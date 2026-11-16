@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/settings.dart';
+import '../../core/env.dart';
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
@@ -18,7 +19,6 @@ import '../common/presence.dart';
 import 'app_lock.dart';
 
 const _webUrl = 'https://grade-app.kz';
-const _appVersion = '1.0.0';
 
 String roleName(AppLocalizations l, AppRole r) => switch (r) {
   AppRole.teacher => l.roleTeacher,
@@ -145,7 +145,7 @@ class _ProfileSheet extends ConsumerWidget {
                 minHeight: GSpace.rowCompact,
                 leading: GIcon(GIcons.info, size: 20, color: c.ink2),
                 title: Text(l.about),
-                trailing: Text(l.version(_appVersion), style: context.t.callout.copyWith(color: c.ink2)),
+                trailing: Text(l.version(appVersion), style: context.t.callout.copyWith(color: c.ink2)),
               ),
             ],
           ),

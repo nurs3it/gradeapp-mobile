@@ -12,6 +12,7 @@ import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import '../../core/analytics.dart';
 
 /// What the server sent for `GET /grades/period/report_card/`.
 class ReportCardFile {
@@ -111,6 +112,7 @@ class _ReportCardRowState extends ConsumerState<ReportCardRow> {
       final file = File('${dir.path}/${card.name}');
       await file.writeAsBytes(card.bytes, flush: true);
       GHaptics.success();
+      ref.read(analyticsProvider).track(AnalyticsEvents.reportCardDownload);
       await SharePlus.instance.share(
         ShareParams(
           files: [XFile(file.path, mimeType: card.mime, name: card.name)],

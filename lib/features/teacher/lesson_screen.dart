@@ -19,6 +19,7 @@ import 'sync_sheet.dart';
 import 'teacher_models.dart';
 import 'teacher_providers.dart';
 import '../common/presence.dart';
+import '../../core/analytics.dart';
 
 /// The whole lesson on one screen (T2–T7, §5.2): topic, roll call by
 /// exceptions, grades from the dock pad, homework and summary in the dock.
@@ -62,6 +63,7 @@ class _LessonBody extends ConsumerStatefulWidget {
 }
 
 class _LessonBodyState extends ConsumerState<_LessonBody> {
+  final _openedAt = DateTime.now();
   late final LessonActions _actions = LessonActions(ref.read(outboxProvider), widget.lesson);
   late final TextEditingController _topic = TextEditingController(text: widget.lesson.topic);
   final _scroll = ScrollController();
@@ -170,6 +172,10 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
       await _actions.markMany(unsaved);
     }
     GHaptics.light();
+    ref.read(analyticsProvider).track(AnalyticsEvents.rollCallDone, {
+      'seconds': DateTime.now().difference(_openedAt).inSeconds,
+      'absent': cells.values.where((c) => c.status == Presence.absent).length,
+    });
     if (mounted) GToast.show(context, l.rollSaved, bottomOffset: GSpace.tabbarH + GSpace.tabbarBottom + 12);
   }
 

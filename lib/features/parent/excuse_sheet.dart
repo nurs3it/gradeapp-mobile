@@ -12,6 +12,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
 import '../learner/learner_providers.dart';
+import '../../core/analytics.dart';
 
 /// Requests of one child (newest first).
 final excusesProvider = StreamProvider.family<List<Excuse>, String>(
@@ -128,6 +129,7 @@ class _ExcuseFormState extends ConsumerState<_ExcuseForm> {
     });
     try {
       await ref.read(dioProvider).post<void>('/excuses/', data: form);
+      ref.read(analyticsProvider).track(AnalyticsEvents.excuseSent);
       GHaptics.success();
       ref
         ..invalidate(excusesProvider(widget.studentId))

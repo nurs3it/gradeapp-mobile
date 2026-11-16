@@ -17,6 +17,7 @@ import '../common/school_providers.dart';
 import '../learner/learner_providers.dart';
 import '../notifications/push.dart';
 import 'check_in_state.dart';
+import '../../core/analytics.dart';
 
 enum _Stage { explain, camera, preview, sending, success, unavailable, denied }
 
@@ -54,6 +55,7 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     ref.read(checkInProvider.notifier).reset();
+    ref.read(analyticsProvider).track(AnalyticsEvents.checkinStart);
     unawaited(_start());
   }
 

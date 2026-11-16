@@ -17,6 +17,7 @@ import '../auth/auth_controller.dart';
 import '../auth/user.dart';
 import '../learner/learner_providers.dart';
 import 'notifications.dart';
+import '../../core/analytics.dart';
 
 /// Firebase options come from the build, not from plist/json files:
 /// `flutter run --dart-define-from-file=firebase.json` (see
@@ -217,6 +218,7 @@ Future<void> openPush(BuildContext context, WidgetRef ref, RemoteMessage m) asyn
   final role = ref.read(activeRoleProvider);
   if (role == null || !context.mounted) return;
   final n = notificationFromPush(m.data);
+  ref.read(analyticsProvider).track(AnalyticsEvents.pushOpen, {'type': n.type});
   final studentId = n.payload.strOrNull('student_id');
   if (role == AppRole.parent && studentId != null) {
     final children = ref.read(childrenProvider).value ?? const [];

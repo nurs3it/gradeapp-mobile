@@ -5,6 +5,7 @@ import 'app/app.dart';
 import 'app/settings.dart';
 import 'core/api/api_client.dart';
 import 'core/api/session_store.dart';
+import 'core/crash_reporting.dart';
 import 'core/offline/outbox.dart';
 import 'core/providers.dart';
 import 'core/storage/json_cache.dart';
@@ -13,7 +14,9 @@ import 'features/learner/learner_providers.dart';
 import 'features/notifications/push.dart';
 import 'features/shell/app_lock.dart';
 
-Future<void> main() async {
+Future<void> main() => runWithCrashReporting(_start);
+
+Future<void> _start() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final (cache, prefs, outbox, _) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open(), Push.init()).wait;

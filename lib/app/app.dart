@@ -17,6 +17,7 @@ import '../ui/ui.dart';
 import 'router.dart';
 import 'settings.dart';
 import '../features/shell/app_lock.dart';
+import '../core/analytics.dart';
 
 final _light = buildTheme(Brightness.light);
 final _dark = buildTheme(Brightness.dark);
@@ -42,6 +43,7 @@ class _GradeAppState extends ConsumerState<GradeApp> {
     _subs.add(outbox.rejectedEvents.stream.listen((_) => GHaptics.error()));
     // The app icon badge follows the unread count of the bell.
     ref.listenManual(pulseProvider.select((p) => p.notificationsUnread), (_, n) => unawaited(SystemBridge.setBadge(n)));
+    ref.read(analyticsProvider).track(AnalyticsEvents.appOpen);
     if (Push.enabled) _listenPush();
   }
 

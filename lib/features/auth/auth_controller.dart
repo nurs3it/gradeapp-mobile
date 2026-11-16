@@ -6,6 +6,7 @@ import '../../core/json.dart';
 import '../../core/providers.dart';
 import '../notifications/push.dart';
 import 'user.dart';
+import '../../core/analytics.dart';
 
 /// Signed-in user, or null. Boot uses the cached profile so the app opens
 /// offline; the fresh profile replaces it once the network answers.
@@ -57,6 +58,7 @@ class AuthController extends AsyncNotifier<AppUser?> {
     if (user is Json) await ref.read(jsonCacheProvider).write(_meKey, user);
     if (publish) state = AsyncData(user is Json ? AppUser.fromJson(user) : await _fetchMe());
     unawaited(ref.read(pushProvider).register());
+    ref.read(analyticsProvider).track(AnalyticsEvents.login);
   }
 
   /// C11: another school. Data of the previous one must not linger.

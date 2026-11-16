@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gradeapp/core/grading.dart';
+import 'package:gradeapp/features/auth/auth_controller.dart';
+import 'package:gradeapp/features/auth/user.dart';
 import 'package:gradeapp/features/teacher/grade_pad.dart';
 import 'package:gradeapp/features/teacher/lesson_screen.dart';
 import 'package:gradeapp/features/teacher/teacher_models.dart';
@@ -8,12 +11,20 @@ import 'package:gradeapp/features/teacher/teacher_providers.dart';
 import 'package:gradeapp/l10n/l10n.dart';
 import 'package:gradeapp/ui/ui.dart';
 
-Widget host(Widget child) => MaterialApp(
-  theme: buildTheme(Brightness.light),
-  locale: const Locale('ru'),
-  localizationsDelegates: AppLocalizations.localizationsDelegates,
-  supportedLocales: AppLocalizations.supportedLocales,
-  home: Scaffold(body: child),
+class _SignedOut extends AuthController {
+  @override
+  Future<AppUser?> build() async => null;
+}
+
+Widget host(Widget child) => ProviderScope(
+  overrides: [authProvider.overrideWith(_SignedOut.new)],
+  child: MaterialApp(
+    theme: buildTheme(Brightness.light),
+    locale: const Locale('ru'),
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    home: Scaffold(body: child),
+  ),
 );
 
 void main() {

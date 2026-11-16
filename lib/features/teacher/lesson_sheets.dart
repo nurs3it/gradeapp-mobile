@@ -15,6 +15,7 @@ import '../common/models.dart';
 import 'homework_upload.dart';
 import 'teacher_models.dart';
 import 'teacher_providers.dart';
+import '../../core/analytics.dart';
 
 /// Picked attendance from the codes sheet.
 typedef CodePick = ({Presence status, String code, String reason});
@@ -341,6 +342,7 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
       }
     }
     GHaptics.success();
+    ref.read(analyticsProvider).track(AnalyticsEvents.homeworkCreated);
     nav.pop();
     if (host.mounted) GToast.show(host, message, icon: icon, bottomOffset: 100);
   }
@@ -622,16 +624,16 @@ Future<void> showFeedbackSheet(BuildContext context, {required RosterStudent stu
   );
 }
 
-class _FeedbackForm extends StatefulWidget {
+class _FeedbackForm extends ConsumerStatefulWidget {
   const _FeedbackForm({required this.student, required this.actions});
   final RosterStudent student;
   final LessonActions actions;
 
   @override
-  State<_FeedbackForm> createState() => _FeedbackFormState();
+  ConsumerState<_FeedbackForm> createState() => _FeedbackFormState();
 }
 
-class _FeedbackFormState extends State<_FeedbackForm> {
+class _FeedbackFormState extends ConsumerState<_FeedbackForm> {
   final _text = TextEditingController();
   String? _tone;
 
@@ -651,6 +653,7 @@ class _FeedbackFormState extends State<_FeedbackForm> {
     final host = nav.context;
     await widget.actions.feedback(widget.student.id, text, tone: _tone, name: widget.student.name);
     GHaptics.success();
+    ref.read(analyticsProvider).track(AnalyticsEvents.feedbackSent);
     nav.pop();
     if (host.mounted) GToast.show(host, toast, bottomOffset: 100);
   }
