@@ -122,7 +122,7 @@ class Analytics {
   Timer? _timer;
   Future<void>? _sending;
   DateTime? _offUntil;
-  bool _loaded = false;
+  Future<void>? _loading;
 
   List<AnalyticsEvent> get pending => List.unmodifiable(_queue);
 
@@ -138,12 +138,17 @@ class Analytics {
     });
   }
 
-  Future<void> _load() async {
-    if (_loaded) return;
-    _loaded = true;
+  Future<void> _load() => _loading ??= _read();
+
+  Future<void> _read() async {
     final raw = await _store?.read(_key);
     if (raw is List) {
-      final old = raw.map(AnalyticsEvent.fromJson).whereType<AnalyticsEvent>().toList();
+      // track() may have run (and persisted) before the store was read.
+      final old = raw
+          .map(AnalyticsEvent.fromJson)
+          .whereType<AnalyticsEvent>()
+          .where((e) => !_queue.any((q) => q.name == e.name && q.at == e.at))
+          .toList();
       _queue.insertAll(0, old);
       if (_queue.length > maxQueue) _queue.removeRange(0, _queue.length - maxQueue);
     }
@@ -151,6 +156,8 @@ class Analytics {
 
   Future<void> _persist() async {
     try {
+      // Never overwrite what an earlier run left in the store.
+      await _load();
       await _store?.write(_key, [for (final e in _queue) e.toJson()]);
     } on Object {
       // the queue is a convenience, not a record

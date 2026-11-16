@@ -148,6 +148,16 @@ void main() {
     expect(c.pending, isEmpty);
   });
 
+  test('an event tracked before the store is read is not sent twice', () async {
+    final dir = Directory.systemTemp.createTempSync('an');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final a = make(store: JsonCache.inDirectory(dir));
+    a.track(AnalyticsEvents.appOpen);
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+    await a.flush();
+    expect((adapter.calls.single.data as Map)['events'], hasLength(1));
+  });
+
   test('crash reports lose query strings from URLs', () {
     expect(scrubUrl('https://grade-app.kz/api/grades/?student_id=abc&term=1'), 'https://grade-app.kz/api/grades/');
     expect(scrubUrl('https://grade-app.kz/api/me/#x'), 'https://grade-app.kz/api/me/');
