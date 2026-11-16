@@ -63,6 +63,7 @@ final quarterSummaryProvider = Provider<AsyncValue<List<SubjectSummary>>>((ref) 
       grading: ref.watch(gradingProvider),
       formulaKnown: ref.watch(gradingLoadedProvider),
       gradeLevel: ref.watch(learnerGradeLevelProvider),
+      termEnded: isoDate(nowOf(ref)).compareTo(term.end) > 0,
     ),
   );
 });

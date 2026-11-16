@@ -40,7 +40,8 @@ class SubjectSummary {
   int countOf(Grading g, WorkKind kind) => grades.where((x) => g.kindOf(x.type) == kind).length;
 }
 
-/// Groups a quarter's grades by subject and puts the quarter mark on each:
+/// Groups a quarter's grades by subject and puts the quarter mark on each
+/// ([termEnded]: the quarter's last day is behind us):
 /// the server's `effective_mark` where it exists (S6-минимум), otherwise the
 /// preliminary mark by the school formula (`Grading.quarter`).
 List<SubjectSummary> summarizeQuarter({
@@ -49,6 +50,7 @@ List<SubjectSummary> summarizeQuarter({
   required Grading grading,
   required bool formulaKnown,
   int? gradeLevel,
+  bool termEnded = false,
 }) {
   final byCourse = <String, List<Grade>>{};
   final names = <String, String>{};
@@ -80,7 +82,9 @@ List<SubjectSummary> summarizeQuarter({
           mark: official ? p!.effectiveMark : computed.mark,
           percent: official ? p!.percent : computed.percent,
           official: official,
-          isFinal: p?.isFinal ?? false,
+          // A quarter that is over is final whether or not the school pressed
+          // «закрыть»: nobody will add marks to it, «предв.» would only confuse.
+          isFinal: termEnded || (p?.isFinal ?? false),
         );
       }(),
   ];

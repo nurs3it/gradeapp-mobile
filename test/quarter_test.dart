@@ -127,6 +127,17 @@ void main() {
     expect(c2.preliminary, isFalse);
   });
 
+  test('a quarter that is over shows final marks even when the school never closed it', () {
+    const open = [PeriodGrade(courseId: 'c1', courseName: 'c1', effectiveMark: 4, percent: 70)];
+    List<SubjectSummary> sum({required bool ended}) =>
+        summarizeQuarter(grades: [g(7, 10, 'fo')], periods: open, grading: kz(), formulaKnown: true, termEnded: ended);
+    expect(sum(ended: false).single.isFinal, isFalse);
+    expect(sum(ended: false).single.preliminary, isTrue);
+    expect(sum(ended: true).single.isFinal, isTrue);
+    expect(sum(ended: true).single.preliminary, isFalse);
+    expect(sum(ended: true).single.mark, 4);
+  });
+
   test('attention sort puts below-quality subjects first', () {
     final g5 = kz();
     final list = summarizeQuarter(
