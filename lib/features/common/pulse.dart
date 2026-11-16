@@ -34,12 +34,15 @@ class PulseController extends Notifier<Pulse> {
   Pulse build() {
     final signedIn = ref.watch(authProvider.select((u) => u.value != null));
     ref.watch(schoolIdProvider);
-    _timer?.cancel();
-    _life?.dispose();
-    ref.onDispose(() {
+    void stop() {
       _timer?.cancel();
+      _timer = null;
       _life?.dispose();
-    });
+      _life = null;
+    }
+
+    stop();
+    ref.onDispose(stop);
     if (!signedIn) return const Pulse();
     _life = AppLifecycleListener(
       onResume: () {
@@ -67,7 +70,8 @@ class PulseController extends Notifier<Pulse> {
   }
 
   /// After reading notifications: drop the badge at once.
-  void seen() => state = Pulse(inbox: state.inbox, billingPayable: state.billingPayable, pollSeconds: state.pollSeconds);
+  void seen() =>
+      state = Pulse(inbox: state.inbox, billingPayable: state.billingPayable, pollSeconds: state.pollSeconds);
 }
 
 final pulseProvider = NotifierProvider<PulseController, Pulse>(PulseController.new);

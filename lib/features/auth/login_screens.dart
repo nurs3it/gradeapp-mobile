@@ -28,61 +28,66 @@ class LoginChooseScreen extends ConsumerWidget {
       backgroundColor: c.canvas,
       body: Stack(
         children: [
-          Container(
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
             height: brandH + 40,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [GColors.brandGradTop, GColors.brand],
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [GColors.brandGradTop, GColors.brand],
+                ),
               ),
-            ),
-            child: SafeArea(
-              bottom: false,
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: -60,
-                    top: 40,
-                    child: Transform.rotate(
-                      angle: -0.6,
-                      child: Container(
-                        width: 260,
-                        height: 64,
-                        decoration: ShapeDecoration(
-                          color: GColors.onFill.withValues(alpha: 0.06),
-                          shape: const StadiumBorder(),
+              child: SafeArea(
+                bottom: false,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      right: -60,
+                      top: 40,
+                      child: Transform.rotate(
+                        angle: -0.6,
+                        child: Container(
+                          width: 260,
+                          height: 64,
+                          decoration: ShapeDecoration(
+                            color: GColors.onFill.withValues(alpha: 0.06),
+                            shape: const StadiumBorder(),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GMark(size: brandH < 400 ? 72 : 104, color: GColors.onFill),
-                          const SizedBox(height: 12),
-                          Text(
-                            l.appName,
-                            style: context.t.largeTitle.copyWith(
-                              color: GColors.onFill,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: -0.7,
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GMark(size: brandH < 400 ? 72 : 104, color: GColors.onFill),
+                            const SizedBox(height: 12),
+                            Text(
+                              l.appName,
+                              style: context.t.largeTitle.copyWith(
+                                color: GColors.onFill,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.7,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            l.loginTagline,
-                            textAlign: TextAlign.center,
-                            style: context.t.body.copyWith(color: GColors.onFill, fontWeight: FontWeight.w500),
-                          ),
-                        ],
+                            const SizedBox(height: 8),
+                            Text(
+                              l.loginTagline,
+                              textAlign: TextAlign.center,
+                              style: context.t.body.copyWith(color: GColors.onFill, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -303,7 +308,10 @@ class _PasswordLoginScreenState extends ConsumerState<PasswordLoginScreen> {
       button: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (_offline) ...[GStateRow(title: l.errorOffline, tone: GTone.neutral, icon: GIcons.syncFailed), const SizedBox(height: 10)],
+          if (_offline) ...[
+            GStateRow(title: l.errorOffline, tone: GTone.neutral, icon: GIcons.syncFailed),
+            const SizedBox(height: 10),
+          ],
           GButton(label: l.signIn, size: GButtonSize.l, expand: true, loading: _busy, onPressed: _submit),
         ],
       ),
@@ -362,7 +370,8 @@ class _PasswordLoginScreenState extends ConsumerState<PasswordLoginScreen> {
             label: l.forgotPassword,
             variant: GButtonVariant.plain,
             size: GButtonSize.s,
-            onPressed: () => context.push(Uri(path: '/login/reset', queryParameters: {'email': _email.text.trim()}).toString()),
+            onPressed: () =>
+                context.push(Uri(path: '/login/reset', queryParameters: {'email': _email.text.trim()}).toString()),
           ),
         ),
       ],
@@ -465,10 +474,7 @@ class _CodeLoginScreenState extends ConsumerState<CodeLoginScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final c = context.c;
-    final stepLabel = Text(
-      l.stepOf(_step + 1, 3).toUpperCase(),
-      style: context.t.eyebrow.copyWith(color: c.ink2),
-    );
+    final stepLabel = Text(l.stepOf(_step + 1, 3).toUpperCase(), style: context.t.eyebrow.copyWith(color: c.ink2));
     return switch (_step) {
       0 => _AuthFrame(
         top: stepLabel,
