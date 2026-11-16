@@ -55,7 +55,8 @@ void main() {
       'seconds': 95,
       'absent': 2,
       'student_name': 'Алия',
-      'type': 'x' * 100,
+      'type': 'grade.created',
+      'reason': 'Free Text!',
       'list': [1],
     });
     a.track('made_up_event');
