@@ -17,13 +17,9 @@ extension JsonRead on Json {
   }
 
   List<T> list<T>(String key, T Function(Json) parse) =>
-      ((this[key] as List<dynamic>?) ?? const [])
-          .whereType<Map<String, dynamic>>()
-          .map(parse)
-          .toList(growable: false);
+      ((this[key] as List<dynamic>?) ?? const []).whereType<Map<String, dynamic>>().map(parse).toList(growable: false);
 
-  List<String> strings(String key) =>
-      ((this[key] as List<dynamic>?) ?? const []).map((e) => '$e').toList();
+  List<String> strings(String key) => ((this[key] as List<dynamic>?) ?? const []).map((e) => '$e').toList();
 }
 
 /// DRF answers either a plain list or a paginated `{results: [...]}` envelope.

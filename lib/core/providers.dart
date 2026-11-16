@@ -44,5 +44,4 @@ Stream<T> cachedGet<T>(
 }
 
 /// Plain list endpoint helper (handles DRF's paginated envelope).
-List<T> parseList<T>(Object? data, T Function(Json) parse) =>
-    resultsOf(data).map(parse).toList(growable: false);
+List<T> parseList<T>(Object? data, T Function(Json) parse) => resultsOf(data).map(parse).toList(growable: false);

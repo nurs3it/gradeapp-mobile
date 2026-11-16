@@ -3,24 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/json.dart';
 import '../../core/offline/outbox.dart';
 import '../../core/providers.dart';
-import '../auth/auth_controller.dart';
 import '../learner/models.dart';
 import 'models.dart';
 
-final teacherDayProvider = StreamProvider.family<TeacherDay, String>(
-  (ref, date) => cachedGet(
-    ref,
-    '/teacher/todo/',
-    query: {'date': date},
-    parse: (d) => TeacherDay.fromJson(d as Json),
-  ),
-);
+export '../school/school_providers.dart';
 
-final gradingProvider = StreamProvider<Grading>((ref) {
-  final school = ref.watch(authProvider.select((u) => u.value?.linkedSchool));
-  if (school == null) return const Stream.empty();
-  return cachedGet(ref, '/schools/$school/', parse: (d) => Grading.fromSchool(d as Json));
-});
+final teacherDayProvider = StreamProvider.family<TeacherDay, String>(
+  (ref, date) => cachedGet(ref, '/teacher/todo/', query: {'date': date}, parse: (d) => TeacherDay.fromJson(d as Json)),
+);
 
 final lessonProvider = StreamProvider.family<Lesson, String>(
   (ref, id) => cachedGet(ref, '/lessons/$id/', parse: (d) => Lesson.fromJson(d as Json)),
@@ -30,8 +20,7 @@ final rosterProvider = StreamProvider.family<List<RosterStudent>, String>(
   (ref, classId) => cachedGet(
     ref,
     '/classes/$classId/students/',
-    parse: (d) => parseList(d, RosterStudent.fromJson)
-      ..sort((a, b) => a.name.compareTo(b.name)),
+    parse: (d) => parseList(d, RosterStudent.fromJson)..sort((a, b) => a.name.compareTo(b.name)),
   ),
 );
 
@@ -42,8 +31,7 @@ final attendanceDefaultsProvider = StreamProvider.family<Map<String, AttendanceD
     '/attendance/lesson_defaults/',
     query: {'lesson_id': lessonId},
     parse: (d) => {
-      for (final s in (d as Json).list('students', (s) => s))
-        s.str('student_id'): AttendanceDefault.fromJson(s),
+      for (final s in (d as Json).list('students', (s) => s)) s.str('student_id'): AttendanceDefault.fromJson(s),
     },
   ),
 );
@@ -102,67 +90,71 @@ class LessonActions {
   final Lesson lesson;
 
   Future<void> mark(String studentId, Presence status, {String code = ''}) => _outbox.add(
-        OutboxItem(
-          key: 'att:${lesson.id}:$studentId',
-          method: 'POST',
-          path: '/attendance/mark/',
-          data: {
-            'lesson_id': lesson.id,
-            'records': [
-              {'student_id': studentId, 'status': status.name, 'code': code},
-            ],
-          },
-        ),
-      );
+    OutboxItem(
+      key: 'att:${lesson.id}:$studentId',
+      method: 'POST',
+      path: '/attendance/mark/',
+      data: {
+        'lesson_id': lesson.id,
+        'records': [
+          {'student_id': studentId, 'status': status.name, 'code': code},
+        ],
+      },
+    ),
+  );
 
   /// «Все на месте»: one request for the whole roster.
   Future<void> markAll(Iterable<String> studentIds, Presence status) => _outbox.add(
-        OutboxItem(
-          key: 'att:${lesson.id}:all:${DateTime.now().microsecondsSinceEpoch}',
-          method: 'POST',
-          path: '/attendance/mark/',
-          data: {
-            'lesson_id': lesson.id,
-            'records': [
-              for (final id in studentIds) {'student_id': id, 'status': status.name, 'code': ''},
-            ],
-          },
-        ),
-      );
+    OutboxItem(
+      key: 'att:${lesson.id}:all:${DateTime.now().microsecondsSinceEpoch}',
+      method: 'POST',
+      path: '/attendance/mark/',
+      data: {
+        'lesson_id': lesson.id,
+        'records': [
+          for (final id in studentIds) {'student_id': id, 'status': status.name, 'code': ''},
+        ],
+      },
+    ),
+  );
 
-  Future<void> grade(String studentId, num? value, {required String type, required int scaleMax}) =>
-      _outbox.add(
-        OutboxItem(
-          key: 'grade:${lesson.id}:$type:$studentId',
-          method: 'POST',
-          path: '/grades/bulk_upsert/',
-          data: {
-            'course': lesson.courseId,
-            'date': lesson.date,
-            'lesson': lesson.id,
-            'type': type,
-            'scale': '$scaleMax',
-            'records': [
-              {'student_id': studentId, 'value': value},
-            ],
-          },
-        ),
-      );
+  Future<void> grade(String studentId, num? value, {required String type, required int scaleMax}) => _outbox.add(
+    OutboxItem(
+      key: 'grade:${lesson.id}:$type:$studentId',
+      method: 'POST',
+      path: '/grades/bulk_upsert/',
+      data: {
+        'course': lesson.courseId,
+        'date': lesson.date,
+        'lesson': lesson.id,
+        'type': type,
+        'scale': '$scaleMax',
+        'records': [
+          {'student_id': studentId, 'value': value},
+        ],
+      },
+    ),
+  );
 
   Future<void> setTopic(String topic) => _outbox.add(
-        OutboxItem(
-          key: 'topic:${lesson.id}',
-          method: 'PATCH',
-          path: '/lessons/${lesson.id}/',
-          data: {'topic': topic},
-        ),
-      );
+    OutboxItem(key: 'topic:${lesson.id}', method: 'PATCH', path: '/lessons/${lesson.id}/', data: {'topic': topic}),
+  );
 
   Future<void> start() => _outbox.add(
-        OutboxItem(key: 'start:${lesson.id}', method: 'POST', path: '/lessons/${lesson.id}/start/', data: const <String, Object?>{}),
-      );
+    OutboxItem(
+      key: 'start:${lesson.id}',
+      method: 'POST',
+      path: '/lessons/${lesson.id}/start/',
+      data: const <String, Object?>{},
+    ),
+  );
 
   Future<void> finish() => _outbox.add(
-        OutboxItem(key: 'finish:${lesson.id}', method: 'POST', path: '/lessons/${lesson.id}/finish/', data: const <String, Object?>{}),
-      );
+    OutboxItem(
+      key: 'finish:${lesson.id}',
+      method: 'POST',
+      path: '/lessons/${lesson.id}/finish/',
+      data: const <String, Object?>{},
+    ),
+  );
 }

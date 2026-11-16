@@ -31,20 +31,20 @@ class AppUser {
 
   /// Roles this app supports, in priority order.
   List<AppRole> get appRoles => [
-        if (roles.contains('teacher')) AppRole.teacher,
-        if (roles.contains('parent')) AppRole.parent,
-        if (roles.contains('student')) AppRole.student,
-      ];
+    if (roles.contains('teacher')) AppRole.teacher,
+    if (roles.contains('parent')) AppRole.parent,
+    if (roles.contains('student')) AppRole.student,
+  ];
 
   factory AppUser.fromJson(Json j) => AppUser(
-        id: j.str('id'),
-        email: j.str('email'),
-        firstName: j.str('first_name'),
-        lastName: j.str('last_name'),
-        roles: j.strings('roles').map((r) => r.toLowerCase()).toList(),
-        linkedSchool: j.strOrNull('linked_school'),
-        avatarUrl: j.strOrNull('avatar_url'),
-        language: j.strOrNull('language_pref') ?? 'ru',
-        staffId: j.strOrNull('staff_id'),
-      );
+    id: j.str('id'),
+    email: j.str('email'),
+    firstName: j.str('first_name'),
+    lastName: j.str('last_name'),
+    roles: j.strings('roles').map((r) => r.toLowerCase()).toList(),
+    linkedSchool: j.strOrNull('linked_school'),
+    avatarUrl: j.strOrNull('avatar_url'),
+    language: j.strOrNull('language_pref') ?? 'ru',
+    staffId: j.strOrNull('staff_id'),
+  );
 }

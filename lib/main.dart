@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
+import 'app/settings.dart';
 import 'core/api/api_client.dart';
 import 'core/api/session_store.dart';
 import 'core/offline/outbox.dart';
@@ -12,19 +13,17 @@ import 'features/auth/auth_controller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final (cache, outbox) = await (JsonCache.open(), Outbox.open()).wait;
+  final (cache, prefs, outbox) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open()).wait;
   final sessions = SessionStore();
   late final ProviderContainer container;
-  final api = ApiClient(
-    sessions,
-    onSessionLost: () => container.read(authProvider.notifier).sessionLost(),
-  );
+  final api = ApiClient(sessions, onSessionLost: () => container.read(authProvider.notifier).sessionLost());
   outbox.attach(api.dio);
 
   container = ProviderContainer(
     overrides: [
       sessionStoreProvider.overrideWithValue(sessions),
       jsonCacheProvider.overrideWithValue(cache),
+      prefsProvider.overrideWithValue(prefs),
       outboxProvider.overrideWithValue(outbox),
       apiClientProvider.overrideWithValue(api),
     ],

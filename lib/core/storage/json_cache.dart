@@ -13,15 +13,15 @@ class JsonCache {
   final Directory _dir;
   final _memory = <String, Object?>{};
 
-  static Future<JsonCache> open() async {
+  /// [name] separates stores: `api_cache` (wiped on sign-out) and `prefs`.
+  static Future<JsonCache> open([String name = 'api_cache']) async {
     final base = await getApplicationSupportDirectory();
-    final dir = Directory('${base.path}/api_cache');
+    final dir = Directory('${base.path}/$name');
     await dir.create(recursive: true);
     return JsonCache._(dir);
   }
 
-  File _file(String key) =>
-      File('${_dir.path}/${base64Url.encode(utf8.encode(key))}.json');
+  File _file(String key) => File('${_dir.path}/${base64Url.encode(utf8.encode(key))}.json');
 
   Future<Object?> read(String key) async {
     if (_memory.containsKey(key)) return _memory[key];

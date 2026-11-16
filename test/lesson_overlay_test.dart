@@ -5,14 +5,16 @@ import 'package:gradeapp/features/teacher/teacher_providers.dart';
 
 void main() {
   OutboxItem att(String lesson, List<(String, String)> recs) => OutboxItem(
-        key: 'k$lesson${recs.length}',
-        method: 'POST',
-        path: '/attendance/mark/',
-        data: {
-          'lesson_id': lesson,
-          'records': [for (final (id, s) in recs) {'student_id': id, 'status': s, 'code': ''}],
-        },
-      );
+    key: 'k$lesson${recs.length}',
+    method: 'POST',
+    path: '/attendance/mark/',
+    data: {
+      'lesson_id': lesson,
+      'records': [
+        for (final (id, s) in recs) {'student_id': id, 'status': s, 'code': ''},
+      ],
+    },
+  );
 
   test('later queued marks win, other lessons are ignored', () {
     final pending = [

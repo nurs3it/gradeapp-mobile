@@ -61,8 +61,7 @@ final weekLessonsProvider = StreamProvider.family<List<Lesson>, WeekArgs>((ref, 
       'date_to': isoDate(from.add(const Duration(days: 6))),
       'page_size': 500,
     },
-    parse: (d) => parseList(d, Lesson.fromJson)
-      ..sort((x, y) => '${x.date}${x.start}'.compareTo('${y.date}${y.start}')),
+    parse: (d) => parseList(d, Lesson.fromJson)..sort((x, y) => '${x.date}${x.start}'.compareTo('${y.date}${y.start}')),
   );
 });
 
@@ -81,8 +80,7 @@ final homeworkProvider = StreamProvider.family<List<Homework>, String>(
     ref,
     '/homework/',
     query: {'student': studentId, 'upcoming': true, 'page_size': 500},
-    parse: (d) => parseList(d, Homework.fromJson)
-      ..sort((a, b) => a.dueDate.compareTo(b.dueDate)),
+    parse: (d) => parseList(d, Homework.fromJson)..sort((a, b) => a.dueDate.compareTo(b.dueDate)),
   ),
 );
 
@@ -96,12 +94,7 @@ Future<void> setHomeworkDone(WidgetRef ref, Homework hw, bool done) async {
 }
 
 /// Student only: self check-in («Я в школе»).
-Future<void> checkIn(
-  WidgetRef ref, {
-  required String photoPath,
-  double? latitude,
-  double? longitude,
-}) async {
+Future<void> checkIn(WidgetRef ref, {required String photoPath, double? latitude, double? longitude}) async {
   final form = FormData.fromMap({
     'photo': await MultipartFile.fromFile(photoPath, filename: 'check-in.jpg'),
     'latitude': ?latitude?.toString(),
@@ -119,5 +112,4 @@ String? checkInErrorCode(Object e) {
 }
 
 /// Monday of the week containing [d].
-DateTime mondayOf(DateTime d) =>
-    DateTime(d.year, d.month, d.day).subtract(Duration(days: d.weekday - 1));
+DateTime mondayOf(DateTime d) => DateTime(d.year, d.month, d.day).subtract(Duration(days: d.weekday - 1));

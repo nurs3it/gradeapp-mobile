@@ -15,3 +15,6 @@ linter:
     always_declare_return_types: true
     avoid_print: true
     unawaited_futures: true
+
+formatter:
+  page_width: 120

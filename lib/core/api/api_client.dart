@@ -13,12 +13,8 @@ import 'session_store.dart';
 /// Both are handled: the cookie value is lifted into the store and sent back
 /// as `refresh` in the body, which the backend also accepts.
 class ApiClient {
-  ApiClient(this.sessions, {required this.onSessionLost})
-      : dio = Dio(_options()),
-        _raw = Dio(_options()) {
-    dio.interceptors.add(
-      InterceptorsWrapper(onRequest: _attachToken, onError: _onError),
-    );
+  ApiClient(this.sessions, {required this.onSessionLost}) : dio = Dio(_options()), _raw = Dio(_options()) {
+    dio.interceptors.add(InterceptorsWrapper(onRequest: _attachToken, onError: _onError));
   }
 
   final SessionStore sessions;
@@ -31,19 +27,16 @@ class ApiClient {
   Future<String>? _refreshing;
 
   static BaseOptions _options() => BaseOptions(
-        baseUrl: apiBaseUrl,
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 20),
-        headers: {'Accept': 'application/json'},
-      );
+    baseUrl: apiBaseUrl,
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 20),
+    headers: {'Accept': 'application/json'},
+  );
 
   /// POST /auth/login/. Throws [OtpRequired] when 2FA is on and no code given.
   Future<Json> login(String email, String password, {String? otp}) async {
     try {
-      final res = await _raw.post<Json>(
-        '/auth/login/',
-        data: {'email': email, 'password': password, 'otp': ?otp},
-      );
+      final res = await _raw.post<Json>('/auth/login/', data: {'email': email, 'password': password, 'otp': ?otp});
       await _storeTokens(res);
       return res.data!;
     } on DioException catch (e) {
@@ -57,10 +50,7 @@ class ApiClient {
     final s = sessions.current;
     if (s != null) {
       await _raw
-          .post<void>(
-            '/auth/logout/',
-            data: {'session_id': s.sessionId, 'refresh': s.refresh},
-          )
+          .post<void>('/auth/logout/', data: {'session_id': s.sessionId, 'refresh': s.refresh})
           .catchError((_) => Response<void>(requestOptions: RequestOptions()));
     }
     await sessions.clear();
@@ -93,18 +83,13 @@ class ApiClient {
 
   /// Single in-flight refresh: N parallel 401s share one rotation, otherwise
   /// the backend sees the same refresh token twice and revokes the session.
-  Future<String> refreshAccess() => _refreshing ??= _doRefresh().whenComplete(
-        () => _refreshing = null,
-      );
+  Future<String> refreshAccess() => _refreshing ??= _doRefresh().whenComplete(() => _refreshing = null);
 
   Future<String> _doRefresh() async {
     final s = sessions.current;
     if (s == null) throw StateError('no session');
     try {
-      final res = await _raw.post<Json>(
-        '/auth/refresh/',
-        data: {'session_id': s.sessionId, 'refresh': s.refresh},
-      );
+      final res = await _raw.post<Json>('/auth/refresh/', data: {'session_id': s.sessionId, 'refresh': s.refresh});
       return (await _storeTokens(res)).access;
     } on DioException catch (e) {
       // Only an explicit 401 ends the session; a network blip must not.
@@ -119,7 +104,8 @@ class ApiClient {
   Future<Session> _storeTokens(Response<Json> res) async {
     final body = res.data!;
     final sid = body.str('session_id');
-    final refresh = body.strOrNull('refresh') ??
+    final refresh =
+        body.strOrNull('refresh') ??
         _cookie(res.headers['set-cookie'], 'ga_rt_$sid') ??
         sessions.current?.refresh ??
         '';

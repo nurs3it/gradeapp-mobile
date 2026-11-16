@@ -9,13 +9,8 @@ import '../api/api_client.dart';
 
 /// A write waiting to reach the server.
 class OutboxItem {
-  OutboxItem({
-    required this.key,
-    required this.method,
-    required this.path,
-    required this.data,
-    DateTime? createdAt,
-  }) : createdAt = createdAt ?? DateTime.now();
+  OutboxItem({required this.key, required this.method, required this.path, required this.data, DateTime? createdAt})
+    : createdAt = createdAt ?? DateTime.now();
 
   /// Same key = same cell (e.g. one student's mark on one lesson): a newer
   /// write replaces the queued one instead of piling up.
@@ -26,20 +21,20 @@ class OutboxItem {
   final DateTime createdAt;
 
   Map<String, Object?> toJson() => {
-        'key': key,
-        'method': method,
-        'path': path,
-        'data': data,
-        'created_at': createdAt.toIso8601String(),
-      };
+    'key': key,
+    'method': method,
+    'path': path,
+    'data': data,
+    'created_at': createdAt.toIso8601String(),
+  };
 
   factory OutboxItem.fromJson(Map<String, dynamic> j) => OutboxItem(
-        key: j['key'] as String,
-        method: j['method'] as String,
-        path: j['path'] as String,
-        data: j['data'],
-        createdAt: DateTime.tryParse('${j['created_at']}'),
-      );
+    key: j['key'] as String,
+    method: j['method'] as String,
+    path: j['path'] as String,
+    data: j['data'],
+    createdAt: DateTime.tryParse('${j['created_at']}'),
+  );
 }
 
 /// Teacher writes (attendance, grades) go here first, then to the server.
@@ -124,8 +119,7 @@ class Outbox {
     await _persist();
   }
 
-  static bool _isServerError(Object e) =>
-      e is DioException && (e.response?.statusCode ?? 0) >= 500;
+  static bool _isServerError(Object e) => e is DioException && (e.response?.statusCode ?? 0) >= 500;
 
   Future<void> _persist() async {
     _changes.add(pending);

@@ -54,25 +54,25 @@ class Lesson {
   bool _sameDay(DateTime now) => date == isoDate(now);
 
   factory Lesson.fromJson(Json j) => Lesson(
-        id: j.str('id'),
-        courseId: j.str('course'),
-        subject: j.strOrNull('subject_name') ?? j.strOrNull('course_name') ?? '—',
-        date: j.str('date'),
-        start: j.str('start_time'),
-        end: j.str('end_time'),
-        room: j.strOrNull('room_name') ?? j.strOrNull('classroom'),
-        teacherName: j.strOrNull('teacher_name'),
-        classGroupId: j.strOrNull('class_group_id'),
-        classGroupName: j.strOrNull('class_group_name'),
-        status: switch (j.str('status')) {
-          'in_progress' => LessonStatus.inProgress,
-          'completed' => LessonStatus.completed,
-          'moved' => LessonStatus.moved,
-          'cancelled' => LessonStatus.cancelled,
-          _ => LessonStatus.scheduled,
-        },
-        topic: j.str('topic'),
-      );
+    id: j.str('id'),
+    courseId: j.str('course'),
+    subject: j.strOrNull('subject_name') ?? j.strOrNull('course_name') ?? '—',
+    date: j.str('date'),
+    start: j.str('start_time'),
+    end: j.str('end_time'),
+    room: j.strOrNull('room_name') ?? j.strOrNull('classroom'),
+    teacherName: j.strOrNull('teacher_name'),
+    classGroupId: j.strOrNull('class_group_id'),
+    classGroupName: j.strOrNull('class_group_name'),
+    status: switch (j.str('status')) {
+      'in_progress' => LessonStatus.inProgress,
+      'completed' => LessonStatus.completed,
+      'moved' => LessonStatus.moved,
+      'cancelled' => LessonStatus.cancelled,
+      _ => LessonStatus.scheduled,
+    },
+    topic: j.str('topic'),
+  );
 }
 
 class Grade {
@@ -101,25 +101,24 @@ class Grade {
   final String? lessonId;
 
   factory Grade.fromJson(Json j) => Grade(
-        id: j.str('id'),
-        studentId: j.strOrNull('student_id') ?? j.str('student'),
-        courseId: j.strOrNull('course_id') ?? j.str('course'),
-        courseName: j.strOrNull('course_name') ?? '—',
-        value: j.number('value') ?? 0,
-        maxValue: j.number('max_value'),
-        type: j.str('type'),
-        comment: j.str('comment'),
-        date: j.str('date'),
-        lessonId: j.strOrNull('lesson'),
-      );
+    id: j.str('id'),
+    studentId: j.strOrNull('student_id') ?? j.str('student'),
+    courseId: j.strOrNull('course_id') ?? j.str('course'),
+    courseName: j.strOrNull('course_name') ?? '—',
+    value: j.number('value') ?? 0,
+    maxValue: j.number('max_value'),
+    type: j.str('type'),
+    comment: j.str('comment'),
+    date: j.str('date'),
+    lessonId: j.strOrNull('lesson'),
+  );
 }
 
 class Attachment {
   const Attachment({required this.url, required this.name});
   final String? url;
   final String name;
-  factory Attachment.fromJson(Json j) =>
-      Attachment(url: j.strOrNull('file_url'), name: j.str('original_name'));
+  factory Attachment.fromJson(Json j) => Attachment(url: j.strOrNull('file_url'), name: j.str('original_name'));
 }
 
 class Homework {
@@ -146,38 +145,38 @@ class Homework {
   final String? lessonId;
 
   Homework withDone(bool done) => Homework(
-        id: id,
-        courseName: courseName,
-        title: title,
-        description: description,
-        dueDate: dueDate,
-        minutes: minutes,
-        attachments: attachments,
-        isDone: done,
-        lessonId: lessonId,
-      );
+    id: id,
+    courseName: courseName,
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    minutes: minutes,
+    attachments: attachments,
+    isDone: done,
+    lessonId: lessonId,
+  );
 
   factory Homework.fromJson(Json j) => Homework(
-        id: j.str('id'),
-        courseName: j.str('course_name'),
-        title: j.str('title'),
-        description: j.str('description'),
-        dueDate: j.str('due_date'),
-        minutes: j.number('estimated_minutes')?.toInt(),
-        attachments: j.list('attachments', Attachment.fromJson),
-        isDone: j.flag('is_done'),
-        lessonId: j.strOrNull('lesson'),
-      );
+    id: j.str('id'),
+    courseName: j.str('course_name'),
+    title: j.str('title'),
+    description: j.str('description'),
+    dueDate: j.str('due_date'),
+    minutes: j.number('estimated_minutes')?.toInt(),
+    attachments: j.list('attachments', Attachment.fromJson),
+    isDone: j.flag('is_done'),
+    lessonId: j.strOrNull('lesson'),
+  );
 }
 
 enum Presence { present, absent, tardy, excused }
 
 Presence presenceOf(String s) => switch (s) {
-      'absent' => Presence.absent,
-      'tardy' => Presence.tardy,
-      'excused' => Presence.excused,
-      _ => Presence.present,
-    };
+  'absent' => Presence.absent,
+  'tardy' => Presence.tardy,
+  'excused' => Presence.excused,
+  _ => Presence.present,
+};
 
 class CheckInStatus {
   const CheckInStatus({
@@ -203,16 +202,16 @@ class CheckInStatus {
   final bool late;
 
   factory CheckInStatus.fromJson(Json j) => CheckInStatus(
-        enabled: j.flag('enabled'),
-        windowStart: j.str('window_start'),
-        windowEnd: j.str('window_end'),
-        windowOpen: j.flag('window_open'),
-        geofence: j.flag('geofence'),
-        consent: j.flag('consent'),
-        checkedIn: j.flag('checked_in'),
-        checkedAt: DateTime.tryParse(j.str('checked_at'))?.toLocal(),
-        late: j.flag('late'),
-      );
+    enabled: j.flag('enabled'),
+    windowStart: j.str('window_start'),
+    windowEnd: j.str('window_end'),
+    windowOpen: j.flag('window_open'),
+    geofence: j.flag('geofence'),
+    consent: j.flag('consent'),
+    checkedIn: j.flag('checked_in'),
+    checkedAt: DateTime.tryParse(j.str('checked_at'))?.toLocal(),
+    late: j.flag('late'),
+  );
 }
 
 /// `GET /students/{id}/today/?date=` — a learner's day in one response.
@@ -248,12 +247,8 @@ class LearnerDay {
       studentName: student.str('full_name'),
       className: student.strOrNull('class_group_name'),
       photoConsent: student.flag('photo_consent'),
-      lessons: j.list('lessons', Lesson.fromJson)
-        ..sort((a, b) => a.start.compareTo(b.start)),
-      attendance: {
-        for (final a in j.list('attendance', (a) => a))
-          a.str('lesson'): presenceOf(a.str('status')),
-      },
+      lessons: j.list('lessons', Lesson.fromJson)..sort((a, b) => a.start.compareTo(b.start)),
+      attendance: {for (final a in j.list('attendance', (a) => a)) a.str('lesson'): presenceOf(a.str('status'))},
       checkIn: j['check_in'] is Json ? CheckInStatus.fromJson(j['check_in'] as Json) : null,
       homework: j.list('homework', Homework.fromJson),
       recentGrades: j.list('recent_grades', Grade.fromJson),
@@ -269,9 +264,11 @@ class Child {
     required this.fullName,
     required this.className,
     required this.avatarUrl,
+    required this.photoConsent,
   });
 
   final String id;
+  final bool photoConsent;
   final String firstName;
   final String fullName;
   final String? className;
@@ -285,6 +282,7 @@ class Child {
       fullName: [u.str('last_name'), u.str('first_name')].where((s) => s.isNotEmpty).join(' '),
       className: j.strOrNull('class_group_name'),
       avatarUrl: u.strOrNull('avatar_url'),
+      photoConsent: j.flag('photo_consent'),
     );
   }
 }
