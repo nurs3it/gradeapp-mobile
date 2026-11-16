@@ -12,6 +12,7 @@ import '../common/pulse.dart';
 import '../learner/learner_providers.dart';
 import '../teacher/sync_sheet.dart';
 import 'profile_sheet.dart';
+import '../common/presence.dart';
 
 /// Bell with the unread badge (student, parent).
 class BellButton extends ConsumerWidget {
@@ -43,7 +44,14 @@ class AvatarButton extends ConsumerWidget {
       scale: 0.94,
       semanticLabel: context.l10n.profile,
       excludeChildSemantics: true,
-      child: GAvatar(name: user.fullName, url: user.avatarUrl, size: 44, color: subjectOf(user.id).fill),
+      child: PersonAvatar(
+        presence: PresenceRef.user(user.id),
+        name: user.fullName,
+        url: user.avatarUrl,
+        size: 44,
+        color: subjectOf(user.id).fill,
+        dotRing: context.c.canvas,
+      ),
     );
   }
 }
@@ -82,7 +90,10 @@ class ChildSwitcherButton extends ConsumerWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              GAvatar(
+              PersonAvatar(
+                presence: PresenceRef.student(child.id),
+                dotTop: true,
+                dotRing: c.canvas,
                 name: child.fullName,
                 url: child.avatarUrl,
                 size: 40,

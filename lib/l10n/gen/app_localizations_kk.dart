@@ -1937,4 +1937,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get notifOpen => 'Ашу';
+
+  @override
+  String get presenceOnline => 'Желіде';
 }

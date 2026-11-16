@@ -1989,4 +1989,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notifOpen => 'Open';
+
+  @override
+  String get presenceOnline => 'Online';
 }

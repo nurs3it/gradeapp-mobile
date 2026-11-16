@@ -6,6 +6,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import 'models.dart';
 import 'school_providers.dart';
+import 'presence.dart';
 
 /// Lesson row (§3.12): time · subject marker · subject / room · tail.
 class LessonRow extends StatelessWidget {
@@ -328,7 +329,12 @@ class _LessonSheet extends StatelessWidget {
             const SizedBox(height: 8),
             GRow(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-              leading: GAvatar(name: lesson.teacherName!, size: 40, color: subjectOf(lesson.teacherName!).fill),
+              leading: PersonAvatar(
+                presence: lesson.teacherId == null ? null : PresenceRef.staff(lesson.teacherId!),
+                name: lesson.teacherName!,
+                size: 40,
+                color: subjectOf(lesson.teacherName!).fill,
+              ),
               title: Text(lesson.teacherName!),
               subtitle: Text(l.teacher),
             ),

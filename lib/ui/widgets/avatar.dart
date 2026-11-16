@@ -24,6 +24,10 @@ class GAvatar extends StatelessWidget {
     this.tone = GAvatarTone.colored,
     this.color,
     this.ring,
+    this.online = false,
+    this.onlineLabel,
+    this.dotRing,
+    this.dotTop = false,
   });
 
   final String name;
@@ -36,6 +40,18 @@ class GAvatar extends StatelessWidget {
 
   /// Child switcher ring (2 pt, 2 pt canvas gap).
   final Color? ring;
+
+  /// Green «в сети» dot at the bottom right, cut out with [dotRing].
+  final bool online;
+
+  /// Spoken label of the dot; the avatar is otherwise decorative.
+  final String? onlineLabel;
+
+  /// Colour of the dot's ring: the surface the avatar sits on (`surface`).
+  final Color? dotRing;
+
+  /// Dot at the top right when the bottom right is taken by a badge.
+  final bool dotTop;
 
   static String initials(String name) {
     final parts = name.trim().split(RegExp(r'\s+')).where((p) => p.isNotEmpty).toList();
@@ -85,6 +101,29 @@ class GAvatar extends StatelessWidget {
         child: circle,
       );
     }
-    return ExcludeSemantics(child: circle);
+    if (online) {
+      final d = (size * 0.28).clamp(10.0, 16.0);
+      circle = Stack(
+        clipBehavior: Clip.none,
+        children: [
+          circle,
+          Positioned(
+            right: ring == null ? -1 : 1,
+            bottom: dotTop ? null : (ring == null ? -1 : 1),
+            top: dotTop ? 1 : null,
+            child: Container(
+              width: d + 4,
+              height: d + 4,
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(color: dotRing ?? c.surface, shape: BoxShape.circle),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: c.ok, shape: BoxShape.circle),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+    return Semantics(label: online ? onlineLabel : null, excludeSemantics: true, child: circle);
   }
 }

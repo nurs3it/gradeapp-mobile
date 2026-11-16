@@ -14,6 +14,7 @@ import '../auth/user.dart';
 import '../common/models.dart';
 import '../learner/learner_providers.dart';
 import 'header.dart';
+import '../common/presence.dart';
 
 const _webUrl = 'https://grade-app.kz';
 const _appVersion = '1.0.0';
@@ -48,7 +49,13 @@ class _ProfileSheet extends ConsumerWidget {
         children: [
           Row(
             children: [
-              GAvatar(name: user.fullName, url: user.avatarUrl, size: 56, color: subjectOf(user.id).fill),
+              PersonAvatar(
+                presence: PresenceRef.user(user.id),
+                name: user.fullName,
+                url: user.avatarUrl,
+                size: 56,
+                color: subjectOf(user.id).fill,
+              ),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -315,7 +322,13 @@ class _ChildrenGroup extends ConsumerWidget {
           children: [
             for (final child in children)
               GRow(
-                leading: GAvatar(name: child.fullName, url: child.avatarUrl, size: 40, color: childColor(child.id)),
+                leading: PersonAvatar(
+                  presence: PresenceRef.student(child.id),
+                  name: child.fullName,
+                  url: child.avatarUrl,
+                  size: 40,
+                  color: childColor(child.id),
+                ),
                 title: Text(child.fullName),
                 subtitle: Text(
                   [
@@ -423,7 +436,13 @@ class _ChildrenSheet extends ConsumerWidget {
                 ),
               for (final child in children)
                 GRow(
-                  leading: GAvatar(name: child.fullName, url: child.avatarUrl, size: 40, color: childColor(child.id)),
+                  leading: PersonAvatar(
+                    presence: PresenceRef.student(child.id),
+                    name: child.fullName,
+                    url: child.avatarUrl,
+                    size: 40,
+                    color: childColor(child.id),
+                  ),
                   title: Text(child.fullName),
                   subtitle: child.className == null ? null : Text(child.className!),
                   trailing: !family && child.id == current ? GIcon(GIcons.check, size: 20, color: c.primaryText) : null,

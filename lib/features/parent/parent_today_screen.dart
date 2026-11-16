@@ -12,6 +12,7 @@ import '../learner/learner_providers.dart';
 import '../shell/header.dart';
 import 'excuse_sheet.dart';
 import 'verdict.dart';
+import '../common/presence.dart';
 
 /// Parent «Сегодня» (P1/P2): one child — verdict, «требует внимания», feed;
 /// two or more — the family overview until a child is picked.
@@ -620,7 +621,13 @@ class _ChildCard extends ConsumerWidget {
               children: [
                 Row(
                   children: [
-                    GAvatar(name: child.fullName, url: child.avatarUrl, size: 44, color: childColor(child.id)),
+                    PersonAvatar(
+                      presence: PresenceRef.student(child.id),
+                      name: child.fullName,
+                      url: child.avatarUrl,
+                      size: 44,
+                      color: childColor(child.id),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(

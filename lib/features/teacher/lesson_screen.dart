@@ -18,6 +18,7 @@ import 'lesson_sheets.dart';
 import 'sync_sheet.dart';
 import 'teacher_models.dart';
 import 'teacher_providers.dart';
+import '../common/presence.dart';
 
 /// The whole lesson on one screen (T2–T7, §5.2): topic, roll call by
 /// exceptions, grades from the dock pad, homework and summary in the dock.
@@ -1007,7 +1008,13 @@ class _StudentRow extends StatelessWidget {
                   ],
                   GestureDetector(
                     onLongPress: readOnly ? null : onSelect,
-                    child: GAvatar(name: student.name, url: student.avatarUrl, size: 40, tone: GAvatarTone.neutral),
+                    child: PersonAvatar(
+                      presence: PresenceRef.student(student.id),
+                      name: student.name,
+                      url: student.avatarUrl,
+                      size: 40,
+                      tone: GAvatarTone.neutral,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -1276,7 +1283,13 @@ class _Face extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: absent ? GColors.badFill : Colors.transparent, width: 3),
               ),
-              child: GAvatar(name: student.name, url: student.avatarUrl, size: 56, tone: GAvatarTone.neutral),
+              child: PersonAvatar(
+                presence: PresenceRef.student(student.id),
+                name: student.name,
+                url: student.avatarUrl,
+                size: 56,
+                tone: GAvatarTone.neutral,
+              ),
             ),
             const SizedBox(height: 4),
             Text(

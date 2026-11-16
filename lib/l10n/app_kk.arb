@@ -557,5 +557,6 @@
   "pushOffOpen": "Баптауларды ашу",
   "pushTurnOn": "Хабарламаларды қосу",
   "pushUnavailable": "Бұл нұсқада пуш-хабарламалар жоқ",
-  "notifOpen": "Ашу"
+  "notifOpen": "Ашу",
+  "presenceOnline": "Желіде"
 }

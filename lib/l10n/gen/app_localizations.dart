@@ -3440,6 +3440,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Открыть'**
   String get notifOpen;
+
+  /// No description provided for @presenceOnline.
+  ///
+  /// In ru, this message translates to:
+  /// **'В сети'**
+  String get presenceOnline;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

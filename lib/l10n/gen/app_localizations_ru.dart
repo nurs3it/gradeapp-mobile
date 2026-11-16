@@ -2038,4 +2038,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notifOpen => 'Открыть';
+
+  @override
+  String get presenceOnline => 'В сети';
 }

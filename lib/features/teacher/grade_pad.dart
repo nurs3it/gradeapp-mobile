@@ -8,6 +8,7 @@ import '../../ui/ui.dart';
 import '../common/lesson_widgets.dart';
 import 'teacher_models.dart';
 import 'teacher_providers.dart';
+import '../common/presence.dart';
 
 /// Dock pad for scales of 6–10 marks (design-system §3.10, decision № 5):
 /// 2 × 5 keys of 60 pt, 1–5 on top and 6–10 under the thumb; the class list
@@ -197,7 +198,13 @@ class _GradePadState extends State<GradePad> {
                               ),
                             ),
                           )
-                        : GAvatar(name: s.name, url: s.avatarUrl, size: 44, tone: GAvatarTone.active),
+                        : PersonAvatar(
+                            presence: PresenceRef.student(s.id),
+                            name: s.name,
+                            url: s.avatarUrl,
+                            size: 44,
+                            tone: GAvatarTone.active,
+                          ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Semantics(

@@ -557,5 +557,6 @@
   "pushOffOpen": "Open settings",
   "pushTurnOn": "Turn on notifications",
   "pushUnavailable": "Push notifications are not available in this build",
-  "notifOpen": "Open"
+  "notifOpen": "Open",
+  "presenceOnline": "Online"
 }

@@ -1542,5 +1542,6 @@
   "pushOffOpen": "Открыть настройки",
   "pushTurnOn": "Включить уведомления",
   "pushUnavailable": "В этой сборке пуши недоступны",
-  "notifOpen": "Открыть"
+  "notifOpen": "Открыть",
+  "presenceOnline": "В сети"
 }

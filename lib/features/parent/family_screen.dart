@@ -8,6 +8,7 @@ import '../common/models.dart';
 import '../learner/learner_providers.dart';
 import '../shell/header.dart';
 import 'excuse_sheet.dart';
+import '../common/presence.dart';
 
 /// Parent «Семья» in 1.0 (§4.5): excuse a child, requests with statuses,
 /// children with the photo consent. Payments, teachers and news come in 1.2.
@@ -84,7 +85,13 @@ class FamilyScreen extends ConsumerWidget {
                   children: [
                     for (final ch in children)
                       GRow(
-                        leading: GAvatar(name: ch.fullName, url: ch.avatarUrl, size: 40, color: childColor(ch.id)),
+                        leading: PersonAvatar(
+                          presence: PresenceRef.student(ch.id),
+                          name: ch.fullName,
+                          url: ch.avatarUrl,
+                          size: 40,
+                          color: childColor(ch.id),
+                        ),
                         title: Text(ch.fullName),
                         subtitle: Text(
                           [
