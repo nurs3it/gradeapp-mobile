@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GradeApp Mobile · «Веер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&text=GradeApp&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add,arrow_forward,calendar_view_week,chat,check,check_circle,checklist,chevron_left,chevron_right,close,cloud_done,cloud_off,cloud_upload,done_all,door_front,edit_note,error,event_busy,expand_more,family_home,flash_on,grid_view,groups,hourglass_top,inbox,info,insights,key,light_mode,location_on,lock,menu_book,mic,more_horiz,notifications,photo_camera_front,play_arrow,qr_code_scanner,remove,schedule,search,signal_cellular_alt,swap_horiz,task_alt,timer,undo,view_agenda,wifi&display=block" rel="stylesheet">
+<style>
+/* ===================== Токены «Веер» (1:1 с docs/design/design-system.md) ===================== */
+:root{
+  --font:'Onest',system-ui,-apple-system,sans-serif;
+  --brand:#0A5BD8;
+  /* предметы: глубокие заливки (белый текст ≥ 4.5:1 в обеих темах) */
+  --indigo:#4F46E5;--violet:#6D35DB;--berry:#A61F84;--rose:#B41F48;--brick:#AE3A0B;--amber:#875500;--green:#0B6F43;--teal:#0A6476;
+  --gold:#FFC226;--on-gold:#1F1600;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+.lt{
+  --canvas:#F2F4F8;--surface:#FFFFFF;--surface2:#EAEEF4;--surface3:#E1E6EE;--hair:#E3E7EE;
+  --ink:#0D1320;--ink2:#4A5466;--ink3:#5D6779;
+  --primary:#0A5BD8;--ptext:#0A5BD8;--psoft:#E6EFFD;--psoft-text:#0848B0;
+  --gold-text:#8A5A00;--gold-soft:#FFF3D1;
+  --ok:#0B7A47;--ok-soft:#E2F4EA;--ok-fill:#11834F;
+  --warn:#975400;--warn-soft:#FDF0DA;--warn-fill:#B25F00;
+  --bad:#C42127;--bad-soft:#FCE6E6;--bad-fill:#D02A30;
+  --tabbg:rgba(255,255,255,.97);
+  --sh1:0 1px 2px rgba(16,24,40,.05);
+  --sh2:0 12px 32px -8px rgba(16,24,40,.18),0 2px 6px rgba(16,24,40,.06);
+  --sh3:0 -10px 40px rgba(16,24,40,.16);
+  --hl:none;
+  --m-indigo:#4F46E5;--m-violet:#6D35DB;--m-berry:#A61F84;--m-rose:#B41F48;--m-brick:#AE3A0B;--m-amber:#875500;--m-green:#0B6F43;--m-teal:#0A6476;
+  --t-indigo:#EAE9FC;--t-violet:#EDE7FB;--t-berry:#F4E4F0;--t-rose:#F6E4E9;--t-brick:#F5E7E2;--t-amber:#F1EBE0;--t-green:#E2EEE8;--t-teal:#E2ECEF;
+  --sk:#E6EAF0;
+}
+.dk{
+  --canvas:#090C12;--surface:#131821;--surface2:#1B212C;--surface3:#252C39;--hair:#232A36;
+  --ink:#F2F5FA;--ink2:#A3ADBE;--ink3:#8B96A8;
+  --primary:#0A5BD8;--ptext:#7AABFF;--psoft:#132545;--psoft-text:#9DC0FF;
+  --gold-text:#FFD36B;--gold-soft:#2E250C;
+  --ok:#4CCB88;--ok-soft:#10291D;--ok-fill:#11834F;
+  --warn:#FFB547;--warn-soft:#2D2109;--warn-fill:#B25F00;
+  --bad:#FF7B7B;--bad-soft:#371619;--bad-fill:#D02A30;
+  --tabbg:rgba(27,33,44,.97);
+  --sh1:none;
+  --sh2:0 12px 32px -6px rgba(0,0,0,.6);
+  --sh3:0 -10px 40px rgba(0,0,0,.6);
+  --hl:inset 0 1px 0 rgba(255,255,255,.06);
+  --m-indigo:#9A94FF;--m-violet:#B38CFF;--m-berry:#F17ACF;--m-rose:#FF7E9F;--m-brick:#FF8F5E;--m-amber:#F2B33D;--m-green:#5BD69A;--m-teal:#4FC6DB;
+  --t-indigo:#242558;--t-violet:#2C2055;--t-berry:#3C1A3D;--t-rose:#401A2C;--t-brick:#3E221B;--t-amber:#332918;--t-green:#11302B;--t-teal:#102D39;
+  --sk:#1E2430;
+}
+
+/* ===================== Страница-витрина ===================== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#E7EAF0}
+body{font-family:var(--font);color:#0D1320;padding:56px 16px 96px;-webkit-font-smoothing:antialiased}
+.page{max-width:1840px;margin:0 auto}
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:start;margin:0 auto 56px;max-width:1500px}
+.intro h1{font-size:52px;line-height:56px;font-weight:800;letter-spacing:-.035em}
+.intro h1 span{color:var(--brand)}
+.intro p{font-size:18px;line-height:28px;color:#3B4556;margin-top:18px;max-width:720px}
+.intro .meta{font-size:14px;color:#4A5466;margin-top:16px;line-height:22px}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rule{background:#fff;border-radius:22px;padding:16px 18px;font-size:14px;line-height:20px;color:#3B4556}
+.rule b{display:block;font-size:16px;color:#0D1320;margin-bottom:4px}
+.row-title{max-width:1500px;margin:72px auto 22px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.row-title h2{font-size:30px;font-weight:800;letter-spacing:-.025em}
+.row-title span{font-size:15px;color:#4A5466}
+.frames{display:flex;flex-wrap:wrap;gap:56px 44px;justify-content:center}
+figure{display:flex;flex-direction:column;align-items:center;gap:18px}
+figcaption{max-width:402px;font-size:14px;line-height:20px;color:#3B4556;text-align:left;width:100%}
+figcaption b{display:block;font-size:16px;color:#0D1320;margin-bottom:2px}
+
+/* ===================== Телефон 402×874 ===================== */
+.phone{width:402px;height:874px;border-radius:62px;position:relative;overflow:hidden;background:var(--canvas);color:var(--ink);font-family:var(--font);
+  box-shadow:0 0 0 10px #0B0C0F,0 0 0 11.5px #34373D,0 40px 80px -20px rgba(10,20,40,.45);font-feature-settings:'cv01' 0}
+.sb{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:8px 30px 0 52px;font-weight:600;font-size:17px;z-index:30;color:var(--ink)}
+.sb .r{display:flex;gap:6px;align-items:center}
+.sb .ms{font-size:19px;font-variation-settings:'FILL' 1,'wght' 600}
+.sb.w{color:#fff}
+.di{position:absolute;top:11px;left:50%;width:126px;height:37px;margin-left:-63px;border-radius:20px;background:#000;z-index:31}
+.hi{position:absolute;bottom:8px;left:50%;width:140px;height:5px;margin-left:-70px;border-radius:3px;background:var(--ink);z-index:40}
+.hi.w{background:#fff}
+.scr{position:absolute;inset:0;padding-top:62px;overflow:hidden}
+.fade{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(to bottom,transparent,var(--canvas) 62%);z-index:14;pointer-events:none}
+.ms{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;user-select:none}
+.ms.f{font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24}
+.ms.s{font-size:20px;font-variation-settings:'FILL' 0,'wght' 600,'GRAD' 0,'opsz' 20}
+.ms.sf{font-size:20px;font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20}
+.ms.xs{font-size:16px;font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 20}
+.tnum{font-feature-settings:'tnum' 1}
+
+/* Заголовок корневого экрана */
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;padding:4px 20px 16px;gap:12px}
+.eyebrow{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.t1{font-size:34px;line-height:40px;font-weight:800;letter-spacing:-.03em}
+.hacts{display:flex;gap:8px;align-items:center;flex:none}
+.hbtn{width:44px;height:44px;border-radius:22px;background:var(--surface);display:grid;place-items:center;position:relative;box-shadow:var(--sh1),var(--hl);color:var(--ink)}
+.badge{position:absolute;top:4px;right:3px;min-width:18px;height:18px;border-radius:9px;background:var(--bad-fill);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 5px;box-shadow:0 0 0 2px var(--canvas)}
+.av{width:44px;height:44px;border-radius:22px;display:grid;place-items:center;font-weight:700;font-size:15px;color:#fff;flex:none;letter-spacing:.01em}
+.av.sm{width:40px;height:40px;font-size:14px}
+.av.xs{width:32px;height:32px;font-size:12px}
+.av.q{background:var(--surface2);color:var(--ink2)}
+.fresh{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);padding:0 20px 12px;margin-top:-8px}
+
+/* Таб-бар-капсула */
+.tabs{position:absolute;left:16px;right:16px;bottom:22px;height:64px;border-radius:32px;background:var(--tabbg);box-shadow:var(--sh2),var(--hl);display:flex;padding:6px;gap:2px;z-index:20}
+.tab{flex:1;border-radius:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:11px;line-height:13px;font-weight:600;color:var(--ink2);min-width:0;white-space:nowrap}
+.tab .ms{font-size:24px}
+.tab.on{background:var(--psoft);color:var(--psoft-text)}
+.tab.on .ms{font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 24}
+
+/* Поверхности */
+.card{background:var(--surface);border-radius:26px;box-shadow:var(--sh1),var(--hl)}
+.grp{margin:0 20px;background:var(--surface);border-radius:26px;overflow:hidden;box-shadow:var(--sh1),var(--hl)}
+.row{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 16px;position:relative}
+.grp .row+.row::before{content:'';position:absolute;top:0;left:var(--inset,16px);right:0;height:1px;background:var(--hair)}
+.rt{flex:1;min-width:0}
+.rt b{display:block;font-size:16px;line-height:21px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rt small{display:block;font-size:13px;line-height:17px;color:var(--ink2);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sh{display:flex;justify-content:space-between;align-items:baseline;padding:26px 20px 10px}
+.sh b{font-size:20px;line-height:25px;font-weight:700;letter-spacing:-.015em}
+.sh a{font-size:15px;font-weight:600;color:var(--ptext);text-decoration:none}
+.sh em{font-style:normal;font-size:14px;color:var(--ink2);font-weight:500}
+.tm{width:46px;font-size:15px;font-weight:600;font-feature-settings:'tnum' 1;color:var(--ink);flex:none}
+.tm.p{color:var(--ink3)}
+.bar{width:5px;height:30px;border-radius:3px;background:var(--c);flex:none}
+.dot{width:10px;height:10px;border-radius:5px;background:var(--c);flex:none}
+.chev{color:var(--ink3);font-size:22px}
+
+/* Кнопки */
+.btn{height:50px;border-radius:25px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700;font-family:var(--font);border:0;white-space:nowrap}
+.btn.pr{background:var(--primary);color:#fff}
+.btn.tn{background:var(--psoft);color:var(--psoft-text)}
+.btn.sc{background:var(--surface2);color:var(--ink)}
+.btn.wh{background:#fff;color:var(--c,#0D1320)}
+.btn.sm{height:40px;border-radius:20px;padding:0 16px;font-size:15px}
+.btn.de{background:var(--bad-fill);color:#fff}
+
+/* Чипы и бейджи */
+.chip{height:36px;border-radius:18px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;background:var(--surface);color:var(--ink);box-shadow:var(--sh1),var(--hl);white-space:nowrap}
+.chip.on{background:var(--ink);color:var(--canvas)}
+.chip .n{font-weight:800;font-feature-settings:'tnum' 1}
+.chip.warn{background:var(--warn-soft);color:var(--warn);box-shadow:none}
+.chip.bad{background:var(--bad-soft);color:var(--bad);box-shadow:none}
+.chip.ps{background:var(--psoft);color:var(--psoft-text);box-shadow:none}
+.type{font-size:11px;line-height:14px;font-weight:700;letter-spacing:.02em;padding:3px 7px;border-radius:7px;display:inline-block}
+.type.fo{background:var(--psoft);color:var(--psoft-text)}
+.type.sor{background:var(--warn-soft);color:var(--warn)}
+.type.soch{background:var(--t-violet);color:var(--m-violet)}
+.pill{height:28px;border-radius:14px;padding:0 10px;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.ps{background:var(--psoft);color:var(--psoft-text)}
+.pill.q{background:var(--surface2);color:var(--ink2)}
+
+/* Чип оценки */
+.g{min-width:34px;height:34px;border-radius:12px;display:inline-grid;place-items:center;font-weight:800;font-size:17px;padding:0 8px;font-feature-settings:'tnum' 1;position:relative;flex:none}
+.g.l{min-width:44px;height:44px;border-radius:15px;font-size:20px}
+.g.xl{min-width:56px;height:56px;border-radius:19px;font-size:26px}
+.g.exc{background:var(--ok-soft);color:var(--ok)}
+.g.good{background:var(--psoft);color:var(--psoft-text)}
+.g.fair{background:var(--warn-soft);color:var(--warn)}
+.g.poor{background:var(--bad-soft);color:var(--bad)}
+.g.new::after{content:'';position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:5px;background:var(--gold);box-shadow:0 0 0 2px var(--surface)}
+.g.pts{font-size:14px;min-width:auto;padding:0 9px}
+
+/* Лист-герой и стопка */
+.hw{position:relative;margin:0 20px 20px}
+.hero{position:relative;border-radius:32px;padding:20px;color:#fff;background:var(--c);z-index:3;overflow:hidden}
+.sl{position:absolute;left:14px;right:14px;bottom:-10px;height:80px;border-radius:26px;background:var(--c);opacity:.72;z-index:2}
+.sl.b{left:30px;right:30px;bottom:-19px;opacity:.48;z-index:1}
+.deco{position:absolute;width:210px;height:50px;border-radius:25px;background:#fff;opacity:.07;right:-58px;top:6px;transform:rotate(-28deg);transform-origin:left center}
+.deco.b{opacity:.05;transform:rotate(-50deg);top:40px;right:-90px}
+.h-eb{display:flex;justify-content:space-between;align-items:center;font-size:12px;line-height:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.88);position:relative}
+.h-eb .tnum{letter-spacing:.02em}
+.h-t{font-size:30px;line-height:34px;font-weight:800;letter-spacing:-.025em;margin-top:8px;position:relative}
+.h-s{font-size:15px;line-height:20px;font-weight:500;color:rgba(255,255,255,.88);margin-top:4px;display:flex;align-items:center;gap:6px;position:relative}
+.big{font-size:64px;line-height:58px;font-weight:800;letter-spacing:-.045em}
+.unit{font-size:17px;line-height:20px;font-weight:600;letter-spacing:-.005em}
+.cd{display:flex;align-items:flex-end;gap:16px;margin-top:18px;position:relative}
+.cd .u{padding-bottom:6px;color:rgba(255,255,255,.88)}
+.prog{height:8px;border-radius:4px;background:rgba(255,255,255,.26);overflow:hidden;position:relative}
+.prog i{display:block;height:100%;border-radius:4px;background:#fff}
+.nx{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);display:flex;align-items:center;gap:10px;font-size:15px;line-height:20px;position:relative}
+.nx .k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.nx b{font-weight:700}
+.nx .sp{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Плитки */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 20px}
+.tile{background:var(--surface);border-radius:26px;padding:16px;min-height:122px;display:flex;flex-direction:column;box-shadow:var(--sh1),var(--hl)}
+.tile .k{font-size:13px;line-height:17px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.tile .v{font-size:36px;line-height:38px;font-weight:800;letter-spacing:-.035em;margin-top:auto}
+.tile .v small{font-size:17px;line-height:20px;font-weight:700;letter-spacing:-.01em}
+.tile .s{font-size:14px;line-height:18px;color:var(--ink2);font-weight:500;margin-top:2px}
+
+/* Отметка-пилюля (после check-in) */
+.cin{margin:0 20px 14px;min-height:56px;border-radius:28px;background:var(--surface);display:flex;align-items:center;padding:6px 6px 6px 8px;gap:10px;box-shadow:var(--sh1),var(--hl)}
+.cin .ic{width:40px;height:40px;border-radius:20px;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;flex:none}
+.cin .tx{flex:1;font-size:15px;line-height:19px;font-weight:600;min-width:0}
+.cin .tx small{display:block;font-size:13px;font-weight:500;color:var(--ink2)}
+.streak{height:44px;border-radius:22px;background:var(--gold);color:var(--on-gold);padding:0 14px 0 10px;display:flex;align-items:center;gap:7px;font-weight:800;font-size:16px;flex:none}
+.streak small{font-size:13px;font-weight:600}
+.fanmini{width:100%;height:100%;display:block}
+.streak .fanmini{width:24px;height:24px}
+
+/* Строка ученика (перекличка) */
+.st{display:flex;align-items:center;gap:12px;min-height:60px;padding:8px 12px 8px 16px;position:relative}
+.grp .st+.st::before{content:'';position:absolute;top:0;left:68px;right:0;height:1px;background:var(--hair)}
+.st .nm{flex:1;min-width:0}
+.st .nm b{display:block;font-size:16px;line-height:20px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st .nm small{display:flex;align-items:center;gap:4px;font-size:13px;line-height:17px;color:var(--ink2);margin-top:1px}
+.st.abs .nm b{color:var(--bad)}
+.st.cur{background:var(--psoft)}
+.att{width:56px;height:44px;border-radius:22px;display:grid;place-items:center;font-weight:800;font-size:17px;flex:none}
+.att.p{background:var(--surface2);color:var(--ink3)}
+.att.n{background:var(--bad-fill);color:#fff}
+.att.c{background:var(--warn-soft);color:var(--warn)}
+.gs{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:var(--surface2);color:var(--ink2);flex:none}
+.gs.off{opacity:.4}
+.src{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:6px;background:var(--surface2);color:var(--ink2);font-size:11px;font-weight:800}
+
+/* Док учителя */
+.dock{position:absolute;left:12px;right:12px;bottom:22px;height:66px;border-radius:33px;background:var(--tabbg);box-shadow:var(--sh2),var(--hl);display:flex;align-items:center;padding:8px;gap:8px;z-index:20}
+.dock .btn{height:50px}
+
+/* Сегменты */
+.seg{display:flex;background:var(--surface2);border-radius:20px;padding:4px;margin:0 20px;height:44px}
+.seg span{flex:1;display:grid;place-items:center;font-size:15px;font-weight:600;color:var(--ink2);border-radius:16px}
+.seg span.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(16,24,40,.12),var(--hl)}
+
+/* Лента дня */
+.tl .row+.row::before{display:none}
+.tl .row{min-height:60px}
+.tl .row::after{content:'';position:absolute;left:87px;top:0;bottom:0;width:2px;background:var(--hair);z-index:0}
+.tl .row:first-child::after{top:50%}.tl .row:last-child::after{bottom:50%}
+.node{width:28px;height:28px;border-radius:14px;display:grid;place-items:center;flex:none;position:relative;z-index:1;box-shadow:0 0 0 3px var(--surface)}
+/* Клавиши пэда */
+.key{height:60px;border-radius:20px;display:grid;place-items:center;font-size:26px;font-weight:800;letter-spacing:-.02em;font-feature-settings:'tnum' 1}
+.key.poor{background:var(--bad-soft);color:var(--bad)}.key.fair{background:var(--warn-soft);color:var(--warn)}.key.good{background:var(--psoft);color:var(--psoft-text)}.key.exc{background:var(--ok-soft);color:var(--ok)}
+.key.dn{transform:scale(.94);background:var(--ok-fill);color:#fff}
+/* Веер четвертей */
+.qt{flex:1;height:64px;border-radius:22px;background:var(--surface);padding:10px 12px;box-shadow:var(--sh1),var(--hl);display:flex;flex-direction:column;justify-content:space-between}
+.qt span{font-size:12px;line-height:14px;font-weight:700;color:var(--ink2)}
+.qt div{height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
+.qt div i{display:block;height:100%;border-radius:3px;background:var(--primary)}
+.qt b{font-size:14px;line-height:16px;font-weight:800}
+.qt.on{background:var(--ink);box-shadow:none}.qt.on span,.qt.on b{color:var(--canvas)}.qt.on div{background:rgba(127,127,127,.35)}.qt.on div i{background:#7AABFF}
+.qt.off{background:var(--surface2);box-shadow:none}.qt.off b{color:var(--ink3);font-weight:600}
+/* Скелетон */
+.skl{background:var(--sk);border-radius:10px}
+
+/* Доски (виджеты, компоненты) */
+.board{border-radius:44px;padding:36px;max-width:1500px;margin:0 auto}
+.wall{background:linear-gradient(160deg,#2B3550 0%,#141A2A 45%,#0B0F1A 100%);color:#fff}
+.wgrid{display:flex;flex-wrap:wrap;gap:28px 28px;align-items:flex-start}
+.wgrid>div{width:min-content}
+.wlab{font-size:13px;color:rgba(255,255,255,.72);margin-top:10px;max-width:364px;line-height:18px}
+.wlab b{color:#fff;display:block;font-size:14px}
+.wd{border-radius:24px;overflow:hidden;position:relative;font-family:var(--font)}
+.ls{background:rgba(255,255,255,.16);border-radius:20px;color:#fff}
+
+.bat{width:27px;height:13px;border:1.5px solid currentColor;border-radius:4px;position:relative;padding:1.5px;opacity:.95}.bat i{display:block;height:100%;width:78%;background:currentColor;border-radius:1.5px}.bat::after{content:'';position:absolute;right:-4.5px;top:3px;width:2.5px;height:4px;border-radius:0 1.5px 1.5px 0;background:currentColor}
+.mk svg,.mk{display:block}
+.wm{font-family:'Inter',var(--font);font-weight:600;letter-spacing:-.02em}
+@media (max-width:860px){.intro{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.intro h1{font-size:38px;line-height:42px}}
+@media (max-width:460px){.frames{gap:24px}.phone{transform:scale(.86);transform-origin:top center;margin-bottom:-120px}.board{padding:20px;border-radius:28px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<section class="intro">
+  <div>
+    <div class="eyebrow" style="color:#4A5466">GradeApp Mobile · визуальное направление v1 · 16.11.2026</div>
+    <h1 style="margin-top:10px">«Веер»: один яркий лист <span>на экран</span></h1>
+    <p>Интерфейс собран из тех же листов, что и знак «Четыре страницы». Фон — спокойная бумага. На каждом экране ровно один громкий лист: текущий урок в цвете предмета, вердикт дня или кнопка «Я в школе». Под ним веером лежат следующие листы с прозрачностью 72 и 48&nbsp;%. Глубину даёт наложение листов, а не тени. Цвет несёт предмет, а не декор. Движение — раскрытие веера и пружина. Цифры, которые ищут глазами (минуты до звонка, оценка, «22 из 24»), набраны крупно и жирно, как на табло.</p>
+    <p class="meta">Шрифт <b>Onest</b> (OFL, Google Fonts) · иконки <b>Material Symbols Rounded</b> · брендовый <b>#0A5BD8</b>, знак без изменений · рамка iPhone 17 Pro 402×874 pt · все имена и данные вымышлены. Токены и компоненты — <code>docs/design/design-system.md</code>, экраны — <code>docs/design/screens.md</code>.</p>
+  </div>
+  <div class="rules">
+    <div class="rule"><b>Один громкий лист</b>Насыщенная заливка только у главного на экране. Всё остальное — белые листы без рамок.</div>
+    <div class="rule"><b>Цвет = предмет</b>8 глубоких цветов предметов с белым текстом ≥ 4.5:1. Синий бренда — только действие и выбор.</div>
+    <div class="rule"><b>Цифры как табло</b>Onest 800, плотный трекинг: 64 pt для отсчёта, 26 pt для клавиш оценок.</div>
+    <div class="rule"><b>Золото — только за успех</b>Солнечный акцент флага: серии, «новое», экран «Отмечено». Никогда не статус.</div>
+    <div class="rule"><b>Веер вместо колец</b>Прогресс четверти, серии и pull-to-refresh — четыре листа знака, а не кольца Apple.</div>
+    <div class="rule"><b>Громкость роли</b>Ученик — громко, учитель — плотно и быстро, родитель — тихо и ясно. Один набор компонентов.</div>
+  </div>
+</section>
+
+<div class="row-title"><h2>Ученик</h2><span>«Сегодня» в двух темах и двух языках, отметка «Я в школе», оценки</span></div>
+<div class="frames">
+
+<!-- ============ Ученик · Сегодня · светлая ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">10:47</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">Понедельник, 16 ноября</div><div class="t1">Сегодня</div></div>
+      <div class="hacts"><div class="hbtn"><i class="ms">notifications</i><span class="badge">2</span></div><div class="av" style="background:var(--violet)">АБ</div></div>
+    </div>
+    <div class="cin">
+      <div class="ic"><i class="ms sf">check</i></div>
+      <div class="tx">В школе с 07:52<small>Отметилась вовремя</small></div>
+      <div class="streak"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#1F1600" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#1F1600" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#1F1600" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#1F1600" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg>12 <small>дней</small></div>
+    </div>
+    <div class="hw" style="--c:var(--teal)">
+      <div class="hero">
+        <i class="deco"></i><i class="deco b"></i>
+        <div class="h-eb"><span>Сейчас · 3-й урок</span><span class="tnum">10:25–11:10</span></div>
+        <div class="h-t">Физика</div>
+        <div class="h-s"><i class="ms xs">door_front</i>каб. 312 · Сейткали А.</div>
+        <div class="cd"><div class="big tnum">23</div><div class="u unit">мин<br>до звонка</div></div>
+        <div class="prog" style="margin-top:14px"><i style="width:49%"></i></div>
+        <div class="nx"><span class="k">Дальше</span><span class="sp"><b class="tnum">11:25</b> История Казахстана · каб. 215</span><i class="ms s">chevron_right</i></div>
+      </div>
+      <i class="sl" style="--c:var(--amber)"></i><i class="sl b" style="--c:var(--violet)"></i>
+    </div>
+    <div class="tiles" style="margin-top:28px">
+      <div class="tile"><div class="k"><i class="ms s">task_alt</i>На завтра</div><div class="v"><span class="tnum">3</span> <small>задания</small></div><div class="s">≈ 70 мин</div></div>
+      <div class="tile"><div class="k"><i class="ms s">insights</i>Новые оценки</div><div style="display:flex;gap:8px;margin-top:auto"><span class="g l exc new">9</span><span class="g l fair new">6</span></div><div class="s">Алгебра · Физика</div></div>
+    </div>
+    <div class="sh"><b>План дня</b><a>Неделя</a></div>
+    <div class="grp" style="--inset:74px">
+      <div class="row"><span class="tm p">08:30</span><span class="bar" style="--c:var(--surface3)"></span><div class="rt"><b style="color:var(--ink2)">2 урока прошли</b><small>Алгебра · Қазақ әдебиеті</small></div><span class="g exc">9</span></div>
+      <div class="row" style="background:var(--t-teal)"><span class="tm">10:25</span><span class="bar" style="--c:var(--m-teal)"></span><div class="rt"><b>Физика</b><small>идёт · каб. 312</small></div><span class="pill ps">сейчас</span></div>
+      <div class="row"><span class="tm">11:25</span><span class="bar" style="--c:var(--m-amber)"></span><div class="rt"><b>История Казахстана</b><small>каб. 215</small></div></div>
+      <div class="row"><span class="tm">12:30</span><span class="bar" style="--c:var(--m-violet)"></span><div class="rt"><b>Английский язык</b><small>Замена: Ахметова Г. · каб. 301</small></div><span class="pill warn"><i class="ms xs">swap_horiz</i>замена</span></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab on" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab" style="position:relative"><i class="ms">insights</i>Оценки</div><div class="tab" style="position:relative"><i class="ms">task_alt</i>Задания</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Сегодня · урок идёт · светлая</b>Отметка уже сделана и свернулась в пилюлю с серией. Громкий лист — текущий урок в цвете физики, под ним видны листы следующих предметов. Отсчёт тикает локально, тап открывает карточку урока.</figcaption>
+</figure>
+
+<!-- ============ Ученик · Сегодня · тёмная · kk ============ -->
+<figure>
+<div class="phone dk">
+  <div class="sb"><span class="tnum">10:14</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">Дүйсенбі, 16 қараша</div><div class="t1">Бүгін</div></div>
+      <div class="hacts"><div class="hbtn"><i class="ms">notifications</i><span class="badge">2</span></div><div class="av" style="background:var(--violet)">АБ</div></div>
+    </div>
+    <div class="cin">
+      <div class="ic"><i class="ms sf">check</i></div>
+      <div class="tx">Мектептесің · 07:52<small>Уақытында белгі қойдың</small></div>
+      <div class="streak"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#1F1600" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#1F1600" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#1F1600" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#1F1600" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg>12 <small>күн</small></div>
+    </div>
+    <div class="hw" style="--c:var(--teal)">
+      <div class="hero">
+        <i class="deco"></i><i class="deco b"></i>
+        <div class="h-eb"><span>Үзіліс · келесі сабақ</span><span class="tnum">10:25–11:10</span></div>
+        <div class="h-t">Физика</div>
+        <div class="h-s"><i class="ms xs">door_front</i>312 каб. · Сейткали А.</div>
+        <div class="cd"><div class="big tnum">11</div><div class="u unit">мин<br>сабаққа дейін</div></div>
+        <div class="prog" style="margin-top:14px"><i style="width:27%"></i></div>
+        <div class="nx"><span class="k">Келесі</span><span class="sp"><b class="tnum">11:25</b> Қазақстан тарихы · 215 каб.</span><i class="ms s">chevron_right</i></div>
+      </div>
+      <i class="sl" style="--c:var(--amber)"></i><i class="sl b" style="--c:var(--violet)"></i>
+    </div>
+    <div class="tiles" style="margin-top:28px">
+      <div class="tile"><div class="k"><i class="ms s">task_alt</i>Ертеңге</div><div class="v"><span class="tnum">3</span> <small>тапсырма</small></div><div class="s">≈ 70 мин</div></div>
+      <div class="tile"><div class="k"><i class="ms s">insights</i>Жаңа бағалар</div><div style="display:flex;gap:8px;margin-top:auto"><span class="g l exc new">9</span><span class="g l fair new">6</span></div><div class="s">Алгебра · Физика</div></div>
+    </div>
+    <div class="sh"><b>Күн жоспары</b><a>Апта</a></div>
+    <div class="grp" style="--inset:74px">
+      <div class="row"><span class="tm p">08:30</span><span class="bar" style="--c:var(--surface3)"></span><div class="rt"><b style="color:var(--ink2)">2 сабақ өтті</b><small>Алгебра · Қазақ әдебиеті</small></div><span class="g exc">9</span></div>
+      <div class="row" style="background:var(--t-teal)"><span class="tm">10:25</span><span class="bar" style="--c:var(--m-teal)"></span><div class="rt"><b>Физика</b><small>11 минуттан кейін · 312 каб.</small></div><span class="pill ps">келесі</span></div>
+      <div class="row"><span class="tm">11:25</span><span class="bar" style="--c:var(--m-amber)"></span><div class="rt"><b>Қазақстан тарихы</b><small>215 каб.</small></div></div>
+      <div class="row"><span class="tm">12:30</span><span class="bar" style="--c:var(--m-violet)"></span><div class="rt"><b>Ағылшын тілі</b><small>Ауыстыру: Ахметова Г. · 301 каб.</small></div><span class="pill warn"><i class="ms xs">swap_horiz</i>ауыстыру</span></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab on" style="position:relative"><i class="ms">light_mode</i>Бүгін</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Апта</div><div class="tab" style="position:relative"><i class="ms">insights</i>Бағалар</div><div class="tab" style="position:relative"><i class="ms">task_alt</i>Тапсырмалар</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Бүгін · перемена · тёмная, қазақша</b>Тот же экран в состоянии «перемена» на казахском: строки длиннее, но вёрстка держится. Тёмная тема — «ночные чернила» #090C12, заливка предмета не меняется, маркеры предметов светлеют.</figcaption>
+</figure>
+
+<!-- ============ Ученик · Камера check-in ============ -->
+<figure>
+<div class="phone dk" style="background:#05070B">
+  <div class="sb w"><span class="tnum">07:52</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr" style="padding-top:0">
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 42%,#5A4A42 0%,#2E2725 38%,#121014 70%,#06070A 100%)"></div>
+    <!-- силуэт -->
+    <div style="position:absolute;left:131px;top:258px;width:140px;height:176px;border-radius:70px 70px 64px 64px;background:radial-gradient(60% 60% at 45% 40%,#B38B74,#7A5A4A 70%,#4A3830)"></div>
+    <div style="position:absolute;left:96px;top:440px;width:210px;height:180px;border-radius:100px 100px 30px 30px;background:radial-gradient(70% 60% at 50% 30%,#2F4A6E,#1C2C44 80%)"></div>
+    <div style="position:absolute;left:121px;top:236px;width:160px;height:84px;border-radius:80px 80px 30px 30px;background:#231A16"></div>
+    <!-- маска и овал -->
+    <div style="position:absolute;left:66px;top:200px;width:270px;height:350px;border-radius:50%;box-shadow:0 0 0 900px rgba(5,7,11,.62);border:3px solid #fff"></div>
+    <div style="position:absolute;left:66px;top:200px;width:270px;height:350px;border-radius:50%;border:3px solid transparent;border-top-color:#5BD69A;border-right-color:#5BD69A;transform:rotate(18deg)"></div>
+    <!-- верх -->
+    <div style="position:absolute;top:62px;left:16px;right:16px;display:flex;align-items:center;justify-content:space-between;color:#fff">
+      <div class="hbtn" style="background:rgba(255,255,255,.16);color:#fff;box-shadow:none"><i class="ms">close</i></div>
+      <div style="font-size:17px;font-weight:700">Я в школе</div>
+      <div class="hbtn" style="background:rgba(255,255,255,.16);color:#fff;box-shadow:none"><i class="ms">flash_on</i></div>
+    </div>
+    <div style="position:absolute;top:124px;left:0;right:0;display:flex;justify-content:center">
+      <span class="pill" style="background:rgba(76,203,136,.2);color:#7EE2AE;height:34px;border-radius:17px;padding:0 14px;font-size:14px"><i class="ms xs">location_on</i>Вы у школы · окно до 08:30</span>
+    </div>
+    <div style="position:absolute;top:572px;left:40px;right:40px;text-align:center;color:#fff">
+      <div style="font-size:20px;font-weight:700;letter-spacing:-.01em">Лицо в овале — и снимок</div>
+      <div style="font-size:14px;line-height:19px;color:rgba(255,255,255,.78);margin-top:6px">Фото увидит только персонал школы.<br>Оно удалится через 30 дней.</div>
+    </div>
+    <!-- спуск -->
+    <div style="position:absolute;bottom:64px;left:0;right:0;display:flex;justify-content:center;align-items:center">
+      <div style="width:84px;height:84px;border-radius:42px;border:4px solid #fff;display:grid;place-items:center"><div style="width:68px;height:68px;border-radius:34px;background:#fff"></div></div>
+    </div>
+  </div>
+  <div class="hi w"></div>
+</div>
+<figcaption><b>«Я в школе» · своя камера</b>Фронтальная камера, овал и затемнение вне его. Геопозиция берётся параллельно с открытием камеры — зелёная дуга на овале значит «геоточка получена». Объяснение приватности прямо в кадре. Кнопка спуска 72 pt.</figcaption>
+</figure>
+
+<!-- ============ Ученик · Отмечено ============ -->
+<figure>
+<div class="phone" style="background:#0A5BD8;color:#fff">
+  <div class="sb w"><span class="tnum">07:52</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr" style="padding-top:0">
+    <i style="position:absolute;width:520px;height:120px;border-radius:60px;background:#fff;opacity:.05;left:-60px;top:110px;transform:rotate(-28deg)"></i>
+    <i style="position:absolute;width:520px;height:120px;border-radius:60px;background:#fff;opacity:.04;left:-10px;top:250px;transform:rotate(-50deg)"></i>
+    <div style="position:absolute;top:150px;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="mk" style="width:132px;height:132px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#fff"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>
+      <div style="font-size:44px;line-height:48px;font-weight:800;letter-spacing:-.035em;margin-top:14px">Отмечено</div>
+      <div style="font-size:20px;font-weight:600;margin-top:6px;color:rgba(255,255,255,.9)"><span class="tnum">07:52</span> · вовремя</div>
+    </div>
+    <div style="position:absolute;left:20px;right:20px;top:470px;background:var(--gold);color:var(--on-gold);border-radius:30px;padding:18px 18px 18px 20px;display:flex;align-items:center;gap:16px">
+      <div style="width:64px;height:64px;flex:none"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#1F1600" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#1F1600" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#1F1600" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#1F1600" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg></div>
+      <div style="flex:1"><div style="font-size:30px;line-height:32px;font-weight:800;letter-spacing:-.03em">12 дней</div><div style="font-size:15px;line-height:20px;font-weight:600;margin-top:2px">подряд вовремя. Ещё 3 дня — и откроется четвёртый лист ноября</div></div>
+    </div>
+    <div style="position:absolute;left:20px;right:20px;top:620px;background:rgba(255,255,255,.14);border-radius:26px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+      <span class="bar" style="--c:#fff;height:36px"></span>
+      <div style="flex:1"><div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.85)">Первый урок · 08:30</div><div style="font-size:17px;font-weight:700;margin-top:2px">Алгебра · каб. 204</div></div>
+      <span class="tnum" style="font-weight:700">через 38 мин</span>
+    </div>
+    <div style="position:absolute;left:20px;right:20px;bottom:54px"><div class="btn wh" style="width:100%;height:56px;border-radius:28px;font-size:17px;--c:#0A5BD8">Готово</div></div>
+  </div>
+  <div class="hi w"></div>
+</div>
+<figcaption><b>Экран-награда после отметки</b>Знак раскрывается веером (пружина, 4 листа с шагом 70 мс), затем золотая карточка серии. Хаптика success. Уважительная причина и каникулы серию не рвут. Через 4 с без касаний экран сам закрывается в «Сегодня».</figcaption>
+</figure>
+
+<!-- ============ Ученик · Оценки ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">19:20</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">2 четверть · 3-я неделя</div><div class="t1">Оценки</div></div>
+      <div class="hacts"><div class="hbtn"><i class="ms">notifications</i></div><div class="av" style="background:var(--violet)">АБ</div></div>
+    </div>
+    <!-- веер четвертей -->
+    <div style="display:flex;gap:8px;margin:0 20px">
+      <div class="qt"><span>1 четв.</span><div><i style="width:100%;opacity:.48"></i></div><b class="tnum">8,4</b></div>
+      <div class="qt on"><span>2 четв.</span><div><i style="width:30%"></i></div><b class="tnum">идёт</b></div>
+      <div class="qt off"><span>3 четв.</span><div></div><b>янв</b></div>
+      <div class="qt off"><span>4 четв.</span><div></div><b>апр</b></div>
+    </div>
+    <div class="seg" style="margin-top:14px"><span class="on">Предметы</span><span>Лента</span></div>
+    <div class="card" style="margin:14px 20px 0;padding:14px 16px;display:flex;gap:12px;align-items:flex-start">
+      <i class="ms s" style="color:var(--ptext);margin-top:1px">insights</i>
+      <div style="font-size:15px;line-height:20px"><b>Сильнее всего — история.</b> Физика просела после СОР: 15 из 25.</div>
+    </div>
+    <div class="sh" style="padding-top:20px"><b>9 предметов</b><em>Сначала требующие внимания</em></div>
+    <div class="grp" style="--inset:16px">
+      <div class="row" style="align-items:flex-start;padding:14px 16px">
+        <div class="rt">
+          <b style="display:flex;align-items:center;gap:8px"><span class="dot" style="--c:var(--m-teal)"></span>Физика</b>
+          <div style="display:flex;gap:10px;margin-top:9px;font-size:12px;font-weight:700;color:var(--ink2)">
+            <div style="flex:1">ФО <span class="tnum">64%</span><div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"><div style="width:64%;height:100%;border-radius:3px;background:var(--m-teal)"></div></div></div>
+            <div style="flex:1">СОР <span class="tnum">60%</span><div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"><div style="width:60%;height:100%;border-radius:3px;background:var(--m-teal)"></div></div></div>
+            <div style="flex:1;color:var(--ink3)">СОЧ —<div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"></div></div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px"><span class="g fair new">6</span><span class="g fair">7</span><span class="g pts">15/25</span><span class="g good">8</span></div>
+        </div>
+        <div style="text-align:center;margin-left:8px"><div class="g xl fair">6</div><div style="font-size:11px;font-weight:700;color:var(--ink2);margin-top:5px">предв.</div></div>
+      </div>
+      <div class="row" style="align-items:flex-start;padding:14px 16px">
+        <div class="rt">
+          <b style="display:flex;align-items:center;gap:8px"><span class="dot" style="--c:var(--m-indigo)"></span>Алгебра</b>
+          <div style="display:flex;gap:10px;margin-top:9px;font-size:12px;font-weight:700;color:var(--ink2)">
+            <div style="flex:1">ФО <span class="tnum">82%</span><div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"><div style="width:82%;height:100%;border-radius:3px;background:var(--m-indigo)"></div></div></div>
+            <div style="flex:1">СОР <span class="tnum">74%</span><div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"><div style="width:74%;height:100%;border-radius:3px;background:var(--m-indigo)"></div></div></div>
+            <div style="flex:1;color:var(--ink3)">СОЧ —<div style="height:5px;border-radius:3px;background:var(--surface2);margin-top:4px"></div></div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px"><span class="g exc new">9</span><span class="g good">8</span><span class="g pts">18/25</span><span class="g exc">10</span></div>
+        </div>
+        <div style="text-align:center;margin-left:8px"><div class="g xl good">8</div><div style="font-size:11px;font-weight:700;color:var(--ink2);margin-top:5px">предв.</div></div>
+      </div>
+      <div class="row" style="align-items:flex-start;padding:14px 16px">
+        <div class="rt">
+          <b style="display:flex;align-items:center;gap:8px"><span class="dot" style="--c:var(--m-amber)"></span>История Казахстана</b>
+          <div style="display:flex;gap:6px;margin-top:10px"><span class="g exc">10</span><span class="g exc">9</span><span class="g pts">23/25</span></div>
+        </div>
+        <div style="text-align:center;margin-left:8px"><div class="g xl exc">9</div><div style="font-size:11px;font-weight:700;color:var(--ink2);margin-top:5px">предв.</div></div>
+      </div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab on" style="position:relative"><i class="ms">insights</i>Оценки</div><div class="tab" style="position:relative"><i class="ms">task_alt</i>Задания</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Оценки · четверть веером</b>Переключатель четвертей — он же прогресс учебного года. Сверху вывод одной фразой. Предметы, требующие внимания, — первыми. Крупная четвертная справа — по формуле школы, с пометкой «предв.», пока четверть идёт. Золотая точка — «новое».</figcaption>
+</figure>
+
+<!-- ============ Ученик · Предмет ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">19:21</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:48px">
+      <div style="display:flex;align-items:center;gap:2px;color:var(--ptext);font-size:17px;font-weight:600"><i class="ms">chevron_left</i>Оценки</div>
+      <div class="hbtn" style="width:40px;height:40px"><i class="ms s">info</i></div>
+    </div>
+    <div class="hw" style="--c:var(--indigo);margin-top:6px">
+      <div class="hero" style="padding:20px 20px 18px">
+        <i class="deco"></i><i class="deco b"></i>
+        <div class="h-eb"><span>2 четверть · предварительно</span><span>Сейткали А.</span></div>
+        <div class="h-t">Алгебра</div>
+        <div style="display:flex;align-items:flex-end;gap:16px;margin-top:10px;position:relative">
+          <div class="big tnum" style="font-size:88px;line-height:80px">8</div>
+          <div style="padding-bottom:8px"><div class="tnum" style="font-size:24px;font-weight:800;letter-spacing:-.02em">78 %</div><div style="font-size:14px;color:rgba(255,255,255,.88);font-weight:500">до «9» не хватает 4 %</div></div>
+        </div>
+      </div>
+      <i class="sl" style="--c:var(--indigo)"></i>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:26px 20px 0">
+      <div class="card" style="padding:12px 14px"><span class="type fo">ФО · 25%</span><div class="tnum" style="font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:8px">82%</div><div style="font-size:12px;color:var(--ink2);font-weight:600">7 работ</div></div>
+      <div class="card" style="padding:12px 14px"><span class="type sor">СОР · 25%</span><div class="tnum" style="font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:8px">74%</div><div style="font-size:12px;color:var(--ink2);font-weight:600">1 из 2</div></div>
+      <div class="card" style="padding:12px 14px"><span class="type soch">СОЧ · 50%</span><div style="font-size:26px;font-weight:800;letter-spacing:-.03em;margin-top:8px;color:var(--ink3)">—</div><div class="tnum" style="font-size:12px;color:var(--ink2);font-weight:600">18 дек</div></div>
+    </div>
+    <div style="margin:10px 20px 0;font-size:14px;font-weight:600;color:var(--ptext);display:flex;align-items:center;gap:4px">Как считается четвертная<i class="ms xs">chevron_right</i></div>
+    <div class="sh" style="padding-top:20px"><b>Работы</b><em>новые сверху</em></div>
+    <div class="grp" style="--inset:16px">
+      <div class="row"><div class="rt"><b>Устный ответ у доски</b><small><span class="type fo">ФО</span> · сегодня · «Хорошо разобрала дискриминант»</small></div><span class="g l exc new">9</span></div>
+      <div class="row"><div class="rt"><b>СОР 1 · Квадратные уравнения</b><small><span class="type sor">СОР</span> · 12 ноября · 74 %</small></div><span class="g l pts">18/25</span></div>
+      <div class="row"><div class="rt"><b>Самостоятельная работа</b><small><span class="type fo">ФО</span> · 10 ноября</small></div><span class="g l good">8</span></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab on" style="position:relative"><i class="ms">insights</i>Оценки</div><div class="tab" style="position:relative"><i class="ms">task_alt</i>Задания</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Предмет · разбор четвертной</b>Лист-герой в цвете алгебры, отметка 88 pt. Три плитки ФО/СОР/СОЧ с весами школы, а не простое среднее. Подсказка «до 9 не хватает» написана без давления. Тап по «i» объясняет формулу и таблицу перевода.</figcaption>
+</figure>
+
+</div>
+
+<div class="row-title"><h2>Родитель и вход</h2><span>Вердикт дня тихим листом, лента дня, первый экран входа</span></div>
+<div class="frames">
+
+<!-- ============ Вход ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb w"><span class="tnum">9:41</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr" style="padding-top:0">
+    <div style="height:440px;background:linear-gradient(180deg,#3175DE,#0A5BD8);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:40px 32px 0;text-align:center">
+      <i style="position:absolute;width:480px;height:110px;border-radius:55px;background:#fff;opacity:.06;left:-150px;top:300px;transform:rotate(-28deg)"></i>
+      <i style="position:absolute;width:480px;height:110px;border-radius:55px;background:#fff;opacity:.05;left:120px;top:60px;transform:rotate(-50deg)"></i>
+      <div class="mk" style="width:104px;height:104px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>
+      <div class="wm" style="font-size:34px;margin-top:6px">GradeApp</div>
+      <div style="font-size:16px;line-height:22px;margin-top:10px;color:rgba(255,255,255,.92);font-weight:500">Расписание, оценки и журнал школы — в одном приложении</div>
+    </div>
+    <div style="position:absolute;top:404px;left:0;right:0;bottom:0;background:var(--canvas);border-radius:36px 36px 0 0;padding:28px 20px 0">
+      <div style="font-size:28px;line-height:32px;font-weight:800;letter-spacing:-.03em">Как вы войдёте?</div>
+      <div class="card" style="margin-top:18px;padding:16px;display:flex;align-items:center;gap:14px">
+        <div style="width:48px;height:48px;border-radius:16px;background:var(--psoft);color:var(--psoft-text);display:grid;place-items:center"><i class="ms f">key</i></div>
+        <div class="rt"><b>Логин и пароль</b><small>Почта или логин, который дала школа</small></div><i class="ms chev">chevron_right</i>
+      </div>
+      <div class="card" style="margin-top:10px;padding:16px;display:flex;align-items:center;gap:14px">
+        <div style="width:48px;height:48px;border-radius:16px;background:var(--gold-soft);color:var(--gold-text);display:grid;place-items:center"><i class="ms">qr_code_scanner</i></div>
+        <div class="rt"><b>Код из школы</b><small>Листок с кодом вида ABCDE-12345</small></div><i class="ms chev">chevron_right</i>
+      </div>
+      <div class="seg" style="margin:26px 40px 0;height:40px"><span>Қазақша</span><span class="on">Русский</span><span>English</span></div>
+    </div>
+  </div>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Вход · выбор способа</b>Вариант B из screens.md, только при первом запуске; дальше сразу пароль или Face ID. Язык выбирается до входа. Код из школы — отдельная ветка с автоформатом поля и камерой.</figcaption>
+</figure>
+
+<!-- ============ Родитель · Сегодня ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">13:40</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">Айдана · 8 «Б»</div><div class="t1">Сегодня</div></div>
+      <div class="hacts"><div class="hbtn"><i class="ms">notifications</i><span class="badge">1</span></div>
+        <div style="position:relative"><div class="av" style="background:var(--berry);box-shadow:0 0 0 2px var(--canvas),0 0 0 4px var(--m-berry)">А</div><span style="position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;border-radius:10px;background:var(--surface);display:grid;place-items:center;box-shadow:0 1px 3px rgba(16,24,40,.2)"><i class="ms xs" style="font-size:16px">expand_more</i></span></div>
+      </div>
+    </div>
+    <div style="margin:0 20px;border-radius:32px;padding:20px;background:var(--warn-soft);position:relative;overflow:hidden">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div style="width:44px;height:44px;border-radius:22px;background:var(--warn-fill);color:#fff;display:grid;place-items:center;flex:none"><i class="ms f">info</i></div>
+        <div style="font-size:28px;line-height:32px;font-weight:800;letter-spacing:-.03em">Есть вопрос</div>
+      </div>
+      <div style="font-size:16px;line-height:23px;margin-top:12px">В школе с <b class="tnum">07:52</b> · <b>4 из 6</b> уроков. Пропущен английский, причина не указана.</div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <span class="btn sm" style="background:var(--surface);color:var(--ink);box-shadow:var(--sh1)"><i class="ms s">event_busy</i>Отпросить</span>
+        <span class="btn sm" style="background:var(--surface);color:var(--ink);box-shadow:var(--sh1)"><i class="ms s">groups</i>Учителя</span>
+      </div>
+    </div>
+    <div class="sh"><b>Требует внимания</b></div>
+    <div class="grp">
+      <div class="row"><div style="width:40px;height:40px;border-radius:14px;background:var(--bad-soft);color:var(--bad);display:grid;place-items:center;font-weight:800">Н</div><div class="rt"><b>Пропуск · 12:30</b><small>Английский язык</small></div><span class="btn tn sm">Объяснить</span></div>
+    </div>
+    <div class="sh"><b>Лента дня</b><em>новое сверху</em></div>
+    <div class="grp tl">
+      <div class="row"><span class="tm">13:25</span><span class="node" style="background:var(--t-green);color:var(--m-green)"><i class="ms xs">play_arrow</i></span><div class="rt"><b>Физкультура</b><small>идёт сейчас · спортзал</small></div></div>
+      <div class="row"><span class="tm">12:30</span><span class="node" style="background:var(--bad-soft);color:var(--bad)"><b style="font-size:13px">Н</b></span><div class="rt"><b>Английский язык</b><small>отсутствовала · замена, Ахметова Г.</small></div></div>
+      <div class="row"><span class="tm">10:25</span><span class="node" style="background:var(--t-teal);color:var(--m-teal)"><i class="ms xs">check</i></span><div class="rt"><b>Физика · СОР 1</b><small>«Повторить законы Ньютона»</small></div><span class="g pts" style="background:var(--warn-soft);color:var(--warn)">15/25</span></div>
+      <div class="row"><span class="tm">08:30</span><span class="node" style="background:var(--t-indigo);color:var(--m-indigo)"><i class="ms xs">check</i></span><div class="rt"><b>Алгебра</b><small>«Хорошо разобрала дискриминант»</small></div><span class="g exc new">9</span></div>
+      <div class="row"><span class="tm">07:52</span><span class="node" style="background:var(--ok-soft);color:var(--ok)"><i class="ms xs">photo_camera_front</i></span><div class="rt"><b>Пришла в школу</b><small>отметка по селфи · вовремя</small></div></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab on" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">insights</i>Оценки</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab" style="position:relative"><i class="ms">family_home</i>Семья</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Родитель · Сегодня · «есть вопрос»</b>Громкость роли — тихая: вердикт на тонированном листе, без насыщенной заливки. Иконка + слово + цвет: смысл не держится на одном цвете. Действия в один тап под вердиктом. В ленте видно, откуда взялся вопрос. Аватар ребёнка справа — переключатель.</figcaption>
+</figure>
+
+<!-- ============ Родитель · Семья (двое) ============ -->
+<figure>
+<div class="phone dk">
+  <div class="sb"><span class="tnum">08:41</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">Понедельник, 16 ноября</div><div class="t1">Семья</div></div>
+      <div class="hacts"><div class="hbtn"><i class="ms">notifications</i></div><div class="av" style="background:var(--surface3);color:var(--ink)">ГС</div></div>
+    </div>
+    <div class="card" style="margin:0 20px;padding:18px;border-radius:30px">
+      <div style="display:flex;align-items:center;gap:12px"><div class="av" style="background:var(--berry)">А</div><div class="rt"><b style="font-size:18px">Айдана</b><small>8 «Б»</small></div><span class="pill ok"><i class="ms xs">check_circle</i>всё в порядке</span></div>
+      <div style="font-size:16px;line-height:22px;margin-top:14px">В школе с <b class="tnum">07:52</b>. Сейчас алгебра, каб. 204.</div>
+      <div style="display:flex;gap:6px;margin-top:12px;align-items:center;font-size:13px;color:var(--ink2);font-weight:600"><span class="g exc new">9</span>новая оценка · Алгебра</div>
+    </div>
+    <div class="card" style="margin:12px 20px 0;padding:18px;border-radius:30px;box-shadow:inset 0 0 0 2px var(--bad)">
+      <div style="display:flex;align-items:center;gap:12px"><div class="av" style="background:var(--green)">Т</div><div class="rt"><b style="font-size:18px">Тимур</b><small>2 «А»</small></div><span class="pill bad"><i class="ms xs">error</i>не отмечен</span></div>
+      <div style="font-size:16px;line-height:22px;margin-top:14px">Первый урок начался в <b class="tnum">08:30</b>. Отметки и заявки нет.</div>
+      <div style="display:flex;gap:8px;margin-top:14px"><span class="btn pr sm"><i class="ms s">event_busy</i>Отпросить</span><span class="btn sm" style="background:var(--surface2);color:var(--ink)"><i class="ms s">chat</i>Классруку</span></div>
+    </div>
+    <div class="sh"><b>На завтра</b></div>
+    <div class="grp">
+      <div class="row"><span class="dot" style="--c:var(--m-berry)"></span><div class="rt"><b>Айдана · 3 задания</b><small>≈ 70 мин · готово 1</small></div><i class="ms chev">chevron_right</i></div>
+      <div class="row"><span class="dot" style="--c:var(--m-green)"></span><div class="rt"><b>Тимур · 1 задание</b><small>≈ 15 мин · Литературное чтение</small></div><i class="ms chev">chevron_right</i></div>
+    </div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab on" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">insights</i>Оценки</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab" style="position:relative"><i class="ms">family_home</i>Семья</div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Родитель · двое детей · тёмная</b>При двух и более детях «Сегодня» открывается обзором семьи: карточка на ребёнка с вердиктом. Тревога («не отмечен и нет заявки») — единственный случай красного, обведена контуром и даёт действие. Тап по карточке — фокус на ребёнке.</figcaption>
+</figure>
+
+</div>
+
+<div class="row-title"><h2>Учитель</h2><span>Сегодня, перекличка исключениями и пэд оценок 1–10</span></div>
+<div class="frames">
+
+<!-- ============ Учитель · Сегодня ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">11:32</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div class="hdr">
+      <div><div class="eyebrow">Понедельник, 16 ноября</div><div class="t1">Сегодня</div></div>
+      <div class="hacts"><div class="hbtn" style="width:auto;padding:0 12px;gap:6px;display:flex;color:var(--ok)"><i class="ms s">cloud_done</i></div><div class="av" style="background:var(--teal)">ЕБ</div></div>
+    </div>
+    <div class="hw" style="--c:var(--violet)">
+      <div class="hero">
+        <i class="deco"></i><i class="deco b"></i>
+        <div class="h-eb"><span>Сейчас · до звонка 38 мин</span><span class="tnum">11:25–12:10</span></div>
+        <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px;position:relative"><div class="big" style="font-size:48px;line-height:50px">9 «В»</div><div style="font-size:20px;font-weight:700">Геометрия</div></div>
+        <div class="h-s"><i class="ms xs">door_front</i>каб. 204 · 24 ученика</div>
+        <div class="prog" style="margin-top:14px"><i style="width:16%"></i></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:16px;position:relative">
+          <div style="flex:1;font-size:15px;line-height:19px;font-weight:600">Перекличка<br>не сделана</div>
+          <span class="btn wh" style="--c:var(--violet);height:52px;border-radius:26px">Открыть урок<i class="ms s">arrow_forward</i></span>
+        </div>
+      </div>
+      <i class="sl" style="--c:var(--indigo)"></i><i class="sl b" style="--c:var(--violet)"></i>
+    </div>
+    <div style="display:flex;gap:8px;margin:28px 20px 0;overflow:hidden">
+      <span class="chip warn"><span class="n">1</span>не отмечено</span>
+      <span class="chip"><span class="n">1</span>без темы</span>
+      <span class="chip"><span class="n">3</span>заявки</span>
+    </div>
+    <div class="sh"><b>Уроки</b><em>6 сегодня</em></div>
+    <div class="grp" style="--inset:74px">
+      <div class="row"><span class="tm p">08:30</span><span class="bar" style="--c:var(--m-indigo)"></span><div class="rt"><b>7 «Б» · Алгебра</b><small>26 из 26 · тема · ДЗ</small></div><i class="ms sf" style="color:var(--ok)">check_circle</i></div>
+      <div class="row"><span class="tm p">09:25</span><span class="bar" style="--c:var(--m-indigo)"></span><div class="rt"><b>8 «А» · Алгебра</b><small>25 из 27 · нет темы</small></div><span class="pill warn">тема</span></div>
+      <div class="row" style="background:var(--t-violet)"><span class="tm">11:25</span><span class="bar" style="--c:var(--m-violet)"></span><div class="rt"><b>9 «В» · Геометрия</b><small>идёт · не отмечено</small></div><span class="pill ps">сейчас</span></div>
+      <div class="row"><span class="tm">12:30</span><span class="bar" style="--c:var(--m-violet)"></span><div class="rt"><b>10 «А» + 10 «Б» · Геометрия</b><small>совмещённый · 41 ученик</small></div></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <nav class="tabs"><div class="tab on" style="position:relative"><i class="ms">light_mode</i>Сегодня</div><div class="tab" style="position:relative"><i class="ms">calendar_view_week</i>Неделя</div><div class="tab" style="position:relative"><i class="ms">inbox</i>Входящие<span class="badge" style="top:2px;right:calc(50% - 26px)">3</span></div></nav>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Учитель · Сегодня · урок идёт</b>Громкий лист — текущий урок: класс 48 pt и одна кнопка «Открыть урок». Счётчики-фильтры — то, что не закрыто. Прошедшие уроки показывают долги чипом. Свайп строки влево — «Все на месте» без входа. Облако в шапке — синхронизация.</figcaption>
+</figure>
+
+<!-- ============ Учитель · Перекличка ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">11:33</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:48px">
+      <div style="display:flex;align-items:center;gap:2px;color:var(--ptext);font-size:17px;font-weight:600"><i class="ms">chevron_left</i>Сегодня</div>
+      <div style="display:flex;gap:8px"><div class="hbtn" style="width:auto;padding:0 12px;gap:6px;display:flex;align-items:center;color:var(--warn);background:var(--warn-soft);box-shadow:none;height:40px"><i class="ms s">cloud_upload</i><b class="tnum" style="font-size:15px">2</b></div><div class="hbtn" style="width:40px;height:40px"><i class="ms s">more_horiz</i></div></div>
+    </div>
+    <div style="padding:6px 20px 0">
+      <div class="eyebrow" style="display:flex;align-items:center;gap:8px"><span class="dot" style="--c:var(--m-violet)"></span>Геометрия · каб. 204 · 11:25–12:10</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px"><div class="t1">9 «В»</div><span class="pill ps" style="height:32px;border-radius:16px;padding:0 12px"><i class="ms xs">timer</i>до звонка <span class="tnum">37 мин</span></span></div>
+    </div>
+    <div class="card" style="margin:14px 20px 0;padding:12px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:13px;font-weight:700;color:var(--ink2)">Тема урока</div><i class="ms s" style="color:var(--ink2)">mic</i></div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><span class="chip ps" style="height:36px"><i class="ms xs">menu_book</i>КТП: Подобие треугольников</span><span class="chip" style="background:var(--surface2);box-shadow:none">Как в прошлый раз</span></div>
+    </div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;padding:20px 20px 10px">
+      <div><div style="font-size:13px;font-weight:700;color:var(--ink2)">Присутствуют</div><div class="tnum" style="font-size:30px;line-height:34px;font-weight:800;letter-spacing:-.03em">22 <span style="font-size:18px;color:var(--ink2);font-weight:700">из 24</span></div></div>
+      <div style="display:flex;gap:8px"><div class="hbtn" style="width:44px;height:44px"><i class="ms s">search</i></div><div class="seg" style="margin:0;height:44px;width:112px;padding:4px"><span class="on"><i class="ms s">view_agenda</i></span><span><i class="ms s">grid_view</i></span></div></div>
+    </div>
+    <div class="grp">
+      <div class="st"><div class="av sm q">АТ</div><div class="nm"><b>Абаев Тимур</b><small><i class="ms xs">photo_camera_front</i><span class="tnum">07:51</span></small></div><div class="att p"><i class="ms sf">check</i></div><div class="gs"><i class="ms">add</i></div></div>
+      <div class="st abs"><div class="av sm q">БА</div><div class="nm"><b>Бекова Айдана</b><small>нет на уроке</small></div><div class="att n">Н</div><div class="gs off"><i class="ms s">remove</i></div></div>
+      <div class="st"><div class="av sm q">ВИ</div><div class="nm"><b>Ветров Илья</b><small><span class="src">К</span>классрук · болеет</small></div><div class="att c">Б</div><div class="gs off"><i class="ms s">remove</i></div></div>
+      <div class="st"><div class="av sm q">ГМ</div><div class="nm"><b>Гусейнова Мадина</b><small><i class="ms xs">photo_camera_front</i><span class="tnum">07:48</span></small></div><div class="att p"><i class="ms sf">check</i></div><span class="g l exc">9</span></div>
+      <div class="st"><div class="av sm q">ДА</div><div class="nm"><b>Даулетов Арман</b><small>опоздал на 6 мин</small></div><div class="att c">О</div><div class="gs"><i class="ms">add</i></div></div>
+      <div class="st"><div class="av sm q">ЕА</div><div class="nm"><b>Ерланқызы Аружан</b><small><i class="ms xs">photo_camera_front</i><span class="tnum">07:55</span></small></div><div class="att p"><i class="ms sf">check</i></div><div class="gs"><i class="ms">add</i></div></div>
+    </div>
+    <div style="height:140px"></div>
+  </div>
+  <div class="fade"></div>
+  <div class="dock">
+    <span class="btn tn sm" style="height:50px;border-radius:25px;padding:0 16px"><i class="ms s">edit_note</i>ДЗ</span>
+    <span class="btn tn sm" style="height:50px;border-radius:25px;padding:0 16px"><i class="ms s">checklist</i>Итог</span>
+    <span class="btn pr" style="flex:1;padding:0 12px">Готово · 22 из 24</span>
+  </div>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Урок · перекличка исключениями</b>Все уже «есть» (серая галочка). Тап по строке переключает «есть ↔ Н» — без третьего состояния. Опоздание и коды школы — долгий тап. Источник отметки виден: камера — сам, «К» — классрук. Облако с числом: 2 записи ждут сети.</figcaption>
+</figure>
+
+<!-- ============ Учитель · Пэд 1–10 ============ -->
+<figure>
+<div class="phone lt">
+  <div class="sb"><span class="tnum">11:41</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+  <div class="scr">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:48px">
+      <div style="display:flex;align-items:center;gap:2px;color:var(--ptext);font-size:17px;font-weight:600"><i class="ms">chevron_left</i>Сегодня</div>
+      <div style="font-size:17px;font-weight:700">9 «В» · Геометрия</div>
+      <div class="hbtn" style="width:40px;height:40px;color:var(--ok)"><i class="ms s">cloud_done</i></div>
+    </div>
+    <div class="grp" style="margin-top:10px">
+      <div class="st"><div class="av sm q">ВИ</div><div class="nm"><b>Ветров Илья</b><small><span class="src">К</span>болеет</small></div><div class="att c">Б</div><div class="gs off"><i class="ms s">remove</i></div></div>
+      <div class="st"><div class="av sm q">ГМ</div><div class="nm"><b>Гусейнова Мадина</b><small>ФО · ответ у доски</small></div><div class="att p"><i class="ms sf">check</i></div><span class="g l exc">9</span></div>
+      <div class="st cur"><div class="av sm" style="background:var(--primary)">ДА</div><div class="nm"><b>Даулетов Арман</b><small>оценивается…</small></div><div class="att c">О</div><div class="gs" style="background:var(--surface);box-shadow:inset 0 0 0 2px var(--primary);color:var(--primary)"><i class="ms">more_horiz</i></div></div>
+      <div class="st"><div class="av sm q">ЕА</div><div class="nm"><b>Ерланқызы Аружан</b><small>следующая</small></div><div class="att p"><i class="ms sf">check</i></div><div class="gs"><i class="ms">add</i></div></div>
+    </div>
+  </div>
+  <div style="position:absolute;inset:0;background:rgba(13,19,32,.12);z-index:18"></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:432px;background:var(--surface);border-radius:38px 38px 0 0;box-shadow:var(--sh3);padding:8px 16px 0;z-index:19">
+    <div style="width:40px;height:5px;border-radius:3px;background:var(--surface3);margin:0 auto"></div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:14px;padding:0 4px">
+      <div class="av" style="background:var(--primary)">ДА</div>
+      <div class="rt"><b style="font-size:18px">Даулетов Арман</b><small><span class="tnum">5 из 24</span> · опоздал на 6 мин</small></div>
+      <div class="hbtn" style="background:var(--surface2);box-shadow:none"><i class="ms">chevron_left</i></div>
+      <div class="hbtn" style="background:var(--surface2);box-shadow:none"><i class="ms">chevron_right</i></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px;padding:0 4px">
+      <span class="chip" style="background:var(--surface2);box-shadow:none;height:40px;border-radius:20px"><span class="type fo">ФО</span>Ответ у доски<i class="ms xs">expand_more</i></span>
+      <span class="chip" style="background:var(--surface2);box-shadow:none;height:40px;border-radius:20px"><i class="ms s">edit_note</i>Комментарий</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px">
+      <div class="key poor">1</div><div class="key poor">2</div><div class="key poor">3</div><div class="key fair">4</div><div class="key fair">5</div>
+      <div class="key fair">6</div><div class="key fair">7</div><div class="key good">8</div><div class="key exc dn">9</div><div class="key exc">10</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 4px">
+      <span class="btn sm" style="background:transparent;color:var(--ink2);padding:0 8px"><i class="ms s">undo</i>Пропустить</span>
+            <span class="btn sm" style="background:transparent;color:var(--ptext);padding:0 8px">Готово</span>
+    </div>
+  </div>
+  <div class="hi"></div>
+</div>
+<figcaption><b>Пэд оценок 1–10 · решение №5</b>Док-панель, а не модалка: список над ней виден, текущий ученик подсвечен. Клавиши 2 × 5 по 60 pt, частые 6–10 — в нижнем ряду под большим пальцем. Цвет клавиши — тон по правилам школы (проходной 4, качество 8). Тап — сохранение, хаптика и переход к следующему.</figcaption>
+</figure>
+
+</div>
+
+<div class="row-title"><h2>Виджеты и Live Activity</h2><span>Домашний экран, экран блокировки, Dynamic Island, Android</span></div>
+<section class="board wall">
+  <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:16px">Домашний экран · iOS (на Android те же раскладки в Glance)</div>
+  <div class="wgrid">
+    <div>
+      <div class="wd lt" style="width:170px;height:170px;background:var(--teal);color:#fff;padding:16px;display:flex;flex-direction:column">
+        <i class="deco" style="width:150px;height:40px;right:-60px;top:4px"></i>
+        <div class="h-eb" style="font-size:11px"><span>Дальше · <span class="tnum">10:25</span></span></div>
+        <div style="font-size:24px;line-height:27px;font-weight:800;letter-spacing:-.025em;margin-top:6px">Физика</div>
+        <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,.9)">каб. 312</div>
+        <div style="margin-top:auto;display:flex;align-items:flex-end;gap:6px"><span class="tnum" style="font-size:44px;line-height:40px;font-weight:800;letter-spacing:-.04em">11</span><span style="font-size:14px;font-weight:700;padding-bottom:3px">мин</span></div>
+      </div>
+      <div class="wlab"><b>W1 · маленький · ученик</b>Перемена: следующий урок и отсчёт, тикает средствами ОС.</div>
+    </div>
+    <div>
+      <div class="wd" style="width:170px;height:170px;background:var(--violet);color:#fff;padding:16px;display:flex;flex-direction:column">
+        <i class="deco" style="width:150px;height:40px;right:-60px;top:4px"></i>
+        <div class="h-eb" style="font-size:11px"><span>Сейчас · до звонка</span></div>
+        <div style="font-size:32px;line-height:34px;font-weight:800;letter-spacing:-.03em;margin-top:6px">9 «В»</div>
+        <div style="font-size:14px;font-weight:600;color:rgba(255,255,255,.9)">Геометрия · 204</div>
+        <div class="tnum" style="margin-top:auto;font-size:36px;line-height:36px;font-weight:800;letter-spacing:-.03em">37:12</div>
+      </div>
+      <div class="wlab"><b>W1 · маленький · учитель</b>Класс вместо кабинета. Тап — сразу экран урока.</div>
+    </div>
+    <div>
+      <div class="wd lt" style="width:364px;height:170px;background:var(--surface);color:var(--ink);padding:12px;display:flex;gap:12px">
+        <div style="width:142px;border-radius:18px;background:var(--teal);color:#fff;padding:12px;display:flex;flex-direction:column;position:relative;overflow:hidden">
+          <div class="h-eb" style="font-size:10px"><span>Сейчас</span></div>
+          <div style="font-size:19px;line-height:22px;font-weight:800;margin-top:4px">Физика</div>
+          <div style="font-size:12px;font-weight:600;opacity:.9">каб. 312</div>
+          <div style="margin-top:auto;display:flex;align-items:flex-end;gap:4px"><span class="tnum" style="font-size:32px;line-height:30px;font-weight:800;letter-spacing:-.04em">23</span><span style="font-size:12px;font-weight:700">мин</span></div>
+          <div style="height:5px;border-radius:3px;background:rgba(255,255,255,.28);margin-top:8px"><div style="width:49%;height:100%;border-radius:3px;background:#fff"></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:2px 0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="tnum" style="font-size:13px;font-weight:700;width:38px">11:25</span><span class="bar" style="--c:var(--m-amber);height:22px;width:4px"></span><span style="font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">История Казах…</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="tnum" style="font-size:13px;font-weight:700;width:38px">12:30</span><span class="bar" style="--c:var(--m-violet);height:22px;width:4px"></span><span style="font-size:14px;font-weight:600">Английский</span><i class="ms xs" style="color:var(--warn)">swap_horiz</i></div>
+          <div style="display:flex;align-items:center;gap:8px"><span class="tnum" style="font-size:13px;font-weight:700;width:38px">13:25</span><span class="bar" style="--c:var(--m-green);height:22px;width:4px"></span><span style="font-size:14px;font-weight:600">Физкультура</span></div>
+          <div style="font-size:12px;font-weight:700;color:var(--ink2);background:var(--surface2);border-radius:10px;padding:6px 8px">ДЗ на завтра · 3 · ≈ 70 мин</div>
+        </div>
+      </div>
+      <div class="wlab"><b>W2 · средний «День»</b>Сейчас + три следующих урока + нагрузка вечера. Замена помечена иконкой, не только цветом.</div>
+    </div>
+    <div>
+      <div class="wd lt" style="width:170px;height:170px;background:var(--surface);color:var(--ink);padding:14px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px"><div class="av xs" style="background:var(--berry)">А</div><b style="font-size:15px">Айдана</b></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:6px;color:var(--ok);font-weight:800;font-size:13px"><i class="ms sf">check_circle</i>В ШКОЛЕ</div>
+        <div class="tnum" style="font-size:30px;line-height:32px;font-weight:800;letter-spacing:-.03em">с 07:52</div>
+        <div style="font-size:13px;color:var(--ink2);font-weight:600;margin-top:4px">2 новые оценки</div>
+      </div>
+      <div class="wlab"><b>W3 · родитель</b>Только статус и число оценок, без цифр. Обновляется тихим пушем.</div>
+    </div>
+    <div>
+      <div class="wd lt" style="width:170px;height:170px;background:var(--surface);color:var(--ink);padding:14px;display:flex;flex-direction:column">
+        <div style="width:30px;height:30px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#0A5BD8"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>
+        <div style="font-size:16px;line-height:20px;font-weight:700;margin-top:auto">Откройте приложение, чтобы обновить</div>
+        <div style="font-size:12px;color:var(--ink2);font-weight:600;margin-top:6px">данные от вчера, 18:40</div>
+      </div>
+      <div class="wlab"><b>Устаревший кэш</b>Старше суток — виджет не врёт, а просит открыть приложение.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:44px;margin-top:44px;align-items:flex-start">
+    <!-- Экран блокировки ученика -->
+    <figure>
+    <div class="phone dk" style="background:radial-gradient(120% 80% at 30% 20%,#2C4C8C 0%,#14213F 45%,#070B14 100%)">
+      <div class="sb w"><span class="tnum">10:14</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+      <div class="scr" style="color:#fff;text-align:center">
+        <div style="font-size:15px;font-weight:600;margin-top:18px;display:flex;justify-content:center;gap:6px;align-items:center"><span>Пн, 16 нояб.</span><span style="opacity:.9">· Физика 10:25 · 312</span></div>
+        <div class="tnum" style="font-size:96px;line-height:100px;font-weight:700;letter-spacing:-.02em;margin-top:2px">10:14</div>
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:14px">
+          <div class="ls" style="width:76px;height:76px;display:grid;place-items:center;position:relative">
+            <svg width="64" height="64" viewBox="0 0 64 64" style="position:absolute;inset:6px"><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="6"/><circle cx="32" cy="32" r="27" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="170" stroke-dashoffset="124" transform="rotate(-90 32 32)"/></svg>
+            <div style="line-height:1"><div class="tnum" style="font-size:22px;font-weight:800">11</div><div style="font-size:10px;font-weight:700">мин</div></div>
+          </div>
+          <div class="ls" style="width:172px;height:76px;padding:12px 14px;text-align:left">
+            <div style="font-size:15px;font-weight:800">Физика · <span class="tnum">10:25</span></div>
+            <div style="font-size:13px;font-weight:600;opacity:.9;margin-top:2px">каб. 312</div>
+            <div style="font-size:13px;font-weight:600;opacity:.9">через 11 мин</div>
+          </div>
+        </div>
+        <div style="position:absolute;left:12px;right:12px;bottom:110px;background:rgba(255,255,255,.14);border-radius:24px;padding:14px 16px;text-align:left;display:flex;gap:12px;align-items:center">
+          <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(180deg,#3175DE,#0A5BD8);display:grid;place-items:center;flex:none"><div style="width:26px;height:26px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div></div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700">GradeApp <span style="opacity:.7;font-weight:500">· сейчас</span></div><div style="font-size:14px;line-height:19px;opacity:.95">Новая оценка по алгебре</div></div>
+        </div>
+      </div>
+      <div class="hi w"></div>
+    </div>
+    <figcaption style="color:rgba(255,255,255,.8)"><b style="color:#fff">Экран блокировки · ученик</b>Inline над часами, круглый отсчёт, прямоугольный «следующий урок». Пуш об оценке — без цифры: оценки на экран блокировки не попадают никогда.</figcaption>
+    </figure>
+
+    <!-- Экран блокировки учителя с LA -->
+    <figure>
+    <div class="phone dk" style="background:radial-gradient(120% 80% at 70% 15%,#3A2E6E 0%,#1A1638 45%,#08070F 100%)">
+      <div class="sb w"><span class="tnum">11:27</span><span class="r"><i class="ms">signal_cellular_alt</i><i class="ms">wifi</i><span class="bat"><i></i></span></span></div><div class="di"></div>
+      <div class="scr" style="color:#fff;text-align:center">
+        <div style="font-size:15px;font-weight:600;margin-top:18px">Понедельник, 16 ноября</div>
+        <div class="tnum" style="font-size:96px;line-height:100px;font-weight:700;letter-spacing:-.02em;margin-top:2px">11:27</div>
+        <div style="position:absolute;left:12px;right:12px;bottom:110px;background:rgba(22,24,32,.9);border-radius:26px;padding:16px;text-align:left">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:30px;height:30px;flex:none"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>
+            <div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:800">9 «В» · Геометрия</div><div style="font-size:13px;opacity:.8;font-weight:500">каб. 204 · идёт урок</div></div>
+            <div style="text-align:right"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.75">до звонка</div><div class="tnum" style="font-size:28px;line-height:30px;font-weight:800;color:#7AABFF;letter-spacing:-.02em">42:51</div></div>
+          </div>
+          <div style="height:6px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:12px"><div style="width:5%;height:100%;border-radius:3px;background:#7AABFF"></div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px"><span style="font-size:14px;font-weight:600">Отмечено <b class="tnum">0 из 24</b></span><span style="height:40px;border-radius:20px;background:#0A5BD8;padding:0 16px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px"><i class="ms s">done_all</i>Все на месте</span></div>
+        </div>
+        <div style="position:absolute;left:12px;right:12px;bottom:300px;display:flex;justify-content:center;gap:10px">
+          <div style="width:250px;height:37px;border-radius:19px;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 10px"><div style="width:20px;height:20px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div><span class="tnum" style="color:#7AABFF;font-weight:800;font-size:14px">43 мин</span></div>
+          <div style="width:37px;height:37px;border-radius:19px;background:#000;display:grid;place-items:center"><svg width="27" height="27" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="rgba(122,171,255,.3)" stroke-width="3"/><circle cx="14" cy="14" r="11" fill="none" stroke="#7AABFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="69" stroke-dashoffset="65" transform="rotate(-90 14 14)"/></svg></div>
+        </div>
+        <div style="position:absolute;left:12px;right:12px;bottom:350px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.7">Dynamic Island: compact · minimal</div>
+      </div>
+      <div class="hi w"></div>
+    </div>
+    <figcaption style="color:rgba(255,255,255,.8)"><b style="color:#fff">Live Activity «Идёт урок» · учитель</b>Запускается только кнопкой «Начать урок». Время до звонка — главное, одна кнопка «Все на месте», пока перекличка не сделана. Без ФИО и оценок. Сверху — компактный и минимальный вид в Dynamic Island.</figcaption>
+    </figure>
+
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:400px">
+      <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7)">Dynamic Island · развёрнутый</div>
+      <div style="width:372px;background:#000;border-radius:46px;padding:18px 22px 18px;color:#fff">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div><div style="font-size:24px;line-height:26px;font-weight:800">9 «В»</div><div style="font-size:13px;opacity:.8;font-weight:600">Геометрия · 204</div></div>
+          <div style="text-align:right"><div class="tnum" style="font-size:30px;line-height:30px;font-weight:800;color:#7AABFF">22:14</div><div style="font-size:12px;opacity:.75;font-weight:600">до звонка</div></div>
+        </div>
+        <div style="height:6px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:14px"><div style="width:51%;height:100%;border-radius:3px;background:#7AABFF"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px"><span style="font-size:14px;font-weight:600">Отмечено <b class="tnum">22 из 24</b> · тема ✓</span><span style="font-size:14px;font-weight:700;color:#7AABFF">Открыть</span></div>
+      </div>
+      <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px">После звонка</div>
+      <div style="width:372px;background:rgba(22,24,32,.92);border-radius:26px;padding:16px;color:#fff;display:flex;align-items:center;gap:12px">
+        <div style="width:30px;height:30px;flex:none"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>
+        <div style="flex:1"><div style="font-size:16px;font-weight:800">Урок закончен</div><div style="font-size:13px;opacity:.85">9 «В» · не заполнена тема</div></div>
+        <span style="height:40px;border-radius:20px;background:rgba(255,255,255,.16);padding:0 16px;display:inline-flex;align-items:center;font-weight:700;font-size:14px">Открыть</span>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:18px">Исчезает через 15 мин после звонка или сразу после «Завершить урок». Никогда не висит дольше урока + 30 мин.</div>
+      <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:8px">Android · ongoing-уведомление</div>
+      <div style="width:372px;background:#1E2128;border-radius:28px;padding:16px 18px;color:#E6E8EE">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;opacity:.8"><div style="width:16px;height:16px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#FFFFFF"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div>GradeApp · идёт урок · 22 мин</div>
+        <div style="font-size:16px;font-weight:700;margin-top:8px">9 «В» · Геометрия · каб. 204</div>
+        <div style="height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin-top:10px"><div style="width:51%;height:100%;border-radius:3px;background:#7AABFF"></div></div>
+        <div style="display:flex;gap:18px;margin-top:12px;font-size:14px;font-weight:700;color:#9DC0FF"><span>Все на месте</span><span>Открыть урок</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row-title"><h2>Компоненты и токены</h2><span>Выжимка из design-system.md: то, из чего собраны экраны выше</span></div>
+<section class="board lt" style="background:var(--canvas);color:var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px">
+  <style>
+    .cb{background:var(--surface);border-radius:28px;padding:20px}
+    .cb h3{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:14px}
+    .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .sw div{border-radius:16px;height:64px;padding:8px;font-size:11px;font-weight:700;display:flex;flex-direction:column;justify-content:flex-end;line-height:13px}
+    .lineup{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  </style>
+  <div class="cb">
+    <h3>Цвет · бренд, нейтрали, статусы</h3>
+    <div class="sw">
+      <div style="background:#0A5BD8;color:#fff">brand<br>#0A5BD8</div>
+      <div style="background:#FFC226;color:#1F1600">gold<br>#FFC226</div>
+      <div style="background:#0D1320;color:#fff">ink<br>#0D1320</div>
+      <div style="background:#F2F4F8;color:#0D1320;box-shadow:inset 0 0 0 1px #E3E7EE">canvas<br>#F2F4F8</div>
+      <div style="background:#090C12;color:#F2F5FA">canvas dk<br>#090C12</div>
+      <div style="background:#131821;color:#F2F5FA">surface dk<br>#131821</div>
+      <div style="background:#4A5466;color:#fff">ink2<br>#4A5466</div>
+      <div style="background:#7AABFF;color:#0D1320">ptext dk<br>#7AABFF</div>
+      <div style="background:#11834F;color:#fff">ok<br>#11834F</div>
+      <div style="background:#B25F00;color:#fff">warn<br>#B25F00</div>
+      <div style="background:#D02A30;color:#fff">bad<br>#D02A30</div>
+      <div style="background:#E6EFFD;color:#0848B0">psoft<br>#E6EFFD</div>
+    </div>
+  </div>
+  <div class="cb">
+    <h3>Предметы · глубокая заливка</h3>
+    <div class="sw">
+      <div style="background:var(--indigo);color:#fff">indigo<br>#4F46E5</div>
+      <div style="background:var(--green);color:#fff">green<br>#0B6F43</div>
+      <div style="background:var(--brick);color:#fff">brick<br>#AE3A0B</div>
+      <div style="background:var(--violet);color:#fff">violet<br>#6D35DB</div>
+      <div style="background:var(--berry);color:#fff">berry<br>#A61F84</div>
+      <div style="background:var(--teal);color:#fff">teal<br>#0A6476</div>
+      <div style="background:var(--amber);color:#fff">amber<br>#875500</div>
+      <div style="background:var(--rose);color:#fff">rose<br>#B41F48</div>
+    </div>
+    <div style="font-size:13px;color:var(--ink2);margin-top:12px;line-height:18px">Белый текст ≥ 4.5:1 на каждой заливке. Порядок = lesson-1…8 веба.</div>
+  </div>
+  <div class="cb">
+    <h3>Типографика · Onest</h3>
+    <div style="display:flex;align-items:baseline;gap:14px"><span class="tnum" style="font-size:64px;line-height:58px;font-weight:800;letter-spacing:-.045em">23</span><span style="font-size:13px;color:var(--ink2)">display 64/58 · 800</span></div>
+    <div style="font-size:34px;line-height:40px;font-weight:800;letter-spacing:-.03em;margin-top:6px">Сегодня</div>
+    <div style="font-size:20px;line-height:25px;font-weight:700;letter-spacing:-.015em">Қазақ әдебиеті · заголовок 20</div>
+    <div style="font-size:16px;line-height:22px;margin-top:4px">Текст 16/22 — Үй тапсырмасы ертеңге дейін.</div>
+    <div class="eyebrow" style="margin-top:8px">Надпись 12 · 700 · +6 %</div>
+  </div>
+  <div class="cb">
+    <h3>Кнопки</h3>
+    <div class="lineup"><span class="btn pr">Отправить</span><span class="btn tn">Отпросить</span><span class="btn sc">Отмена</span></div>
+    <div class="lineup" style="margin-top:10px"><span class="btn pr sm">Готово · 22 из 24</span><span class="btn de sm">Удалить</span><span class="btn sm" style="background:var(--surface2);color:var(--ink3);opacity:.6">Нет сети</span></div>
+    <h3 style="margin-top:18px">Сегменты и чипы</h3>
+    <div class="seg" style="margin:0"><span class="on">Предметы</span><span>Лента</span></div>
+    <div class="lineup" style="margin-top:10px"><span class="chip on">Все</span><span class="chip">Физика</span><span class="chip warn"><span class="n">2</span>не отмечено</span></div>
+  </div>
+  <div class="cb">
+    <h3>Чип оценки · шкала 1–10 (проходной 4, качество 8)</h3>
+    <div class="lineup"><span class="g l poor">1</span><span class="g l poor">2</span><span class="g l poor">3</span><span class="g l fair">4</span><span class="g l fair">5</span><span class="g l fair">6</span><span class="g l fair">7</span><span class="g l good">8</span><span class="g l exc">9</span><span class="g l exc">10</span></div>
+    <div class="lineup" style="margin-top:12px"><span class="g l exc new">9</span><span style="font-size:13px;color:var(--ink2)">новое</span><span class="g l pts">18/25</span><span style="font-size:13px;color:var(--ink2)">СОР</span><span class="type fo">ФО</span><span class="type sor">СОР</span><span class="type soch">СОЧ</span></div>
+    <h3 style="margin-top:18px">Посещаемость</h3>
+    <div class="lineup"><div class="att p"><i class="ms sf">check</i></div><div class="att n">Н</div><div class="att c">Б</div><div class="att c">О</div><div class="att c">У</div><span style="font-size:13px;color:var(--ink2)">тап: есть ↔ Н · долгий: коды</span></div>
+  </div>
+  <div class="cb">
+    <h3>Статусы · всегда иконка + слово</h3>
+    <div class="lineup"><span class="pill ok"><i class="ms xs">check_circle</i>в школе</span><span class="pill warn"><i class="ms xs">schedule</i>опоздала</span><span class="pill bad"><i class="ms xs">error</i>пропуск</span><span class="pill ps"><i class="ms xs">hourglass_top</i>на рассмотрении</span><span class="pill q"><i class="ms xs">lock</i>окно закрыто</span></div>
+    <h3 style="margin-top:18px">Синхронизация</h3>
+    <div class="lineup">
+      <span class="pill ok" style="height:36px;border-radius:18px"><i class="ms s">cloud_done</i>всё отправлено</span>
+      <span class="pill warn" style="height:36px;border-radius:18px"><i class="ms s">cloud_upload</i>2 ждут сети</span>
+      <span class="pill bad" style="height:36px;border-radius:18px"><i class="ms s">cloud_off</i>1 отклонено</span>
+    </div>
+    <div style="margin-top:14px;background:var(--ink);color:var(--canvas);border-radius:22px;height:52px;display:flex;align-items:center;gap:10px;padding:0 8px 0 16px;font-size:15px;font-weight:600"><i class="ms s" style="color:#5BD69A">task_alt</i><span style="flex:1">Задание отмечено готовым</span><span style="color:#7AABFF;font-weight:700;padding:0 10px">Отменить</span></div>
+  </div>
+  <div class="cb">
+    <h3>Серия и веер прогресса</h3>
+    <div class="lineup"><div class="streak"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#1F1600" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#1F1600" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#1F1600" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#1F1600" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg>12 <small>дней</small></div><div class="streak" style="background:var(--surface2);color:var(--ink2)"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#4A5466" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#4A5466" fill-opacity="0.1" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#4A5466" fill-opacity="0.1" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#4A5466" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg>пауза <small>· болезнь</small></div></div>
+    <div class="lineup" style="margin-top:14px;gap:14px">
+      <div style="width:48px;height:48px"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg></div><div style="width:48px;height:48px"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg></div><div style="width:48px;height:48px"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg></div><div style="width:48px;height:48px"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.1" transform="rotate(-72 31 75)"/></svg></div><div style="width:48px;height:48px"><svg class="fanmini" viewBox="15.3 19.3 66 66" width="100%" height="100%" aria-hidden="true"><rect x="24" y="66.5" width="50" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill="#0A5BD8" fill-opacity="0.72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" fill="#0A5BD8" fill-opacity="1" transform="rotate(-72 31 75)"/></svg></div>
+    </div>
+    <div style="font-size:13px;color:var(--ink2);margin-top:10px;line-height:18px">Недели месяца, четверти года, pull-to-refresh: листы веера появляются по одному.</div>
+  </div>
+  <div class="cb">
+    <h3>Загрузка · скелетон листа</h3>
+    <div class="skl" style="height:150px;border-radius:32px"></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:14px"><div class="skl" style="width:44px;height:16px"></div><div class="skl" style="width:5px;height:30px"></div><div style="flex:1"><div class="skl" style="height:14px;width:70%"></div><div class="skl" style="height:12px;width:40%;margin-top:6px"></div></div></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:12px"><div class="skl" style="width:44px;height:16px"></div><div class="skl" style="width:5px;height:30px"></div><div style="flex:1"><div class="skl" style="height:14px;width:55%"></div><div class="skl" style="height:12px;width:30%;margin-top:6px"></div></div></div>
+  </div>
+  <div class="cb">
+    <h3>Пустое и ошибочное состояние</h3>
+    <div style="display:flex;gap:14px;align-items:center">
+      <div style="width:64px;height:64px;border-radius:22px;background:var(--psoft);display:grid;place-items:center;flex:none"><div style="width:44px;height:44px"><svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><g fill="#0A5BD8"><rect x="24" y="66.5" width="50" height="16" rx="8" fill-opacity=".25" transform="rotate(-6 31 75)"/><rect x="24" y="66.5" width="54" height="16" rx="8" fill-opacity=".48" transform="rotate(-28 31 75)"/><rect x="24" y="66.5" width="58" height="16" rx="8" fill-opacity=".72" transform="rotate(-50 31 75)"/><rect x="24" y="66.5" width="62" height="16" rx="8" transform="rotate(-72 31 75)"/></g></svg></div></div>
+      <div><div style="font-size:17px;font-weight:700">Заданий на завтра нет</div><div style="font-size:14px;color:var(--ink2);line-height:19px">Новые появятся здесь, как только учитель их задаст.</div></div>
+    </div>
+    <div style="margin-top:16px;background:var(--bad-soft);border-radius:20px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start">
+      <i class="ms s" style="color:var(--bad)">error</i>
+      <div style="flex:1;font-size:14px;line-height:19px"><b>Вы в 180 м от школы.</b> Подойдите ближе ко входу и повторите.</div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px"><span class="btn tn sm">Повторить</span></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
