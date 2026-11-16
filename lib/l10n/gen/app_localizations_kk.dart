@@ -1959,4 +1959,24 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get lockUnavailable => 'Телефон баптауларында Face ID, саусақ ізін немесе құпиякодты қосыңыз';
+
+  @override
+  String reportCardRow(String term) {
+    return '$term бойынша табель';
+  }
+
+  @override
+  String get reportCardHint => 'PDF · жіберу немесе сақтау';
+
+  @override
+  String get reportCardPreparing => 'Табель дайындалуда…';
+
+  @override
+  String get reportCardOffline => 'Желі жоқ — табельді жүктеу мүмкін емес. Интернет пайда болғанда қайталап көріңіз.';
+
+  @override
+  String get reportCardDenied => 'Табельге рұқсат жоқ';
+
+  @override
+  String get reportCardFailed => 'Табельді алу мүмкін болмады. Қайтадан көріңіз.';
 }

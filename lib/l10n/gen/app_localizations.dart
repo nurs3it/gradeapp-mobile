@@ -3482,6 +3482,42 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Включите Face ID, отпечаток или код-пароль в настройках телефона'**
   String get lockUnavailable;
+
+  /// No description provided for @reportCardRow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Табель за {term}'**
+  String reportCardRow(String term);
+
+  /// No description provided for @reportCardHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'PDF · отправить или сохранить'**
+  String get reportCardHint;
+
+  /// No description provided for @reportCardPreparing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Готовим табель…'**
+  String get reportCardPreparing;
+
+  /// No description provided for @reportCardOffline.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет сети — табель не скачать. Попробуйте, когда появится интернет.'**
+  String get reportCardOffline;
+
+  /// No description provided for @reportCardDenied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет доступа к табелю'**
+  String get reportCardDenied;
+
+  /// No description provided for @reportCardFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось получить табель. Попробуйте ещё раз.'**
+  String get reportCardFailed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -564,5 +564,18 @@
   "lockReason": "Бұл өзіңіз екеніңізді растаңыз",
   "lockTitle": "GradeApp құлыпталған",
   "lockUnlock": "Құлыпты ашу",
-  "lockUnavailable": "Телефон баптауларында Face ID, саусақ ізін немесе құпиякодты қосыңыз"
+  "lockUnavailable": "Телефон баптауларында Face ID, саусақ ізін немесе құпиякодты қосыңыз",
+  "reportCardRow": "{term} бойынша табель",
+  "@reportCardRow": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardHint": "PDF · жіберу немесе сақтау",
+  "reportCardPreparing": "Табель дайындалуда…",
+  "reportCardOffline": "Желі жоқ — табельді жүктеу мүмкін емес. Интернет пайда болғанда қайталап көріңіз.",
+  "reportCardDenied": "Табельге рұқсат жоқ",
+  "reportCardFailed": "Табельді алу мүмкін болмады. Қайтадан көріңіз."
 }

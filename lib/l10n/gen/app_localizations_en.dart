@@ -2011,4 +2011,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lockUnavailable => 'Set up Face ID, a fingerprint or a passcode in the phone\'s settings';
+
+  @override
+  String reportCardRow(String term) {
+    return 'Report card for $term';
+  }
+
+  @override
+  String get reportCardHint => 'PDF · share or save';
+
+  @override
+  String get reportCardPreparing => 'Preparing the report card…';
+
+  @override
+  String get reportCardOffline =>
+      'No connection, so the report card can\'t be downloaded. Try again when you\'re online.';
+
+  @override
+  String get reportCardDenied => 'No access to this report card';
+
+  @override
+  String get reportCardFailed => 'Couldn\'t get the report card. Please try again.';
 }

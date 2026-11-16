@@ -1549,5 +1549,18 @@
   "lockReason": "Подтвердите, что это вы",
   "lockTitle": "GradeApp заблокирован",
   "lockUnlock": "Разблокировать",
-  "lockUnavailable": "Включите Face ID, отпечаток или код-пароль в настройках телефона"
+  "lockUnavailable": "Включите Face ID, отпечаток или код-пароль в настройках телефона",
+  "reportCardRow": "Табель за {term}",
+  "@reportCardRow": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardHint": "PDF · отправить или сохранить",
+  "reportCardPreparing": "Готовим табель…",
+  "reportCardOffline": "Нет сети — табель не скачать. Попробуйте, когда появится интернет.",
+  "reportCardDenied": "Нет доступа к табелю",
+  "reportCardFailed": "Не удалось получить табель. Попробуйте ещё раз."
 }

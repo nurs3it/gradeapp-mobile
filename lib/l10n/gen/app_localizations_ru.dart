@@ -2059,4 +2059,24 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get lockUnavailable => 'Включите Face ID, отпечаток или код-пароль в настройках телефона';
+
+  @override
+  String reportCardRow(String term) {
+    return 'Табель за $term';
+  }
+
+  @override
+  String get reportCardHint => 'PDF · отправить или сохранить';
+
+  @override
+  String get reportCardPreparing => 'Готовим табель…';
+
+  @override
+  String get reportCardOffline => 'Нет сети — табель не скачать. Попробуйте, когда появится интернет.';
+
+  @override
+  String get reportCardDenied => 'Нет доступа к табелю';
+
+  @override
+  String get reportCardFailed => 'Не удалось получить табель. Попробуйте ещё раз.';
 }

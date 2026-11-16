@@ -564,5 +564,18 @@
   "lockReason": "Confirm it's you",
   "lockTitle": "GradeApp is locked",
   "lockUnlock": "Unlock",
-  "lockUnavailable": "Set up Face ID, a fingerprint or a passcode in the phone's settings"
+  "lockUnavailable": "Set up Face ID, a fingerprint or a passcode in the phone's settings",
+  "reportCardRow": "Report card for {term}",
+  "@reportCardRow": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardHint": "PDF · share or save",
+  "reportCardPreparing": "Preparing the report card…",
+  "reportCardOffline": "No connection, so the report card can't be downloaded. Try again when you're online.",
+  "reportCardDenied": "No access to this report card",
+  "reportCardFailed": "Couldn't get the report card. Please try again."
 }
