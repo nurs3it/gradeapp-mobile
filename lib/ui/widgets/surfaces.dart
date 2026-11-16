@@ -65,7 +65,11 @@ class GGroup extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           for (var i = 0; i < children.length; i++) ...[
-            if (i > 0) Padding(padding: EdgeInsetsDirectional.only(start: inset), child: Container(height: 1, color: c.hairline)),
+            if (i > 0)
+              Padding(
+                padding: EdgeInsetsDirectional.only(start: inset),
+                child: Container(height: 1, color: c.hairline),
+              ),
             children[i],
           ],
         ],
@@ -87,12 +91,20 @@ class GSectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.c;
     return Padding(
-      padding: EdgeInsets.fromLTRB(GSpace.gutter(context), GSpace.sectionTop, GSpace.gutter(context), GSpace.sectionGap),
+      padding: EdgeInsets.fromLTRB(
+        GSpace.gutter(context),
+        GSpace.sectionTop,
+        GSpace.gutter(context),
+        GSpace.sectionGap,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
-            child: Semantics(header: true, child: Text(title, style: context.t.title2.copyWith(color: color))),
+            child: Semantics(
+              header: true,
+              child: Text(title, style: context.t.title2.copyWith(color: color)),
+            ),
           ),
           ?trailing,
           if (action != null)
@@ -101,7 +113,12 @@ class GSectionHeader extends StatelessWidget {
               semanticLabel: action,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(minHeight: 32),
-                child: Center(child: Text(action!, style: context.t.callout.copyWith(color: c.primaryText, fontWeight: FontWeight.w600))),
+                child: Center(
+                  child: Text(
+                    action!,
+                    style: context.t.callout.copyWith(color: c.primaryText, fontWeight: FontWeight.w600),
+                  ),
+                ),
               ),
             ),
         ],
@@ -210,7 +227,9 @@ class _GRowState extends State<GRow> {
       ),
     );
     if (widget.onTap == null && widget.onLongPress == null) {
-      return widget.semanticLabel == null ? row : Semantics(label: widget.semanticLabel, excludeSemantics: true, child: row);
+      return widget.semanticLabel == null
+          ? row
+          : Semantics(label: widget.semanticLabel, excludeSemantics: true, child: row);
     }
     return Semantics(
       button: true,
@@ -274,7 +293,14 @@ class GTile extends StatelessWidget {
             Row(
               children: [
                 if (icon != null) ...[GIcon(icon!, size: 20, color: c.ink2), const SizedBox(width: 6)],
-                Expanded(child: Text(label, style: t.subhead.copyWith(color: c.ink2), maxLines: 2, overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    label,
+                    style: t.subhead.copyWith(color: c.ink2),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -293,7 +319,12 @@ class GTile extends StatelessWidget {
               ),
             if (caption != null) ...[
               const SizedBox(height: 2),
-              Text(caption!, style: t.subhead.copyWith(color: c.ink2), maxLines: 1, overflow: TextOverflow.ellipsis),
+              Text(
+                caption!,
+                style: t.subhead.copyWith(color: c.ink2),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ],
         ),
@@ -311,7 +342,15 @@ class GTileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     if (tiles.isEmpty) return const SizedBox.shrink();
     if (tiles.length == 1 || GScale.large(context)) {
-      return Column(children: [for (final t in tiles) Padding(padding: const EdgeInsets.only(bottom: GSpace.stackGap), child: t)]);
+      return Column(
+        children: [
+          for (final t in tiles)
+            Padding(
+              padding: const EdgeInsets.only(bottom: GSpace.stackGap),
+              child: t,
+            ),
+        ],
+      );
     }
     return IntrinsicHeight(
       child: Row(
@@ -340,7 +379,9 @@ class GSectionTitle extends StatelessWidget {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(child: Semantics(header: true, child: Text(title, style: context.t.title2))),
+        Expanded(
+          child: Semantics(header: true, child: Text(title, style: context.t.title2)),
+        ),
         ?trailing,
         if (action != null)
           GPressable(

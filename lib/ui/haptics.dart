@@ -28,8 +28,6 @@ abstract final class GHaptics {
   static void warning() => _notify('warning', HapticFeedback.mediumImpact);
 
   static void _notify(String kind, Future<void> Function() fallback) {
-    unawaited(
-      _channel.invokeMethod<void>('notify', kind).catchError((Object _) => fallback()),
-    );
+    unawaited(_channel.invokeMethod<void>('notify', kind).catchError((Object _) => fallback()));
   }
 }

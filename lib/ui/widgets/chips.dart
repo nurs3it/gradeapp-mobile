@@ -41,7 +41,8 @@ class GChip extends StatelessWidget {
         ? (c.ink, c.canvas)
         : tone != null
         ? (tone!.soft(c), tone!.fg(c))
-        : (c.surface, c.ink);
+        // Dark sheets are `surface` too: lift the chip one step so it stays visible.
+        : (c.isDark ? c.surface2 : c.surface, c.ink);
     return GPressable(
       onTap: onTap == null
           ? null
@@ -68,12 +69,19 @@ class GChip extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (dot != null) ...[
-                  Container(width: 8, height: 8, decoration: BoxDecoration(color: dot, shape: BoxShape.circle)),
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
+                  ),
                   const SizedBox(width: 6),
                 ],
                 if (icon != null) ...[GIcon(icon!, size: 16, color: fg), const SizedBox(width: 6)],
                 if (count != null) ...[
-                  Text('$count', style: t.subhead.copyWith(color: fg, fontWeight: FontWeight.w800)),
+                  Text(
+                    '$count',
+                    style: t.subhead.copyWith(color: fg, fontWeight: FontWeight.w800),
+                  ),
                   const SizedBox(width: 5),
                 ],
                 Text(label, style: t.subhead.copyWith(color: fg)),
@@ -142,7 +150,11 @@ class GStatusPill extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[GIcon(icon!, size: 16, color: fg, fill: 1), const SizedBox(width: 4)],
-          Text(label, style: context.t.footnote.copyWith(color: fg, fontWeight: FontWeight.w700), maxLines: 1),
+          Text(
+            label,
+            style: context.t.footnote.copyWith(color: fg, fontWeight: FontWeight.w700),
+            maxLines: 1,
+          ),
         ],
       ),
     );

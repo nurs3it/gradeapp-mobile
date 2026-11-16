@@ -114,7 +114,9 @@ class GField extends StatelessWidget {
                 children: [
                   GIcon(GIcons.error, size: 16, color: c.bad, fill: 1),
                   const SizedBox(width: 6),
-                  Expanded(child: Text(error!, style: context.t.footnote.copyWith(color: c.bad))),
+                  Expanded(
+                    child: Text(error!, style: context.t.footnote.copyWith(color: c.bad)),
+                  ),
                 ],
               ),
             ),
@@ -139,6 +141,9 @@ class AccessCodeFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     final text = format(newValue.text);
-    return TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length));
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
   }
 }

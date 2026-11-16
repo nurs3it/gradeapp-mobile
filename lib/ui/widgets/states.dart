@@ -129,10 +129,17 @@ class GEmpty extends StatelessWidget {
                 : GMark(size: 44, color: error ? c.bad : GColors.brand),
           ),
           const SizedBox(height: 16),
-          Semantics(header: true, child: Text(title, style: context.t.headline, textAlign: TextAlign.center)),
+          Semantics(
+            header: true,
+            child: Text(title, style: context.t.headline, textAlign: TextAlign.center),
+          ),
           if (message != null) ...[
             const SizedBox(height: 6),
-            Text(message!, style: context.t.body.copyWith(color: c.ink2), textAlign: TextAlign.center),
+            Text(
+              message!,
+              style: context.t.body.copyWith(color: c.ink2),
+              textAlign: TextAlign.center,
+            ),
           ],
           if (action != null) ...[
             const SizedBox(height: 16),
@@ -170,7 +177,8 @@ class GStateRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.c;
     final fg = tone == GTone.neutral ? c.ink : tone.fg(c);
-    final iconData = icon ??
+    final iconData =
+        icon ??
         switch (tone) {
           GTone.bad => GIcons.error,
           GTone.warn => GIcons.info,
@@ -190,8 +198,15 @@ class GStateRow extends StatelessWidget {
               child: Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(text: title, style: const TextStyle(fontWeight: FontWeight.w700)),
-                    if (message != null) TextSpan(text: ' $message', style: const TextStyle(fontWeight: FontWeight.w500)),
+                    TextSpan(
+                      text: title,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    if (message != null)
+                      TextSpan(
+                        text: ' $message',
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
                   ],
                 ),
                 style: context.t.subhead.copyWith(color: tone == GTone.neutral ? c.ink : fg),
@@ -199,12 +214,7 @@ class GStateRow extends StatelessWidget {
             ),
             if (action != null) ...[
               const SizedBox(width: 8),
-              GButton(
-                label: action!,
-                onPressed: onAction,
-                size: GButtonSize.s,
-                variant: GButtonVariant.surface,
-              ),
+              GButton(label: action!, onPressed: onAction, size: GButtonSize.s, variant: GButtonVariant.surface),
             ],
           ],
         ),

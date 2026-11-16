@@ -47,8 +47,7 @@ class MarkPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(MarkPainter old) =>
-      old.color != color || !_eq(old.unfold, unfold) || !_eq(old.alpha, alpha);
+  bool shouldRepaint(MarkPainter old) => old.color != color || !_eq(old.unfold, unfold) || !_eq(old.alpha, alpha);
 
   static bool _eq(List<double> a, List<double> b) {
     for (var i = 0; i < a.length; i++) {
@@ -66,7 +65,10 @@ class GMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-    child: CustomPaint(size: Size.square(size), painter: MarkPainter(color: color ?? GColors.brand)),
+    child: CustomPaint(
+      size: Size.square(size),
+      painter: MarkPainter(color: color ?? GColors.brand),
+    ),
   );
 }
 
@@ -156,7 +158,10 @@ class _GMarkUnfoldState extends State<GMarkUnfold> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: Duration(milliseconds: ((_settle + 3 * _step) * 1000).round()));
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: ((_settle + 3 * _step) * 1000).round()),
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (GMotion.reduce(context)) {

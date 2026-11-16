@@ -136,7 +136,9 @@ class _GRootPageState extends State<GRootPage> {
                 ),
                 if (widget.below != null) SliverToBoxAdapter(child: widget.below),
                 ...widget.slivers,
-                SliverToBoxAdapter(child: SizedBox(height: widget.bottomPadding + MediaQuery.paddingOf(context).bottom)),
+                SliverToBoxAdapter(
+                  child: SizedBox(height: widget.bottomPadding + MediaQuery.paddingOf(context).bottom),
+                ),
               ],
             ),
           ),

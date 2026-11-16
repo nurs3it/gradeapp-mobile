@@ -53,7 +53,9 @@ class GTabBar extends StatelessWidget {
               child: FractionallySizedBox(
                 widthFactor: 1 / n,
                 heightFactor: 1,
-                child: DecoratedBox(decoration: ShapeDecoration(color: c.primarySoft, shape: const StadiumBorder())),
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(color: c.primarySoft, shape: const StadiumBorder()),
+                ),
               ),
             ),
             Row(

@@ -74,13 +74,22 @@ class GGradeChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GRadius.grade(height))),
       // widthFactor 1: hug the figure (an aligned Container would stretch in a Wrap).
-      child: Center(widthFactor: 1, child: Text(text, style: style, maxLines: 1, textScaler: TextScaler.noScaling)),
+      child: Center(
+        widthFactor: 1,
+        child: Text(text, style: style, maxLines: 1, textScaler: TextScaler.noScaling),
+      ),
     );
     return Semantics(
       label: semanticLabel ?? text,
       excludeSemantics: true,
       child: isNew
-          ? Stack(clipBehavior: Clip.none, children: [chip, const Positioned(top: -3, right: -3, child: GNewDot())])
+          ? Stack(
+              clipBehavior: Clip.none,
+              children: [
+                chip,
+                const Positioned(top: -3, right: -3, child: GNewDot()),
+              ],
+            )
           : chip,
     );
   }

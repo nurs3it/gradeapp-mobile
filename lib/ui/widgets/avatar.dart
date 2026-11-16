@@ -78,7 +78,10 @@ class GAvatar extends StatelessWidget {
     if (ring != null) {
       circle = Container(
         padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: ring!, width: 2)),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: ring!, width: 2),
+        ),
         child: circle,
       );
     }

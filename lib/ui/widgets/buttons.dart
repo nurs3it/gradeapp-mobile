@@ -69,7 +69,10 @@ class GButton extends StatelessWidget {
     } else if (onPressed == null && variant == GButtonVariant.plain) {
       fg = c.ink3.withValues(alpha: 0.6);
     }
-    final style = (size == GButtonSize.l ? t.headline : t.bodyStrong).copyWith(color: fg, fontSize: size == GButtonSize.s ? 15 : null);
+    final style = (size == GButtonSize.l ? t.headline : t.bodyStrong).copyWith(
+      color: fg,
+      fontSize: size == GButtonSize.s ? 15 : null,
+    );
     final iconSize = size == GButtonSize.s ? 18.0 : 20.0;
     final content = loading
         ? GLoader(size: 22, color: fg)
@@ -79,7 +82,13 @@ class GButton extends StatelessWidget {
             children: [
               if (icon != null) ...[GIcon(icon!, size: iconSize, color: fg), const SizedBox(width: 8)],
               Flexible(
-                child: Text(label, style: style, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+                child: Text(
+                  label,
+                  style: style,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           );
@@ -91,7 +100,9 @@ class GButton extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(minHeight: height, minWidth: height),
         width: expand ? double.infinity : null,
-        padding: EdgeInsets.symmetric(horizontal: variant == GButtonVariant.plain ? 8 : (size == GButtonSize.s ? 16 : 22)),
+        padding: EdgeInsets.symmetric(
+          horizontal: variant == GButtonVariant.plain ? 8 : (size == GButtonSize.s ? 16 : 22),
+        ),
         decoration: ShapeDecoration(
           color: bg,
           shape: const StadiumBorder(),
@@ -99,8 +110,8 @@ class GButton extends StatelessWidget {
               ? [BoxShadow(color: c.shadowTint.withValues(alpha: 0.05), offset: const Offset(0, 1), blurRadius: 2)]
               : null,
         ),
-        alignment: Alignment.center,
-        child: content,
+        // Hug the label unless [expand]; an aligned Container would stretch.
+        child: Center(widthFactor: expand ? null : 1, heightFactor: 1, child: content),
       ),
     );
   }
@@ -150,8 +161,7 @@ class GIconButton extends StatelessWidget {
                 alignment: Alignment.center,
                 child: GIcon(icon, size: 22, color: color ?? c.ink, fill: fill),
               ),
-              if (badge != null && badge! > 0)
-                Positioned(right: -4, top: -4, child: GCountBadge(count: badge!)),
+              if (badge != null && badge! > 0) Positioned(right: -4, top: -4, child: GCountBadge(count: badge!)),
             ],
           ),
         ),
@@ -180,7 +190,7 @@ class GCountBadge extends StatelessWidget {
           widthFactor: 1,
           heightFactor: 1,
           child: Text(
-          count > 99 ? '99+' : '$count',
+            count > 99 ? '99+' : '$count',
             style: context.t.caption.copyWith(color: GColors.onFill, fontSize: 11, height: 1),
             textScaler: TextScaler.noScaling,
           ),

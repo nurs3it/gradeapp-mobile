@@ -38,55 +38,65 @@ Future<T?> showGSheet<T>(
       reverseCurve: GMotion.exit,
       reverseDuration: GMotion.base,
     ),
-    builder: (ctx) {
-      final media = MediaQuery.of(ctx);
-      final maxH = media.size.height * (full ? 0.94 : 0.62);
-      final body = builder(ctx);
-      return AnimatedPadding(
-        duration: GMotion.quick,
-        padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: full ? maxH : media.size.height * 0.9, minHeight: full ? maxH : 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const _Handle(),
-              if (title != null)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 4, 12, 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Semantics(
-                          header: true,
-                          child: Text(title, style: bigTitle ? ctx.t.title1 : ctx.t.headline, maxLines: 2),
-                        ),
+    builder: (outer) => Theme(
+      data: Theme.of(outer).copyWith(extensions: [outer.c.raised(), outer.t]),
+      child: Builder(
+        builder: (ctx) {
+          final media = MediaQuery.of(ctx);
+          final maxH = media.size.height * (full ? 0.94 : 0.62);
+          final body = builder(ctx);
+          return AnimatedPadding(
+            duration: GMotion.quick,
+            padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: full ? maxH : media.size.height * 0.9, minHeight: full ? maxH : 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const _Handle(),
+                  if (title != null)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 4, 12, 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Semantics(
+                              header: true,
+                              child: Text(title, style: bigTitle ? ctx.t.title1 : ctx.t.headline, maxLines: 2),
+                            ),
+                          ),
+                          GIconButton(
+                            icon: GIcons.close,
+                            label: closeLabel ?? MaterialLocalizations.of(ctx).closeButtonLabel,
+                            size: 36,
+                            background: ctx.c.surface2,
+                            color: ctx.c.ink2,
+                            onPressed: () => Navigator.of(ctx).maybePop(),
+                          ),
+                        ],
                       ),
-                      GIconButton(
-                        icon: GIcons.close,
-                        label: closeLabel ?? MaterialLocalizations.of(ctx).closeButtonLabel,
-                        size: 36,
-                        background: ctx.c.surface2,
-                        color: ctx.c.ink2,
-                        onPressed: () => Navigator.of(ctx).maybePop(),
+                    ),
+                  if (scrollable) Flexible(child: SingleChildScrollView(child: body)) else Flexible(child: body),
+                  if (actions != null)
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        20,
+                        8,
+                        20,
+                        12 + (media.viewInsets.bottom > 0 ? 0 : media.padding.bottom),
                       ),
-                    ],
-                  ),
-                ),
-              if (scrollable) Flexible(child: SingleChildScrollView(child: body)) else Flexible(child: body),
-              if (actions != null)
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 8, 20, 12 + (media.viewInsets.bottom > 0 ? 0 : media.padding.bottom)),
-                  child: actions,
-                )
-              else
-                SizedBox(height: media.padding.bottom + 8),
-            ],
-          ),
-        ),
-      );
-    },
+                      child: actions,
+                    )
+                  else
+                    SizedBox(height: media.padding.bottom + 8),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    ),
   );
 }
 

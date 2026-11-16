@@ -67,7 +67,10 @@ class _GRollingTextState extends State<GRollingText> with SingleTickerProviderSt
                     ClipRect(
                       child: Stack(
                         children: [
-                          Opacity(opacity: 0, child: Text(to[i], style: widget.style, textScaler: scaler)),
+                          Opacity(
+                            opacity: 0,
+                            child: Text(to[i], style: widget.style, textScaler: scaler),
+                          ),
                           Transform.translate(
                             offset: Offset(0, -8 * t),
                             child: Opacity(
@@ -77,7 +80,10 @@ class _GRollingTextState extends State<GRollingText> with SingleTickerProviderSt
                           ),
                           Transform.translate(
                             offset: Offset(0, 8 * (1 - t)),
-                            child: Opacity(opacity: t, child: Text(to[i], style: widget.style, textScaler: scaler)),
+                            child: Opacity(
+                              opacity: t,
+                              child: Text(to[i], style: widget.style, textScaler: scaler),
+                            ),
                           ),
                         ],
                       ),

@@ -17,14 +17,54 @@ class GSubject {
 
 /// Order matches the web `lesson-1…8`.
 const gSubjects = <GSubject>[
-  GSubject(fill: Color(0xFF4F46E5), tintLight: Color(0xFFEAE9FC), tintDark: Color(0xFF242558), markerDark: Color(0xFF9A94FF)),
-  GSubject(fill: Color(0xFF0B6F43), tintLight: Color(0xFFE2EEE8), tintDark: Color(0xFF11302B), markerDark: Color(0xFF5BD69A)),
-  GSubject(fill: Color(0xFFAE3A0B), tintLight: Color(0xFFF5E7E2), tintDark: Color(0xFF3E221B), markerDark: Color(0xFFFF8F5E)),
-  GSubject(fill: Color(0xFF6D35DB), tintLight: Color(0xFFEDE7FB), tintDark: Color(0xFF2C2055), markerDark: Color(0xFFB38CFF)),
-  GSubject(fill: Color(0xFFA61F84), tintLight: Color(0xFFF4E4F0), tintDark: Color(0xFF3C1A3D), markerDark: Color(0xFFF17ACF)),
-  GSubject(fill: Color(0xFF0A6476), tintLight: Color(0xFFE2ECEF), tintDark: Color(0xFF102D39), markerDark: Color(0xFF4FC6DB)),
-  GSubject(fill: Color(0xFF875500), tintLight: Color(0xFFF1EBE0), tintDark: Color(0xFF332918), markerDark: Color(0xFFF2B33D)),
-  GSubject(fill: Color(0xFFB41F48), tintLight: Color(0xFFF6E4E9), tintDark: Color(0xFF401A2C), markerDark: Color(0xFFFF7E9F)),
+  GSubject(
+    fill: Color(0xFF4F46E5),
+    tintLight: Color(0xFFEAE9FC),
+    tintDark: Color(0xFF242558),
+    markerDark: Color(0xFF9A94FF),
+  ),
+  GSubject(
+    fill: Color(0xFF0B6F43),
+    tintLight: Color(0xFFE2EEE8),
+    tintDark: Color(0xFF11302B),
+    markerDark: Color(0xFF5BD69A),
+  ),
+  GSubject(
+    fill: Color(0xFFAE3A0B),
+    tintLight: Color(0xFFF5E7E2),
+    tintDark: Color(0xFF3E221B),
+    markerDark: Color(0xFFFF8F5E),
+  ),
+  GSubject(
+    fill: Color(0xFF6D35DB),
+    tintLight: Color(0xFFEDE7FB),
+    tintDark: Color(0xFF2C2055),
+    markerDark: Color(0xFFB38CFF),
+  ),
+  GSubject(
+    fill: Color(0xFFA61F84),
+    tintLight: Color(0xFFF4E4F0),
+    tintDark: Color(0xFF3C1A3D),
+    markerDark: Color(0xFFF17ACF),
+  ),
+  GSubject(
+    fill: Color(0xFF0A6476),
+    tintLight: Color(0xFFE2ECEF),
+    tintDark: Color(0xFF102D39),
+    markerDark: Color(0xFF4FC6DB),
+  ),
+  GSubject(
+    fill: Color(0xFF875500),
+    tintLight: Color(0xFFF1EBE0),
+    tintDark: Color(0xFF332918),
+    markerDark: Color(0xFFF2B33D),
+  ),
+  GSubject(
+    fill: Color(0xFFB41F48),
+    tintLight: Color(0xFFF6E4E9),
+    tintDark: Color(0xFF401A2C),
+    markerDark: Color(0xFFFF7E9F),
+  ),
 ];
 
 /// Stable subject index: FNV-1a over the UTF-16 code units, so the same course
@@ -179,6 +219,37 @@ class GColors extends ThemeExtension<GColors> {
   Color subjectTint(String key) => subjectOf(key).tint(brightness);
   Color subjectMarker(String key) => subjectOf(key).marker(brightness);
   Color subjectFill(String key) => subjectOf(key).fill;
+
+  /// One elevation step up (dark sheets): groups and chips inside a dark
+  /// sheet would otherwise vanish into its `surface`.
+  GColors raised() => !isDark
+      ? this
+      : GColors(
+          brightness: brightness,
+          canvas: canvas,
+          surface: surface2,
+          surface2: surface3,
+          surface3: surface3,
+          hairline: surface3,
+          tabbar: tabbar,
+          scrim: scrim,
+          skeleton: skeleton,
+          ink: ink,
+          ink2: ink2,
+          ink3: ink3,
+          primaryText: primaryText,
+          primarySoft: primarySoft,
+          primarySoftText: primarySoftText,
+          goldSoft: goldSoft,
+          goldText: goldText,
+          ok: ok,
+          okSoft: okSoft,
+          warn: warn,
+          warnSoft: warnSoft,
+          bad: bad,
+          badSoft: badSoft,
+          shadowTint: shadowTint,
+        );
 
   @override
   GColors copyWith() => this;

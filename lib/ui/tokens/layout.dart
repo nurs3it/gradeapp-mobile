@@ -53,22 +53,37 @@ abstract final class GRadius {
 
 /// Depth (§2.5): one cheap shadow at most, none in the dark theme.
 abstract final class GDepth {
-  static List<BoxShadow> level1(GColors c) =>
-      c.isDark ? const [] : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.05), offset: const Offset(0, 1), blurRadius: 2)];
+  static List<BoxShadow> level1(GColors c) => c.isDark
+      ? const []
+      : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.05), offset: const Offset(0, 1), blurRadius: 2)];
 
   static List<BoxShadow> level2(GColors c) => c.isDark
-      ? [BoxShadow(color: c.shadowTint.withValues(alpha: 0.6), offset: const Offset(0, 12), blurRadius: 32, spreadRadius: -6)]
+      ? [
+          BoxShadow(
+            color: c.shadowTint.withValues(alpha: 0.6),
+            offset: const Offset(0, 12),
+            blurRadius: 32,
+            spreadRadius: -6,
+          ),
+        ]
       : [
-          BoxShadow(color: c.shadowTint.withValues(alpha: 0.18), offset: const Offset(0, 12), blurRadius: 32, spreadRadius: -8),
+          BoxShadow(
+            color: c.shadowTint.withValues(alpha: 0.18),
+            offset: const Offset(0, 12),
+            blurRadius: 32,
+            spreadRadius: -8,
+          ),
           BoxShadow(color: c.shadowTint.withValues(alpha: 0.06), offset: const Offset(0, 2), blurRadius: 6),
         ];
 
-  static List<BoxShadow> sheet(GColors c) =>
-      c.isDark ? const [] : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.16), offset: const Offset(0, -10), blurRadius: 40)];
+  static List<BoxShadow> sheet(GColors c) => c.isDark
+      ? const []
+      : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.16), offset: const Offset(0, -10), blurRadius: 40)];
 
   /// Segmented thumb.
-  static List<BoxShadow> thumb(GColors c) =>
-      c.isDark ? const [] : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.12), offset: const Offset(0, 1), blurRadius: 3)];
+  static List<BoxShadow> thumb(GColors c) => c.isDark
+      ? const []
+      : [BoxShadow(color: c.shadowTint.withValues(alpha: 0.12), offset: const Offset(0, 1), blurRadius: 3)];
 }
 
 /// Motion (§2.6): durations, curves, springs.

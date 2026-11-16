@@ -53,10 +53,18 @@ class GHeroSheet extends StatelessWidget {
       ),
     );
     if (heroTag != null) {
-      sheet = Hero(tag: heroTag!, child: Material(type: MaterialType.transparency, child: sheet));
+      sheet = Hero(
+        tag: heroTag!,
+        child: Material(type: MaterialType.transparency, child: sheet),
+      );
     }
     if (onTap != null) {
-      sheet = GPressable(onTap: onTap, semanticLabel: semanticLabel, excludeChildSemantics: semanticLabel != null, child: sheet);
+      sheet = GPressable(
+        onTap: onTap,
+        semanticLabel: semanticLabel,
+        excludeChildSemantics: semanticLabel != null,
+        child: sheet,
+      );
     } else if (semanticLabel != null) {
       sheet = Semantics(label: semanticLabel, excludeSemantics: true, child: sheet);
     }
@@ -111,7 +119,10 @@ class _Leaves extends StatelessWidget {
                 child: Container(
                   width: 210,
                   height: 50,
-                  decoration: ShapeDecoration(color: GColors.onFill.withValues(alpha: alpha), shape: const StadiumBorder()),
+                  decoration: ShapeDecoration(
+                    color: GColors.onFill.withValues(alpha: alpha),
+                    shape: const StadiumBorder(),
+                  ),
                 ),
               ),
             ),
@@ -136,7 +147,10 @@ class GHeroProgress extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: FractionallySizedBox(
         widthFactor: value.clamp(0.0, 1.0),
-        child: DecoratedBox(decoration: ShapeDecoration(color: color, shape: const StadiumBorder())),
+        heightFactor: 1,
+        child: DecoratedBox(
+          decoration: ShapeDecoration(color: color, shape: const StadiumBorder()),
+        ),
       ),
     ),
   );
@@ -157,7 +171,10 @@ class GBar extends StatelessWidget {
     alignment: Alignment.centerLeft,
     child: FractionallySizedBox(
       widthFactor: value.clamp(0.0, 1.0),
-      child: DecoratedBox(decoration: ShapeDecoration(color: color, shape: const StadiumBorder())),
+      heightFactor: 1,
+      child: DecoratedBox(
+        decoration: ShapeDecoration(color: color, shape: const StadiumBorder()),
+      ),
     ),
   );
 }
