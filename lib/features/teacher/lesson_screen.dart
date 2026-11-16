@@ -149,7 +149,13 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
 
   Future<void> _codes(RosterStudent s, RollCell cell, Grading g) async {
     GHaptics.medium();
-    final pick = await showCodesSheet(context, name: s.name, grading: g, cell: cell);
+    final pick = await showCodesSheet(
+      context,
+      name: s.name,
+      grading: g,
+      cell: cell,
+      onFeedback: () => unawaited(showFeedbackSheet(context, student: s, actions: _actions)),
+    );
     if (pick != null) await _mark(s, cell, pick.status, pick.code, reason: pick.reason);
   }
 

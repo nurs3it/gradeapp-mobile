@@ -16,6 +16,7 @@ import 'grades_logic.dart';
 import 'learner_providers.dart';
 import 'report_card.dart';
 import 'seen.dart';
+import 'feedback.dart';
 
 /// Quarter picked in «Оценки» (null = the current one).
 class SelectedTerm extends Notifier<String?> {
@@ -228,6 +229,13 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
           ),
         ),
       ),
+      if (term != null && learner != null)
+        SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: g),
+          sliver: SliverToBoxAdapter(
+            child: FeedbackSection(studentId: learner, term: term),
+          ),
+        ),
       if (term != null && learner != null)
         SliverPadding(
           padding: EdgeInsets.fromLTRB(g, 16, g, 0),

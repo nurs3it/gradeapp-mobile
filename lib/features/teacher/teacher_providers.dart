@@ -386,6 +386,23 @@ class LessonActions {
     ),
   );
 
+  /// Feedback to one student from the lesson; [tone] is `positive`,
+  /// `negative` or null (plain).
+  Future<void> feedback(String studentId, String text, {String? tone, String name = ''}) => _outbox.add(
+    OutboxItem(
+      key: 'fb:${lesson.id}:$studentId:${DateTime.now().microsecondsSinceEpoch}',
+      method: 'POST',
+      path: '/feedback/',
+      label: _label('feedback', student: name),
+      data: {
+        'to_student': studentId,
+        'text': text,
+        'tags': [?tone],
+        'date': lesson.date,
+      },
+    ),
+  );
+
   /// T5: homework from the lesson (JSON part; attachments need the network).
   Future<void> assignHomework({
     required String title,

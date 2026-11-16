@@ -2079,4 +2079,35 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reportCardFailed => 'Не удалось получить табель. Попробуйте ещё раз.';
+
+  @override
+  String get feedbackTitle => 'Отзывы учителей';
+
+  @override
+  String get feedbackPraise => 'Похвала';
+
+  @override
+  String get feedbackRemark => 'Замечание';
+
+  @override
+  String get feedbackAction => 'Отзыв ученику';
+
+  @override
+  String feedbackSheetTitle(String name) {
+    return 'Отзыв: $name';
+  }
+
+  @override
+  String get feedbackHint => 'Что получилось или над чем стоит поработать';
+
+  @override
+  String get feedbackSend => 'Отправить отзыв';
+
+  @override
+  String feedbackSent(String name) {
+    return 'Отзыв для $name отправляется';
+  }
+
+  @override
+  String get whatFeedback => 'Отзыв ученику';
 }

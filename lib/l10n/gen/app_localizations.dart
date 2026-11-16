@@ -3518,6 +3518,60 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не удалось получить табель. Попробуйте ещё раз.'**
   String get reportCardFailed;
+
+  /// No description provided for @feedbackTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзывы учителей'**
+  String get feedbackTitle;
+
+  /// No description provided for @feedbackPraise.
+  ///
+  /// In ru, this message translates to:
+  /// **'Похвала'**
+  String get feedbackPraise;
+
+  /// No description provided for @feedbackRemark.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замечание'**
+  String get feedbackRemark;
+
+  /// No description provided for @feedbackAction.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзыв ученику'**
+  String get feedbackAction;
+
+  /// No description provided for @feedbackSheetTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзыв: {name}'**
+  String feedbackSheetTitle(String name);
+
+  /// No description provided for @feedbackHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Что получилось или над чем стоит поработать'**
+  String get feedbackHint;
+
+  /// No description provided for @feedbackSend.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отправить отзыв'**
+  String get feedbackSend;
+
+  /// No description provided for @feedbackSent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзыв для {name} отправляется'**
+  String feedbackSent(String name);
+
+  /// No description provided for @whatFeedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзыв ученику'**
+  String get whatFeedback;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

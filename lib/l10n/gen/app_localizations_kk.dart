@@ -1979,4 +1979,35 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get reportCardFailed => 'Табельді алу мүмкін болмады. Қайтадан көріңіз.';
+
+  @override
+  String get feedbackTitle => 'Мұғалімдер пікірі';
+
+  @override
+  String get feedbackPraise => 'Мақтау';
+
+  @override
+  String get feedbackRemark => 'Ескерту';
+
+  @override
+  String get feedbackAction => 'Оқушыға пікір жазу';
+
+  @override
+  String feedbackSheetTitle(String name) {
+    return 'Пікір: $name';
+  }
+
+  @override
+  String get feedbackHint => 'Не жақсы шықты немесе неге көңіл бөлу керек';
+
+  @override
+  String get feedbackSend => 'Пікірді жіберу';
+
+  @override
+  String feedbackSent(String name) {
+    return '$name үшін пікір жіберіліп жатыр';
+  }
+
+  @override
+  String get whatFeedback => 'Оқушыға пікір';
 }

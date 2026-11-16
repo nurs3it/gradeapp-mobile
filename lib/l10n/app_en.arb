@@ -577,5 +577,28 @@
   "reportCardPreparing": "Preparing the report card…",
   "reportCardOffline": "No connection, so the report card can't be downloaded. Try again when you're online.",
   "reportCardDenied": "No access to this report card",
-  "reportCardFailed": "Couldn't get the report card. Please try again."
+  "reportCardFailed": "Couldn't get the report card. Please try again.",
+  "feedbackTitle": "Teacher feedback",
+  "feedbackPraise": "Praise",
+  "feedbackRemark": "Remark",
+  "feedbackAction": "Write feedback",
+  "feedbackSheetTitle": "Feedback: {name}",
+  "@feedbackSheetTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackHint": "What went well or what to work on",
+  "feedbackSend": "Send feedback",
+  "feedbackSent": "Feedback for {name} is on its way",
+  "@feedbackSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "whatFeedback": "Feedback to a student"
 }

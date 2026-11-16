@@ -577,5 +577,28 @@
   "reportCardPreparing": "Табель дайындалуда…",
   "reportCardOffline": "Желі жоқ — табельді жүктеу мүмкін емес. Интернет пайда болғанда қайталап көріңіз.",
   "reportCardDenied": "Табельге рұқсат жоқ",
-  "reportCardFailed": "Табельді алу мүмкін болмады. Қайтадан көріңіз."
+  "reportCardFailed": "Табельді алу мүмкін болмады. Қайтадан көріңіз.",
+  "feedbackTitle": "Мұғалімдер пікірі",
+  "feedbackPraise": "Мақтау",
+  "feedbackRemark": "Ескерту",
+  "feedbackAction": "Оқушыға пікір жазу",
+  "feedbackSheetTitle": "Пікір: {name}",
+  "@feedbackSheetTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackHint": "Не жақсы шықты немесе неге көңіл бөлу керек",
+  "feedbackSend": "Пікірді жіберу",
+  "feedbackSent": "{name} үшін пікір жіберіліп жатыр",
+  "@feedbackSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "whatFeedback": "Оқушыға пікір"
 }

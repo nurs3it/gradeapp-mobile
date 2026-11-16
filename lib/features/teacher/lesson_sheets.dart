@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +8,7 @@ import '../../core/grading.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import 'teacher_models.dart';
 import 'teacher_providers.dart';
 
 /// Picked attendance from the codes sheet.
@@ -18,18 +21,26 @@ Future<CodePick?> showCodesSheet(
   required String name,
   required Grading grading,
   required RollCell cell,
+  VoidCallback? onFeedback,
 }) {
   final l = context.l10n;
   String codeFor(Presence p) => grading.attendanceCodes.where((c) => c.status == p).firstOrNull?.code ?? '';
   return showGSheet<CodePick>(
     context,
     title: name,
-    builder: (ctx) => _CodesBody(grading: grading, cell: cell, codeFor: codeFor, l: l),
+    builder: (ctx) => _CodesBody(grading: grading, cell: cell, codeFor: codeFor, l: l, onFeedback: onFeedback),
   );
 }
 
 class _CodesBody extends StatefulWidget {
-  const _CodesBody({required this.grading, required this.cell, required this.codeFor, required this.l});
+  const _CodesBody({
+    required this.grading,
+    required this.cell,
+    required this.codeFor,
+    required this.l,
+    this.onFeedback,
+  });
+  final VoidCallback? onFeedback;
   final Grading grading;
   final RollCell cell;
   final String Function(Presence) codeFor;
@@ -80,7 +91,7 @@ class _CodesBodyState extends State<_CodesBody> {
       title: Text(title),
       trailing: selected ? GIcon(GIcons.check, size: 20, color: c.primaryText) : null,
     );
-    return Padding(
+    final list = Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
       child: GGroup(
         inset: 68,
@@ -144,6 +155,31 @@ class _CodesBodyState extends State<_CodesBody> {
         ],
       ),
     );
+    final feedback = widget.onFeedback;
+    return feedback == null
+        ? list
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              list,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
+                child: GGroup(
+                  children: [
+                    GRow(
+                      leading: GIcon(GIcons.chat, size: 22, color: c.primaryText),
+                      title: Text(l.feedbackAction),
+                      chevron: true,
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        feedback();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
   }
 }
 
@@ -441,4 +477,94 @@ Future<bool> showSummarySheet(
   await actions.finish();
   GHaptics.success();
   return true;
+}
+
+/// Feedback to one student from the lesson: a few words, optionally marked
+/// as praise or a remark. Goes through the queue like the rest.
+Future<void> showFeedbackSheet(BuildContext context, {required RosterStudent student, required LessonActions actions}) {
+  return showGSheet<void>(
+    context,
+    title: context.l10n.feedbackSheetTitle(student.name),
+    builder: (_) => _FeedbackForm(student: student, actions: actions),
+  );
+}
+
+class _FeedbackForm extends StatefulWidget {
+  const _FeedbackForm({required this.student, required this.actions});
+  final RosterStudent student;
+  final LessonActions actions;
+
+  @override
+  State<_FeedbackForm> createState() => _FeedbackFormState();
+}
+
+class _FeedbackFormState extends State<_FeedbackForm> {
+  final _text = TextEditingController();
+  String? _tone;
+
+  @override
+  void dispose() {
+    _text.dispose();
+    super.dispose();
+  }
+
+  Future<void> _send() async {
+    final text = _text.text.trim();
+    if (text.isEmpty) return;
+    final toast = context.l10n.feedbackSent(
+      widget.student.firstName.isEmpty ? widget.student.name : widget.student.firstName,
+    );
+    final nav = Navigator.of(context);
+    final host = nav.context;
+    await widget.actions.feedback(widget.student.id, text, tone: _tone, name: widget.student.name);
+    GHaptics.success();
+    nav.pop();
+    if (host.mounted) GToast.show(host, toast, bottomOffset: 100);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          GField(
+            controller: _text,
+            hint: l.feedbackHint,
+            maxLines: 5,
+            minLines: 3,
+            autofocus: true,
+            textCapitalization: TextCapitalization.sentences,
+            onChanged: (_) => setState(() {}),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            children: [
+              GChip(
+                label: l.feedbackPraise,
+                selected: _tone == 'positive',
+                onTap: () => setState(() => _tone = _tone == 'positive' ? null : 'positive'),
+              ),
+              GChip(
+                label: l.feedbackRemark,
+                selected: _tone == 'negative',
+                onTap: () => setState(() => _tone = _tone == 'negative' ? null : 'negative'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          GButton(
+            label: l.feedbackSend,
+            size: GButtonSize.l,
+            expand: true,
+            onPressed: _text.text.trim().isEmpty ? null : () => unawaited(_send()),
+          ),
+        ],
+      ),
+    );
+  }
 }

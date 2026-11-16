@@ -2032,4 +2032,35 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportCardFailed => 'Couldn\'t get the report card. Please try again.';
+
+  @override
+  String get feedbackTitle => 'Teacher feedback';
+
+  @override
+  String get feedbackPraise => 'Praise';
+
+  @override
+  String get feedbackRemark => 'Remark';
+
+  @override
+  String get feedbackAction => 'Write feedback';
+
+  @override
+  String feedbackSheetTitle(String name) {
+    return 'Feedback: $name';
+  }
+
+  @override
+  String get feedbackHint => 'What went well or what to work on';
+
+  @override
+  String get feedbackSend => 'Send feedback';
+
+  @override
+  String feedbackSent(String name) {
+    return 'Feedback for $name is on its way';
+  }
+
+  @override
+  String get whatFeedback => 'Feedback to a student';
 }

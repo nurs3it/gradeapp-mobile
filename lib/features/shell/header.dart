@@ -217,6 +217,7 @@ String outboxWhat(AppLocalizations l, OutboxItem item) {
     'finish' => l.whatFinish,
     'summary' => l.whatSummary,
     'homework' => l.whatHomework,
+    'feedback' => l.whatFeedback,
     _ => item.path,
   };
 }

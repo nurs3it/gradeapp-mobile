@@ -1562,5 +1562,28 @@
   "reportCardPreparing": "Готовим табель…",
   "reportCardOffline": "Нет сети — табель не скачать. Попробуйте, когда появится интернет.",
   "reportCardDenied": "Нет доступа к табелю",
-  "reportCardFailed": "Не удалось получить табель. Попробуйте ещё раз."
+  "reportCardFailed": "Не удалось получить табель. Попробуйте ещё раз.",
+  "feedbackTitle": "Отзывы учителей",
+  "feedbackPraise": "Похвала",
+  "feedbackRemark": "Замечание",
+  "feedbackAction": "Отзыв ученику",
+  "feedbackSheetTitle": "Отзыв: {name}",
+  "@feedbackSheetTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackHint": "Что получилось или над чем стоит поработать",
+  "feedbackSend": "Отправить отзыв",
+  "feedbackSent": "Отзыв для {name} отправляется",
+  "@feedbackSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "whatFeedback": "Отзыв ученику"
 }
