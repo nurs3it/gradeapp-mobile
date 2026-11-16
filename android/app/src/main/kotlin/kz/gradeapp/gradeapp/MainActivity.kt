@@ -38,7 +38,6 @@ class MainActivity : FlutterActivity() {
                         for ((id, name) in names) {
                             val importance = if (id == "chat") NotificationManager.IMPORTANCE_HIGH else NotificationManager.IMPORTANCE_DEFAULT
                             val channel = NotificationChannel(id.toString(), name.toString(), importance)
-                            channel.lockscreenVisibility = android.app.Notification.VISIBILITY_PRIVATE
                             manager.createNotificationChannel(channel)
                         }
                     }

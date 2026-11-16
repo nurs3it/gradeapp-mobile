@@ -141,14 +141,26 @@ class Push {
     if (!enabled) return;
     try {
       if (!_granted(await status())) return;
-      // iOS hands FCM a token only after APNs registered the device.
-      if (Platform.isIOS && await _m.getAPNSToken() == null) return;
+      // iOS hands FCM a token only after APNs registered the device, which
+      // lags the permission grant by a moment.
+      if (Platform.isIOS && !await _apnsReady()) {
+        debugPrint('push: no APNs token yet');
+        return;
+      }
       final token = await _m.getToken();
       if (token != null) await _send(token);
       _refresh ??= _m.onTokenRefresh.listen(_send);
     } catch (e) {
       debugPrint('push register: $e');
     }
+  }
+
+  Future<bool> _apnsReady() async {
+    for (var i = 0; i < 10; i++) {
+      if (await _m.getAPNSToken() != null) return true;
+      await Future<void>.delayed(const Duration(seconds: 1));
+    }
+    return false;
   }
 
   Future<void> _send(String token) async {
