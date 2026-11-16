@@ -23,18 +23,20 @@ Map<String, dynamic>? scrubCrumbData(Map<String, dynamic>? data) {
 
 Breadcrumb? scrubBreadcrumb(Breadcrumb? crumb, Hint hint) {
   if (crumb == null) return null;
-  return crumb.copyWith(data: scrubCrumbData(crumb.data));
+  crumb.data = scrubCrumbData(crumb.data);
+  return crumb;
 }
 
-/// The app never sets a user and has no HTTP integration, so an event has
-/// neither; should an SDK add a request anyway, only its URL without query
-/// survives (no headers, cookies or body).
+/// No user and no request (headers, cookies, body, query) ever leave the
+/// phone, whatever an integration may have attached.
 SentryEvent scrubEvent(SentryEvent event, Hint hint) {
-  final req = event.request;
-  return event.copyWith(
-    request: req == null ? null : SentryRequest(url: req.url == null ? null : scrubUrl(req.url!), method: req.method),
-    breadcrumbs: event.breadcrumbs?.map((b) => b.copyWith(data: scrubCrumbData(b.data))).toList(),
-  );
+  event
+    ..user = null
+    ..request = null;
+  for (final b in event.breadcrumbs ?? const <Breadcrumb>[]) {
+    b.data = scrubCrumbData(b.data);
+  }
+  return event;
 }
 
 /// Runs [app]. With a Sentry DSN in the build (`--dart-define=SENTRY_DSN=`)
