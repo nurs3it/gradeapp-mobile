@@ -3572,6 +3572,66 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Отзыв ученику'**
   String get whatFeedback;
+
+  /// No description provided for @hwAttachCamera.
+  ///
+  /// In ru, this message translates to:
+  /// **'Камера'**
+  String get hwAttachCamera;
+
+  /// No description provided for @hwAttachPhoto.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото'**
+  String get hwAttachPhoto;
+
+  /// No description provided for @hwAttachFile.
+  ///
+  /// In ru, this message translates to:
+  /// **'Файл'**
+  String get hwAttachFile;
+
+  /// No description provided for @hwRemoveFile.
+  ///
+  /// In ru, this message translates to:
+  /// **'Убрать {name}'**
+  String hwRemoveFile(String name);
+
+  /// No description provided for @hwFileTooBig.
+  ///
+  /// In ru, this message translates to:
+  /// **'{name} больше 10 МБ — не прикреплён'**
+  String hwFileTooBig(String name);
+
+  /// No description provided for @hwUploading.
+  ///
+  /// In ru, this message translates to:
+  /// **'Загружаем файлы ({done} из {total})…'**
+  String hwUploading(int done, int total);
+
+  /// No description provided for @hwFilesFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Задание выдано, но не загрузились файлы: {n}. Прикрепите их позже на сайте.'**
+  String hwFilesFailed(int n);
+
+  /// No description provided for @hwFilesOffline.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет сети: задание сохранено без файлов и уйдёт позже. Файлы прикрепите, когда появится интернет.'**
+  String get hwFilesOffline;
+
+  /// No description provided for @hwFilesError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось выдать задание. Попробуйте ещё раз.'**
+  String get hwFilesError;
+
+  /// No description provided for @attachmentOpenFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось открыть файл'**
+  String get attachmentOpenFailed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

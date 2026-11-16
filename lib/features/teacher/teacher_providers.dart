@@ -5,6 +5,7 @@ import '../../core/offline/outbox.dart';
 import '../../core/providers.dart';
 import '../auth/auth_controller.dart';
 import '../common/models.dart';
+import 'homework_upload.dart';
 import 'teacher_models.dart';
 
 final teacherDayProvider = StreamProvider.family<TeacherDay, String>(
@@ -415,14 +416,7 @@ class LessonActions {
       method: 'POST',
       path: '/homework/',
       label: _label('homework', state: title),
-      data: {
-        'course': lesson.courseId,
-        'lesson': lesson.id,
-        'title': title,
-        'description': description,
-        'due_date': due,
-        'estimated_minutes': ?minutes,
-      },
+      data: homeworkBody(lesson, title: title, description: description, due: due, minutes: minutes),
     ),
   );
 }

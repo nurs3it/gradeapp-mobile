@@ -1585,5 +1585,46 @@
       }
     }
   },
-  "whatFeedback": "Отзыв ученику"
+  "whatFeedback": "Отзыв ученику",
+  "hwAttachCamera": "Камера",
+  "hwAttachPhoto": "Фото",
+  "hwAttachFile": "Файл",
+  "hwRemoveFile": "Убрать {name}",
+  "@hwRemoveFile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwFileTooBig": "{name} больше 10 МБ — не прикреплён",
+  "@hwFileTooBig": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwUploading": "Загружаем файлы ({done} из {total})…",
+  "@hwUploading": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesFailed": "Задание выдано, но не загрузились файлы: {n}. Прикрепите их позже на сайте.",
+  "@hwFilesFailed": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesOffline": "Нет сети: задание сохранено без файлов и уйдёт позже. Файлы прикрепите, когда появится интернет.",
+  "hwFilesError": "Не удалось выдать задание. Попробуйте ещё раз.",
+  "attachmentOpenFailed": "Не удалось открыть файл"
 }

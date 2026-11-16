@@ -600,5 +600,46 @@
       }
     }
   },
-  "whatFeedback": "Feedback to a student"
+  "whatFeedback": "Feedback to a student",
+  "hwAttachCamera": "Camera",
+  "hwAttachPhoto": "Photos",
+  "hwAttachFile": "File",
+  "hwRemoveFile": "Remove {name}",
+  "@hwRemoveFile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwFileTooBig": "{name} is over 10 MB, not attached",
+  "@hwFileTooBig": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwUploading": "Uploading files ({done} of {total})…",
+  "@hwUploading": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesFailed": "Homework assigned, but {n} files didn't upload. Attach them later on the website.",
+  "@hwFilesFailed": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesOffline": "No connection: the homework is saved without files and will be sent later. Attach files once you're online.",
+  "hwFilesError": "Couldn't assign the homework. Please try again.",
+  "attachmentOpenFailed": "Couldn't open the file"
 }

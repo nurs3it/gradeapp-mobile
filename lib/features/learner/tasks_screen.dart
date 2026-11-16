@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../auth/auth_controller.dart';
 import '../auth/user.dart';
+import '../common/attachments.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
 import '../shell/header.dart';
@@ -352,9 +352,6 @@ Future<void> showTaskSheet(BuildContext context, WidgetRef ref, Homework hw, {re
     builder: (ctx) {
       final c = ctx.c;
       final t = ctx.t;
-      final dpr = MediaQuery.devicePixelRatioOf(ctx);
-      final images = hw.attachments.where((a) => a.isImage && a.url != null).toList();
-      final files = hw.attachments.where((a) => !a.isImage).toList();
       return Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
         child: Column(
@@ -380,46 +377,10 @@ Future<void> showTaskSheet(BuildContext context, WidgetRef ref, Homework hw, {re
               const SizedBox(height: 10),
               SelectableText(hw.description, style: t.body),
             ],
-            if (images.isNotEmpty) ...[
+            if (hw.attachments.isNotEmpty) ...[
               const SizedBox(height: 16),
-              GridView.count(
-                crossAxisCount: 3,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  for (final a in images)
-                    GPressable(
-                      onTap: () => unawaited(launchUrl(Uri.parse(a.url!))),
-                      semanticLabel: a.name,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.network(a.url!, fit: BoxFit.cover, cacheWidth: (104 * dpr).round()),
-                      ),
-                    ),
-                ],
-              ),
+              AttachmentsView(attachments: hw.attachments),
             ],
-            for (final a in files)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: GCard(
-                  color: c.surface2,
-                  onTap: a.url == null ? null : () => unawaited(launchUrl(Uri.parse(a.url!))),
-                  semanticLabel: '${l.openFile}: ${a.name}',
-                  child: Row(
-                    children: [
-                      GIcon(GIcons.file, color: c.ink2),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(a.name, style: t.bodyStrong, maxLines: 1, overflow: TextOverflow.ellipsis),
-                      ),
-                      GIcon(GIcons.openInNew, size: 20, color: c.ink3),
-                    ],
-                  ),
-                ),
-              ),
             const SizedBox(height: 16),
             Text(
               [?hw.teacherName, if (hw.minutes != null) l.approxMinutes(hw.minutes!)].join(' · '),

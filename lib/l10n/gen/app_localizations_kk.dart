@@ -2010,4 +2010,43 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get whatFeedback => 'Оқушыға пікір';
+
+  @override
+  String get hwAttachCamera => 'Камера';
+
+  @override
+  String get hwAttachPhoto => 'Фото';
+
+  @override
+  String get hwAttachFile => 'Файл';
+
+  @override
+  String hwRemoveFile(String name) {
+    return '$name алып тастау';
+  }
+
+  @override
+  String hwFileTooBig(String name) {
+    return '$name 10 МБ-тан үлкен — тіркелмеді';
+  }
+
+  @override
+  String hwUploading(int done, int total) {
+    return 'Файлдар жүктелуде ($done/$total)…';
+  }
+
+  @override
+  String hwFilesFailed(int n) {
+    return 'Тапсырма берілді, бірақ $n файл жүктелмеді. Оларды кейін сайт арқылы тіркеңіз.';
+  }
+
+  @override
+  String get hwFilesOffline =>
+      'Желі жоқ: тапсырма файлсыз сақталды, кейін жіберіледі. Файлдарды интернет пайда болғанда тіркеңіз.';
+
+  @override
+  String get hwFilesError => 'Тапсырманы беру мүмкін болмады. Қайтадан көріңіз.';
+
+  @override
+  String get attachmentOpenFailed => 'Файлды ашу мүмкін болмады';
 }

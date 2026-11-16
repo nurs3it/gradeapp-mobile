@@ -2063,4 +2063,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get whatFeedback => 'Feedback to a student';
+
+  @override
+  String get hwAttachCamera => 'Camera';
+
+  @override
+  String get hwAttachPhoto => 'Photos';
+
+  @override
+  String get hwAttachFile => 'File';
+
+  @override
+  String hwRemoveFile(String name) {
+    return 'Remove $name';
+  }
+
+  @override
+  String hwFileTooBig(String name) {
+    return '$name is over 10 MB, not attached';
+  }
+
+  @override
+  String hwUploading(int done, int total) {
+    return 'Uploading files ($done of $total)…';
+  }
+
+  @override
+  String hwFilesFailed(int n) {
+    return 'Homework assigned, but $n files didn\'t upload. Attach them later on the website.';
+  }
+
+  @override
+  String get hwFilesOffline =>
+      'No connection: the homework is saved without files and will be sent later. Attach files once you\'re online.';
+
+  @override
+  String get hwFilesError => 'Couldn\'t assign the homework. Please try again.';
+
+  @override
+  String get attachmentOpenFailed => 'Couldn\'t open the file';
 }

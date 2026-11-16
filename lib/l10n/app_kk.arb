@@ -600,5 +600,46 @@
       }
     }
   },
-  "whatFeedback": "Оқушыға пікір"
+  "whatFeedback": "Оқушыға пікір",
+  "hwAttachCamera": "Камера",
+  "hwAttachPhoto": "Фото",
+  "hwAttachFile": "Файл",
+  "hwRemoveFile": "{name} алып тастау",
+  "@hwRemoveFile": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwFileTooBig": "{name} 10 МБ-тан үлкен — тіркелмеді",
+  "@hwFileTooBig": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hwUploading": "Файлдар жүктелуде ({done}/{total})…",
+  "@hwUploading": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesFailed": "Тапсырма берілді, бірақ {n} файл жүктелмеді. Оларды кейін сайт арқылы тіркеңіз.",
+  "@hwFilesFailed": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "hwFilesOffline": "Желі жоқ: тапсырма файлсыз сақталды, кейін жіберіледі. Файлдарды интернет пайда болғанда тіркеңіз.",
+  "hwFilesError": "Тапсырманы беру мүмкін болмады. Қайтадан көріңіз.",
+  "attachmentOpenFailed": "Файлды ашу мүмкін болмады"
 }

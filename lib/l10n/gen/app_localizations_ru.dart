@@ -2110,4 +2110,43 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get whatFeedback => 'Отзыв ученику';
+
+  @override
+  String get hwAttachCamera => 'Камера';
+
+  @override
+  String get hwAttachPhoto => 'Фото';
+
+  @override
+  String get hwAttachFile => 'Файл';
+
+  @override
+  String hwRemoveFile(String name) {
+    return 'Убрать $name';
+  }
+
+  @override
+  String hwFileTooBig(String name) {
+    return '$name больше 10 МБ — не прикреплён';
+  }
+
+  @override
+  String hwUploading(int done, int total) {
+    return 'Загружаем файлы ($done из $total)…';
+  }
+
+  @override
+  String hwFilesFailed(int n) {
+    return 'Задание выдано, но не загрузились файлы: $n. Прикрепите их позже на сайте.';
+  }
+
+  @override
+  String get hwFilesOffline =>
+      'Нет сети: задание сохранено без файлов и уйдёт позже. Файлы прикрепите, когда появится интернет.';
+
+  @override
+  String get hwFilesError => 'Не удалось выдать задание. Попробуйте ещё раз.';
+
+  @override
+  String get attachmentOpenFailed => 'Не удалось открыть файл';
 }

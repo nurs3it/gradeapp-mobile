@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/grading.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
+import 'attachments.dart';
 import 'models.dart';
 import 'school_providers.dart';
 import 'presence.dart';
@@ -365,9 +366,19 @@ class _LessonSheet extends StatelessWidget {
                           ),
                           const SizedBox(width: 8),
                           Expanded(child: Text(hw.title, style: t.body)),
+                          if (hw.attachments.isNotEmpty) ...[
+                            const SizedBox(width: 8),
+                            GIcon(GIcons.attach, size: 18, color: c.ink3),
+                          ],
                         ],
                       ),
                     ),
+                  for (final hw in homework)
+                    if (hw.attachments.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: AttachmentsView(attachments: hw.attachments),
+                      ),
                 ],
               ),
             ),
