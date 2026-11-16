@@ -2084,4 +2084,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ntCheckInMissing => 'Has not checked in';
+
+  @override
+  String get wgNextShort => 'Next';
 }

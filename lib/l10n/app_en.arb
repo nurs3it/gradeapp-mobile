@@ -623,5 +623,6 @@
   "setLocalTitle": "On this phone",
   "setReminders": "Attendance reminders",
   "setLive": "Lesson on the lock screen",
-  "ntCheckInMissing": "Has not checked in"
+  "ntCheckInMissing": "Has not checked in",
+  "wgNextShort": "Next"
 }

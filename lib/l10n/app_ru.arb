@@ -1608,5 +1608,6 @@
   "setLocalTitle": "На этом телефоне",
   "setReminders": "Напоминания об отметке посещаемости",
   "setLive": "«Идёт урок» на экране блокировки",
-  "ntCheckInMissing": "Не отметился в школе"
+  "ntCheckInMissing": "Не отметился в школе",
+  "wgNextShort": "Дальше"
 }

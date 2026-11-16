@@ -3614,6 +3614,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не отметился в школе'**
   String get ntCheckInMissing;
+
+  /// No description provided for @wgNextShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше'**
+  String get wgNextShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -69,7 +69,7 @@ struct DayView: View {
       VStack(spacing: 6) {
         HStack(spacing: 12) {
           mini(snap, hero, running: running)
-            .frame(width: 142)
+            .frame(width: 128)
           VStack(spacing: 2) {
             ForEach(Array(after.filter { $0.date == hero.date }.prefix(rowsMax)), id: \.self) { s in
               row(snap, s, dimmed: false, highlighted: false)
@@ -98,7 +98,7 @@ struct DayView: View {
   /// The loud sheet in miniature: subject fill, white text, the countdown.
   func mini(_ snap: Snapshot, _ s: Snapshot.Slot, running: Bool) -> some View {
     VStack(alignment: .leading, spacing: 2) {
-      Text(running ? snap.label("now").uppercased() : "\(snap.label("next").uppercased())")
+      Text(running ? snap.label("now").uppercased() : snap.label("nextShort").uppercased())
         .font(G.font(11, .bold)).foregroundStyle(G.onFill.opacity(0.85)).lineLimit(1)
       Text(snap.isTeacher && !s.lesson.cls.isEmpty ? s.lesson.cls : s.lesson.subject)
         .font(G.font(20, .heavy)).foregroundStyle(G.onFill).lineLimit(2).minimumScaleFactor(0.7)
@@ -123,7 +123,9 @@ struct DayView: View {
         Text(snap.isTeacher && !s.lesson.cls.isEmpty ? "\(s.lesson.cls) · \(s.lesson.subject)" : s.lesson.subject)
           .font(G.font(14, .semibold)).foregroundStyle(G.ink).lineLimit(1)
         Spacer(minLength: 4)
-        Text(snap.room(s.lesson)).font(G.font(12, .semibold)).foregroundStyle(G.ink3).lineLimit(1)
+        if family == .systemLarge {
+          Text(snap.room(s.lesson)).font(G.font(12, .semibold)).foregroundStyle(G.ink3).lineLimit(1)
+        }
       }
       .padding(.vertical, 3).padding(.horizontal, highlighted ? 6 : 0)
       .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(highlighted ? G.tint(s.lesson.ci) : Color.clear))

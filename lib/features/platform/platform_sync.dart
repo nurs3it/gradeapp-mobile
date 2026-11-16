@@ -101,20 +101,10 @@ class PlatformSync {
         );
         if (remind && dayJson is Json) await Reminders.reschedule(TeacherDay.fromJson(dayJson), now, l, prefs);
       } else {
-        final dayPath = '/students/${t.learnerId}/today/';
-        final dayQ = {'date': today};
-        unawaited(
-          _get(dayPath, dayQ).then((j) => cache.write(cacheKeyOf(dayPath, dayQ), j)).catchError((Object _) {}),
-        );
-        final weekQ = <String, Object?>{
-          'student_id': t.learnerId,
-          'date_from': monday,
-          'date_to': sunday,
-          'page_size': 500,
-        };
-        unawaited(
-          _get('/lessons/', weekQ).then((j) => cache.write(cacheKeyOf('/lessons/', weekQ), j)).catchError((Object _) {}),
-        );
+        _refreshStudentCaches(t.learnerId!, today, monday, sunday);
+        // Sync pushes carry no child id and a parent may have several:
+        // every child's cached day and week are refreshed.
+        if (t.role == 'parent') unawaited(_refreshOtherChildren(t.learnerId!, today, monday, sunday));
         final aheadQ = <String, Object?>{
           'student_id': t.learnerId,
           'date_from': today,
@@ -137,6 +127,26 @@ class PlatformSync {
       debugPrint('platform sync: $e');
       return false;
     }
+  }
+
+  /// Cached «today» and week of one student, under the keys the screens read.
+  void _refreshStudentCaches(String id, String today, String monday, String sunday) {
+    final dayPath = '/students/$id/today/';
+    final dayQ = {'date': today};
+    final weekQ = <String, Object?>{'student_id': id, 'date_from': monday, 'date_to': sunday, 'page_size': 500};
+    unawaited(_get(dayPath, dayQ).then((j) => cache.write(cacheKeyOf(dayPath, dayQ), j)).catchError((Object _) {}));
+    unawaited(
+      _get('/lessons/', weekQ).then((j) => cache.write(cacheKeyOf('/lessons/', weekQ), j)).catchError((Object _) {}),
+    );
+  }
+
+  Future<void> _refreshOtherChildren(String selected, String today, String monday, String sunday) async {
+    try {
+      final kids = parseList(await _get('/users/me/children/', const {}), (j) => j.str('id'));
+      for (final id in kids.where((k) => k.isNotEmpty && k != selected)) {
+        _refreshStudentCaches(id, today, monday, sunday);
+      }
+    } catch (_) {}
   }
 
   Future<Object?> _get(String path, Map<String, Object?> q) async => (await dio.get<Object?>(path, queryParameters: q)).data;

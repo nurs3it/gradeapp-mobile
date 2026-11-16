@@ -50,7 +50,7 @@ struct LessonProvider: TimelineProvider {
     let today = f.string(from: Date())
     let json = """
       {"v":1,"role":"student","who":"","lang":"ru","generatedAt":"\(ISO8601DateFormatter().string(from: Date()))",
-       "generatedLabel":"08:00","labels":{"next":"Следующий урок","now":"Сейчас","updated":"Обновлено 08:00",
+       "generatedLabel":"08:00","labels":{"next":"Следующий урок","nextShort":"Дальше","now":"Сейчас","updated":"Обновлено 08:00",
        "roomFmt":"каб. %s","minFmt":"%s мин","homework":"ДЗ на завтра","startsIn":"Начнётся через","endsIn":"До конца",
        "stale":"Откройте приложение, чтобы обновить","noMore":"Сегодня уроков больше нет","tomorrow":"Завтра",
        "noHomework":"На завтра ничего не задано","signedOut":"Войдите в GradeApp","day":"День"},

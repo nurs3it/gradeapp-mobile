@@ -2032,4 +2032,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get ntCheckInMissing => 'Мектепке белгі қойылмады';
+
+  @override
+  String get wgNextShort => 'Келесі';
 }

@@ -69,6 +69,7 @@ Json buildSnapshot({
     'generatedLabel': _clock(now),
     'labels': {
       'next': l.wgNext,
+      'nextShort': l.wgNextShort,
       'now': l.wgNow,
       'day': l.wgDay,
       'updated': l.wgUpdated(_clock(now)),

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- W2 «День», 4x2: the lesson on now / next on the left, the next lessons on
+     the right, tomorrow's homework and the update time below. Filled in by
+     DayWidget.kt. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/widget_round" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/hero"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9">
+
+                <ImageView
+                    android:id="@+id/hero_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/widget_round" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/hero_eyebrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/onest_bold"
+                        android:maxLines="1"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/hero_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/onest_extrabold"
+                        android:maxLines="2"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/hero_sub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/onest_semibold"
+                        android:maxLines="1"
+                        android:textSize="12sp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <Chronometer
+                        android:id="@+id/hero_countdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/onest_extrabold"
+                        android:maxLines="1"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1.1"
+                android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/row1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/row1_time"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_bold"
+                android:maxLines="1"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/row1_bar"
+                android:layout_width="4dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/widget_bar" />
+
+            <TextView
+                android:id="@+id/row1_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/row1_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/row2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/row2_time"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_bold"
+                android:maxLines="1"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/row2_bar"
+                android:layout_width="4dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/widget_bar" />
+
+            <TextView
+                android:id="@+id/row2_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/row2_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/row3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/row3_time"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_bold"
+                android:maxLines="1"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/row3_bar"
+                android:layout_width="4dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/widget_bar" />
+
+            <TextView
+                android:id="@+id/row3_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/row3_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="12sp" />
+        </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/homework"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/onest_bold"
+                android:maxLines="1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/onest_semibold"
+                android:maxLines="1"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

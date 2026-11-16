@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_next_label">Келесі сабақ</string>
+    <string name="widget_next_description">Сабақ, кабинет және қоңырауға дейінгі уақыт.</string>
+    <string name="widget_day_label">Күн</string>
+    <string name="widget_day_description">Күндегі сабақтар және ертеңгі үй тапсырмасы.</string>
+</resources>

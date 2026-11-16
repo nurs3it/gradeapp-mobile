@@ -2133,4 +2133,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ntCheckInMissing => 'Не отметился в школе';
+
+  @override
+  String get wgNextShort => 'Дальше';
 }

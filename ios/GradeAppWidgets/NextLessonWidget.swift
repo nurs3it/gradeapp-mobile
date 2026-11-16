@@ -39,13 +39,14 @@ struct NextLessonView: View {
       let snap = entry.snap!
       let l = s.lesson
       VStack(alignment: .leading, spacing: 2) {
-        Text("\(running ? snap.label("now") : snap.label("next")) · \(l.start)".uppercased())
+        Text("\(running ? snap.label("now") : snap.label("nextShort")) · \(l.start)".uppercased())
           .font(G.font(11, .bold)).foregroundStyle(G.onFill.opacity(0.85)).lineLimit(1)
           .widgetAccentable()
         if snap.isTeacher && !l.cls.isEmpty {
           Text(l.cls).font(G.font(30, .heavy)).foregroundStyle(G.onFill).lineLimit(1).minimumScaleFactor(0.6)
-          Text([l.subject, snap.room(l)].filter { !$0.isEmpty }.joined(separator: " · "))
-            .font(G.font(14, .semibold)).foregroundStyle(G.onFill.opacity(0.9)).lineLimit(2)
+          Text(l.subject)
+            .font(G.font(14, .semibold)).foregroundStyle(G.onFill.opacity(0.9)).lineLimit(1)
+          Text(snap.room(l)).font(G.font(13, .semibold)).foregroundStyle(G.onFill.opacity(0.9))
         } else {
           Text(l.subject).font(G.font(22, .heavy)).foregroundStyle(G.onFill).lineLimit(2).minimumScaleFactor(0.7)
           Text(snap.room(l)).font(G.font(14, .semibold)).foregroundStyle(G.onFill.opacity(0.9))
