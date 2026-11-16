@@ -303,6 +303,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get themeSystem => 'Жүйедегідей';
 
   @override
+  String get themeAuto => 'Авто';
+
+  @override
   String get themeLight => 'Ашық';
 
   @override

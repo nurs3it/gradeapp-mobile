@@ -33,7 +33,6 @@ class AuthController extends AsyncNotifier<AppUser?> {
     final user = body['user'];
     if (user is Json) await ref.read(jsonCacheProvider).write(_meKey, user);
     state = AsyncData(user is Json ? AppUser.fromJson(user) : await _fetchMe());
-    ref.invalidate(activeRoleProvider);
   }
 
   Future<void> logout() async {

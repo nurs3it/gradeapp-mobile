@@ -615,6 +615,12 @@ abstract class AppLocalizations {
   /// **'Как в системе'**
   String get themeSystem;
 
+  /// No description provided for @themeAuto.
+  ///
+  /// In ru, this message translates to:
+  /// **'Авто'**
+  String get themeAuto;
+
   /// No description provided for @themeLight.
   ///
   /// In ru, this message translates to:

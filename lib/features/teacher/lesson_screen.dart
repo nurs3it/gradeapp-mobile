@@ -174,7 +174,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(GSpace.page, GSpace.xl, GSpace.sm, GSpace.sm),
+                    padding: const EdgeInsets.fromLTRB(GSpace.page, GSpace.xl, GSpace.page, GSpace.sm),
                     child: Row(
                       children: [
                         Expanded(child: Text(l.presentCount(present, students.length), style: context.t.titleSmall)),

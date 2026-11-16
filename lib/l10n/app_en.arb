@@ -87,6 +87,7 @@
   "language": "Language",
   "theme": "Theme",
   "themeSystem": "System",
+  "themeAuto": "Auto",
   "themeLight": "Light",
   "themeDark": "Dark",
   "role": "Account",

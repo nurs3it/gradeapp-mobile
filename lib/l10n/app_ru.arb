@@ -112,6 +112,7 @@
   "language": "Язык",
   "theme": "Тема",
   "themeSystem": "Как в системе",
+  "themeAuto": "Авто",
   "themeLight": "Светлая",
   "themeDark": "Тёмная",
   "role": "Кабинет",

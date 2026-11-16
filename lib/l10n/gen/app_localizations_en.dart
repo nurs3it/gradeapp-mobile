@@ -314,6 +314,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeSystem => 'System';
 
   @override
+  String get themeAuto => 'Auto';
+
+  @override
   String get themeLight => 'Light';
 
   @override

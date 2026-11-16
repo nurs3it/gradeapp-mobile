@@ -39,6 +39,7 @@ ThemeData buildTheme(Brightness b) {
 
   final text = TextTheme(
     displaySmall: s(34, 40, FontWeight.w700, ls: -0.6), // large title
+    headlineMedium: s(32, 38, FontWeight.w700, ls: -0.6), // SliverAppBar.large title
     headlineSmall: s(24, 30, FontWeight.w700, ls: -0.4),
     titleLarge: s(20, 26, FontWeight.w600, ls: -0.3),
     titleMedium: s(17, 22, FontWeight.w600, ls: -0.2),
@@ -78,7 +79,6 @@ ThemeData buildTheme(Brightness b) {
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
-      titleTextStyle: text.titleMedium,
       systemOverlayStyle: b == Brightness.light ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
     ),
     navigationBarTheme: NavigationBarThemeData(

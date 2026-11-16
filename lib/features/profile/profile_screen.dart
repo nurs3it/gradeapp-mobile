@@ -94,7 +94,7 @@ class ProfileScreen extends ConsumerWidget {
               child: SegmentedButton<ThemeMode>(
                 showSelectedIcon: false,
                 segments: [
-                  ButtonSegment(value: ThemeMode.system, label: Text(l.themeSystem)),
+                  ButtonSegment(value: ThemeMode.system, label: Text(l.themeAuto)),
                   ButtonSegment(value: ThemeMode.light, label: Text(l.themeLight)),
                   ButtonSegment(value: ThemeMode.dark, label: Text(l.themeDark)),
                 ],

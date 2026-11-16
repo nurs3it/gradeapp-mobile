@@ -58,7 +58,9 @@ class GGradeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.c;
-    final scored = maxValue != null && maxValue! > 0;
+    // A column scored out of its own max (СОР 16/20); a max equal to the
+    // school scale is just a mark.
+    final scored = maxValue != null && maxValue! > 0 && maxValue != grading.max;
     final mark = scored ? grading.min + (value / maxValue!) * (grading.max - grading.min) : value;
     final fg = switch (grading.tone(mark)) {
       GradeTone.excellent => c.successText,
@@ -70,14 +72,18 @@ class GGradeChip extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(minWidth: size, minHeight: size),
       padding: const EdgeInsets.symmetric(horizontal: 6),
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: fg.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(GRadius.control),
       ),
-      child: Text(
-        label,
-        style: TextStyle(fontSize: scored ? 13 : size * 0.47, fontWeight: FontWeight.w700, color: fg, height: 1),
+      // widthFactor/heightFactor 1: centre the text without filling the parent.
+      child: Center(
+        widthFactor: 1,
+        heightFactor: 1,
+        child: Text(
+          label,
+          style: TextStyle(fontSize: scored ? 13 : size * 0.47, fontWeight: FontWeight.w700, color: fg, height: 1),
+        ),
       ),
     );
   }
