@@ -84,7 +84,7 @@ void main() {
         PresenceBatcher.parse({
           'users': ['u1'],
           'students': ['s1', 5],
-          'staff': [],
+          'staff': <String>[],
         }),
         {const PresenceRef.user('u1'), const PresenceRef.student('s1')},
       );
