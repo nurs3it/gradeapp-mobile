@@ -286,8 +286,9 @@ class VerdictSheet extends StatelessWidget {
     switch (v.level) {
       case VerdictLevel.noLessons:
         final tl = tomorrow?.lessons.where((x) => !x.isCancelled).toList() ?? const <Lesson>[];
-        if (tl.isNotEmpty)
+        if (tl.isNotEmpty) {
           add(l.factTomorrow(l.lessonsCount(tl.length), hm(tl.first.start)), strong: [hm(tl.first.start)]);
+        }
       case VerdictLevel.alarm:
         add(l.factAlarm(hm(v.firstLesson!.start)), strong: [hm(v.firstLesson!.start)]);
       default:
@@ -299,8 +300,9 @@ class VerdictSheet extends StatelessWidget {
         } else if (v.firstLesson != null && v.lessonsDone == 0) {
           add(l.factBeforeLessons(hm(v.firstLesson!.start)), strong: [hm(v.firstLesson!.start)]);
         }
-        if (v.lessonsDone > 0)
+        if (v.lessonsDone > 0) {
           add(l.factLessons(v.lessonsDone, v.lessonsTotal), strong: ['${v.lessonsDone}', '${v.lessonsTotal}']);
+        }
         for (final a in v.absent) {
           add('${l.factAbsent(a.subject)}, ${l.factNoReason}');
         }
