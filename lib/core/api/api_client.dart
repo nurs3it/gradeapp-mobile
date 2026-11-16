@@ -46,6 +46,28 @@ class ApiClient {
     }
   }
 
+  /// POST /auth/access-code/: one-time code from the school. The code is
+  /// spent atomically, so the new password travels in the same request.
+  /// The response carries `login` — the address to sign in with later.
+  Future<Json> redeemAccessCode(String code, {String? newPassword, String? otp}) async {
+    try {
+      final res = await _raw.post<Json>(
+        '/auth/access-code/',
+        data: {'code': code, 'new_password': ?newPassword, 'otp': ?otp},
+      );
+      await _storeTokens(res);
+      return res.data!;
+    } on DioException catch (e) {
+      final body = e.response?.data;
+      if (body is Map && body['otp_required'] != null) throw const OtpRequired();
+      rethrow;
+    }
+  }
+
+  /// POST /auth/password-reset/ — always answers neutrally.
+  Future<void> requestPasswordReset(String email) =>
+      _raw.post<void>('/auth/password-reset/', data: {'email': email});
+
   Future<void> logout() async {
     final s = sessions.current;
     if (s != null) {
