@@ -3,40 +3,74 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/auth/auth_controller.dart';
-import '../features/auth/login_screen.dart';
+import '../features/auth/login_screens.dart';
 import '../features/auth/user.dart';
 import '../features/learner/grades_screen.dart';
-import '../features/learner/homework_screen.dart';
-import '../features/learner/schedule_screen.dart';
-import '../features/learner/today_screen.dart';
-import '../features/profile/profile_screen.dart';
+import '../features/learner/tasks_screen.dart';
+import '../features/learner/week_screen.dart';
+import '../features/notifications/notifications_screen.dart';
+import '../features/parent/family_screen.dart';
+import '../features/parent/parent_today_screen.dart';
+import '../features/shell/shell.dart';
+import '../features/student/check_in_flow.dart';
+import '../features/student/student_today_screen.dart';
+import '../features/teacher/inbox_screen.dart';
 import '../features/teacher/lesson_screen.dart';
-import '../features/teacher/teacher_day_screen.dart';
-import 'shell.dart';
+import '../features/teacher/teacher_today_screen.dart';
+import '../features/teacher/teacher_week_screen.dart';
 
-/// Two shells: learner (student & parent share every screen; parent adds a
-/// child switcher) and teacher. Auth and role changes re-run [redirect].
+/// Root path of each role's shell.
+String homeOf(AppRole role) => switch (role) {
+  AppRole.student => '/s/today',
+  AppRole.parent => '/p/today',
+  AppRole.teacher => '/t/today',
+};
+
+String _prefixOf(AppRole role) => switch (role) {
+  AppRole.student => '/s/',
+  AppRole.parent => '/p/',
+  AppRole.teacher => '/t/',
+};
+
+/// Three shells (C1): each role has its own tab set. Auth and role changes
+/// re-run [redirect]; full-screen flows (lesson, camera, notifications) sit
+/// above the shells on the root navigator.
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier(0);
   ref
-    ..listen(authProvider, (_, _) => refresh.value++)
+    ..listen(authProvider.select((a) => (a.isLoading && !a.hasValue, a.value?.id)), (_, _) => refresh.value++)
     ..listen(activeRoleProvider, (_, _) => refresh.value++)
     ..onDispose(refresh.dispose);
 
   String? redirect(BuildContext _, GoRouterState s) {
     final auth = ref.read(authProvider);
-    if (auth.isLoading && !auth.hasValue) return s.matchedLocation == '/splash' ? null : '/splash';
-    final user = auth.value;
     final loc = s.matchedLocation;
-    if (user == null) return loc == '/login' ? null : '/login';
+    if (auth.isLoading && !auth.hasValue) return loc == '/splash' ? null : '/splash';
+    final user = auth.value;
     final role = ref.read(activeRoleProvider);
-    if (role == null) return loc == '/login' ? null : '/login';
-    final home = role == AppRole.teacher ? '/t' : '/l';
-    if (!loc.startsWith(home)) return role == AppRole.teacher ? '/t/lessons' : '/l/today';
-    return null;
+    final inLogin = loc.startsWith('/login');
+    if (user == null || role == null) return inLogin ? null : '/login';
+    if (inLogin || loc == '/splash') return homeOf(role);
+    final other = AppRole.values.where((r) => r != role).any((r) => loc.startsWith(_prefixOf(r)));
+    return other ? homeOf(role) : null;
   }
 
   NoTransitionPage<void> tab(Widget child) => NoTransitionPage(child: child);
+
+  StatefulShellBranch branch(String path, Widget screen, [List<RouteBase> routes = const []]) =>
+      StatefulShellBranch(
+        routes: [GoRoute(path: path, pageBuilder: (_, _) => tab(screen), routes: routes)],
+      );
+
+  List<RouteBase> gradeDetail() => [
+    GoRoute(path: ':course', builder: (_, s) => SubjectScreen(courseId: s.pathParameters['course']!)),
+  ];
+
+  StatefulShellRoute shell(AppRole role, List<StatefulShellBranch> branches) => StatefulShellRoute(
+    builder: (_, _, nav) => AppShell(shell: nav, role: role),
+    navigatorContainerBuilder: (_, nav, children) => ShellBranches(shell: nav, children: children),
+    branches: branches,
+  );
 
   return GoRouter(
     initialLocation: '/splash',
@@ -44,52 +78,37 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: redirect,
     routes: [
       GoRoute(path: '/splash', builder: (_, _) => const SplashScreen()),
-      GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
-      StatefulShellRoute.indexedStack(
-        builder: (_, _, shell) => AppShell(shell: shell, teacher: false),
-        branches: [
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/l/today', pageBuilder: (_, _) => tab(const TodayScreen()))],
-          ),
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/l/schedule', pageBuilder: (_, _) => tab(const ScheduleScreen()))],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/l/grades',
-                pageBuilder: (_, _) => tab(const GradesScreen()),
-                routes: [
-                  GoRoute(
-                    path: ':course',
-                    builder: (_, s) => SubjectGradesScreen(courseId: s.pathParameters['course']!),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/l/homework', pageBuilder: (_, _) => tab(const HomeworkScreen()))],
-          ),
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/l/profile', pageBuilder: (_, _) => tab(const ProfileScreen()))],
-          ),
-        ],
-      ),
-      StatefulShellRoute.indexedStack(
-        builder: (_, _, shell) => AppShell(shell: shell, teacher: true),
-        branches: [
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/t/lessons', pageBuilder: (_, _) => tab(const TeacherDayScreen()))],
-          ),
-          StatefulShellBranch(
-            routes: [GoRoute(path: '/t/profile', pageBuilder: (_, _) => tab(const ProfileScreen()))],
-          ),
-        ],
-      ),
       GoRoute(
-        path: '/t/lesson/:id',
-        builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!),
+        path: '/login',
+        builder: (_, _) => const LoginChooseScreen(),
+        routes: [
+          GoRoute(path: 'password', builder: (_, _) => const PasswordLoginScreen()),
+          GoRoute(path: 'code', builder: (_, _) => const CodeLoginScreen()),
+          GoRoute(path: 'reset', builder: (_, s) => ResetPasswordScreen(email: s.uri.queryParameters['email'])),
+        ],
+      ),
+      shell(AppRole.student, [
+        branch('/s/today', const StudentTodayScreen()),
+        branch('/s/week', const WeekScreen()),
+        branch('/s/grades', const GradesScreen(), gradeDetail()),
+        branch('/s/tasks', const TasksScreen()),
+      ]),
+      shell(AppRole.parent, [
+        branch('/p/today', const ParentTodayScreen()),
+        branch('/p/grades', const GradesScreen(), gradeDetail()),
+        branch('/p/week', const WeekScreen()),
+        branch('/p/family', const FamilyScreen()),
+      ]),
+      shell(AppRole.teacher, [
+        branch('/t/today', const TeacherTodayScreen()),
+        branch('/t/week', const TeacherWeekScreen()),
+        branch('/t/inbox', const InboxScreen()),
+      ]),
+      GoRoute(path: '/lesson/:id', builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!)),
+      GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
+      GoRoute(
+        path: '/checkin',
+        pageBuilder: (_, _) => const MaterialPage(fullscreenDialog: true, child: CheckInFlow()),
       ),
     ],
   );

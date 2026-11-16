@@ -1,8 +1,12 @@
+import 'dart:async';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/providers.dart';
+import '../features/common/pulse.dart';
 import '../l10n/l10n.dart';
 import '../ui/ui.dart';
 import 'router.dart';
@@ -18,36 +22,37 @@ class GradeApp extends ConsumerStatefulWidget {
   ConsumerState<GradeApp> createState() => _GradeAppState();
 }
 
-class _GradeAppState extends ConsumerState<GradeApp> with WidgetsBindingObserver {
+class _GradeAppState extends ConsumerState<GradeApp> {
+  StreamSubscription<Object?>? _refused;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    ref.read(outboxProvider).flush();
+    final outbox = ref.read(outboxProvider);
+    unawaited(outbox.flush());
+    // A refused record is shown in the lesson and the queue; the haptic tells
+    // the teacher right away (§2.7).
+    _refused = outbox.rejectedEvents.stream.listen((_) => GHaptics.error());
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    unawaited(_refused?.cancel());
     super.dispose();
-  }
-
-  /// Back in the app (e.g. walked from the classroom to the staff-room Wi-Fi):
-  /// push whatever was marked offline.
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) ref.read(outboxProvider).flush();
   }
 
   @override
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
+    // Keeps badges and the connectivity probe alive while signed in.
+    ref.watch(pulseProvider.select((_) => 0));
     return MaterialApp.router(
       title: 'GradeApp',
       debugShowCheckedModeBanner: false,
       theme: _light,
       darkTheme: _dark,
       themeMode: settings.themeMode,
+      themeAnimationDuration: GMotion.base,
       locale: settings.locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
@@ -56,6 +61,12 @@ class _GradeAppState extends ConsumerState<GradeApp> with WidgetsBindingObserver
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      // Dynamic Type: honour the system scale up to 1.35 (§2.2).
+      builder: (context, child) {
+        final mq = MediaQuery.of(context);
+        final scale = math.min(mq.textScaler.scale(1), GScale.max);
+        return MediaQuery(data: mq.copyWith(textScaler: TextScaler.linear(scale)), child: child!);
+      },
       routerConfig: ref.watch(routerProvider),
     );
   }

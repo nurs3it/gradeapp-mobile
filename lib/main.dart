@@ -9,11 +9,15 @@ import 'core/offline/outbox.dart';
 import 'core/providers.dart';
 import 'core/storage/json_cache.dart';
 import 'features/auth/auth_controller.dart';
+import 'features/learner/learner_providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final (cache, prefs, outbox) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open()).wait;
+  final boot = {
+    for (final k in [SettingsController.key, ActiveRole.key, SelectedChild.key]) k: await prefs.read(k),
+  };
   final sessions = SessionStore();
   late final ProviderContainer container;
   final api = ApiClient(sessions, onSessionLost: () => container.read(authProvider.notifier).sessionLost());
@@ -24,6 +28,7 @@ Future<void> main() async {
       sessionStoreProvider.overrideWithValue(sessions),
       jsonCacheProvider.overrideWithValue(cache),
       prefsProvider.overrideWithValue(prefs),
+      bootPrefsProvider.overrideWithValue(boot),
       outboxProvider.overrideWithValue(outbox),
       apiClientProvider.overrideWithValue(api),
     ],

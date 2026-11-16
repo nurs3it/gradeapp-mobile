@@ -1,11 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/json.dart';
-import '../core/storage/json_cache.dart';
-
-/// Device-level preferences; survive sign-out (unlike the API cache).
-final prefsProvider = Provider<JsonCache>((_) => throw UnimplementedError());
+import '../core/providers.dart';
 
 class AppSettings {
   const AppSettings({this.themeMode = ThemeMode.system, this.locale});
@@ -15,20 +14,17 @@ class AppSettings {
   final Locale? locale;
 }
 
+/// Theme and language; device-level, survive sign-out. Read before the first
+/// frame (boot prefs) so the app never flashes the wrong theme.
 class SettingsController extends Notifier<AppSettings> {
-  static const _key = 'settings';
+  static const key = 'settings';
 
   @override
   AppSettings build() {
-    _load();
-    return const AppSettings();
-  }
-
-  Future<void> _load() async {
-    final raw = await ref.read(prefsProvider).read(_key);
-    if (raw is! Json) return;
+    final raw = ref.read(bootPrefsProvider)[key];
+    if (raw is! Json) return const AppSettings();
     final lang = raw.strOrNull('locale');
-    state = AppSettings(
+    return AppSettings(
       themeMode: ThemeMode.values.asNameMap()[raw.str('theme')] ?? ThemeMode.system,
       locale: lang == null ? null : Locale(lang),
     );
@@ -39,7 +35,7 @@ class SettingsController extends Notifier<AppSettings> {
 
   void _save(AppSettings s) {
     state = s;
-    ref.read(prefsProvider).write(_key, {'theme': s.themeMode.name, 'locale': s.locale?.languageCode});
+    unawaited(ref.read(prefsProvider).write(key, {'theme': s.themeMode.name, 'locale': s.locale?.languageCode}));
   }
 }
 
