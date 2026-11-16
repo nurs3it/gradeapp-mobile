@@ -21,9 +21,8 @@ class FamilyScreen extends ConsumerWidget {
     final g = GSpace.gutter(context);
     final children = ref.watch(childrenProvider).value ?? const <Child>[];
     final current = ref.watch(currentChildProvider);
-    final requests = [
-      for (final ch in children) ...(ref.watch(excusesProvider(ch.id)).value ?? const <Excuse>[]),
-    ]..sort((a, b) {
+    final requests = [for (final ch in children) ...(ref.watch(excusesProvider(ch.id)).value ?? const <Excuse>[])]
+      ..sort((a, b) {
         final active = (b.status == ExcuseStatus.pending ? 1 : 0).compareTo(a.status == ExcuseStatus.pending ? 1 : 0);
         return active != 0 ? active : b.startDate.compareTo(a.startDate);
       });
@@ -71,12 +70,12 @@ class FamilyScreen extends ConsumerWidget {
               if (loading && requests.isEmpty)
                 const GSkeleton(hero: false, rows: 2)
               else if (requests.isEmpty)
-                GCard(child: GEmpty(title: l.reqEmpty, message: l.reqEmptyHint))
+                GCard(
+                  child: GEmpty(title: l.reqEmpty, message: l.reqEmptyHint),
+                )
               else
                 GGroup(
-                  children: [
-                    for (final r in requests.take(30)) _RequestRow(excuse: r, showName: children.length > 1),
-                  ],
+                  children: [for (final r in requests.take(30)) _RequestRow(excuse: r, showName: children.length > 1)],
                 ),
               if (children.isNotEmpty) ...[
                 GSectionTitle(title: l.profileChildren),
@@ -88,7 +87,10 @@ class FamilyScreen extends ConsumerWidget {
                         leading: GAvatar(name: ch.fullName, url: ch.avatarUrl, size: 40, color: childColor(ch.id)),
                         title: Text(ch.fullName),
                         subtitle: Text(
-                          [?ch.className, '${l.photoConsent}: ${ch.photoConsent ? l.consentOn : l.consentOff}'].join(' · '),
+                          [
+                            ?ch.className,
+                            '${l.photoConsent}: ${ch.photoConsent ? l.consentOn : l.consentOff}',
+                          ].join(' · '),
                         ),
                         trailing: ch.photoConsent
                             ? null
@@ -133,7 +135,10 @@ class _RequestRow extends ConsumerWidget {
       subtitle: Text(
         [
           from == to ? from : '$from – $to',
-          if (e.status == ExcuseStatus.rejected && e.reviewNote.isNotEmpty) e.reviewNote else if (e.reason.isNotEmpty) e.reason,
+          if (e.status == ExcuseStatus.rejected && e.reviewNote.isNotEmpty)
+            e.reviewNote
+          else if (e.reason.isNotEmpty)
+            e.reason,
         ].join(' · '),
       ),
       subtitleMaxLines: 2,

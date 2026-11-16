@@ -41,7 +41,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     if (id == null) return const Scaffold(body: Center(child: GLoader()));
     final hw = ref.watch(homeworkProvider(id));
     final overrides = ref.watch(homeworkOverridesProvider);
-    final all = [for (final h in hw.value ?? const <Homework>[]) overrides.containsKey(h.id) ? h.withDone(overrides[h.id]!) : h];
+    final all = [
+      for (final h in hw.value ?? const <Homework>[]) overrides.containsKey(h.id) ? h.withDone(overrides[h.id]!) : h,
+    ];
     final today = dateOnly(now);
     final monday = mondayOf(now);
     final sunday = monday.add(const Duration(days: 6));
@@ -110,10 +112,18 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
           const SliverToBoxAdapter(child: GSkeleton(hero: false))
         else if (hw.hasError && !hw.hasValue)
           SliverToBoxAdapter(
-            child: GEmpty(error: true, title: l.errorTitle, message: l.errorOffline, action: l.retry, onAction: () => ref.invalidate(homeworkProvider(id))),
+            child: GEmpty(
+              error: true,
+              title: l.errorTitle,
+              message: l.errorOffline,
+              action: l.retry,
+              onAction: () => ref.invalidate(homeworkProvider(id)),
+            ),
           )
         else if (open.isEmpty && done.isEmpty)
-          SliverToBoxAdapter(child: GEmpty(title: l.tasksEmpty, message: l.tasksEmptyHint))
+          SliverToBoxAdapter(
+            child: GEmpty(title: l.tasksEmpty, message: l.tasksEmptyHint),
+          )
         else
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: g),
@@ -142,7 +152,8 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                         ),
                         onTap: () => setState(() => _showDone = !_showDone),
                       ),
-                      if (_showDone) for (final h in done.take(40)) _TaskRow(hw: h, parent: parent, studentId: id),
+                      if (_showDone)
+                        for (final h in done.take(40)) _TaskRow(hw: h, parent: parent, studentId: id),
                     ],
                   ),
                 ],
@@ -172,7 +183,8 @@ class _SectionHeader extends StatelessWidget {
       _Section.week => l.sectionWeek,
       _Section.later => l.sectionLater,
     };
-    final showLoad = (section == _Section.tomorrow || section == _Section.today) && norm != null && norm! > 0 && minutes > 0;
+    final showLoad =
+        (section == _Section.tomorrow || section == _Section.today) && norm != null && norm! > 0 && minutes > 0;
     return Padding(
       padding: const EdgeInsets.only(top: GSpace.sectionTop, bottom: GSpace.sectionGap),
       child: Column(
@@ -180,7 +192,10 @@ class _SectionHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              if (section == _Section.overdue) ...[GIcon(GIcons.error, size: 20, color: c.bad, fill: 1), const SizedBox(width: 6)],
+              if (section == _Section.overdue) ...[
+                GIcon(GIcons.error, size: 20, color: c.bad, fill: 1),
+                const SizedBox(width: 6),
+              ],
               Expanded(
                 child: Semantics(
                   header: true,
@@ -257,7 +272,11 @@ class _TaskRow extends ConsumerWidget {
       titleMaxLines: 2,
       subtitle: Text(sub),
       trailing: parent
-          ? GStatusPill(label: hw.isDone ? l.hwDone : l.hwNotDone, tone: hw.isDone ? GTone.ok : GTone.neutral, icon: hw.isDone ? GIcons.ok : null)
+          ? GStatusPill(
+              label: hw.isDone ? l.hwDone : l.hwNotDone,
+              tone: hw.isDone ? GTone.ok : GTone.neutral,
+              icon: hw.isDone ? GIcons.ok : null,
+            )
           : null,
     );
     if (parent) return row;
@@ -348,7 +367,10 @@ Future<void> showTaskSheet(BuildContext context, WidgetRef ref, Homework hw, {re
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(hw.courseName, style: t.headline.copyWith(color: c.subjectMarker(hw.courseName))),
-                  Text(l.dueBy(Fmt.shortWeekdayDayMonth(DateTime.parse(hw.dueDate), ctx.localeTag)), style: t.footnote.copyWith(color: c.ink2)),
+                  Text(
+                    l.dueBy(Fmt.shortWeekdayDayMonth(DateTime.parse(hw.dueDate), ctx.localeTag)),
+                    style: t.footnote.copyWith(color: c.ink2),
+                  ),
                 ],
               ),
             ),
@@ -390,7 +412,9 @@ Future<void> showTaskSheet(BuildContext context, WidgetRef ref, Homework hw, {re
                     children: [
                       GIcon(GIcons.file, color: c.ink2),
                       const SizedBox(width: 10),
-                      Expanded(child: Text(a.name, style: t.bodyStrong, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                      Expanded(
+                        child: Text(a.name, style: t.bodyStrong, maxLines: 1, overflow: TextOverflow.ellipsis),
+                      ),
                       GIcon(GIcons.openInNew, size: 20, color: c.ink3),
                     ],
                   ),

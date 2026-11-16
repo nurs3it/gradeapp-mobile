@@ -15,6 +15,7 @@ final jsonCacheProvider = Provider<JsonCache>((_) => throw UnimplementedError())
 
 /// Device-level preferences; survive sign-out (unlike the API cache).
 final prefsProvider = Provider<JsonCache>((_) => throw UnimplementedError());
+
 /// Small preferences read before the first frame (active role, chosen
 /// child), so the app does not flash another role's screen at start.
 final bootPrefsProvider = Provider<Map<String, Object?>>((_) => const {});

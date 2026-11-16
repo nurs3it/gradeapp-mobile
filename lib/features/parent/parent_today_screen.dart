@@ -45,7 +45,9 @@ class ParentTodayScreen extends ConsumerWidget {
       );
     }
     return GRootPage(
-      eyebrow: child == null ? Fmt.weekdayDayMonth(now, context.localeTag) : [child.shortName, ?child.className].join(' · '),
+      eyebrow: child == null
+          ? Fmt.weekdayDayMonth(now, context.localeTag)
+          : [child.shortName, ?child.className].join(' · '),
       title: l.tabToday,
       actions: const [BellButton(), ChildSwitcherButton()],
       onRefresh: refresh,
@@ -81,7 +83,13 @@ class _ChildDay extends ConsumerWidget {
     if (!day.hasValue) {
       return SliverToBoxAdapter(
         child: day.hasError
-            ? GEmpty(error: true, title: l.errorTitle, message: l.errorOffline, action: l.retry, onAction: () => ref.invalidate(learnerDayProvider))
+            ? GEmpty(
+                error: true,
+                title: l.errorTitle,
+                message: l.errorOffline,
+                action: l.retry,
+                onAction: () => ref.invalidate(learnerDayProvider),
+              )
             : const GSkeleton(),
       );
     }
@@ -135,13 +143,27 @@ class _ChildDay extends ConsumerWidget {
                 for (final a in v.attention)
                   switch (a.kind) {
                     AttentionKind.absentNoReason => GRow(
-                      leading: _Plate(tone: GTone.bad, child: Text(_absentLetter(ref), style: context.t.bodyStrong.copyWith(color: c.bad, fontWeight: FontWeight.w800))),
+                      leading: _Plate(
+                        tone: GTone.bad,
+                        child: Text(
+                          _absentLetter(ref),
+                          style: context.t.bodyStrong.copyWith(color: c.bad, fontWeight: FontWeight.w800),
+                        ),
+                      ),
                       title: Text(l.attAbsent(hm(a.lesson!.start))),
                       subtitle: Text(a.lesson!.subject),
-                      trailing: GButton(label: l.actExplain, size: GButtonSize.s, variant: GButtonVariant.tinted, onPressed: () => excuse(lesson: a.lesson)),
+                      trailing: GButton(
+                        label: l.actExplain,
+                        size: GButtonSize.s,
+                        variant: GButtonVariant.tinted,
+                        onPressed: () => excuse(lesson: a.lesson),
+                      ),
                     ),
                     AttentionKind.noConsent => GRow(
-                      leading: _Plate(tone: GTone.warn, child: GIcon(GIcons.checkIn, size: 22, color: c.warn)),
+                      leading: _Plate(
+                        tone: GTone.warn,
+                        child: GIcon(GIcons.checkIn, size: 22, color: c.warn),
+                      ),
                       title: Text(l.attNoConsent),
                       subtitle: Text(l.attNoConsentSub),
                       trailing: GButton(
@@ -152,10 +174,20 @@ class _ChildDay extends ConsumerWidget {
                       ),
                     ),
                     AttentionKind.excuseRejected => GRow(
-                      leading: _Plate(tone: GTone.bad, child: GIcon(GIcons.excuse, size: 22, color: c.bad)),
+                      leading: _Plate(
+                        tone: GTone.bad,
+                        child: GIcon(GIcons.excuse, size: 22, color: c.bad),
+                      ),
                       title: Text(l.attRejected),
-                      subtitle: Text(a.excuse!.reviewNote.isEmpty ? categoryName(l, a.excuse!.category) : a.excuse!.reviewNote),
-                      trailing: GButton(label: l.actExcuse, size: GButtonSize.s, variant: GButtonVariant.tinted, onPressed: excuse),
+                      subtitle: Text(
+                        a.excuse!.reviewNote.isEmpty ? categoryName(l, a.excuse!.category) : a.excuse!.reviewNote,
+                      ),
+                      trailing: GButton(
+                        label: l.actExcuse,
+                        size: GButtonSize.s,
+                        variant: GButtonVariant.tinted,
+                        onPressed: excuse,
+                      ),
                     ),
                   },
               ],
@@ -199,10 +231,7 @@ class _Plate extends StatelessWidget {
     width: 40,
     height: 40,
     alignment: Alignment.center,
-    decoration: ShapeDecoration(
-      color: tone?.soft(context.c) ?? context.c.surface,
-      shape: GRadius.surface(13),
-    ),
+    decoration: ShapeDecoration(color: tone?.soft(context.c) ?? context.c.surface, shape: GRadius.surface(13)),
     child: child,
   );
 }
@@ -257,7 +286,8 @@ class VerdictSheet extends StatelessWidget {
     switch (v.level) {
       case VerdictLevel.noLessons:
         final tl = tomorrow?.lessons.where((x) => !x.isCancelled).toList() ?? const <Lesson>[];
-        if (tl.isNotEmpty) add(l.factTomorrow(l.lessonsCount(tl.length), hm(tl.first.start)), strong: [hm(tl.first.start)]);
+        if (tl.isNotEmpty)
+          add(l.factTomorrow(l.lessonsCount(tl.length), hm(tl.first.start)), strong: [hm(tl.first.start)]);
       case VerdictLevel.alarm:
         add(l.factAlarm(hm(v.firstLesson!.start)), strong: [hm(v.firstLesson!.start)]);
       default:
@@ -269,7 +299,8 @@ class VerdictSheet extends StatelessWidget {
         } else if (v.firstLesson != null && v.lessonsDone == 0) {
           add(l.factBeforeLessons(hm(v.firstLesson!.start)), strong: [hm(v.firstLesson!.start)]);
         }
-        if (v.lessonsDone > 0) add(l.factLessons(v.lessonsDone, v.lessonsTotal), strong: ['${v.lessonsDone}', '${v.lessonsTotal}']);
+        if (v.lessonsDone > 0)
+          add(l.factLessons(v.lessonsDone, v.lessonsTotal), strong: ['${v.lessonsDone}', '${v.lessonsTotal}']);
         for (final a in v.absent) {
           add('${l.factAbsent(a.subject)}, ${l.factNoReason}');
         }
@@ -300,12 +331,17 @@ class VerdictSheet extends StatelessWidget {
                   child: GIcon(icon, size: 24, color: GColors.onFill, fill: 1),
                 ),
                 const SizedBox(width: 12),
-                Expanded(child: Semantics(header: true, child: Text(title, style: t.title1, maxLines: 2))),
+                Expanded(
+                  child: Semantics(header: true, child: Text(title, style: t.title1, maxLines: 2)),
+                ),
               ],
             ),
             if (facts.isNotEmpty) ...[
               const SizedBox(height: 12),
-              Text.rich(TextSpan(children: facts), style: t.body.copyWith(height: 23 / 16)),
+              Text.rich(
+                TextSpan(children: facts),
+                style: t.body.copyWith(height: 23 / 16),
+              ),
             ],
             if (updatedAt != null) ...[
               const SizedBox(height: 6),
@@ -370,13 +406,17 @@ class _FeedSection extends ConsumerWidget {
           ? l.feedMarkedAbsent
           : mark != null && mark.status != Presence.present
           ? presenceLabel(l, mark.status)
-          : grades.where((g) => g.comment.isNotEmpty).map((g) => '«${g.comment}»').firstOrNull ?? (lesson.topic.isEmpty ? '' : lesson.topic);
+          : grades.where((g) => g.comment.isNotEmpty).map((g) => '«${g.comment}»').firstOrNull ??
+                (lesson.topic.isEmpty ? '' : lesson.topic);
       items.add((
         lesson.startsAt(),
         _TimelineRow(
           time: hm(lesson.start),
           node: absent
-              ? Text(_ChildDay._absentLetter(ref), style: t.footnote.copyWith(color: c.bad, fontWeight: FontWeight.w800))
+              ? Text(
+                  _ChildDay._absentLetter(ref),
+                  style: t.footnote.copyWith(color: c.bad, fontWeight: FontWeight.w800),
+                )
               : null,
           nodeColor: absent ? c.badSoft : c.subjectTint(lesson.colorKey),
           title: lesson.subject,
@@ -403,7 +443,10 @@ class _FeedSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        GSectionTitle(title: l.feedTitle, trailing: Text(l.feedNewest, style: t.footnote.copyWith(color: c.ink2))),
+        GSectionTitle(
+          title: l.feedTitle,
+          trailing: Text(l.feedNewest, style: t.footnote.copyWith(color: c.ink2)),
+        ),
         GGroup(inset: 120, children: [for (final (_, w) in items) w]),
       ],
     );
@@ -494,9 +537,15 @@ class _Family extends ConsumerWidget {
               for (final ch in children)
                 Builder(
                   builder: (context) {
-                    final hw = (days[ch.id]!.value?.homework ?? const <Homework>[]).where((h) => h.dueDate == tomorrow).toList();
+                    final hw = (days[ch.id]!.value?.homework ?? const <Homework>[])
+                        .where((h) => h.dueDate == tomorrow)
+                        .toList();
                     return GRow(
-                      leading: Container(width: 10, height: 10, decoration: BoxDecoration(color: childColor(ch.id), shape: BoxShape.circle)),
+                      leading: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(color: childColor(ch.id), shape: BoxShape.circle),
+                      ),
                       title: Text('${ch.shortName} · ${l.tasksCount(hw.length)}'),
                       subtitle: hw.isEmpty
                           ? null
@@ -576,24 +625,24 @@ class _ChildCard extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(child.shortName, style: t.title2, maxLines: 1, overflow: TextOverflow.ellipsis),
-                          if (child.className != null) Text(child.className!, style: t.footnote.copyWith(color: c.ink2)),
+                          if (child.className != null)
+                            Text(child.className!, style: t.footnote.copyWith(color: c.ink2)),
                         ],
                       ),
                     ),
                     GStatusPill(label: pill, tone: tone),
                   ],
                 ),
-                if (fact.isNotEmpty) ...[
-                  const SizedBox(height: 12),
-                  Text(fact, style: t.body),
-                ],
+                if (fact.isNotEmpty) ...[const SizedBox(height: 12), Text(fact, style: t.body)],
                 if (fresh != null && !alarm) ...[
                   const SizedBox(height: 10),
                   Row(
                     children: [
                       GradeChipOf(grade: fresh, isNew: true),
                       const SizedBox(width: 8),
-                      Expanded(child: Text(l.factNewGrade(fresh.courseName), style: t.footnote.copyWith(color: c.ink2))),
+                      Expanded(
+                        child: Text(l.factNewGrade(fresh.courseName), style: t.footnote.copyWith(color: c.ink2)),
+                      ),
                     ],
                   ),
                 ],

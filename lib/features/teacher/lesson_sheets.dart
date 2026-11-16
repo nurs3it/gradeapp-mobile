@@ -62,7 +62,9 @@ class _CodesBodyState extends State<_CodesBody> {
     final c = context.c;
     final cell = widget.cell;
     final std = {'Н', 'Б', 'О', 'У', 'П'};
-    final own = widget.grading.attendanceCodes.where((x) => !std.contains(x.code) || x.status == Presence.excused).toList();
+    final own = widget.grading.attendanceCodes
+        .where((x) => !std.contains(x.code) || x.status == Presence.excused)
+        .toList();
     Widget row(String title, String letter, GTone tone, bool selected, VoidCallback onTap) => GRow(
       onTap: onTap,
       leading: Container(
@@ -70,7 +72,10 @@ class _CodesBodyState extends State<_CodesBody> {
         height: 40,
         alignment: Alignment.center,
         decoration: ShapeDecoration(color: tone.soft(c), shape: const StadiumBorder()),
-        child: Text(letter, style: context.t.bodyStrong.copyWith(color: tone.fg(c), fontWeight: FontWeight.w800)),
+        child: Text(
+          letter,
+          style: context.t.bodyStrong.copyWith(color: tone.fg(c), fontWeight: FontWeight.w800),
+        ),
       ),
       title: Text(title),
       trailing: selected ? GIcon(GIcons.check, size: 20, color: c.primaryText) : null,
@@ -88,7 +93,13 @@ class _CodesBodyState extends State<_CodesBody> {
             cell.status == Presence.absent,
             () => _pick(Presence.absent, widget.codeFor(Presence.absent)),
           ),
-          row(l.codeLate, widget.codeFor(Presence.tardy), GTone.warn, cell.status == Presence.tardy, () => setState(() => _late = !_late)),
+          row(
+            l.codeLate,
+            widget.codeFor(Presence.tardy),
+            GTone.warn,
+            cell.status == Presence.tardy,
+            () => setState(() => _late = !_late),
+          ),
           if (_late)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
@@ -108,7 +119,10 @@ class _CodesBodyState extends State<_CodesBody> {
                           controller: _custom,
                           hint: l.codeCustom,
                           keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(3)],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(3),
+                          ],
                           onSubmitted: (v) => _lateBy(int.tryParse(v) ?? 0),
                         ),
                       ),
@@ -135,7 +149,9 @@ class _CodesBodyState extends State<_CodesBody> {
 
 /// Work type of the lesson (chosen once, remembered per course).
 Future<String?> showWorkTypeSheet(BuildContext context, {required Grading grading, required String current}) {
-  final types = grading.lessonTypes.isEmpty ? [const WorkType(code: 'fo', name: 'ФО', kind: WorkKind.formative)] : grading.lessonTypes;
+  final types = grading.lessonTypes.isEmpty
+      ? [const WorkType(code: 'fo', name: 'ФО', kind: WorkKind.formative)]
+      : grading.lessonTypes;
   return showGSheet<String>(
     context,
     title: context.l10n.workType,
@@ -194,16 +210,15 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
     setState(() => _busy = true);
     final lines = text.split('\n');
     final title = lines.first.length > 120 ? '${lines.first.substring(0, 117)}…' : lines.first;
-    await widget.actions.assignHomework(
-      title: title,
-      description: text,
-      due: isoDate(due),
-      minutes: _minutes,
-    );
+    await widget.actions.assignHomework(title: title, description: text, due: isoDate(due), minutes: _minutes);
     GHaptics.success();
     if (!mounted) return;
     Navigator.of(context).pop();
-    GToast.show(context, context.l10n.hwAssigned(widget.lesson.classGroupName ?? widget.lesson.subject), bottomOffset: 100);
+    GToast.show(
+      context,
+      context.l10n.hwAssigned(widget.lesson.classGroupName ?? widget.lesson.subject),
+      bottomOffset: 100,
+    );
   }
 
   @override
@@ -212,14 +227,17 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
     final c = context.c;
     final t = context.t;
     final lesson = widget.lesson;
-    final around = ref.watch(courseLessonsProvider((courseId: lesson.courseId, date: lesson.date))).value ?? const <Lesson>[];
+    final around =
+        ref.watch(courseLessonsProvider((courseId: lesson.courseId, date: lesson.date))).value ?? const <Lesson>[];
     final next = around.where((x) => x.date.compareTo(lesson.date) > 0 && !x.isCancelled).firstOrNull;
     final fallback = DateTime.parse(lesson.date).add(const Duration(days: 1));
     final due = _due ?? (next == null ? fallback : DateTime.parse(next.date));
     final previous = (ref.watch(courseHomeworkProvider(lesson.courseId)).value ?? const <Homework>[])
         .where((h) => h.dueDate.compareTo(lesson.date) <= 0)
         .fold<Homework?>(null, (best, h) => best == null || h.dueDate.compareTo(best.dueDate) > 0 ? h : best);
-    final existing = (ref.watch(courseHomeworkProvider(lesson.courseId)).value ?? const <Homework>[]).where((h) => h.lessonId == lesson.id);
+    final existing = (ref.watch(courseHomeworkProvider(lesson.courseId)).value ?? const <Homework>[]).where(
+      (h) => h.lessonId == lesson.id,
+    );
     final load = lesson.classGroupId == null
         ? null
         : ref.watch(dailyLoadProvider((classId: lesson.classGroupId!, date: isoDate(due)))).value;
@@ -235,7 +253,12 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
               Text(l.hwSheetTitle(lesson.classGroupName ?? lesson.subject), style: t.title1),
               if (existing.isNotEmpty) ...[
                 const SizedBox(height: 12),
-                GStateRow(title: l.hwExisting, message: existing.map((h) => h.title).join('; '), tone: GTone.info, icon: GIcons.homework),
+                GStateRow(
+                  title: l.hwExisting,
+                  message: existing.map((h) => h.title).join('; '),
+                  tone: GTone.info,
+                  icon: GIcons.homework,
+                ),
               ],
               const SizedBox(height: 16),
               if (previous != null && _text.text.isEmpty) ...[
@@ -244,7 +267,9 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
                   child: GSuggestChip(
                     label: l.sameAsLast,
                     icon: GIcons.undo,
-                    onTap: () => setState(() => _text.text = previous.description.isEmpty ? previous.title : previous.description),
+                    onTap: () => setState(
+                      () => _text.text = previous.description.isEmpty ? previous.title : previous.description,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -291,7 +316,11 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
                 spacing: 8,
                 children: [
                   for (final m in const [10, 20, 30, 45])
-                    GChip(label: l.minutesShort(m), selected: _minutes == m, onTap: () => setState(() => _minutes = _minutes == m ? null : m)),
+                    GChip(
+                      label: l.minutesShort(m),
+                      selected: _minutes == m,
+                      onTap: () => setState(() => _minutes = _minutes == m ? null : m),
+                    ),
                 ],
               ),
               if (load != null && load.norm > 0) ...[
@@ -387,18 +416,20 @@ Future<bool> showSummarySheet(
               ],
             ),
             const SizedBox(height: 16),
-            GField(controller: note, label: l.sumField, maxLines: 4, minLines: 2, textCapitalization: TextCapitalization.sentences),
+            GField(
+              controller: note,
+              label: l.sumField,
+              maxLines: 4,
+              minLines: 2,
+              textCapitalization: TextCapitalization.sentences,
+            ),
           ],
         ),
       );
     },
     actions: Builder(
-      builder: (ctx) => GButton(
-        label: l.dockFinish,
-        size: GButtonSize.l,
-        expand: true,
-        onPressed: () => Navigator.of(ctx).pop(true),
-      ),
+      builder: (ctx) =>
+          GButton(label: l.dockFinish, size: GButtonSize.l, expand: true, onPressed: () => Navigator.of(ctx).pop(true)),
     ),
   );
   if (done != true) {

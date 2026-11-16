@@ -10,10 +10,13 @@ RosterStudent st(String id, String last, String cls) =>
 
 void main() {
   test('joint lesson: students of every class, by class then surname, no duplicates', () {
-    final roster = mergeRoster(['10A', '10B'], {
-      '10B': [st('3', 'Бекова', '10B'), st('1', 'Абаев', '10B')],
-      '10A': [st('2', 'Ерлан', '10A'), st('1', 'Абаев', '10A'), st('4', 'Жанна', '10A')],
-    });
+    final roster = mergeRoster(
+      ['10A', '10B'],
+      {
+        '10B': [st('3', 'Бекова', '10B'), st('1', 'Абаев', '10B')],
+        '10A': [st('2', 'Ерлан', '10A'), st('1', 'Абаев', '10A'), st('4', 'Жанна', '10A')],
+      },
+    );
     expect(roster.map((s) => s.id), ['1', '2', '4', '3']);
     expect(roster.first.classId, '10A');
   });
@@ -42,7 +45,9 @@ void main() {
       students: students,
       defaults: defaults,
       overlay: LessonOverlay.of([queued], 'L'),
-      grades: [const Grade(id: 'g', studentId: 'a', courseId: 'x', courseName: 'x', value: 9, type: 'fo', date: '2026-11-16')],
+      grades: [
+        const Grade(id: 'g', studentId: 'a', courseId: 'x', courseName: 'x', value: 9, type: 'fo', date: '2026-11-16'),
+      ],
       type: 'fo',
     );
     expect(cells['a']!.status, Presence.present);
@@ -62,7 +67,8 @@ void main() {
   });
 
   test('now / next across the day', () {
-    Lesson l(String id, String s, String e) => Lesson(id: id, courseId: id, subject: id, date: '2026-11-16', start: s, end: e);
+    Lesson l(String id, String s, String e) =>
+        Lesson(id: id, courseId: id, subject: id, date: '2026-11-16', start: s, end: e);
     final day = [l('a', '08:30', '09:15'), l('b', '09:25', '10:10'), l('c', '10:25', '11:10')];
     DateTime at(int h, int m) => DateTime(2026, 11, 16, h, m);
     final before = computeNowNext(day, at(7, 52));

@@ -86,14 +86,15 @@ typedef PlanArgs = ({String classId, String subject, String date});
 /// КТП topic for the lesson date: planned on that day, else the next one.
 final ktpTopicProvider = FutureProvider.family<String?, PlanArgs>((ref, a) async {
   try {
-    final res = await ref.read(dioProvider).get<Object?>('/planning/thematic-plans/', queryParameters: {'class_group': a.classId});
+    final res = await ref
+        .read(dioProvider)
+        .get<Object?>('/planning/thematic-plans/', queryParameters: {'class_group': a.classId});
     final plans = resultsOf(res.data).where((p) => p.str('subject_name') == a.subject);
     final topics = [
       for (final p in plans)
         for (final s in p.list('sections', (s) => s))
           for (final t in s.list('topics', (t) => t)) (title: t.str('title'), date: t.str('planned_date')),
-    ].where((t) => t.title.isNotEmpty && t.date.isNotEmpty).toList()
-      ..sort((x, y) => x.date.compareTo(y.date));
+    ].where((t) => t.title.isNotEmpty && t.date.isNotEmpty).toList()..sort((x, y) => x.date.compareTo(y.date));
     return topics.where((t) => t.date == a.date).firstOrNull?.title ??
         topics.where((t) => t.date.compareTo(a.date) > 0).firstOrNull?.title;
   } catch (_) {
@@ -268,21 +269,20 @@ class LessonActions {
     String reason = '',
     String name = '',
     String label = '',
-  }) =>
-      _outbox.add(
-        OutboxItem(
-          key: 'att:${lesson.id}:$studentId',
-          method: 'POST',
-          path: '/attendance/mark/',
-          label: _label('attendance', state: label, student: name),
-          data: {
-            'lesson_id': lesson.id,
-            'records': [
-              {'student_id': studentId, 'status': status.name, 'code': code, if (reason.isNotEmpty) 'reason': reason},
-            ],
-          },
-        ),
-      );
+  }) => _outbox.add(
+    OutboxItem(
+      key: 'att:${lesson.id}:$studentId',
+      method: 'POST',
+      path: '/attendance/mark/',
+      label: _label('attendance', state: label, student: name),
+      data: {
+        'lesson_id': lesson.id,
+        'records': [
+          {'student_id': studentId, 'status': status.name, 'code': code, if (reason.isNotEmpty) 'reason': reason},
+        ],
+      },
+    ),
+  );
 
   /// «Все на месте» / «Готово»: one request for the given students.
   Future<void> markMany(Map<String, ({Presence status, String code})> records) => _outbox.add(
@@ -387,21 +387,25 @@ class LessonActions {
   );
 
   /// T5: homework from the lesson (JSON part; attachments need the network).
-  Future<void> assignHomework({required String title, required String description, required String due, int? minutes}) =>
-      _outbox.add(
-        OutboxItem(
-          key: 'hw:${lesson.id}:${DateTime.now().microsecondsSinceEpoch}',
-          method: 'POST',
-          path: '/homework/',
-          label: _label('homework', state: title),
-          data: {
-            'course': lesson.courseId,
-            'lesson': lesson.id,
-            'title': title,
-            'description': description,
-            'due_date': due,
-            'estimated_minutes': ?minutes,
-          },
-        ),
-      );
+  Future<void> assignHomework({
+    required String title,
+    required String description,
+    required String due,
+    int? minutes,
+  }) => _outbox.add(
+    OutboxItem(
+      key: 'hw:${lesson.id}:${DateTime.now().microsecondsSinceEpoch}',
+      method: 'POST',
+      path: '/homework/',
+      label: _label('homework', state: title),
+      data: {
+        'course': lesson.courseId,
+        'lesson': lesson.id,
+        'title': title,
+        'description': description,
+        'due_date': due,
+        'estimated_minutes': ?minutes,
+      },
+    ),
+  );
 }

@@ -103,10 +103,7 @@ class CheckInCard extends ConsumerWidget {
                   ),
                 ],
               ),
-              if (failed) ...[
-                const SizedBox(height: 14),
-                _ErrorRow(run: run, status: status),
-              ],
+              if (failed) ...[const SizedBox(height: 14), _ErrorRow(run: run, status: status)],
             ],
           ),
         );
@@ -134,7 +131,11 @@ class _ErrorRow extends ConsumerWidget {
 
     final (String title, String? action, VoidCallback? onAction) = switch (run.code) {
       'outside_area' => (l.checkInOutside(run.distance ?? 0), l.retry, retry),
-      'location_required' => (l.checkInNeedLocation, l.openSettings, () => unawaited(Geolocator.openLocationSettings())),
+      'location_required' => (
+        l.checkInNeedLocation,
+        l.openSettings,
+        () => unawaited(Geolocator.openLocationSettings()),
+      ),
       'stale_photo' || 'photo_required' => (l.checkInStale, l.checkInOpenCamera, () => context.push('/checkin')),
       'window_closed' => (l.checkInWindowClosed, null, null),
       'consent_required' => (l.checkInNoConsent, null, null),
@@ -209,7 +210,9 @@ class _Quiet extends StatelessWidget {
             children: [
               GIcon(icon, size: 22, color: tone?.fg(c) ?? c.ink2),
               const SizedBox(width: 10),
-              Expanded(child: Text(title, style: context.t.bodyStrong.copyWith(color: tone?.fg(c)))),
+              Expanded(
+                child: Text(title, style: context.t.bodyStrong.copyWith(color: tone?.fg(c))),
+              ),
             ],
           ),
           if (message != null) ...[

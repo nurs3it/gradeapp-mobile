@@ -65,8 +65,7 @@ class ApiClient {
   }
 
   /// POST /auth/password-reset/ — always answers neutrally.
-  Future<void> requestPasswordReset(String email) =>
-      _raw.post<void>('/auth/password-reset/', data: {'email': email});
+  Future<void> requestPasswordReset(String email) => _raw.post<void>('/auth/password-reset/', data: {'email': email});
 
   Future<void> logout() async {
     final s = sessions.current;

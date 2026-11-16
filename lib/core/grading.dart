@@ -187,7 +187,13 @@ class Grading {
     final weight = active.fold<double>(0, (s, p) => s + p.$2);
     if (active.isEmpty || weight == 0) return QuarterResult(fo: fo, sor: sor, soch: soch);
     final pct = _r2(active.fold<double>(0, (s, p) => s + p.$1! * p.$2) / weight);
-    return QuarterResult(fo: fo, sor: sor, soch: soch, percent: pct, mark: pctToMark(pct, gradeLevel: gradeLevel));
+    return QuarterResult(
+      fo: fo,
+      sor: sor,
+      soch: soch,
+      percent: pct,
+      mark: pctToMark(pct, gradeLevel: gradeLevel),
+    );
   }
 
   static double _r2(num v) => (v * 100).roundToDouble() / 100;
@@ -201,7 +207,11 @@ class Grading {
         cfg.list(key, (r) => (mark: r.number('mark') ?? 0, minPct: r.number('min_pct') ?? 0));
     final f = cfg['quarter_formula'];
     final formula = f is Json
-        ? (fo: (f.number('fo') ?? 0).toDouble(), sor: (f.number('sor') ?? 0).toDouble(), soch: (f.number('soch') ?? 0).toDouble())
+        ? (
+            fo: (f.number('fo') ?? 0).toDouble(),
+            sor: (f.number('sor') ?? 0).toDouble(),
+            soch: (f.number('soch') ?? 0).toDouble(),
+          )
         : (fo: 0.25, sor: 0.25, soch: 0.5);
     return Grading(
       min: min,

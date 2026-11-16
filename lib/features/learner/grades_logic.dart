@@ -66,7 +66,9 @@ List<SubjectSummary> summarizeQuarter({
       () {
         final list = [...e.value]..sort((a, b) => b.date.compareTo(a.date));
         final p = periodBy[e.key];
-        final computed = formulaKnown ? grading.quarter(list.map((x) => x.input), gradeLevel: gradeLevel) : QuarterResult.empty;
+        final computed = formulaKnown
+            ? grading.quarter(list.map((x) => x.input), gradeLevel: gradeLevel)
+            : QuarterResult.empty;
         final official = p?.effectiveMark != null;
         return SubjectSummary(
           courseId: e.key,

@@ -153,7 +153,10 @@ class SyncIndicator extends ConsumerWidget {
                   GIcon(icon, size: 22, color: fg, fill: 1),
                 if (count > 0) ...[
                   const SizedBox(width: 6),
-                  Text('$count', style: context.t.subhead.copyWith(color: fg, fontWeight: FontWeight.w800)),
+                  Text(
+                    '$count',
+                    style: context.t.subhead.copyWith(color: fg, fontWeight: FontWeight.w800),
+                  ),
                 ],
               ],
             ),

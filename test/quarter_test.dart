@@ -97,13 +97,16 @@ void main() {
     final ten = Grading.fromSchool({
       'grading_config': {'min': 1, 'max': 10, 'passing': 4, 'quality_min': 8},
     });
-    expect([for (var v = 1; v <= 10; v++) ten.tone(v)], [
-      ...List.filled(3, GradeTone.poor),
-      ...List.filled(4, GradeTone.fair),
-      GradeTone.good,
-      GradeTone.excellent,
-      GradeTone.excellent,
-    ]);
+    expect(
+      [for (var v = 1; v <= 10; v++) ten.tone(v)],
+      [
+        ...List.filled(3, GradeTone.poor),
+        ...List.filled(4, GradeTone.fair),
+        GradeTone.good,
+        GradeTone.excellent,
+        GradeTone.excellent,
+      ],
+    );
   });
 
   test('summary prefers the school effective_mark, else the formula (never a plain average)', () {
@@ -127,7 +130,10 @@ void main() {
   test('attention sort puts below-quality subjects first', () {
     final g5 = kz();
     final list = summarizeQuarter(
-      grades: [g(9, 10, 'fo', course: 'a'), g(5, 10, 'fo', course: 'b')],
+      grades: [
+        g(9, 10, 'fo', course: 'a'),
+        g(5, 10, 'fo', course: 'b'),
+      ],
       periods: const [],
       grading: g5,
       formulaKnown: true,

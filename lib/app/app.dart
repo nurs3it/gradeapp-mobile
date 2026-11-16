@@ -65,7 +65,10 @@ class _GradeAppState extends ConsumerState<GradeApp> {
       builder: (context, child) {
         final mq = MediaQuery.of(context);
         final scale = math.min(mq.textScaler.scale(1), GScale.max);
-        return MediaQuery(data: mq.copyWith(textScaler: TextScaler.linear(scale)), child: child!);
+        return MediaQuery(
+          data: mq.copyWith(textScaler: TextScaler.linear(scale)),
+          child: child!,
+        );
       },
       routerConfig: ref.watch(routerProvider),
     );

@@ -164,9 +164,7 @@ class _ProfileSheet extends ConsumerWidget {
     final picked = await showGSheet<(String?,)>(
       context,
       title: l.settingsLanguage,
-      builder: (ctx) => _Options(
-        options: [for (final (code, name) in options) ((code,), name, code == current)],
-      ),
+      builder: (ctx) => _Options(options: [for (final (code, name) in options) ((code,), name, code == current)]),
     );
     if (picked == null) return;
     final code = picked.$1;
@@ -222,7 +220,13 @@ class _ProfileSheet extends ConsumerWidget {
     final outbox = ref.read(outboxProvider);
     final unsent = outbox.state.total;
     if (unsent == 0) {
-      final ok = await confirmSheet(context, title: l.signOutConfirm, confirm: l.signOut, cancel: l.cancel, destructive: true);
+      final ok = await confirmSheet(
+        context,
+        title: l.signOutConfirm,
+        confirm: l.signOut,
+        cancel: l.cancel,
+        destructive: true,
+      );
       if (ok) await ref.read(authProvider.notifier).logout();
       return;
     }
@@ -238,7 +242,12 @@ class _ProfileSheet extends ConsumerWidget {
         builder: (ctx) => Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GButton(label: l.signOutSendFirst, expand: true, size: GButtonSize.l, onPressed: () => Navigator.pop(ctx, 1)),
+            GButton(
+              label: l.signOutSendFirst,
+              expand: true,
+              size: GButtonSize.l,
+              onPressed: () => Navigator.pop(ctx, 1),
+            ),
             const SizedBox(height: 8),
             GButton(
               label: l.signOutAnyway,
@@ -296,7 +305,12 @@ class _ChildrenGroup extends ConsumerWidget {
               GRow(
                 leading: GAvatar(name: child.fullName, url: child.avatarUrl, size: 40, color: childColor(child.id)),
                 title: Text(child.fullName),
-                subtitle: Text([?child.className, '${l.photoConsent}: ${child.photoConsent ? l.consentOn : l.consentOff}'].join(' · ')),
+                subtitle: Text(
+                  [
+                    ?child.className,
+                    '${l.photoConsent}: ${child.photoConsent ? l.consentOn : l.consentOff}',
+                  ].join(' · '),
+                ),
                 trailing: child.photoConsent
                     ? GButton(
                         label: l.consentRevokeAction,

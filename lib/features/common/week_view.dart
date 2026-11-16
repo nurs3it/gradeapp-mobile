@@ -253,7 +253,10 @@ class _DayStrip extends StatelessWidget {
                                           width: 5,
                                           height: 5,
                                           margin: const EdgeInsets.symmetric(horizontal: 1.5),
-                                          decoration: BoxDecoration(color: sel ? c.canvas : dot, shape: BoxShape.circle),
+                                          decoration: BoxDecoration(
+                                            color: sel ? c.canvas : dot,
+                                            shape: BoxShape.circle,
+                                          ),
                                         ),
                                     ],
                                   ),
@@ -323,7 +326,13 @@ class _DayPage extends ConsumerWidget {
               if (week.isLoading && !week.hasValue)
                 const GSkeleton(hero: false, rows: 5)
               else if (week.hasError && !week.hasValue)
-                GEmpty(error: true, title: l.errorTitle, message: l.errorOffline, action: l.retry, onAction: () => onRefresh(monday))
+                GEmpty(
+                  error: true,
+                  title: l.errorTitle,
+                  message: l.errorOffline,
+                  action: l.retry,
+                  onAction: () => onRefresh(monday),
+                )
               else if (day.isEmpty)
                 GEmpty(title: l.weekNoLessons, message: l.weekNoLessonsHint)
               else

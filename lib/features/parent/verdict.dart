@@ -70,13 +70,13 @@ DayVerdict verdictOf(LearnerDay day, DateTime now, {required Grading grading, bo
   final today = day.date;
   final active = day.lessons.where((l) => !l.isCancelled).toList()..sort((a, b) => a.startMin.compareTo(b.startMin));
   final excuses = day.excuses;
-  final excusedToday = excuses.any(
-    (e) => e.scope != 'specific_lessons' && (e.status == ExcuseStatus.approved || e.status == ExcuseStatus.pending) && e.covers(today),
-  );
+  bool wholeDay(Excuse e, Set<ExcuseStatus> ok) =>
+      e.scope != 'specific_lessons' && ok.contains(e.status) && e.covers(today);
+  // «Отпрошен» only once approved; a pending request already calms the alarm.
+  final excusedToday = excuses.any((e) => wholeDay(e, {ExcuseStatus.approved}));
+  final requestedToday = excuses.any((e) => wholeDay(e, {ExcuseStatus.approved, ExcuseStatus.pending}));
   final pending = excuses.where((e) => e.status == ExcuseStatus.pending && e.endDate.compareTo(today) >= 0).firstOrNull;
-  final rejected = excuses
-      .where((e) => e.status == ExcuseStatus.rejected && e.endDate.compareTo(today) >= 0)
-      .toList();
+  final rejected = excuses.where((e) => e.status == ExcuseStatus.rejected && e.endDate.compareTo(today) >= 0).toList();
 
   final checkIn = day.checkIn;
   final useCheckIn = checkinEnabled && (checkIn?.enabled ?? false);
@@ -86,7 +86,14 @@ DayVerdict verdictOf(LearnerDay day, DateTime now, {required Grading grading, bo
   for (final l in active) {
     final mark = day.attendance[l.id];
     if (mark == null || mark.status != Presence.absent) continue;
-    final explained = mark.reason.isNotEmpty || excuses.any((e) => e.status != ExcuseStatus.rejected && e.status != ExcuseStatus.cancelled && e.covers(today, lessonId: l.id));
+    final explained =
+        mark.reason.isNotEmpty ||
+        excuses.any(
+          (e) =>
+              e.status != ExcuseStatus.rejected &&
+              e.status != ExcuseStatus.cancelled &&
+              e.covers(today, lessonId: l.id),
+        );
     if (!explained) {
       absent.add(l);
       attention.add(Attention(AttentionKind.absentNoReason, lesson: l));
@@ -124,7 +131,12 @@ DayVerdict verdictOf(LearnerDay day, DateTime now, {required Grading grading, bo
   VerdictLevel level;
   if (active.isEmpty) {
     level = VerdictLevel.noLessons;
-  } else if (useCheckIn && (checkIn?.consent ?? false) && !arrived && started.isNotEmpty && !anyPresent && !excusedToday) {
+  } else if (useCheckIn &&
+      (checkIn?.consent ?? false) &&
+      !arrived &&
+      started.isNotEmpty &&
+      !anyPresent &&
+      !requestedToday) {
     level = VerdictLevel.alarm;
   } else if (attention.any((a) => a.kind != AttentionKind.absentNoReason)) {
     level = VerdictLevel.action;

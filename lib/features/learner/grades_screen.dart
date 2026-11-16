@@ -150,7 +150,11 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
               ),
             ),
           ],
-          _ => [const SliverToBoxAdapter(child: Padding(padding: EdgeInsets.only(top: 16), child: GSkeleton(hero: false, rows: 5)))],
+          _ => [
+            const SliverToBoxAdapter(
+              child: Padding(padding: EdgeInsets.only(top: 16), child: GSkeleton(hero: false, rows: 5)),
+            ),
+          ],
         },
       ],
     );
@@ -161,7 +165,11 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
     final c = context.c;
     final g = GSpace.gutter(context);
     if (list.isEmpty) {
-      return [SliverToBoxAdapter(child: GEmpty(title: l.gradesEmpty, message: l.gradesEmptyHint))];
+      return [
+        SliverToBoxAdapter(
+          child: GEmpty(title: l.gradesEmpty, message: l.gradesEmptyHint),
+        ),
+      ];
     }
     if (_view == _View.feed) return [_Feed(list: list, seen: seen)];
     final sorted = _alpha ? ([...list]..sort((a, b) => a.name.compareTo(b.name))) : sortByAttention(list, grading);
@@ -185,7 +193,10 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
                       child: Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: l.insightStrong(insight.strong.name), style: const TextStyle(fontWeight: FontWeight.w700)),
+                            TextSpan(
+                              text: l.insightStrong(insight.strong.name),
+                              style: const TextStyle(fontWeight: FontWeight.w700),
+                            ),
                             TextSpan(text: ' ${l.insightWeak(insight.weak.name, insight.weak.percent!.round())}'),
                           ],
                         ),
@@ -251,7 +262,11 @@ class _QuarterFan extends ConsumerWidget {
                       : running
                       ? now.difference(start).inDays / end.difference(start).inDays.clamp(1, 1000)
                       : 1.0;
-                  final value = future ? Fmt.monthShort(start, context.localeTag) : running ? l.termRunning : '';
+                  final value = future
+                      ? Fmt.monthShort(start, context.localeTag)
+                      : running
+                      ? l.termRunning
+                      : '';
                   final (bg, fg, track, fill) = isSel
                       ? (c.ink, c.canvas, c.canvas.withValues(alpha: 0.25), c.canvas)
                       : future
@@ -279,7 +294,11 @@ class _QuarterFan extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(l.termShort(term.number), style: t.footnote.copyWith(color: fg, fontWeight: FontWeight.w600), textScaler: TextScaler.noScaling),
+                          Text(
+                            l.termShort(term.number),
+                            style: t.footnote.copyWith(color: fg, fontWeight: FontWeight.w600),
+                            textScaler: TextScaler.noScaling,
+                          ),
                           GBar(value: progress, color: fill, track: track, height: 6),
                           Text(
                             value,
@@ -330,7 +349,11 @@ class _SubjectRow extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 14, 14, 14),
       title: Row(
         children: [
-          Container(width: 8, height: 8, decoration: BoxDecoration(color: marker, shape: BoxShape.circle)),
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: marker, shape: BoxShape.circle),
+          ),
           const SizedBox(width: 8),
           Expanded(child: Text(s.name, maxLines: 1, overflow: TextOverflow.ellipsis)),
         ],
@@ -373,10 +396,7 @@ class _SubjectRow extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           GGradeChip(text: s.mark == null ? '—' : fmtNum(s.mark!), tone: markTone, size: GGradeSize.l),
-          if (s.preliminary) ...[
-            const SizedBox(height: 4),
-            Text(l.prelim, style: t.caption.copyWith(color: c.ink2)),
-          ],
+          if (s.preliminary) ...[const SizedBox(height: 4), Text(l.prelim, style: t.caption.copyWith(color: c.ink2))],
         ],
       ),
     );
@@ -555,7 +575,10 @@ class SubjectScreen extends ConsumerWidget {
                                 const SizedBox(height: 10),
                                 CappedText(
                                   pct == null ? '—' : '${pct.round()} %',
-                                  style: t.title1.copyWith(fontSize: 26, fontFeatures: const [FontFeature.tabularFigures()]),
+                                  style: t.title1.copyWith(
+                                    fontSize: 26,
+                                    fontFeatures: const [FontFeature.tabularFigures()],
+                                  ),
                                 ),
                                 Text(l.worksCount(s.countOf(grading, kind)), style: t.footnote.copyWith(color: c.ink2)),
                               ],
@@ -575,7 +598,10 @@ class SubjectScreen extends ConsumerWidget {
                     onPressed: () => showFormulaSheet(context, ref),
                   ),
                 ),
-                GSectionTitle(title: l.works, trailing: Text(l.newestFirst, style: t.footnote.copyWith(color: c.ink2))),
+                GSectionTitle(
+                  title: l.works,
+                  trailing: Text(l.newestFirst, style: t.footnote.copyWith(color: c.ink2)),
+                ),
                 GGroup(
                   children: [
                     for (final gr in s.grades)
@@ -655,7 +681,11 @@ class _SubjectHero extends StatelessWidget {
                     if (s.percent != null)
                       Text(
                         '${fmtNum(s.percent!.round())} %',
-                        style: t.title1.copyWith(color: on, fontSize: 24, fontFeatures: const [FontFeature.tabularFigures()]),
+                        style: t.title1.copyWith(
+                          color: on,
+                          fontSize: 24,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
                       ),
                     if (next != null)
                       Text(
@@ -688,7 +718,10 @@ Future<void> showFormulaSheet(BuildContext context, WidgetRef ref) {
       final c = ctx.c;
       final t = ctx.t;
       if (!known) {
-        return Padding(padding: const EdgeInsets.all(20), child: GStateRow(title: l.formulaMissing, tone: GTone.warn));
+        return Padding(
+          padding: const EdgeInsets.all(20),
+          child: GStateRow(title: l.formulaMissing, tone: GTone.warn),
+        );
       }
       final parts = [
         (l.kindFo, g.formula.fo, 'formative'),

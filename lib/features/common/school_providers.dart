@@ -62,7 +62,12 @@ final termsProvider = StreamProvider<List<Term>>((ref) {
       // Keep the year of the current term (several years may be listed).
       final current = raw.where((t) => t.flag('is_current')).firstOrNull;
       final year = current?.str('academic_year');
-      final terms = year == null ? all : [for (final t in raw) if (t.str('academic_year') == year) Term.fromJson(t)];
+      final terms = year == null
+          ? all
+          : [
+              for (final t in raw)
+                if (t.str('academic_year') == year) Term.fromJson(t),
+            ];
       return terms..sort((a, b) => a.number.compareTo(b.number));
     },
   );

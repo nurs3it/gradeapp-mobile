@@ -75,7 +75,12 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
         if (mounted) setState(() => _stage = _Stage.unavailable);
         return;
       }
-      final ctrl = CameraController(front, ResolutionPreset.high, enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
+      final ctrl = CameraController(
+        front,
+        ResolutionPreset.high,
+        enableAudio: false,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
       await ctrl.initialize();
       await ctrl.setFlashMode(FlashMode.off);
       if (!mounted) {
@@ -85,7 +90,9 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
       setState(() => _camera = ctrl);
     } on CameraException catch (e) {
       if (!mounted) return;
-      setState(() => _stage = e.code.contains('Denied') || e.code.contains('denied') ? _Stage.denied : _Stage.unavailable);
+      setState(
+        () => _stage = e.code.contains('Denied') || e.code.contains('denied') ? _Stage.denied : _Stage.unavailable,
+      );
     }
   }
 
@@ -231,11 +238,7 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
       child: OverflowBox(
         maxHeight: double.infinity,
         maxWidth: double.infinity,
-        child: SizedBox(
-          width: size.width,
-          height: size.width * ratio,
-          child: CameraPreview(cam),
-        ),
+        child: SizedBox(width: size.width, height: size.width * ratio, child: CameraPreview(cam)),
       ),
     );
   }
@@ -247,7 +250,8 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
     final run = ref.watch(checkInProvider);
     final sending = _stage == _Stage.sending;
     final school = ref.watch(schoolProvider).value;
-    final far = _pos != null &&
+    final far =
+        _pos != null &&
         school?.lat != null &&
         Geolocator.distanceBetween(_pos!.latitude, _pos!.longitude, school!.lat!, school.lon!) > 300;
     final geo = status?.geofence ?? false;
@@ -282,7 +286,11 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
                 onPressed: _close,
               ),
               Expanded(
-                child: Text(l.checkInTitle, textAlign: TextAlign.center, style: t.headline.copyWith(color: GColors.onFill)),
+                child: Text(
+                  l.checkInTitle,
+                  textAlign: TextAlign.center,
+                  style: t.headline.copyWith(color: GColors.onFill),
+                ),
               ),
               GIconButton(
                 icon: _flash ? GIcons.flash : GIcons.flashOff,
@@ -392,7 +400,9 @@ class _OvalOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IgnorePointer(
     child: RepaintBoundary(
-      child: CustomPaint(painter: _OvalPainter(arc: arc, progress: progress, arcColor: arcColor)),
+      child: CustomPaint(
+        painter: _OvalPainter(arc: arc, progress: progress, arcColor: arcColor),
+      ),
     ),
   );
 }
@@ -466,10 +476,16 @@ class _Shutter extends StatelessWidget {
     child: Container(
       width: 84,
       height: 84,
-      decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: GColors.onFill, width: 4)),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: GColors.onFill, width: 4),
+      ),
       padding: const EdgeInsets.all(4),
       child: DecoratedBox(
-        decoration: BoxDecoration(color: onTap == null ? GColors.onFill.withValues(alpha: 0.4) : GColors.onFill, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+          color: onTap == null ? GColors.onFill.withValues(alpha: 0.4) : GColors.onFill,
+          shape: BoxShape.circle,
+        ),
       ),
     ),
   );
@@ -501,10 +517,7 @@ class _Explain extends StatelessWidget {
                     child: Container(
                       width: 88,
                       height: 108,
-                      decoration: ShapeDecoration(
-                        color: c.primarySoft,
-                        shape: const OvalBorder(),
-                      ),
+                      decoration: ShapeDecoration(color: c.primarySoft, shape: const OvalBorder()),
                       child: const Center(child: GMark(size: 52)),
                     ),
                   ),
@@ -571,7 +584,8 @@ class _SuccessState extends ConsumerState<_Success> {
     final first = day?.lessons.where((x) => !x.isCancelled && !x.isPast(at)).firstOrNull;
     final firstStart = first?.startsAt();
     final lateMin = firstStart != null && at.isAfter(firstStart) ? at.difference(firstStart).inMinutes : 0;
-    final late = (day?.checkIn?.late ?? false) || lateMin > 0 || (end != null && at.hour * 60 + at.minute > minutesOf(end));
+    final late =
+        (day?.checkIn?.late ?? false) || lateMin > 0 || (end != null && at.hour * 60 + at.minute > minutesOf(end));
     return Scaffold(
       backgroundColor: GColors.brand,
       body: SafeArea(
@@ -631,7 +645,11 @@ class _SuccessState extends ConsumerState<_Success> {
                   ),
                 )
               else
-                Text(l.doneParents, textAlign: TextAlign.center, style: t.body.copyWith(color: GColors.onFill)),
+                Text(
+                  l.doneParents,
+                  textAlign: TextAlign.center,
+                  style: t.body.copyWith(color: GColors.onFill),
+                ),
               const SizedBox(height: 24),
               GButton(
                 label: l.done,

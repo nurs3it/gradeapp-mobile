@@ -32,7 +32,9 @@ class WeekScreen extends ConsumerWidget {
         ref
           ..invalidate(weekLessonsProvider((studentId: id, monday: monday)))
           ..invalidate(homeworkProvider(id));
-        await ref.read(weekLessonsProvider((studentId: id, monday: monday)).future).then((_) {}, onError: (Object _) {});
+        await ref
+            .read(weekLessonsProvider((studentId: id, monday: monday)).future)
+            .then((_) {}, onError: (Object _) {});
       },
       rowBuilder: (context, lesson, day, now) {
         final hw = (ref.read(homeworkProvider(id)).value ?? const <Homework>[])
@@ -78,9 +80,7 @@ class _Pending extends ConsumerWidget {
     final children = ref.watch(childrenProvider);
     return Scaffold(
       body: Center(
-        child: children.hasValue
-            ? GEmpty(title: l.noChildrenTitle, message: l.noChildrenMessage)
-            : const GLoader(),
+        child: children.hasValue ? GEmpty(title: l.noChildrenTitle, message: l.noChildrenMessage) : const GLoader(),
       ),
     );
   }

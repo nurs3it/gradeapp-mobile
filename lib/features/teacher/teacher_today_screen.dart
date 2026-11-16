@@ -83,7 +83,10 @@ Future<List<String>> markLessonAllPresent(WidgetRef ref, String lessonId) async 
   final actions = LessonActions(outbox, lesson);
   if (lesson.status == LessonStatus.scheduled) await actions.start();
   await actions.markMany({for (final s in roster) s.id: (status: Presence.present, code: '')});
-  return [for (final i in outbox.pending) if (i.label['lesson_id'] == lessonId) i.key];
+  return [
+    for (final i in outbox.pending)
+      if (i.label['lesson_id'] == lessonId) i.key,
+  ];
 }
 
 class _Body extends ConsumerWidget {
@@ -104,7 +107,9 @@ class _Body extends ConsumerWidget {
     final todoById = {for (final t in lessons) t.lesson.id: t};
     final unmarked = lessons.where((t) => t.needsAttendance && t.lesson.isPast(now)).length;
     final noTopic = lessons.where((t) => t.needsTopic && !now.isBefore(t.lesson.startsAt())).length;
-    final debtsToday = lessons.where((t) => t.lesson.isPast(now) && t.debts.isNotEmpty && !t.lesson.isCancelled).toList();
+    final debtsToday = lessons
+        .where((t) => t.lesson.isPast(now) && t.debts.isNotEmpty && !t.lesson.isCancelled)
+        .toList();
     final overdue = day.overdue.where((t) => t.lesson.date != today && t.needsAttendance).toList();
     final visible = lessons.where((t) {
       return switch (filter) {
@@ -137,7 +142,12 @@ class _Body extends ConsumerWidget {
                     onTap: () => onFilter(_Filter.unmarked),
                   ),
                 if (noTopic > 0)
-                  GChip(label: l.tNoTopic, count: noTopic, selected: filter == _Filter.noTopic, onTap: () => onFilter(_Filter.noTopic)),
+                  GChip(
+                    label: l.tNoTopic,
+                    count: noTopic,
+                    selected: filter == _Filter.noTopic,
+                    onTap: () => onFilter(_Filter.noTopic),
+                  ),
               ],
             ),
           ],
@@ -200,7 +210,9 @@ class _Body extends ConsumerWidget {
                     minHeight: GSpace.rowCompact,
                     marker: ctx.c.subjectMarker(t.lesson.colorKey),
                     title: Text(lessonTitle(t.lesson)),
-                    subtitle: Text('${Fmt.dayMonth(DateTime.parse(t.lesson.date), ctx.localeTag)} · ${hm(t.lesson.start)}'),
+                    subtitle: Text(
+                      '${Fmt.dayMonth(DateTime.parse(t.lesson.date), ctx.localeTag)} · ${hm(t.lesson.start)}',
+                    ),
                   ),
               ],
             ),
@@ -208,12 +220,8 @@ class _Body extends ConsumerWidget {
         ),
       ),
       actions: Builder(
-        builder: (ctx) => GButton(
-          label: l.tAllPresent,
-          size: GButtonSize.l,
-          expand: true,
-          onPressed: () => Navigator.pop(ctx, true),
-        ),
+        builder: (ctx) =>
+            GButton(label: l.tAllPresent, size: GButtonSize.l, expand: true, onPressed: () => Navigator.pop(ctx, true)),
       ),
     );
     if (ok != true) return;
@@ -340,7 +348,13 @@ class _TodoRow extends ConsumerWidget {
 
 /// Loud sheet of the teacher (§3.14, last rows): class 48 pt, one button.
 class _TeacherHero extends ConsumerWidget {
-  const _TeacherHero({required this.state, required this.todo, required this.debts, required this.onOpen, required this.now});
+  const _TeacherHero({
+    required this.state,
+    required this.todo,
+    required this.debts,
+    required this.onOpen,
+    required this.now,
+  });
   final NowNext state;
   final Map<String, TodoLesson> todo;
   final List<TodoLesson> debts;
@@ -357,7 +371,9 @@ class _TeacherHero extends ConsumerWidget {
     final s = state;
 
     if (s.phase == DayPhase.none) {
-      return GCard(child: GEmpty(title: l.tNoLessons, icon: GIcons.today));
+      return GCard(
+        child: GEmpty(title: l.tNoLessons, icon: GIcons.today),
+      );
     }
     if (s.phase == DayPhase.after) {
       if (debts.isEmpty) {
@@ -436,13 +452,21 @@ class _TeacherHero extends ConsumerWidget {
       fan: [for (final u in s.upcoming) c.subjectFill(u.colorKey)],
       heroTag: 'lesson-${lesson.id}',
       onTap: () => onOpen(lesson.id),
-      semanticLabel: [eyebrow, lesson.classGroupName ?? '', lesson.subject, if (lesson.room != null) l.room(lesson.room!), status].join('. '),
+      semanticLabel: [
+        eyebrow,
+        lesson.classGroupName ?? '',
+        lesson.subject,
+        if (lesson.room != null) l.room(lesson.room!),
+        status,
+      ].join('. '),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
-              Expanded(child: Text(eyebrow.toUpperCase(), style: t.eyebrow.copyWith(color: on88), maxLines: 1)),
+              Expanded(
+                child: Text(eyebrow.toUpperCase(), style: t.eyebrow.copyWith(color: on88), maxLines: 1),
+              ),
               Text('${hm(lesson.start)}–${hm(lesson.end)}', style: t.eyebrow.copyWith(color: on88)),
             ],
           ),
@@ -469,7 +493,9 @@ class _TeacherHero extends ConsumerWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: Text(status, style: t.subhead.copyWith(color: on), maxLines: 2)),
+              Expanded(
+                child: Text(status, style: t.subhead.copyWith(color: on), maxLines: 2),
+              ),
               const SizedBox(width: 12),
               GButton(
                 label: l.openLesson,

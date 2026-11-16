@@ -69,14 +69,28 @@ void main() {
 
   test('no alarm before the first lesson, with a request, or when a teacher saw the child', () {
     expect(verdictOf(day(ci: checkIn()), DateTime(2026, 11, 16, 8), grading: grading).level, VerdictLevel.ok);
-    expect(verdictOf(day(ci: checkIn(), excuses: [excuse(ExcuseStatus.pending)]), noon, grading: grading).level, VerdictLevel.ok);
-    final seen = day(ci: checkIn(), attendance: const {'1': AttendanceMark(status: Presence.present)});
+    expect(
+      verdictOf(
+        day(ci: checkIn(), excuses: [excuse(ExcuseStatus.pending)]),
+        noon,
+        grading: grading,
+      ).level,
+      VerdictLevel.ok,
+    );
+    final seen = day(
+      ci: checkIn(),
+      attendance: const {'1': AttendanceMark(status: Presence.present)},
+    );
     expect(verdictOf(seen, noon, grading: grading).level, VerdictLevel.ok);
   });
 
   test('absent without reason → question with «Объяснить»; explained by request → ok', () {
     const marks = {'1': AttendanceMark(status: Presence.absent)};
-    final v = verdictOf(day(ci: checkIn(checkedIn: true), attendance: marks), noon, grading: grading);
+    final v = verdictOf(
+      day(ci: checkIn(checkedIn: true), attendance: marks),
+      noon,
+      grading: grading,
+    );
     expect(v.level, VerdictLevel.question);
     expect(v.attention.single.kind, AttentionKind.absentNoReason);
     expect(v.attention.single.lesson!.id, '1');
@@ -84,15 +98,32 @@ void main() {
     final explained = day(
       ci: checkIn(checkedIn: true),
       attendance: marks,
-      excuses: [excuse(ExcuseStatus.pending, scope: 'specific_lessons', lessonIds: ['1'])],
+      excuses: [
+        excuse(ExcuseStatus.pending, scope: 'specific_lessons', lessonIds: ['1']),
+      ],
     );
     expect(verdictOf(explained, noon, grading: grading).level, VerdictLevel.ok);
   });
 
   test('late check-in and a low grade today are questions', () {
-    expect(verdictOf(day(ci: checkIn(checkedIn: true, late: true)), noon, grading: grading).level, VerdictLevel.question);
-    final low = const Grade(id: 'g', studentId: 's', courseId: 'c1', courseName: 'S1', value: 2, type: 'fo', date: '2026-11-16');
-    final v = verdictOf(day(ci: checkIn(checkedIn: true), grades: [low]), noon, grading: grading);
+    expect(
+      verdictOf(day(ci: checkIn(checkedIn: true, late: true)), noon, grading: grading).level,
+      VerdictLevel.question,
+    );
+    final low = const Grade(
+      id: 'g',
+      studentId: 's',
+      courseId: 'c1',
+      courseName: 'S1',
+      value: 2,
+      type: 'fo',
+      date: '2026-11-16',
+    );
+    final v = verdictOf(
+      day(ci: checkIn(checkedIn: true), grades: [low]),
+      noon,
+      grading: grading,
+    );
     expect(v.level, VerdictLevel.question);
     expect(v.lowGrades, [low]);
   });
@@ -101,7 +132,11 @@ void main() {
     final v = verdictOf(day(ci: checkIn(consent: false), consent: false), noon, grading: grading);
     expect(v.level, VerdictLevel.action);
     expect(v.attention.map((a) => a.kind), contains(AttentionKind.noConsent));
-    final rejected = verdictOf(day(ci: checkIn(checkedIn: true), excuses: [excuse(ExcuseStatus.rejected)]), noon, grading: grading);
+    final rejected = verdictOf(
+      day(ci: checkIn(checkedIn: true), excuses: [excuse(ExcuseStatus.rejected)]),
+      noon,
+      grading: grading,
+    );
     expect(rejected.level, VerdictLevel.action);
   });
 

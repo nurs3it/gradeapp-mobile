@@ -209,7 +209,11 @@ class Outbox {
       while (_items.isNotEmpty) {
         final item = _items.first;
         try {
-          await dio.request<void>(item.path, data: item.data, options: Options(method: item.method));
+          await dio.request<void>(
+            item.path,
+            data: item.data,
+            options: Options(method: item.method),
+          );
           _items.remove(item);
           _lastSentAt = DateTime.now();
         } catch (e) {
@@ -274,7 +278,9 @@ class Outbox {
       jsonEncode({
         'version': 2,
         'last_sent_at': _lastSentAt?.toIso8601String(),
-        'items': [for (final i in [..._items, ..._rejected]) i.toJson()],
+        'items': [
+          for (final i in [..._items, ..._rejected]) i.toJson(),
+        ],
       }),
     );
   }

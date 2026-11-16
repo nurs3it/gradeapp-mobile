@@ -38,7 +38,9 @@ class _SyncBody extends ConsumerWidget {
             const SizedBox(height: 16),
             Text(l.syncRejected(s.rejected.length), style: t.headline.copyWith(color: c.bad)),
             const SizedBox(height: 8),
-            GGroup(children: [for (final i in s.rejected) _ItemRow(item: i, outbox: outbox)]),
+            GGroup(
+              children: [for (final i in s.rejected) _ItemRow(item: i, outbox: outbox)],
+            ),
           ],
           if (s.pending.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -49,7 +51,9 @@ class _SyncBody extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 8),
-            GGroup(children: [for (final i in s.pending) _ItemRow(item: i, outbox: outbox)]),
+            GGroup(
+              children: [for (final i in s.pending) _ItemRow(item: i, outbox: outbox)],
+            ),
             const SizedBox(height: 12),
             GButton(
               label: l.retry,

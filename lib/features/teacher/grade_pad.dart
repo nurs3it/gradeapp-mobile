@@ -161,7 +161,9 @@ class _GradePadState extends State<GradePad> {
         height: GradePad.height + MediaQuery.paddingOf(context).bottom,
         decoration: ShapeDecoration(
           color: c.surface,
-          shape: const RoundedSuperellipseBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(GRadius.sheet))),
+          shape: const RoundedSuperellipseBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(GRadius.sheet)),
+          ),
           shadows: GDepth.sheet(c),
         ),
         padding: EdgeInsets.fromLTRB(16, 8, 16, MediaQuery.paddingOf(context).bottom + 4),
@@ -298,8 +300,13 @@ class _GradePadState extends State<GradePad> {
                                         value: marks[r * cols + k],
                                         height: keyH,
                                         tone: g.tone(marks[r * cols + k]),
-                                        solid: _flash == marks[r * cols + k] || (!_multi && current == marks[r * cols + k]),
-                                        label: l.padKey('${marks[r * cols + k]}', toneWord(l, g.tone(marks[r * cols + k]))),
+                                        solid:
+                                            _flash == marks[r * cols + k] ||
+                                            (!_multi && current == marks[r * cols + k]),
+                                        label: l.padKey(
+                                          '${marks[r * cols + k]}',
+                                          toneWord(l, g.tone(marks[r * cols + k])),
+                                        ),
                                         onTap: () => _press(marks[r * cols + k]),
                                       )
                                     : const SizedBox.shrink(),
@@ -372,7 +379,9 @@ class _Key extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            DecoratedBox(decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GRadius.key))),
+            DecoratedBox(
+              decoration: BoxDecoration(color: bg, borderRadius: BorderRadius.circular(GRadius.key)),
+            ),
             // Solid layer cross-fades in (§2.6: colour by opacity, not by animating the colour).
             AnimatedOpacity(
               opacity: solid ? 1 : 0,
@@ -384,7 +393,10 @@ class _Key extends StatelessWidget {
             Center(
               child: Text(
                 '$value',
-                style: context.t.key.copyWith(color: solid ? GColors.onFill : fg, fontSize: GScale.large(context) ? 30 : 26),
+                style: context.t.key.copyWith(
+                  color: solid ? GColors.onFill : fg,
+                  fontSize: GScale.large(context) ? 30 : 26,
+                ),
                 textScaler: TextScaler.noScaling,
               ),
             ),

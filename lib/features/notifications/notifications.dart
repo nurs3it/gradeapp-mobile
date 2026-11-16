@@ -47,7 +47,9 @@ class AppNotification {
       payload: (j['payload'] as Json?) ?? const {},
       read: j.flag('read_flag'),
       createdAt: DateTime.tryParse(j.str('created_at'))?.toLocal() ?? DateTime.now(),
-      target: t is Json ? NotificationTarget(kind: t.str('kind'), id: t.str('id'), available: t.flag('available')) : null,
+      target: t is Json
+          ? NotificationTarget(kind: t.str('kind'), id: t.str('id'), available: t.flag('available'))
+          : null,
     );
   }
 }
@@ -209,10 +211,7 @@ class NotificationRow extends StatelessWidget {
           if (!read) const Positioned(right: -3, top: -3, child: GNewDot()),
         ],
       ),
-      title: Text(
-        notificationTitle(l, n.type),
-        style: read ? t.body : t.bodyStrong,
-      ),
+      title: Text(notificationTitle(l, n.type), style: read ? t.body : t.bodyStrong),
       subtitle: body.isEmpty ? null : Text(body),
       subtitleMaxLines: 2,
       trailing: Text(Fmt.clock(n.createdAt), style: t.footnote.copyWith(color: c.ink3)),

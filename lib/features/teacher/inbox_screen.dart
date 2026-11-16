@@ -82,7 +82,11 @@ class InboxScreen extends ConsumerWidget {
               await markRead(ref, n);
               return false;
             },
-            child: NotificationRow(n: n, read: n.read || read.contains(n.id), onTap: () => openNotification(context, ref, n)),
+            child: NotificationRow(
+              n: n,
+              read: n.read || read.contains(n.id),
+              onTap: () => openNotification(context, ref, n),
+            ),
           ),
       ],
     );
@@ -92,7 +96,12 @@ class InboxScreen extends ConsumerWidget {
       title: l.tabInbox,
       actions: [
         if (unread.isNotEmpty)
-          GButton(label: l.markAllRead, variant: GButtonVariant.plain, size: GButtonSize.s, onPressed: () => markAllRead(ref, unread)),
+          GButton(
+            label: l.markAllRead,
+            variant: GButtonVariant.plain,
+            size: GButtonSize.s,
+            onPressed: () => markAllRead(ref, unread),
+          ),
         const AvatarButton(),
       ],
       below: const NetBanner(),

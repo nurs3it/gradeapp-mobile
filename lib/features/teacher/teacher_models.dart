@@ -58,7 +58,14 @@ class TeacherDay {
 }
 
 class RosterStudent {
-  const RosterStudent({required this.id, required this.firstName, required this.lastName, this.avatarUrl, this.classId, this.className});
+  const RosterStudent({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    this.avatarUrl,
+    this.classId,
+    this.className,
+  });
   final String id;
   final String firstName;
   final String lastName;
@@ -140,17 +147,17 @@ List<RosterStudent> mergeRoster(List<String> classIds, Map<String, List<RosterSt
 /// Roll-call order inside a class (T2): checked in by selfie first, then the
 /// rest, each by surname.
 List<RosterStudent> rollCallOrder(List<RosterStudent> roster, Map<String, AttendanceDefault> defaults) {
-  int group(RosterStudent s) => defaults[s.id]?.source == 'checkin' && defaults[s.id]?.status != Presence.absent ? 0 : 1;
+  int group(RosterStudent s) =>
+      defaults[s.id]?.source == 'checkin' && defaults[s.id]?.status != Presence.absent ? 0 : 1;
   final classes = <String?>[];
   for (final s in roster) {
     if (!classes.contains(s.classId)) classes.add(s.classId);
   }
   return [
     for (final cls in classes)
-      ...(roster.where((s) => s.classId == cls).toList()
-        ..sort((a, b) {
-          final gcmp = group(a).compareTo(group(b));
-          return gcmp != 0 ? gcmp : a.name.toLowerCase().compareTo(b.name.toLowerCase());
-        })),
+      ...(roster.where((s) => s.classId == cls).toList()..sort((a, b) {
+        final gcmp = group(a).compareTo(group(b));
+        return gcmp != 0 ? gcmp : a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      })),
   ];
 }

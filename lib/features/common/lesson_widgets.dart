@@ -78,10 +78,16 @@ class LessonRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (sub.isNotEmpty) Text(sub, maxLines: 1, overflow: TextOverflow.ellipsis),
-                Text(secondLine!, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: c.ink2)),
+                Text(
+                  secondLine!,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: c.ink2),
+                ),
               ],
             ),
-      trailing: trailing ??
+      trailing:
+          trailing ??
           (lesson.isCancelled
               ? GStatusPill(label: l.pillCancelled, tone: GTone.warn, icon: GIcons.excuse)
               : current
@@ -217,7 +223,10 @@ Future<void> showLessonSheet(
       parent: parent,
       teacher: teacher,
     ),
-    actions: switch ((parent && mark?.status == Presence.absent && onExplain != null, teacher && onOpenLesson != null)) {
+    actions: switch ((
+      parent && mark?.status == Presence.absent && onExplain != null,
+      teacher && onOpenLesson != null,
+    )) {
       (true, _) => GButton(
         label: l.explainAbsence,
         size: GButtonSize.l,
@@ -288,7 +297,9 @@ class _LessonSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  teacher && lesson.classGroupName != null ? '${lesson.classGroupName} · ${lesson.subject}' : lesson.subject,
+                  teacher && lesson.classGroupName != null
+                      ? '${lesson.classGroupName} · ${lesson.subject}'
+                      : lesson.subject,
                   style: t.heroTitle.copyWith(
                     color: fg,
                     decoration: lesson.isCancelled ? TextDecoration.lineThrough : null,
@@ -304,7 +315,8 @@ class _LessonSheet extends StatelessWidget {
                   Wrap(
                     spacing: 6,
                     children: [
-                      if (lesson.isCancelled) GStatusPill(label: l.pillCancelled, tone: GTone.warn, icon: GIcons.excuse),
+                      if (lesson.isCancelled)
+                        GStatusPill(label: l.pillCancelled, tone: GTone.warn, icon: GIcons.excuse),
                       if (lesson.isJoint) GStatusPill(label: l.pillJoint, tone: GTone.neutral),
                     ],
                   ),
@@ -339,7 +351,12 @@ class _LessonSheet extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Row(
                         children: [
-                          GIcon(hw.isDone ? GIcons.ok : GIcons.homework, size: 20, color: hw.isDone ? c.ok : c.ink2, fill: hw.isDone ? 1 : 0),
+                          GIcon(
+                            hw.isDone ? GIcons.ok : GIcons.homework,
+                            size: 20,
+                            color: hw.isDone ? c.ok : c.ink2,
+                            fill: hw.isDone ? 1 : 0,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(child: Text(hw.title, style: t.body)),
                         ],
@@ -357,13 +374,21 @@ class _LessonSheet extends StatelessWidget {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   if (mark != null)
-                    GStatusPill(label: mark!.code.isNotEmpty ? '${mark!.code} · ${presenceLabel(l, mark!.status)}' : presenceLabel(l, mark!.status), tone: presenceTone(mark!.status)),
+                    GStatusPill(
+                      label: mark!.code.isNotEmpty
+                          ? '${mark!.code} · ${presenceLabel(l, mark!.status)}'
+                          : presenceLabel(l, mark!.status),
+                      tone: presenceTone(mark!.status),
+                    ),
                   for (final g in grades) GradeChipOf(grade: g, size: GGradeSize.m),
                 ],
               ),
             )
           else if (!teacher && past && !lesson.isCancelled)
-            _Section(title: parent ? l.childMarks : l.myMarks, child: Text(l.notFilledYet, style: t.body.copyWith(color: c.ink3))),
+            _Section(
+              title: parent ? l.childMarks : l.myMarks,
+              child: Text(l.notFilledYet, style: t.body.copyWith(color: c.ink3)),
+            ),
         ],
       ),
     );

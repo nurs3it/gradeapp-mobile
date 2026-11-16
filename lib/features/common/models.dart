@@ -190,8 +190,10 @@ class Attachment {
 
   bool get isImage => RegExp(r'\.(png|jpe?g|gif|webp|heic)$', caseSensitive: false).hasMatch(name);
 
-  factory Attachment.fromJson(Json j) =>
-      Attachment(url: j.strOrNull('file_url') ?? j.strOrNull('file'), name: j.strOrNull('original_name') ?? j.str('name'));
+  factory Attachment.fromJson(Json j) => Attachment(
+    url: j.strOrNull('file_url') ?? j.strOrNull('file'),
+    name: j.strOrNull('original_name') ?? j.str('name'),
+  );
 }
 
 class Homework {
@@ -448,7 +450,14 @@ class Child {
 
 /// Academic quarter (`/schools/academic-terms/`).
 class Term {
-  const Term({required this.id, required this.number, required this.name, required this.start, required this.end, this.isCurrent = false});
+  const Term({
+    required this.id,
+    required this.number,
+    required this.name,
+    required this.start,
+    required this.end,
+    this.isCurrent = false,
+  });
   final String id;
   final int number;
   final String name;

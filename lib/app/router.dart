@@ -57,13 +57,15 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   NoTransitionPage<void> tab(Widget child) => NoTransitionPage(child: child);
 
-  StatefulShellBranch branch(String path, Widget screen, [List<RouteBase> routes = const []]) =>
-      StatefulShellBranch(
-        routes: [GoRoute(path: path, pageBuilder: (_, _) => tab(screen), routes: routes)],
-      );
+  StatefulShellBranch branch(String path, Widget screen, [List<RouteBase> routes = const []]) => StatefulShellBranch(
+    routes: [GoRoute(path: path, pageBuilder: (_, _) => tab(screen), routes: routes)],
+  );
 
   List<RouteBase> gradeDetail() => [
-    GoRoute(path: ':course', builder: (_, s) => SubjectScreen(courseId: s.pathParameters['course']!)),
+    GoRoute(
+      path: ':course',
+      builder: (_, s) => SubjectScreen(courseId: s.pathParameters['course']!),
+    ),
   ];
 
   StatefulShellRoute shell(AppRole role, List<StatefulShellBranch> branches) => StatefulShellRoute(
@@ -84,7 +86,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         routes: [
           GoRoute(path: 'password', builder: (_, _) => const PasswordLoginScreen()),
           GoRoute(path: 'code', builder: (_, _) => const CodeLoginScreen()),
-          GoRoute(path: 'reset', builder: (_, s) => ResetPasswordScreen(email: s.uri.queryParameters['email'])),
+          GoRoute(
+            path: 'reset',
+            builder: (_, s) => ResetPasswordScreen(email: s.uri.queryParameters['email']),
+          ),
         ],
       ),
       shell(AppRole.student, [
@@ -104,7 +109,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         branch('/t/week', const TeacherWeekScreen()),
         branch('/t/inbox', const InboxScreen()),
       ]),
-      GoRoute(path: '/lesson/:id', builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!)),
+      GoRoute(
+        path: '/lesson/:id',
+        builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!),
+      ),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(
         path: '/checkin',

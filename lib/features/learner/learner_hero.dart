@@ -89,7 +89,11 @@ class LearnerHero extends StatelessWidget {
           : l.heroRest;
       return GHeroSheet(
         color: GColors.brand,
-        semanticLabel: [eyebrow, title, if (hasTasks && tomorrowMinutes > 0) l.approxMinutes(tomorrowMinutes)].join('. '),
+        semanticLabel: [
+          eyebrow,
+          title,
+          if (hasTasks && tomorrowMinutes > 0) l.approxMinutes(tomorrowMinutes),
+        ].join('. '),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -173,7 +177,12 @@ class LearnerHero extends StatelessWidget {
           ),
           if (meta.isNotEmpty) ...[
             const SizedBox(height: 4),
-            Text(meta, style: t.callout.copyWith(color: fg88), maxLines: 1, overflow: TextOverflow.ellipsis),
+            Text(
+              meta,
+              style: t.callout.copyWith(color: fg88),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
           if (!cancelled) ...[
             const SizedBox(height: 12),
@@ -189,10 +198,7 @@ class LearnerHero extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children: [
-                Text(
-                  (next != null ? l.heroNext : l.heroThen).toUpperCase(),
-                  style: t.eyebrow.copyWith(color: fg88),
-                ),
+                Text((next != null ? l.heroNext : l.heroThen).toUpperCase(), style: t.eyebrow.copyWith(color: fg88)),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
@@ -224,14 +230,21 @@ class _Countdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.t;
     final large = GScale.large(context);
-    final unitText = Text(unit, style: t.callout.copyWith(color: color, fontWeight: FontWeight.w600, height: 1.15));
+    final unitText = Text(
+      unit,
+      style: t.callout.copyWith(color: color, fontWeight: FontWeight.w600, height: 1.15),
+    );
     final digits = GRollingText(number, style: t.display.copyWith(color: color));
     if (large) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [digits, unitText]);
     }
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [digits, const SizedBox(width: 12), Flexible(child: unitText)],
+      children: [
+        digits,
+        const SizedBox(width: 12),
+        Flexible(child: unitText),
+      ],
     );
   }
 }

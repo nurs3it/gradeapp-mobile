@@ -41,24 +41,18 @@ class CheckInRun {
   /// The shot can be sent again (network problem, not a refusal of the photo).
   bool get canResend => photoPath != null && (offline || code == null || code == 'outside_area');
 
-  CheckInRun copy({
-    CheckInPhase? phase,
-    double? progress,
-    String? code,
-    int? distance,
-    bool? offline,
-    DateTime? at,
-  }) => CheckInRun(
-    phase: phase ?? this.phase,
-    progress: progress ?? this.progress,
-    code: code,
-    distance: distance,
-    offline: offline ?? false,
-    photoPath: photoPath,
-    lat: lat,
-    lon: lon,
-    at: at ?? this.at,
-  );
+  CheckInRun copy({CheckInPhase? phase, double? progress, String? code, int? distance, bool? offline, DateTime? at}) =>
+      CheckInRun(
+        phase: phase ?? this.phase,
+        progress: progress ?? this.progress,
+        code: code,
+        distance: distance,
+        offline: offline ?? false,
+        photoPath: photoPath,
+        lat: lat,
+        lon: lon,
+        at: at ?? this.at,
+      );
 }
 
 class CheckInController extends Notifier<CheckInRun> {

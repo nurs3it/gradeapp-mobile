@@ -35,7 +35,11 @@ class NotificationsScreen extends ConsumerWidget {
         ],
       ),
       body: switch (list) {
-        AsyncValue(:final value?) when value.isEmpty => GEmpty(title: l.notifEmpty, message: l.notifEmptyHint, icon: GIcons.bell),
+        AsyncValue(:final value?) when value.isEmpty => GEmpty(
+          title: l.notifEmpty,
+          message: l.notifEmptyHint,
+          icon: GIcons.bell,
+        ),
         AsyncValue(:final value?) => RefreshIndicator.adaptive(
           onRefresh: () async => ref.invalidate(notificationsProvider),
           child: ListView(

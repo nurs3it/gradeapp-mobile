@@ -80,7 +80,9 @@ class _Body extends ConsumerWidget {
     final dueTomorrow = day.homework.where((h) => h.dueDate == tomorrow && !done(h)).toList();
     final tomorrowMinutes = dueTomorrow.fold<int>(0, (s, h) => s + (h.minutes ?? 0));
     final needTomorrow = state.phase == DayPhase.after || state.phase == DayPhase.none;
-    final tomorrowDay = needTomorrow ? ref.watch(learnerDayProvider((studentId: studentId, date: tomorrow))).value : null;
+    final tomorrowDay = needTomorrow
+        ? ref.watch(learnerDayProvider((studentId: studentId, date: tomorrow))).value
+        : null;
 
     final allHw = ref.watch(homeworkProvider(studentId)).value ?? const <Homework>[];
     final overdue = allHw.where((h) => h.dueDate.compareTo(day.date) < 0 && !done(h)).length;
@@ -162,7 +164,10 @@ class _Body extends ConsumerWidget {
                   GRow(
                     leading: SizedBox(
                       width: 48,
-                      child: Text(hm(passed.first.start), style: context.t.callout.copyWith(color: context.c.ink3, fontWeight: FontWeight.w600)),
+                      child: Text(
+                        hm(passed.first.start),
+                        style: context.t.callout.copyWith(color: context.c.ink3, fontWeight: FontWeight.w600),
+                      ),
                     ),
                     marker: context.c.ink3,
                     title: Text(l.lessonsPassed(passed.length)),
@@ -173,7 +178,10 @@ class _Body extends ConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               for (final gr in passedGrades.take(2))
-                                Padding(padding: const EdgeInsets.only(left: 6), child: GradeChipOf(grade: gr)),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 6),
+                                  child: GradeChipOf(grade: gr),
+                                ),
                             ],
                           ),
                   ),

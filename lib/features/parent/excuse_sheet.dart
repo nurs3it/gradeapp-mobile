@@ -116,7 +116,8 @@ class _ExcuseFormState extends ConsumerState<_ExcuseForm> {
         MapEntry('end_date', to),
         MapEntry('category', _category),
         if (_comment.text.trim().isNotEmpty) MapEntry('reason', _comment.text.trim()),
-        if (_when == _When.lessons) for (final id in _lessons) MapEntry('lesson_ids', id),
+        if (_when == _When.lessons)
+          for (final id in _lessons) MapEntry('lesson_ids', id),
       ]);
     if (_proof != null) {
       form.files.add(MapEntry('attachment', await MultipartFile.fromFile(_proof!.path, filename: 'note.jpg')));
@@ -189,9 +190,13 @@ class _ExcuseFormState extends ConsumerState<_ExcuseForm> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Expanded(child: _DateButton(label: l.excuseFrom, date: _from, onTap: () => _pickDate(true))),
+                    Expanded(
+                      child: _DateButton(label: l.excuseFrom, date: _from, onTap: () => _pickDate(true)),
+                    ),
                     const SizedBox(width: 8),
-                    Expanded(child: _DateButton(label: l.excuseTo, date: _to, onTap: () => _pickDate(false))),
+                    Expanded(
+                      child: _DateButton(label: l.excuseTo, date: _to, onTap: () => _pickDate(false)),
+                    ),
                   ],
                 ),
               ],
@@ -226,7 +231,11 @@ class _ExcuseFormState extends ConsumerState<_ExcuseForm> {
                 runSpacing: 4,
                 children: [
                   for (final cat in const ['illness', 'family', 'appointment', 'other'])
-                    GChip(label: categoryName(l, cat), selected: _category == cat, onTap: () => setState(() => _category = cat)),
+                    GChip(
+                      label: categoryName(l, cat),
+                      selected: _category == cat,
+                      onTap: () => setState(() => _category = cat),
+                    ),
                 ],
               ),
               label(l.excuseComment),
@@ -331,7 +340,11 @@ Future<void> showConsentSheet(BuildContext context, WidgetRef ref, {required Str
             const SizedBox(height: 16),
             Text(l.consentSheetTitle, style: ctx.t.title1, textAlign: TextAlign.center),
             const SizedBox(height: 16),
-            for (final (icon, text) in [(GIcons.lock, l.consentWho), (GIcons.clock, l.consentKeep), (GIcons.undo, l.consentWhere)])
+            for (final (icon, text) in [
+              (GIcons.lock, l.consentWho),
+              (GIcons.clock, l.consentKeep),
+              (GIcons.undo, l.consentWhere),
+            ])
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Row(
