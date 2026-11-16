@@ -12,100 +12,128 @@ class AppLocalizationsKk extends AppLocalizations {
   String get appName => 'GradeApp';
 
   @override
-  String get loginTitle => 'GradeApp-қа кіру';
-
-  @override
-  String get loginSubtitle => 'Мектеп аккаунтының поштасы мен құпиясөзін енгізіңіз';
-
-  @override
-  String get email => 'Пошта';
-
-  @override
-  String get password => 'Құпиясөз';
-
-  @override
-  String get otpCode => 'Аутентификатор қосымшасының коды';
-
-  @override
-  String get otpHint => '6 сан';
-
-  @override
-  String get signIn => 'Кіру';
-
-  @override
-  String get loginInvalid => 'Пошта немесе құпиясөз қате';
-
-  @override
-  String get loginOtpInvalid => 'Код қате';
-
-  @override
-  String get loginNoRole => 'Мобильді қосымшада әзірге оқушы, ата-ана және мұғалім кабинеттері қолжетімді';
-
-  @override
-  String get signOut => 'Шығу';
-
-  @override
-  String get errorTitle => 'Жүктеу мүмкін болмады';
-
-  @override
-  String get errorMessage => 'Интернетті тексеріп, қайталап көріңіз';
-
-  @override
-  String get retry => 'Қайталау';
-
-  @override
-  String get offlineSaved => 'Телефонда сақталды — желі пайда болғанда жібереміз';
-
-  @override
-  String syncPending(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count өзгеріс жіберуді күтуде');
-    return '$_temp0';
-  }
-
-  @override
-  String get syncRejected => 'Сервер өзгерісті қабылдамады. Тексеріп, қайта белгілеңіз';
-
-  @override
-  String get synced => 'Бәрі жіберілді';
-
-  @override
   String get tabToday => 'Бүгін';
 
   @override
-  String get tabSchedule => 'Кесте';
+  String get tabWeek => 'Апта';
 
   @override
   String get tabGrades => 'Бағалар';
 
   @override
-  String get tabHomework => 'Тапсырмалар';
+  String get tabTasks => 'Тапсырмалар';
 
   @override
-  String get tabProfile => 'Профиль';
+  String get tabFamily => 'Отбасы';
 
   @override
-  String get tabLessons => 'Сабақтар';
+  String get tabInbox => 'Кіріс';
 
   @override
-  String get now => 'Қазір';
-
-  @override
-  String get next => 'Келесі';
-
-  @override
-  String greetingMorning(String name) {
-    return 'Қайырлы таң, $name';
+  String tabWithBadge(String tab, int count) {
+    return '$tab, жаңасы: $count';
   }
 
   @override
-  String greetingDay(String name) {
-    return 'Қайырлы күн, $name';
+  String get back => 'Артқа';
+
+  @override
+  String get close => 'Жабу';
+
+  @override
+  String get cancel => 'Бас тарту';
+
+  @override
+  String get done => 'Дайын';
+
+  @override
+  String get retry => 'Қайталау';
+
+  @override
+  String get undo => 'Болдырмау';
+
+  @override
+  String get save => 'Сақтау';
+
+  @override
+  String get delete => 'Жою';
+
+  @override
+  String get skip => 'Өткізу';
+
+  @override
+  String get notNow => 'Қазір емес';
+
+  @override
+  String get continueAction => 'Жалғастыру';
+
+  @override
+  String get change => 'Өзгерту';
+
+  @override
+  String get add => 'Қосу';
+
+  @override
+  String get openSettings => 'Баптауларды ашу';
+
+  @override
+  String get send => 'Жіберу';
+
+  @override
+  String get errorTitle => 'Жүктеу мүмкін болмады';
+
+  @override
+  String get errorOffline => 'Желі жоқ. Интернетті тексеріп, қайталаңыз';
+
+  @override
+  String get errorGeneric => 'Бір қате кетті. Қайта көріңіз';
+
+  @override
+  String offlineBar(String time) {
+    return 'Желі жоқ. $time кезіндегі деректер көрсетілген';
   }
 
   @override
-  String greetingEvening(String name) {
-    return 'Қайырлы кеш, $name';
+  String get offlineBarNoTime => 'Желі жоқ. Сақталған деректер көрсетілген';
+
+  @override
+  String updatedAt(String time) {
+    return '$time жаңартылды';
   }
+
+  @override
+  String minutesShort(int m) {
+    return '$m мин';
+  }
+
+  @override
+  String approxMinutes(int m) {
+    return '≈ $m мин';
+  }
+
+  @override
+  String inMinutes(int m) {
+    return '$m минуттан кейін';
+  }
+
+  @override
+  String room(String room) {
+    return '$room каб.';
+  }
+
+  @override
+  String nOfM(int n, int m) {
+    return '$n / $m';
+  }
+
+  @override
+  String get yesterday => 'Кеше';
+
+  @override
+  String get tomorrow => 'Ертең';
+
+  @override
+  String get todayWord => 'Бүгін';
 
   @override
   String lessonsCount(int count) {
@@ -114,205 +142,16 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
-  String get noLessonsTitle => 'Сабақ жоқ';
-
-  @override
-  String get noLessonsMessage => 'Бұл күні сабақ жоқ';
-
-  @override
-  String room(String room) {
-    return '$room каб.';
-  }
-
-  @override
-  String lessonEndsIn(int minutes) {
-    return '$minutes минуттан кейін аяқталады';
-  }
-
-  @override
-  String lessonStartsIn(int minutes) {
-    return '$minutes минуттан кейін басталады';
-  }
-
-  @override
-  String get dayDone => 'Бүгінгі сабақтар аяқталды';
-
-  @override
-  String get presencePresent => 'Келді';
-
-  @override
-  String get presenceAbsent => 'Жоқ';
-
-  @override
-  String get presenceTardy => 'Кешікті';
-
-  @override
-  String get presenceExcused => 'Себепті';
-
-  @override
-  String get presenceAbsentLong => 'Келмеді';
-
-  @override
-  String get presenceExcusedLong => 'Себепті жоқ';
-
-  @override
-  String get checkInTitle => 'Мен мектептемін';
-
-  @override
-  String get checkInAction => 'Белгілену';
-
-  @override
-  String get checkInHint => 'Кіреберісте селфи түсіріңіз — мұғалім келгеніңізді көреді';
-
-  @override
-  String checkInDone(String time) {
-    return '$time белгіленді';
-  }
-
-  @override
-  String get checkInLate => 'Кешігу';
-
-  @override
-  String checkInWindow(String from, String to) {
-    return 'Белгілену уақыты: $from–$to';
-  }
-
-  @override
-  String get checkInNoConsent => 'Ата-ана фото-белгілеуге әлі келісім бермеген';
-
-  @override
-  String get checkInSending => 'Жіберілуде…';
-
-  @override
-  String get checkInSuccess => 'Дайын, сіз белгілендіңіз';
-
-  @override
-  String get checkInLocationDenied => 'Геолокацияға рұқсат беріңіз — мектеп сіздің орныңызды тексереді';
-
-  @override
-  String checkInOutside(int meters) {
-    return 'Сіз мектеп аумағынан тыссыз ($meters м)';
-  }
-
-  @override
-  String get checkInStale => 'Дәл қазір түсірілген жаңа фото қажет';
-
-  @override
-  String get checkInAlready => 'Сіз бүгін белгіленіп қойдыңыз';
-
-  @override
-  String get checkInClosed => 'Белгілену уақыты аяқталды';
-
-  @override
-  String childCheckedIn(String time) {
-    return 'Мектепке $time келді';
-  }
-
-  @override
-  String get childNotCheckedIn => 'Мектепте әлі белгіленбеді';
-
-  @override
-  String get homeworkDue => 'Тапсырмалар';
-
-  @override
-  String get homeworkEmptyTitle => 'Тапсырма жоқ';
-
-  @override
-  String get homeworkEmptyMessage => 'Жаңа тапсырмалар осында шығады';
-
-  @override
-  String get homeworkActive => 'Өзекті';
-
-  @override
-  String get homeworkDoneTab => 'Орындалған';
-
-  @override
-  String homeworkMinutes(int minutes) {
-    return '≈ $minutes мин';
-  }
-
-  @override
-  String get dueToday => 'Бүгін тапсыру';
-
-  @override
-  String get dueTomorrow => 'Ертең тапсыру';
-
-  @override
-  String dueOn(String date) {
-    return '$date дейін тапсыру';
-  }
-
-  @override
-  String get overdue => 'Мерзімі өтті';
-
-  @override
-  String get attachments => 'Файлдар';
-
-  @override
-  String get markDone => 'Орындалды деп белгілеу';
-
-  @override
-  String get markUndone => 'Өзектіге қайтару';
-
-  @override
-  String get recentGrades => 'Соңғы бағалар';
-
-  @override
-  String get gradesEmptyTitle => 'Әзірге баға жоқ';
-
-  @override
-  String get gradesEmptyMessage => 'Барлық пәндер бойынша бағалар осында шығады';
-
-  @override
-  String get average => 'Орташа';
-
-  @override
-  String gradesCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count баға');
+  String tasksCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count тапсырма');
     return '$_temp0';
   }
 
   @override
-  String get all => 'Барлығы';
-
-  @override
-  String get weekPrev => 'Алдыңғы апта';
-
-  @override
-  String get weekNext => 'Келесі апта';
-
-  @override
-  String get today => 'Бүгін';
-
-  @override
-  String get profileChildren => 'Балалар';
-
-  @override
-  String get photoConsent => '«Мен мектептемін» фото-белгілеуі';
-
-  @override
-  String get photoConsentHint => 'Бала кіреберісте селфимен белгілене алады';
-
-  @override
-  String get language => 'Тіл';
-
-  @override
-  String get theme => 'Тақырып';
-
-  @override
-  String get themeSystem => 'Жүйедегідей';
-
-  @override
-  String get themeAuto => 'Авто';
-
-  @override
-  String get themeLight => 'Ашық';
-
-  @override
-  String get themeDark => 'Күңгірт';
-
-  @override
-  String get role => 'Кабинет';
+  String tasksUnit(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: 'тапсырма');
+    return '$_temp0';
+  }
 
   @override
   String get roleTeacher => 'Мұғалім';
@@ -324,101 +163,1718 @@ class AppLocalizationsKk extends AppLocalizations {
   String get roleStudent => 'Оқушы';
 
   @override
+  String get notifications => 'Хабарландырулар';
+
+  @override
+  String notificationsUnread(int count) {
+    return 'Хабарландырулар, оқылмағаны: $count';
+  }
+
+  @override
+  String get profile => 'Профиль';
+
+  @override
+  String switchChild(String name) {
+    return 'Баланы ауыстыру, қазір $name';
+  }
+
+  @override
+  String get profileSchools => 'Мектептер';
+
+  @override
+  String get profileChildren => 'Балалар';
+
+  @override
+  String get settingsNotifications => 'Хабарландырулар';
+
+  @override
+  String get settingsLanguage => 'Тіл';
+
+  @override
+  String get settingsTheme => 'Көрініс';
+
+  @override
+  String get themeSystem => 'Жүйедегідей';
+
+  @override
+  String get themeLight => 'Ашық';
+
+  @override
+  String get themeDark => 'Қараңғы';
+
+  @override
+  String get langSystem => 'Жүйедегідей';
+
+  @override
+  String get langKk => 'Қазақша';
+
+  @override
+  String get langRu => 'Русский';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get openWeb => 'Веб-нұсқасын ашу';
+
+  @override
+  String get about => 'Қосымша туралы';
+
+  @override
+  String version(String v) {
+    return 'Нұсқа $v';
+  }
+
+  @override
+  String get signOut => 'Шығу';
+
+  @override
   String get signOutConfirm => 'Аккаунттан шығасыз ба?';
 
   @override
-  String get cancel => 'Болдырмау';
+  String signOutPending(int count) {
+    return '$count жазба жіберілмеген. Шықсаңыз, олар жоғалады';
+  }
+
+  @override
+  String get signOutSendFirst => 'Жіберіп, шығу';
+
+  @override
+  String get signOutAnyway => 'Жібермей шығу';
+
+  @override
+  String get signOutWaitNet => 'Желі жоқ — жазбалар әлі жіберілмеді';
+
+  @override
+  String get photoConsent => 'Селфимен белгілеу';
+
+  @override
+  String get consentOn => 'рұқсат етілген';
+
+  @override
+  String get consentOff => 'рұқсат етілмеген';
+
+  @override
+  String get consentRevoke => 'Селфимен белгілеуге тыйым салу керек пе?';
+
+  @override
+  String get consentRevokeBody => 'Бала «Мен мектептемін» белгісін фотомен қоя алмайды';
+
+  @override
+  String get consentRevokeAction => 'Тыйым салу';
+
+  @override
+  String get switchSchoolFailed => 'Мектепті ауыстыру мүмкін болмады';
 
   @override
   String get noChildrenTitle => 'Балалар байланыстырылмаған';
 
   @override
-  String get noChildrenMessage => 'Мектептен баланы аккаунтыңызға байланыстыруды сұраңыз';
+  String get noChildrenMessage => 'Баланы аккаунтыңызға байланыстыруды мектептен сұраңыз';
 
   @override
-  String get teacherTodayEmpty => 'Бүгін сабақ жоқ';
+  String get allFamily => 'Бүкіл отбасы';
 
   @override
-  String get overdueTitle => 'Толтырылмаған';
+  String className(String name) {
+    return '$name сынып';
+  }
 
   @override
-  String get overdueHint => 'Соңғы екі аптадағы белгісіз немесе тақырыпсыз сабақтар';
+  String get loginTagline => 'Мектеп кестесі, бағалар мен журнал — бір қосымшада';
 
   @override
-  String get missingAttendance => 'Қатысу';
+  String get loginHow => 'Қалай кіресіз?';
 
   @override
-  String get missingTopic => 'Тақырып';
+  String get loginWithPassword => 'Логин мен құпиясөз';
+
+  @override
+  String get loginWithPasswordHint => 'Мектеп берген пошта не логин';
+
+  @override
+  String get loginWithCode => 'Мектеп берген код';
+
+  @override
+  String get loginWithCodeHint => 'ABCDE-12345 түріндегі коды бар парақ';
+
+  @override
+  String get loginTitle => 'Кіру';
+
+  @override
+  String get loginField => 'Пошта немесе логин';
+
+  @override
+  String get password => 'Құпиясөз';
+
+  @override
+  String get showPassword => 'Құпиясөзді көрсету';
+
+  @override
+  String get hidePassword => 'Құпиясөзді жасыру';
+
+  @override
+  String get forgotPassword => 'Құпиясөзді ұмыттыңыз ба?';
+
+  @override
+  String get signIn => 'Кіру';
+
+  @override
+  String get loginInvalid => 'Логин немесе құпиясөз қате';
+
+  @override
+  String get loginBlocked => 'Аккаунт бұғатталған — мектепке хабарласыңыз';
+
+  @override
+  String get loginThrottled => 'Тым көп әрекет. Бір минут күтіңіз';
+
+  @override
+  String get loginNoRole => 'Қосымшада әзірге оқушы, ата-ана және мұғалім кабинеттері ғана бар';
+
+  @override
+  String get otpTitle => 'Растау коды';
+
+  @override
+  String get otpHint => 'Аутентификатор қосымшасындағы 6 цифрды енгізіңіз';
+
+  @override
+  String get otpInvalid => 'Код қате';
+
+  @override
+  String get resetTitle => 'Құпиясөзді қалпына келтіру';
+
+  @override
+  String get resetHint => 'Жаңа құпиясөз орнату үшін поштаға сілтеме жібереміз';
+
+  @override
+  String get resetEmail => 'Пошта';
+
+  @override
+  String get resetSend => 'Сілтемені жіберу';
+
+  @override
+  String get resetSentTitle => 'Поштаңызды тексеріңіз';
+
+  @override
+  String resetSentBody(String email) {
+    return 'Егер $email мекенжайы GradeApp-та тіркелген болса, оған сілтемесі бар хат келеді';
+  }
+
+  @override
+  String get resetOtherEmail => 'Басқа мекенжай енгізу';
+
+  @override
+  String get codeTitle => 'Мектеп берген код';
+
+  @override
+  String get codeHint => 'Код мектеп берген парақта басылған';
+
+  @override
+  String get codeInvalid => 'Код табылмады немесе бұрын қолданылған';
+
+  @override
+  String get codeIncomplete => 'Кодта 10 таңба бар';
+
+  @override
+  String get codePasswordTitle => 'Құпиясөз ойлап табыңыз';
+
+  @override
+  String get codePasswordHint => 'Онымен қосымшаға және сайтқа кіресіз';
+
+  @override
+  String get codePwLength => 'Кемінде 8 таңба';
+
+  @override
+  String get codePwMixed => 'Әріптер мен цифрлар бар';
+
+  @override
+  String get codePwMatch => 'Құпиясөздер сәйкес';
+
+  @override
+  String get codePwRepeat => 'Құпиясөзді қайталаңыз';
+
+  @override
+  String get codeLoginTitle => 'Сіздің логиніңіз';
+
+  @override
+  String get codeLoginHint => 'Онымен веб-нұсқаға да кіруге болады';
+
+  @override
+  String get copy => 'Көшіру';
+
+  @override
+  String get copied => 'Көшірілді';
+
+  @override
+  String stepOf(int step, int total) {
+    return '$step/$total қадам';
+  }
+
+  @override
+  String get heroNow => 'Қазір';
+
+  @override
+  String get heroNext => 'Келесі';
+
+  @override
+  String heroLessonN(int n) {
+    return '$n-сабақ';
+  }
+
+  @override
+  String get heroLast => 'соңғы';
+
+  @override
+  String get heroPause => 'Үзіліс';
+
+  @override
+  String get heroPauseNext => 'келесі сабақ';
+
+  @override
+  String get heroUntilBell => 'қоңырауға дейін';
+
+  @override
+  String get heroUntilStart => 'басталуына дейін';
+
+  @override
+  String get heroUntilLesson => 'сабаққа дейін';
+
+  @override
+  String get heroMin => 'мин';
+
+  @override
+  String get heroDayOver => 'Күн аяқталды';
+
+  @override
+  String get heroForTomorrow => 'Ертеңге';
+
+  @override
+  String get heroOpenTasks => 'Тапсырмаларды ашу';
+
+  @override
+  String get heroNoLessons => 'Бүгін сабақ жоқ';
+
+  @override
+  String get heroRest => 'Демалуға болады';
+
+  @override
+  String get heroCancelled => 'болмайды';
+
+  @override
+  String get heroThen => 'Содан кейін';
+
+  @override
+  String heroInstead(String who, String whom) {
+    return '$whom орнына $who';
+  }
+
+  @override
+  String heroSemantic(String state, String subject, String details, String countdown) {
+    return '$state $subject, $details. $countdown';
+  }
+
+  @override
+  String heroCountdown(String label, int m) {
+    return '$label: $m мин';
+  }
+
+  @override
+  String heroNextLine(String time, String subject) {
+    return 'Келесі $time $subject';
+  }
+
+  @override
+  String heroTomorrowPlan(int count, String time) {
+    return 'Ертең $time бастап $count сабақ';
+  }
+
+  @override
+  String heroTasksDone(int done, int total) {
+    return 'Үй тапсырмасы: $total ішінен $done дайын';
+  }
+
+  @override
+  String get tileTomorrow => 'Ертеңге';
+
+  @override
+  String get tileNewGrades => 'Жаңа бағалар';
+
+  @override
+  String get tileOverdue => 'Мерзімі өтті';
+
+  @override
+  String get dayPlan => 'Күн жоспары';
+
+  @override
+  String lessonsPassed(int count) {
+    return '$count сабақ өтті';
+  }
+
+  @override
+  String get pillNow => 'қазір';
+
+  @override
+  String get pillSubstitution => 'алмастыру';
+
+  @override
+  String get pillCancelled => 'болмайды';
+
+  @override
+  String get pillJoint => 'біріктірілген';
+
+  @override
+  String breakLine(int m) {
+    return 'үзіліс $m мин';
+  }
+
+  @override
+  String get checkInTitle => 'Мен мектептемін';
+
+  @override
+  String checkInBy(String time) {
+    return 'Белгілеу $time дейін';
+  }
+
+  @override
+  String get checkInSubtitle => 'Кіреберісте селфи — 5 секунд';
+
+  @override
+  String checkInOpensAt(String time) {
+    return 'Белгілеу $time ашылады';
+  }
+
+  @override
+  String checkInDoneAt(String time) {
+    return '$time бастап мектептесің';
+  }
+
+  @override
+  String get checkInOnTime => 'Уақытында белгі қойдың';
+
+  @override
+  String checkInLateAt(String time) {
+    return '$time белгіленді · кешігу';
+  }
+
+  @override
+  String checkInClosed(String time) {
+    return 'Белгілеу терезесі $time жабылды';
+  }
+
+  @override
+  String get checkInClosedHint => 'Мектепте болсаң, сынып жетекшісіне айт';
+
+  @override
+  String get checkInNoConsent => 'Фотоға ата-ананың рұқсаты керек';
+
+  @override
+  String get checkInAskParent => 'Ата-анадан қалай сұрауға болады';
+
+  @override
+  String get checkInAskParentHint =>
+      'Ата-анаң мұны өз GradeApp қосымшасында рұқсат етеді: «Бүгін» → «Рұқсат беру». Бір минут қана';
+
+  @override
+  String get checkInSending => 'Фото жіберілуде…';
+
+  @override
+  String checkInSendingPct(int pct) {
+    return 'Жіберілуде… $pct %';
+  }
+
+  @override
+  String checkInOutside(int meters) {
+    return 'Мектептен $meters м қашықтықтасың. Кіреберіске жақындап, қайтала';
+  }
+
+  @override
+  String get checkInNeedLocation => 'Геолокацияны қос';
+
+  @override
+  String get checkInStale => 'Жаңа сурет түсір';
+
+  @override
+  String get checkInOffline => 'Желі жоқ. Терезе ашық тұрғанда, жаңа суретсіз қайталаймыз';
+
+  @override
+  String get checkInAlready => 'Бүгін белгі қойып қойдың';
+
+  @override
+  String get checkInWindowClosed => 'Белгілеу терезесі жабық';
+
+  @override
+  String get checkInFailed => 'Фотоны жіберу мүмкін болмады';
+
+  @override
+  String get checkInOpenCamera => 'Камераны ашу';
+
+  @override
+  String get camLocating => 'Орналасқан жер ізделуде…';
+
+  @override
+  String camAtSchool(String time) {
+    return 'Мектеп жанындасың · терезе $time дейін';
+  }
+
+  @override
+  String camWindowUntil(String time) {
+    return 'Терезе $time дейін';
+  }
+
+  @override
+  String get camFar => 'Мектептен алыс';
+
+  @override
+  String get camHint => 'Бетің сопақ ішінде — түсір';
+
+  @override
+  String get camPrivacy => 'Фотоны тек мектеп қызметкерлері көреді. Ол 30 күннен кейін өшеді';
+
+  @override
+  String get camShutter => 'Суретке түсіру';
+
+  @override
+  String get camFlashOn => 'Экран жарқылын қосу';
+
+  @override
+  String get camFlashOff => 'Экран жарқылын өшіру';
+
+  @override
+  String get camRetake => 'Қайта түсіру';
+
+  @override
+  String get camUnavailable => 'Камера қолжетімсіз';
+
+  @override
+  String get camDenied => 'Телефон баптауларында GradeApp үшін «Камера» рұқсатын қос';
+
+  @override
+  String get camExplainTitle => 'Селфимен белгілеу';
+
+  @override
+  String get camExplainWhy => 'Кіреберістегі селфи мектепте екеніңді растайды';
+
+  @override
+  String get camExplainWho => 'Фотоны тек мектеп қызметкерлері көреді';
+
+  @override
+  String get camExplainKeep => 'Фото 30 күннен кейін өшеді';
+
+  @override
+  String get doneTitle => 'Белгіленді';
+
+  @override
+  String doneOnTime(String time) {
+    return '$time · уақытында';
+  }
+
+  @override
+  String doneLate(String time) {
+    return '$time · кешігу';
+  }
+
+  @override
+  String doneLateMin(String time, int m) {
+    return '$time · $m мин кешігу';
+  }
+
+  @override
+  String doneFirstLesson(String time) {
+    return 'Бірінші сабақ · $time';
+  }
+
+  @override
+  String get doneParents => 'Ата-анаң белгіні қосымшадан көреді';
+
+  @override
+  String weekEyebrow(String range, String term) {
+    return '$range · $term';
+  }
+
+  @override
+  String get weekGoToday => 'Бүгін';
+
+  @override
+  String weekDaySpan(String lessons, String from, String to) {
+    return '$lessons · $from–$to';
+  }
+
+  @override
+  String get weekNoLessons => 'Сабақ жоқ';
+
+  @override
+  String get weekNoLessonsHint => 'Бұл күні сабақ жоқ';
+
+  @override
+  String get weekPrev => 'Алдыңғы апта';
+
+  @override
+  String get weekNext => 'Келесі апта';
+
+  @override
+  String get hwShort => 'ҮТ';
+
+  @override
+  String get dotChanges => 'өзгерістер бар';
+
+  @override
+  String get dotHomework => 'үй тапсырмасы бар';
+
+  @override
+  String get dotExam => 'БЖБ не ТЖБ';
+
+  @override
+  String lessonOrdinal(String weekday, int n) {
+    return '$weekday · $n-сабақ';
+  }
+
+  @override
+  String get teacher => 'Мұғалім';
+
+  @override
+  String get topicLabel => 'Тақырып';
+
+  @override
+  String get lessonHomework => 'Сабаққа тапсырма';
+
+  @override
+  String get myMarks => 'Менің белгілерім';
+
+  @override
+  String get childMarks => 'Белгілер';
+
+  @override
+  String get notFilledYet => 'Мұғалім әлі толтырмады';
+
+  @override
+  String get explainAbsence => 'Себебін түсіндіру';
+
+  @override
+  String get openLesson => 'Сабақты ашу';
+
+  @override
+  String get presencePresent => 'сабақта болды';
+
+  @override
+  String get presenceAbsent => 'келмеді';
+
+  @override
+  String get presenceTardy => 'кешікті';
+
+  @override
+  String get presenceExcused => 'дәлелді себеп';
+
+  @override
+  String gradesEyebrow(String term, int week) {
+    return '$term · $week-апта';
+  }
+
+  @override
+  String termShort(int n) {
+    return '$n тоқс.';
+  }
+
+  @override
+  String get termRunning => 'жүріп жатыр';
+
+  @override
+  String termPick(String term) {
+    return '$term таңдау';
+  }
+
+  @override
+  String get segSubjects => 'Пәндер';
+
+  @override
+  String get segFeed => 'Таспа';
+
+  @override
+  String subjectsCount(int count) {
+    return '$count пән';
+  }
+
+  @override
+  String get sortAttention => 'Алдымен назарды қажет ететіндер';
+
+  @override
+  String get sortAlpha => 'Әліпби бойынша';
+
+  @override
+  String get prelim => 'алдын ала';
+
+  @override
+  String get gradesEmpty => 'Бұл тоқсанда әлі баға жоқ';
+
+  @override
+  String get gradesEmptyHint => 'Алғашқысы сабақтан кейін шығады';
+
+  @override
+  String insightStrong(String subject) {
+    return 'Ең жақсысы — $subject.';
+  }
+
+  @override
+  String insightWeak(String subject, int pct) {
+    return '$subject назар аударуды қажет етеді: $pct %.';
+  }
+
+  @override
+  String quarterResults(String term) {
+    return 'Қорытынды: $term';
+  }
+
+  @override
+  String get howCalculated => 'Тоқсандық баға қалай шығады';
+
+  @override
+  String get howCalcBody => 'Мектеп пен табель де осылай есептейді';
+
+  @override
+  String get howCalcMissing => 'Бір бөлігі әлі жоқ болса, оның салмағы қалғандарына бөлінеді';
+
+  @override
+  String get pctToMark => '% → баға';
+
+  @override
+  String pctFrom(int pct) {
+    return '$pct % бастап';
+  }
+
+  @override
+  String get formulaMissing => 'Мектеп формуласы жүктелмеді, сондықтан тоқсандық баға жасырылды';
+
+  @override
+  String subjectPrelim(String term) {
+    return '$term · алдын ала';
+  }
+
+  @override
+  String subjectFinal(String term) {
+    return '$term · қорытынды';
+  }
+
+  @override
+  String worksCount(int count) {
+    return '$count жұмыс';
+  }
+
+  @override
+  String toNextMark(String mark, int pct) {
+    return '«$mark» үшін $pct % жетпейді';
+  }
+
+  @override
+  String get works => 'Жұмыстар';
+
+  @override
+  String get newestFirst => 'жаңалары жоғарыда';
+
+  @override
+  String get kindFo => 'ҚБ';
+
+  @override
+  String get kindSor => 'БЖБ';
+
+  @override
+  String get kindSoch => 'ТЖБ';
+
+  @override
+  String gradeSemantic(String value, String tone) {
+    return 'Баға $value, $tone';
+  }
+
+  @override
+  String get toneExcellent => 'өте жақсы';
+
+  @override
+  String get toneGood => 'жақсы';
+
+  @override
+  String get toneFair => 'қанағаттанарлық';
+
+  @override
+  String get tonePoor => 'қанағаттанарлықсыз';
+
+  @override
+  String get newWord => 'жаңа';
+
+  @override
+  String tasksEyebrow(int count) {
+    return 'Осы аптада: $count тапсырма';
+  }
+
+  @override
+  String get sectionOverdue => 'Мерзімі өтті';
+
+  @override
+  String get sectionToday => 'Бүгін';
+
+  @override
+  String get sectionTomorrow => 'Ертең';
+
+  @override
+  String get sectionWeek => 'Осы аптада';
+
+  @override
+  String get sectionLater => 'Кейінірек';
+
+  @override
+  String sectionDone(int count) {
+    return 'Орындалды: $count';
+  }
+
+  @override
+  String get allSubjects => 'Барлығы';
+
+  @override
+  String get markDone => 'Дайын деп белгілеу';
+
+  @override
+  String get markUndone => 'Орындалмағандарға қайтару';
+
+  @override
+  String get doneToast => 'Тапсырма дайын деп белгіленді';
+
+  @override
+  String get undoneToast => 'Тапсырма тізімге қайтты';
+
+  @override
+  String get hwDone => 'орындалды';
+
+  @override
+  String get hwNotDone => 'орындалмады';
+
+  @override
+  String dueBy(String date) {
+    return '$date дейін';
+  }
+
+  @override
+  String attachmentsCount(int count) {
+    return '$count файл';
+  }
+
+  @override
+  String get tasksEmpty => 'Тапсырма жоқ';
+
+  @override
+  String get tasksEmptyHint => 'Мұғалімдердің жаңа тапсырмалары осында шығады';
+
+  @override
+  String taskToggleDone(String title) {
+    return '«$title» дайын деп белгілеу';
+  }
+
+  @override
+  String taskToggleUndone(String title) {
+    return '«$title» қайтару';
+  }
+
+  @override
+  String get openFile => 'Файлды ашу';
+
+  @override
+  String loadToday(int used, int norm) {
+    return 'Жүктеме: $norm минуттың $used';
+  }
+
+  @override
+  String get verdictOk => 'Бәрі жақсы';
+
+  @override
+  String get verdictQuestion => 'Сұрақ бар';
+
+  @override
+  String get verdictAction => 'Әрекет керек';
+
+  @override
+  String get verdictAlarm => 'Мектепте белгі қоймады';
+
+  @override
+  String get verdictNoLessons => 'Бүгін сабақ жоқ';
+
+  @override
+  String verdictUpdated(String time) {
+    return '$time кезіндегі деректер';
+  }
+
+  @override
+  String factArrived(String time) {
+    return '$time бастап мектепте.';
+  }
+
+  @override
+  String factLessons(int done, int total) {
+    return '$total сабақтың $done өтті.';
+  }
+
+  @override
+  String factBeforeLessons(String time) {
+    return 'Бірінші сабақ $time.';
+  }
+
+  @override
+  String factAbsent(String subject) {
+    return 'Сабаққа келмеді: $subject';
+  }
+
+  @override
+  String get factNoReason => 'себебі көрсетілмеген.';
+
+  @override
+  String factLate(String time) {
+    return 'Кешігу: $time белгіленді.';
+  }
+
+  @override
+  String factLowGrade(String subject, String value) {
+    return 'Төмен баға: $subject $value.';
+  }
+
+  @override
+  String get factExcused => 'Бүгінге рұқсат алынған.';
+
+  @override
+  String factAlarm(String time) {
+    return 'Бірінші сабақ $time басталды. Белгі де, өтініш те жоқ.';
+  }
+
+  @override
+  String get factNoConsent => 'Селфимен белгілеу сіздің рұқсатыңызды күтуде.';
+
+  @override
+  String factTomorrow(String lessons, String time) {
+    return 'Ертең $time бастап $lessons.';
+  }
+
+  @override
+  String factNewGrade(String subject) {
+    return 'жаңа баға · $subject';
+  }
+
+  @override
+  String get actExcuse => 'Сұрап алу';
+
+  @override
+  String get actExplain => 'Түсіндіру';
+
+  @override
+  String get actAllow => 'Рұқсат беру';
+
+  @override
+  String get attentionTitle => 'Назар аударыңыз';
+
+  @override
+  String attAbsent(String time) {
+    return 'Келмеді · $time';
+  }
+
+  @override
+  String get attNoConsent => 'Селфимен белгілеу';
+
+  @override
+  String get attNoConsentSub => 'Сіздің рұқсатыңыз керек';
+
+  @override
+  String get attRejected => 'Өтініш қабылданбады';
+
+  @override
+  String get attPending => 'Өтініш сынып жетекшісінде қаралуда';
+
+  @override
+  String get feedTitle => 'Күн таспасы';
+
+  @override
+  String get feedNewest => 'жаңасы жоғарыда';
+
+  @override
+  String get feedArrived => 'Мектепке келді';
+
+  @override
+  String feedArrivedSub(String state) {
+    return 'селфимен белгі · $state';
+  }
+
+  @override
+  String get feedOnTime => 'уақытында';
+
+  @override
+  String get feedLate => 'кешігу';
+
+  @override
+  String get feedNow => 'қазір жүріп жатыр';
+
+  @override
+  String get feedMarkedAbsent => 'келмеді деп белгіленді';
+
+  @override
+  String get feedEmpty => 'Әзірге ештеңе болған жоқ';
+
+  @override
+  String forTomorrowLine(String tasks, int m, int done) {
+    return '$tasks · ≈ $m мин · $done дайын';
+  }
+
+  @override
+  String get familyTitle => 'Отбасы';
+
+  @override
+  String get familyNotChecked => 'белгі жоқ';
+
+  @override
+  String get familyAllGood => 'бәрі жақсы';
+
+  @override
+  String get familyQuestion => 'сұрақ бар';
+
+  @override
+  String get familyNoLessons => 'сабақ жоқ';
+
+  @override
+  String get familyExcuseCard => 'Баланы сұрап алу';
+
+  @override
+  String get familyExcuseHint => 'Ауру, отбасылық жағдай, дәрігер — өтініш сынып жетекшісіне жіберіледі';
+
+  @override
+  String get requests => 'Өтініштер';
+
+  @override
+  String get reqPending => 'қаралуда';
+
+  @override
+  String get reqApproved => 'мақұлданды';
+
+  @override
+  String get reqRejected => 'қабылданбады';
+
+  @override
+  String get reqCancelled => 'кері қайтарылды';
+
+  @override
+  String get reqWithdraw => 'Өтінішті кері қайтару';
+
+  @override
+  String get reqWithdrawConfirm => 'Өтінішті кері қайтарасыз ба?';
+
+  @override
+  String get reqEmpty => 'Әзірге өтініш жоқ';
+
+  @override
+  String get reqEmptyHint => 'Баланы сұрап алғанда, өтініш осында шығады';
+
+  @override
+  String get catIllness => 'Ауру';
+
+  @override
+  String get catFamily => 'Отбасылық';
+
+  @override
+  String get catAppointment => 'Дәрігер не шаруа';
+
+  @override
+  String get catOther => 'Басқа';
+
+  @override
+  String excuseTitle(String name) {
+    return 'Сұрап алу: $name';
+  }
+
+  @override
+  String get excuseWhen => 'Қашан';
+
+  @override
+  String get excuseDates => 'Күндер';
+
+  @override
+  String get excuseLessons => 'Сабақтар';
+
+  @override
+  String get excuseFrom => 'Бастап';
+
+  @override
+  String get excuseTo => 'Дейін';
+
+  @override
+  String get excuseReason => 'Себеп';
+
+  @override
+  String get excuseComment => 'Түсініктеме';
+
+  @override
+  String get excuseCommentHint => 'Міндетті емес';
+
+  @override
+  String get excuseProof => 'Анықтама';
+
+  @override
+  String get excuseCamera => 'Камера';
+
+  @override
+  String get excuseGallery => 'Галерея';
+
+  @override
+  String get excuseRemoveProof => 'Анықтаманы алып тастау';
+
+  @override
+  String get excuseSend => 'Сынып жетекшісіне жіберу';
+
+  @override
+  String get excuseSent => 'Өтініш жіберілді';
+
+  @override
+  String get excusePickLessons => 'Кемінде бір сабақты таңдаңыз';
+
+  @override
+  String get excuseOffline => 'Желі жоқ. Байланыс болғанда жіберіңіз';
+
+  @override
+  String get excuseFailed => 'Өтінішті жіберу мүмкін болмады';
+
+  @override
+  String get consentSheetTitle => 'Селфимен белгілеуге рұқсат бересіз бе?';
+
+  @override
+  String get consentWho => 'Фотоны тек мектеп қызметкерлері көреді';
+
+  @override
+  String get consentKeep => '30 күннен кейін өшеді';
+
+  @override
+  String get consentWhere => 'Бала профилінде кері қайтаруға болады';
+
+  @override
+  String consentAllowed(String name) {
+    return '$name белгі қоя алады';
+  }
+
+  @override
+  String get consentFailed => 'Рұқсатты сақтау мүмкін болмады';
+
+  @override
+  String tUntilBell(int m) {
+    return 'қоңырауға $m мин';
+  }
+
+  @override
+  String tStartsIn(int m) {
+    return '$m минуттан кейін';
+  }
+
+  @override
+  String tFree(int m) {
+    return 'бос уақыт $m мин';
+  }
+
+  @override
+  String tStudents(int count) {
+    return '$count оқушы';
+  }
+
+  @override
+  String get tRollNotDone => 'Түгендеу жасалмады';
+
+  @override
+  String get tRollDone => 'Түгендеу жасалды';
+
+  @override
+  String get tTopicDone => 'тақырып ✓';
+
+  @override
+  String get tCloseDay => 'Күнді жабу';
+
+  @override
+  String tActions(int count) {
+    return '$count әрекет';
+  }
+
+  @override
+  String get tDayClosed => 'Күн жабылды';
+
+  @override
+  String get tDayClosedHint => 'Барлық сабақ толтырылды';
+
+  @override
+  String get tNoLessons => 'Бүгін сабақ жоқ';
+
+  @override
+  String get tUnmarked => 'белгіленбеген';
+
+  @override
+  String get tNoTopic => 'тақырыпсыз';
+
+  @override
+  String get tLessons => 'Сабақтар';
+
+  @override
+  String tTodayCount(int count) {
+    return 'бүгін $count';
+  }
+
+  @override
+  String get missingAttendance => 'қатысу';
+
+  @override
+  String get missingTopic => 'тақырып';
 
   @override
   String get missingHomework => 'ҮТ';
 
   @override
-  String get missingGrades => 'Бағалар';
+  String get missingGrades => 'бағалар';
 
   @override
-  String get allFilled => 'Бәрі толтырылды';
-
-  @override
-  String get lessonStart => 'Сабақты бастау';
-
-  @override
-  String get lessonFinish => 'Сабақты аяқтау';
-
-  @override
-  String get lessonFinished => 'Сабақ аяқталды';
-
-  @override
-  String get lessonCancelled => 'Сабақ тоқтатылды';
-
-  @override
-  String get topic => 'Сабақ тақырыбы';
-
-  @override
-  String get topicHint => 'Мысалы: Квадрат теңдеулер';
-
-  @override
-  String get allPresent => 'Барлығы орнында';
-
-  @override
-  String presentCount(int present, int total) {
-    return '$total оқушының $present қатысуда';
+  String tMissingWhat(String what, String lesson) {
+    return '$what: $lesson';
   }
 
   @override
-  String get fromCheckIn => 'Өзі белгіленді';
+  String get tDebts => 'Соңғы 14 күндегі қарыздар';
 
   @override
-  String get fromHomeroom => 'Сынып жетекшісінің белгісі';
+  String tDebtsUnmarked(int count) {
+    return '$count сабақ белгісіз';
+  }
+
+  @override
+  String get tCloseAll => 'Барлығын келмегендерсіз жабу';
+
+  @override
+  String get tCloseAllConfirm => 'Барлығын қатысты деп белгілейміз бе?';
+
+  @override
+  String get tCloseAllBody => 'Тек белгі әлі жоқ сабақтар. Кейін сабақта түзетуге болады';
+
+  @override
+  String tAllPresentToast(String cls) {
+    return '$cls: барлығы орнында';
+  }
+
+  @override
+  String get tAllPresent => 'Барлығы орнында';
+
+  @override
+  String tLessonRowSemantic(String time, String cls, String subject, String state) {
+    return '$time, $cls, $subject. $state';
+  }
+
+  @override
+  String get tAllFilled => 'бәрі толтырылды';
+
+  @override
+  String tJointClasses(String a, String b) {
+    return '$a + $b';
+  }
+
+  @override
+  String get lessonOver => 'сабақ аяқталды';
+
+  @override
+  String get topicCard => 'Сабақ тақырыбы';
+
+  @override
+  String ktpChip(String topic) {
+    return 'КТЖ: $topic';
+  }
+
+  @override
+  String get sameAsLast => 'Өткендегідей';
+
+  @override
+  String get topicHint => 'Мысалы: Үшбұрыштардың ұқсастығы';
+
+  @override
+  String get topicSaved => 'Тақырып сақталды';
+
+  @override
+  String get presentLabel => 'Қатысады';
+
+  @override
+  String get searchStudent => 'Оқушыны іздеу';
+
+  @override
+  String get viewList => 'Тізім';
+
+  @override
+  String get viewFaces => 'Беттер';
+
+  @override
+  String sourceCheckIn(String time) {
+    return 'өзі белгіленді · $time';
+  }
+
+  @override
+  String get sourceCheckInShort => 'өзі белгіленді';
+
+  @override
+  String get sourceHomeroom => 'сынып жетекшісінің белгісі';
+
+  @override
+  String lateBy(int m) {
+    return '$m мин кешікті';
+  }
+
+  @override
+  String notSaved(String reason) {
+    return 'сақталмады: $reason';
+  }
+
+  @override
+  String get reasonSochShort => 'ТЖБ күні';
+
+  @override
+  String get reasonSoch => 'ТЖБ күні — белгілер қабылданбайды';
+
+  @override
+  String get reasonForbiddenShort => 'сабаққа құқық жоқ';
+
+  @override
+  String get reasonForbidden => 'Бұл сабаққа құқық жоқ';
+
+  @override
+  String get reasonNotFound => 'Сабақ не оқушы жойылған';
+
+  @override
+  String get reasonInvalid => 'Сервер жазбаны қабылдамады';
+
+  @override
+  String sochBanner(String subject) {
+    return 'Бүгін «$subject» пәні бойынша ТЖБ.';
+  }
+
+  @override
+  String get sochBannerBody => 'Ағымдағы бағалар мен қатысу қойылмайды';
+
+  @override
+  String pendingBanner(int count) {
+    return '$count белгі желіні күтуде.';
+  }
+
+  @override
+  String get pendingBannerBody => 'Өзіміз жібереміз';
+
+  @override
+  String rejectedBanner(int count) {
+    return '$count жазба сақталмады.';
+  }
+
+  @override
+  String get openQueue => 'Ашу';
+
+  @override
+  String get dockHomework => 'ҮТ';
+
+  @override
+  String get dockSummary => 'Қорытынды';
+
+  @override
+  String dockAllPresent(int count) {
+    return 'Барлығы орнында · $count';
+  }
+
+  @override
+  String dockDone(int n, int m) {
+    return 'Дайын · $n/$m';
+  }
+
+  @override
+  String get dockFinish => 'Сабақты аяқтау';
+
+  @override
+  String get dockSochDay => 'ТЖБ күні';
+
+  @override
+  String get rollSaved => 'Түгендеу сақталды';
+
+  @override
+  String markedToast(String name, String state) {
+    return '$name — $state';
+  }
+
+  @override
+  String get stateAbsent => 'Н';
+
+  @override
+  String get statePresent => 'бар';
+
+  @override
+  String get rowPresentHint => 'Екі рет түрту — келмеді деп белгілеу';
+
+  @override
+  String get rowAbsentHint => 'Екі рет түрту — қатысты деп белгілеу';
+
+  @override
+  String get actionCodes => 'Қатысу кодтары';
+
+  @override
+  String codesTitle(String name) {
+    return '$name';
+  }
+
+  @override
+  String get codeLate => 'Кешікті';
+
+  @override
+  String get codeLateMinutes => 'Неше минутқа';
+
+  @override
+  String get codeCustom => 'Басқа';
+
+  @override
+  String get codeSick => 'Ауырып жүр';
+
+  @override
+  String get codeExcused => 'Дәлелді себеп';
+
+  @override
+  String get codePresent => 'Бар';
+
+  @override
+  String get codeAbsent => 'Жоқ';
+
+  @override
+  String get lessonStartedToast => 'Сабақ басталды';
+
+  @override
+  String padOf(int n, int total) {
+    return '$n/$total';
+  }
+
+  @override
+  String get padComment => 'Түсініктеме';
+
+  @override
+  String get padCommentHint => 'Келесі бағаға қосылады';
+
+  @override
+  String padAbsentWarn(String name) {
+    return '$name «Н» деп белгіленген. Баға қоямыз ба?';
+  }
+
+  @override
+  String get padPut => 'Қою';
+
+  @override
+  String get padRemoved => 'Баға алынды';
+
+  @override
+  String padKey(String v, String tone) {
+    return '$v қою, $tone';
+  }
+
+  @override
+  String padSelected(int count) {
+    return 'Таңдалды: $count';
+  }
+
+  @override
+  String get padPrev => 'Алдыңғы оқушы';
+
+  @override
+  String get padNext => 'Келесі оқушы';
+
+  @override
+  String gradeSlot(String name) {
+    return 'Баға: $name';
+  }
+
+  @override
+  String get gradeLocked => 'Бағалар жабық';
+
+  @override
+  String get scaleViewOnly => 'Бұл шкала веб-журналда қойылады';
+
+  @override
+  String get selectMode => 'Оқушыларды таңдау';
 
   @override
   String get workType => 'Жұмыс түрі';
 
   @override
-  String gradeFor(String name) {
-    return 'Баға: $name';
+  String get menuMore => 'Тағы';
+
+  @override
+  String get menuGradeAll => 'Барлығын бағалау';
+
+  @override
+  String get menuOpenWeb => 'Журналды вебте ашу';
+
+  @override
+  String get menuStart => 'Сабақты бастау';
+
+  @override
+  String jointPill(int count) {
+    return 'біріктірілген · $count';
   }
 
   @override
-  String get removeGrade => 'Алып тастау';
-
-  @override
-  String gradeAbsentWarn(String name) {
-    return '$name жоқ. Сонда да баға қоясыз ба?';
+  String classHeader(String cls, int count) {
+    return '$cls · $count';
   }
 
   @override
   String get rosterEmpty => 'Сыныпта оқушы жоқ';
 
   @override
-  String get autoNext => 'Бірден келесі оқушыға';
+  String hwSheetTitle(String cls) {
+    return '$cls үшін тапсырма';
+  }
 
   @override
-  String get done => 'Дайын';
+  String get hwTextHint => '12-параграф, 3–7 есептер';
 
   @override
-  String get attendanceCodes => 'Қатысу коды';
+  String get hwDue => 'Мерзімі';
 
   @override
-  String get save => 'Сақтау';
+  String hwDueNextLesson(String date) {
+    return 'Келесі сабақ · $date';
+  }
+
+  @override
+  String get hwTime => 'Орындау уақыты';
+
+  @override
+  String hwLoad(String day, int used, int norm) {
+    return '$day: $norm минуттың $used бос емес';
+  }
+
+  @override
+  String hwOverNorm(int m) {
+    return 'нормадан $m мин артық';
+  }
+
+  @override
+  String get hwAssign => 'Беру';
+
+  @override
+  String hwAssigned(String cls) {
+    return 'ҮТ берілді · $cls';
+  }
+
+  @override
+  String get hwExisting => 'Берілген';
+
+  @override
+  String get hwFailed => 'ҮТ беру мүмкін болмады';
+
+  @override
+  String get hwOffline => 'Желі жоқ — тапсырма байланыс болғанда жіберіледі';
+
+  @override
+  String get hwOtherDate => 'Басқа күн';
+
+  @override
+  String get sumTitle => 'Сабақ қорытындысы';
+
+  @override
+  String sumAttendance(int n, int m) {
+    return 'Қатысу · $n/$m';
+  }
+
+  @override
+  String get sumTopic => 'Тақырып';
+
+  @override
+  String get sumHomework => 'ҮТ';
+
+  @override
+  String sumGrades(int count) {
+    return 'Бағалар · $count';
+  }
+
+  @override
+  String get sumField => 'Сабақ қорытындысы, міндетті емес';
+
+  @override
+  String get lessonFinishedToast => 'Сабақ аяқталды';
+
+  @override
+  String get syncTitle => 'Синхрондау';
+
+  @override
+  String syncLast(String time) {
+    return 'Соңғы жіберу $time';
+  }
+
+  @override
+  String syncRejected(int count) {
+    return 'Қабылданбады · $count';
+  }
+
+  @override
+  String syncWaiting(int count) {
+    return 'Желіні күтуде · $count';
+  }
+
+  @override
+  String get syncAllSent => 'Бәрі жіберілді';
+
+  @override
+  String get syncAllSentHint => 'Белгілер, бағалар мен тақырыптар серверде';
+
+  @override
+  String get syncDeleteConfirm => 'Жазбаны жою керек пе?';
+
+  @override
+  String get syncDeleteBody => 'Ол жіберілмей жойылады';
+
+  @override
+  String get syncSending => 'Жіберілуде';
+
+  @override
+  String syncPendingN(int count) {
+    return 'Жіберуді күтуде: $count';
+  }
+
+  @override
+  String syncRejectedN(int count) {
+    return 'Сақталмады: $count';
+  }
+
+  @override
+  String whatAttendance(String state) {
+    return 'Қатысу «$state»';
+  }
+
+  @override
+  String whatGrade(String v) {
+    return 'Баға $v';
+  }
+
+  @override
+  String get whatGradeRemoved => 'Баға алынды';
+
+  @override
+  String get whatTopic => 'Сабақ тақырыбы';
+
+  @override
+  String get whatStart => 'Сабақтың басталуы';
+
+  @override
+  String get whatFinish => 'Сабақтың аяқталуы';
+
+  @override
+  String get whatHomework => 'Үй тапсырмасы';
+
+  @override
+  String whatAllPresent(int count) {
+    return 'Барлығы орнында · $count';
+  }
+
+  @override
+  String get whatSummary => 'Сабақ қорытындысы';
+
+  @override
+  String createdAt(String time) {
+    return '$time жасалды';
+  }
+
+  @override
+  String get inboxAction => 'Әрекет қажет';
+
+  @override
+  String get inboxSchedule => 'Кесте';
+
+  @override
+  String get inboxOther => 'Басқасы';
+
+  @override
+  String get inboxEmpty => 'Кіріс бос';
+
+  @override
+  String get inboxEmptyHint =>
+      'Мұнда белгісіз сабақтар, қабылданбаған жазбалар, алмастырулар мен хабарландырулар шығады';
+
+  @override
+  String get inboxRejected => 'Жазбалар сақталмады';
+
+  @override
+  String get inboxRejectedSub => 'Қайталау не жою үшін кезекті ашыңыз';
+
+  @override
+  String inboxExcuses(int count) {
+    return '$count келмеу туралы өтініш';
+  }
+
+  @override
+  String get inboxExcusesSub => 'Мақұлдау не қабылдамау веб-нұсқада';
+
+  @override
+  String get markRead => 'Оқылды';
+
+  @override
+  String get markAllRead => 'Бәрін оқылды деу';
+
+  @override
+  String get notifEmpty => 'Хабарландыру жоқ';
+
+  @override
+  String get notifEmptyHint => 'Мұнда бағалар, тапсырмалар, алмастырулар және өтініштер бойынша шешімдер шығады';
+
+  @override
+  String get notifUnavailable => 'Жазба жойылған немесе қолжетімсіз';
+
+  @override
+  String get notifUnavailableHint => 'Мүмкін, мектепте өзгерткен. Қосымшаның қалғаны әдеттегідей жұмыс істейді';
+
+  @override
+  String get ntGradeCreated => 'Жаңа баға';
+
+  @override
+  String get ntGradeUpdated => 'Баға өзгертілді';
+
+  @override
+  String get ntHomework => 'Үй тапсырмасы';
+
+  @override
+  String get ntHomeworkReminder => 'Тапсырма туралы еске салу';
+
+  @override
+  String get ntLessonCancelled => 'Сабақ болмайды';
+
+  @override
+  String get ntLessonRescheduled => 'Сабақ ауыстырылды';
+
+  @override
+  String get ntSubstitution => 'Алмастыру';
+
+  @override
+  String get ntLessonStarted => 'Сабақ басталды';
+
+  @override
+  String get ntCheckIn => 'Бала мектепке келді';
+
+  @override
+  String get ntAttendance => 'Қатысу';
+
+  @override
+  String get ntUnmarked => 'Қатысуды белгілеңіз';
+
+  @override
+  String get ntGradesReminder => 'Бағаларды қойыңыз';
+
+  @override
+  String get ntExcusePending => 'Жаңа өтініш';
+
+  @override
+  String get ntExcuseApproved => 'Өтініш мақұлданды';
+
+  @override
+  String get ntExcuseRejected => 'Өтініш қабылданбады';
+
+  @override
+  String get ntExcuseCancelled => 'Өтініш кері қайтарылды';
+
+  @override
+  String get ntInvoice => 'Төлем шоты';
+
+  @override
+  String get ntEvent => 'Мектеп іс-шарасы';
+
+  @override
+  String get ntChat => 'Жаңа хабарлама';
+
+  @override
+  String get ntOther => 'Хабарлама';
 }

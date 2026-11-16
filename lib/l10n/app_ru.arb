@@ -1,158 +1,1527 @@
 {
   "@@locale": "ru",
   "appName": "GradeApp",
-
-  "loginTitle": "Вход в GradeApp",
-  "loginSubtitle": "Используйте почту и пароль от школьного аккаунта",
-  "email": "Почта",
-  "password": "Пароль",
-  "otpCode": "Код из приложения-аутентификатора",
-  "otpHint": "6 цифр",
-  "signIn": "Войти",
-  "loginInvalid": "Неверная почта или пароль",
-  "loginOtpInvalid": "Неверный код",
-  "loginNoRole": "В мобильном приложении пока доступны кабинеты ученика, родителя и учителя",
-  "signOut": "Выйти",
-
-  "errorTitle": "Не удалось загрузить",
-  "errorMessage": "Проверьте интернет и попробуйте ещё раз",
-  "retry": "Повторить",
-  "offlineSaved": "Сохранено на телефоне — отправим, когда появится сеть",
-  "syncPending": "{count, plural, one{{count} изменение ждёт отправки} few{{count} изменения ждут отправки} other{{count} изменений ждут отправки}}",
-  "@syncPending": {"placeholders": {"count": {"type": "int"}}},
-  "syncRejected": "Сервер не принял изменение. Проверьте и отметьте ещё раз",
-  "synced": "Всё отправлено",
-
   "tabToday": "Сегодня",
-  "tabSchedule": "Расписание",
+  "tabWeek": "Неделя",
   "tabGrades": "Оценки",
-  "tabHomework": "Задания",
-  "tabProfile": "Профиль",
-  "tabLessons": "Уроки",
-
-  "now": "Сейчас",
-  "next": "Далее",
-  "greetingMorning": "Доброе утро, {name}",
-  "greetingDay": "Добрый день, {name}",
-  "greetingEvening": "Добрый вечер, {name}",
-  "@greetingMorning": {"placeholders": {"name": {"type": "String"}}},
-  "@greetingDay": {"placeholders": {"name": {"type": "String"}}},
-  "@greetingEvening": {"placeholders": {"name": {"type": "String"}}},
-  "lessonsCount": "{count, plural, =0{Уроков нет} one{{count} урок} few{{count} урока} other{{count} уроков}}",
-  "@lessonsCount": {"placeholders": {"count": {"type": "int"}}},
-  "noLessonsTitle": "Уроков нет",
-  "noLessonsMessage": "В этот день занятий нет",
+  "tabTasks": "Задания",
+  "tabFamily": "Семья",
+  "tabInbox": "Входящие",
+  "tabWithBadge": "{tab}, новых: {count}",
+  "@tabWithBadge": {
+    "placeholders": {
+      "tab": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "back": "Назад",
+  "close": "Закрыть",
+  "cancel": "Отмена",
+  "done": "Готово",
+  "retry": "Повторить",
+  "undo": "Отменить",
+  "save": "Сохранить",
+  "delete": "Удалить",
+  "skip": "Пропустить",
+  "notNow": "Не сейчас",
+  "continueAction": "Продолжить",
+  "change": "Изменить",
+  "add": "Добавить",
+  "openSettings": "Открыть настройки",
+  "send": "Отправить",
+  "errorTitle": "Не получилось загрузить",
+  "errorOffline": "Нет сети. Проверьте интернет и повторите",
+  "errorGeneric": "Что-то пошло не так. Попробуйте ещё раз",
+  "offlineBar": "Нет сети. Показаны данные от {time}",
+  "@offlineBar": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "offlineBarNoTime": "Нет сети. Показаны сохранённые данные",
+  "updatedAt": "Обновлено в {time}",
+  "@updatedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesShort": "{m} мин",
+  "@minutesShort": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "approxMinutes": "≈ {m} мин",
+  "@approxMinutes": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "inMinutes": "через {m} мин",
+  "@inMinutes": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
   "room": "каб. {room}",
-  "@room": {"placeholders": {"room": {"type": "String"}}},
-  "lessonEndsIn": "Закончится через {minutes} мин",
-  "@lessonEndsIn": {"placeholders": {"minutes": {"type": "int"}}},
-  "lessonStartsIn": "Начнётся через {minutes} мин",
-  "@lessonStartsIn": {"placeholders": {"minutes": {"type": "int"}}},
-  "dayDone": "Уроки на сегодня закончились",
-
-  "presencePresent": "Был",
-  "presenceAbsent": "Н/Б",
-  "presenceTardy": "Опоздал",
-  "presenceExcused": "Уваж.",
-  "presenceAbsentLong": "Отсутствовал",
-  "presenceExcusedLong": "Уважительная причина",
-
-  "checkInTitle": "Я в школе",
-  "checkInAction": "Отметиться",
-  "checkInHint": "Сделайте селфи у входа — учитель увидит, что вы пришли",
-  "checkInDone": "Отмечен в {time}",
-  "@checkInDone": {"placeholders": {"time": {"type": "String"}}},
-  "checkInLate": "Опоздание",
-  "checkInWindow": "Отметиться можно с {from} до {to}",
-  "@checkInWindow": {"placeholders": {"from": {"type": "String"}, "to": {"type": "String"}}},
-  "checkInNoConsent": "Родитель ещё не дал согласие на фото-отметку",
-  "checkInSending": "Отправляем…",
-  "checkInSuccess": "Готово, вы отмечены",
-  "checkInLocationDenied": "Разрешите доступ к геопозиции — школа проверяет, что вы на месте",
-  "checkInOutside": "Вы вне территории школы ({meters} м)",
-  "@checkInOutside": {"placeholders": {"meters": {"type": "int"}}},
-  "checkInStale": "Нужно новое фото, сделанное сейчас",
-  "checkInAlready": "Вы уже отметились сегодня",
-  "checkInClosed": "Окно отметки закрыто",
-  "childCheckedIn": "Пришёл в школу в {time}",
-  "@childCheckedIn": {"placeholders": {"time": {"type": "String"}}},
-  "childNotCheckedIn": "Ещё не отметился в школе",
-
-  "homeworkDue": "Задания",
-  "homeworkEmptyTitle": "Заданий нет",
-  "homeworkEmptyMessage": "Новые задания появятся здесь",
-  "homeworkActive": "Актуальные",
-  "homeworkDoneTab": "Выполненные",
-  "homeworkMinutes": "≈ {minutes} мин",
-  "@homeworkMinutes": {"placeholders": {"minutes": {"type": "int"}}},
-  "dueToday": "Сдать сегодня",
-  "dueTomorrow": "Сдать завтра",
-  "dueOn": "Сдать до {date}",
-  "@dueOn": {"placeholders": {"date": {"type": "String"}}},
-  "overdue": "Просрочено",
-  "attachments": "Файлы",
-  "markDone": "Отметить выполненным",
-  "markUndone": "Вернуть в актуальные",
-
-  "recentGrades": "Последние оценки",
-  "gradesEmptyTitle": "Оценок пока нет",
-  "gradesEmptyMessage": "Здесь появятся оценки по всем предметам",
-  "average": "Средний",
-  "gradesCount": "{count, plural, one{{count} оценка} few{{count} оценки} other{{count} оценок}}",
-  "@gradesCount": {"placeholders": {"count": {"type": "int"}}},
-  "all": "Все",
-
-  "weekPrev": "Предыдущая неделя",
-  "weekNext": "Следующая неделя",
-  "today": "Сегодня",
-
-  "profileChildren": "Дети",
-  "photoConsent": "Фото-отметка «Я в школе»",
-  "photoConsentHint": "Ребёнок сможет отмечаться селфи при входе",
-  "language": "Язык",
-  "theme": "Тема",
-  "themeSystem": "Как в системе",
-  "themeAuto": "Авто",
-  "themeLight": "Светлая",
-  "themeDark": "Тёмная",
-  "role": "Кабинет",
+  "@room": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "nOfM": "{n} из {m}",
+  "@nOfM": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "yesterday": "Вчера",
+  "tomorrow": "Завтра",
+  "todayWord": "Сегодня",
+  "lessonsCount": "{count, plural, =0{Уроков нет} one{{count} урок} few{{count} урока} other{{count} уроков}}",
+  "@lessonsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasksCount": "{count, plural, one{{count} задание} few{{count} задания} other{{count} заданий}}",
+  "@tasksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasksUnit": "{count, plural, one{задание} few{задания} other{заданий}}",
+  "@tasksUnit": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "roleTeacher": "Учитель",
   "roleParent": "Родитель",
   "roleStudent": "Ученик",
+  "notifications": "Уведомления",
+  "notificationsUnread": "Уведомления, непрочитанных: {count}",
+  "@notificationsUnread": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profile": "Профиль",
+  "switchChild": "Сменить ребёнка, сейчас {name}",
+  "@switchChild": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "profileSchools": "Школы",
+  "profileChildren": "Дети",
+  "settingsNotifications": "Уведомления",
+  "settingsLanguage": "Язык",
+  "settingsTheme": "Оформление",
+  "themeSystem": "Как в системе",
+  "themeLight": "Светлое",
+  "themeDark": "Тёмное",
+  "langSystem": "Как в системе",
+  "langKk": "Қазақша",
+  "langRu": "Русский",
+  "langEn": "English",
+  "openWeb": "Открыть веб-версию",
+  "about": "О приложении",
+  "version": "Версия {v}",
+  "@version": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "signOut": "Выйти",
   "signOutConfirm": "Выйти из аккаунта?",
-  "cancel": "Отмена",
+  "signOutPending": "{count, plural, one{{count} запись не отправлена} few{{count} записи не отправлены} other{{count} записей не отправлено}}. Если выйти, они пропадут",
+  "@signOutPending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "signOutSendFirst": "Отправить и выйти",
+  "signOutAnyway": "Выйти без отправки",
+  "signOutWaitNet": "Нет сети — записи ещё не ушли",
+  "photoConsent": "Отметка по селфи",
+  "consentOn": "разрешена",
+  "consentOff": "не разрешена",
+  "consentRevoke": "Запретить отметку по селфи?",
+  "consentRevokeBody": "Ребёнок не сможет отмечаться «Я в школе» по фото",
+  "consentRevokeAction": "Запретить",
+  "switchSchoolFailed": "Не получилось сменить школу",
   "noChildrenTitle": "Дети не привязаны",
   "noChildrenMessage": "Попросите школу привязать ребёнка к вашему аккаунту",
-
-  "teacherTodayEmpty": "Сегодня уроков нет",
-  "overdueTitle": "Не заполнено",
-  "overdueHint": "Уроки за последние две недели без отметок или темы",
-  "missingAttendance": "Посещаемость",
-  "missingTopic": "Тема",
+  "allFamily": "Вся семья",
+  "className": "класс {name}",
+  "@className": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "loginTagline": "Расписание, оценки и журнал школы — в одном приложении",
+  "loginHow": "Как вы войдёте?",
+  "loginWithPassword": "Логин и пароль",
+  "loginWithPasswordHint": "Почта или логин, который дала школа",
+  "loginWithCode": "Код из школы",
+  "loginWithCodeHint": "Листок с кодом вида ABCDE-12345",
+  "loginTitle": "Вход",
+  "loginField": "Почта или логин",
+  "password": "Пароль",
+  "showPassword": "Показать пароль",
+  "hidePassword": "Скрыть пароль",
+  "forgotPassword": "Забыли пароль?",
+  "signIn": "Войти",
+  "loginInvalid": "Неверный логин или пароль",
+  "loginBlocked": "Аккаунт заблокирован — обратитесь в школу",
+  "loginThrottled": "Слишком много попыток. Подождите минуту",
+  "loginNoRole": "В приложении пока есть кабинеты ученика, родителя и учителя",
+  "otpTitle": "Код подтверждения",
+  "otpHint": "Введите 6 цифр из приложения-аутентификатора",
+  "otpInvalid": "Неверный код",
+  "resetTitle": "Восстановить пароль",
+  "resetHint": "Пришлём на почту ссылку, чтобы задать новый пароль",
+  "resetEmail": "Почта",
+  "resetSend": "Отправить ссылку",
+  "resetSentTitle": "Проверьте почту",
+  "resetSentBody": "Если адрес {email} есть в GradeApp, на него придёт письмо со ссылкой",
+  "@resetSentBody": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "resetOtherEmail": "Ввести другой адрес",
+  "codeTitle": "Код из школы",
+  "codeHint": "Код напечатан на листке, который выдала школа",
+  "codeInvalid": "Код не найден или уже использован",
+  "codeIncomplete": "В коде 10 знаков",
+  "codePasswordTitle": "Придумайте пароль",
+  "codePasswordHint": "С ним вы будете входить в приложение и на сайт",
+  "codePwLength": "Не короче 8 знаков",
+  "codePwMixed": "Есть буквы и цифры",
+  "codePwMatch": "Пароли совпадают",
+  "codePwRepeat": "Повторите пароль",
+  "codeLoginTitle": "Ваш логин",
+  "codeLoginHint": "Им можно войти и в веб-версии",
+  "copy": "Скопировать",
+  "copied": "Скопировано",
+  "stepOf": "Шаг {step} из {total}",
+  "@stepOf": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "heroNow": "Сейчас",
+  "heroNext": "Дальше",
+  "heroLessonN": "{n}-й урок",
+  "@heroLessonN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "heroLast": "последний",
+  "heroPause": "Перемена",
+  "heroPauseNext": "следующий",
+  "heroUntilBell": "до звонка",
+  "heroUntilStart": "до начала",
+  "heroUntilLesson": "до урока",
+  "heroMin": "мин",
+  "heroDayOver": "День закончен",
+  "heroForTomorrow": "На завтра",
+  "heroOpenTasks": "Открыть задания",
+  "heroNoLessons": "Сегодня уроков нет",
+  "heroRest": "Можно отдохнуть",
+  "heroCancelled": "отменён",
+  "heroThen": "Потом",
+  "heroInstead": "{who} вместо {whom}",
+  "@heroInstead": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      },
+      "whom": {
+        "type": "String"
+      }
+    }
+  },
+  "heroSemantic": "{state} {subject}, {details}. {countdown}",
+  "@heroSemantic": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "subject": {
+        "type": "String"
+      },
+      "details": {
+        "type": "String"
+      },
+      "countdown": {
+        "type": "String"
+      }
+    }
+  },
+  "heroCountdown": "{label}: {m} мин",
+  "@heroCountdown": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "heroNextLine": "Дальше {time} {subject}",
+  "@heroNextLine": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "heroTomorrowPlan": "Завтра {count, plural, one{{count} урок} few{{count} урока} other{{count} уроков}} с {time}",
+  "@heroTomorrowPlan": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "heroTasksDone": "ДЗ готово: {done} из {total}",
+  "@heroTasksDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tileTomorrow": "На завтра",
+  "tileNewGrades": "Новые оценки",
+  "tileOverdue": "Просрочено",
+  "dayPlan": "План дня",
+  "lessonsPassed": "{count, plural, one{{count} урок прошёл} few{{count} урока прошли} other{{count} уроков прошли}}",
+  "@lessonsPassed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pillNow": "сейчас",
+  "pillSubstitution": "замена",
+  "pillCancelled": "отменён",
+  "pillJoint": "совмещённый",
+  "breakLine": "перемена {m} мин",
+  "@breakLine": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "checkInTitle": "Я в школе",
+  "checkInBy": "Отметка до {time}",
+  "@checkInBy": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "checkInSubtitle": "Селфи у входа — 5 секунд",
+  "checkInOpensAt": "Отметка откроется в {time}",
+  "@checkInOpensAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "checkInDoneAt": "В школе с {time}",
+  "@checkInDoneAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "checkInOnTime": "Отметка вовремя",
+  "checkInLateAt": "Отмечено в {time} · опоздание",
+  "@checkInLateAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "checkInClosed": "Окно отметки закрыто в {time}",
+  "@checkInClosed": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "checkInClosedHint": "Если вы уже в школе, скажите классному руководителю",
+  "checkInNoConsent": "Нужно разрешение родителя на фото",
+  "checkInAskParent": "Как попросить родителя",
+  "checkInAskParentHint": "Родитель разрешает это в своём приложении GradeApp: «Сегодня» → «Разрешить». Это займёт минуту",
+  "checkInSending": "Отправляем фото…",
+  "checkInSendingPct": "Отправляем… {pct} %",
+  "@checkInSendingPct": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "checkInOutside": "Вы в {meters} м от школы. Подойдите ближе ко входу и повторите",
+  "@checkInOutside": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "checkInNeedLocation": "Включите геолокацию",
+  "checkInStale": "Сделайте новый снимок",
+  "checkInOffline": "Нет сети. Повторим без нового снимка, пока окно открыто",
+  "checkInAlready": "Вы уже отметились сегодня",
+  "checkInWindowClosed": "Окно отметки закрыто",
+  "checkInFailed": "Не получилось отправить фото",
+  "checkInOpenCamera": "Открыть камеру",
+  "camLocating": "Ищем геопозицию…",
+  "camAtSchool": "Вы у школы · окно до {time}",
+  "@camAtSchool": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "camWindowUntil": "Окно до {time}",
+  "@camWindowUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "camFar": "Далеко от школы",
+  "camHint": "Лицо в овале — и снимок",
+  "camPrivacy": "Фото увидит только персонал школы. Оно удалится через 30 дней",
+  "camShutter": "Сделать снимок",
+  "camFlashOn": "Включить вспышку экраном",
+  "camFlashOff": "Выключить вспышку экраном",
+  "camRetake": "Переснять",
+  "camUnavailable": "Камера недоступна",
+  "camDenied": "Включите «Камера» для GradeApp в настройках телефона",
+  "camExplainTitle": "Отметка по селфи",
+  "camExplainWhy": "Селфи у входа подтверждает, что вы в школе",
+  "camExplainWho": "Фото видит только персонал школы",
+  "camExplainKeep": "Фото удаляется через 30 дней",
+  "doneTitle": "Отмечено",
+  "doneOnTime": "{time} · вовремя",
+  "@doneOnTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "doneLate": "{time} · опоздание",
+  "@doneLate": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "doneLateMin": "{time} · опоздание на {m} мин",
+  "@doneLateMin": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "doneFirstLesson": "Первый урок · {time}",
+  "@doneFirstLesson": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "doneParents": "Родители увидят отметку в приложении",
+  "weekEyebrow": "{range} · {term}",
+  "@weekEyebrow": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      },
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "weekGoToday": "Сегодня",
+  "weekDaySpan": "{lessons} · {from}–{to}",
+  "@weekDaySpan": {
+    "placeholders": {
+      "lessons": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "weekNoLessons": "Уроков нет",
+  "weekNoLessonsHint": "В этот день занятий нет",
+  "weekPrev": "Предыдущая неделя",
+  "weekNext": "Следующая неделя",
+  "hwShort": "ДЗ",
+  "dotChanges": "есть изменения",
+  "dotHomework": "есть ДЗ",
+  "dotExam": "СОР или СОЧ",
+  "lessonOrdinal": "{weekday} · {n}-й урок",
+  "@lessonOrdinal": {
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "teacher": "Учитель",
+  "topicLabel": "Тема",
+  "lessonHomework": "Задание к уроку",
+  "myMarks": "Мои отметки",
+  "childMarks": "Отметки",
+  "notFilledYet": "Учитель ещё не заполнил",
+  "explainAbsence": "Объяснить пропуск",
+  "openLesson": "Открыть урок",
+  "presencePresent": "был на уроке",
+  "presenceAbsent": "пропуск",
+  "presenceTardy": "опоздание",
+  "presenceExcused": "уважительная",
+  "gradesEyebrow": "{term} · {week}-я неделя",
+  "@gradesEyebrow": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "termShort": "{n} четв.",
+  "@termShort": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "termRunning": "идёт",
+  "termPick": "Выбрать {term}",
+  "@termPick": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "segSubjects": "Предметы",
+  "segFeed": "Лента",
+  "subjectsCount": "{count, plural, one{{count} предмет} few{{count} предмета} other{{count} предметов}}",
+  "@subjectsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sortAttention": "Сначала требующие внимания",
+  "sortAlpha": "По алфавиту",
+  "prelim": "предв.",
+  "gradesEmpty": "Оценок в этой четверти пока нет",
+  "gradesEmptyHint": "Первая появится после урока",
+  "insightStrong": "Сильнее всего — {subject}.",
+  "@insightStrong": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "insightWeak": "Внимания требует {subject}: {pct} %.",
+  "@insightWeak": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "quarterResults": "Итоги: {term}",
+  "@quarterResults": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "howCalculated": "Как считается четвертная",
+  "howCalcBody": "Так же считает школа и табель",
+  "howCalcMissing": "Если какой-то части пока нет, её вес делится между остальными",
+  "pctToMark": "% → отметка",
+  "pctFrom": "от {pct} %",
+  "@pctFrom": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "formulaMissing": "Формула школы не загрузилась, поэтому четвертная скрыта",
+  "subjectPrelim": "{term} · предварительно",
+  "@subjectPrelim": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "subjectFinal": "{term} · итог",
+  "@subjectFinal": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
+  "worksCount": "{count, plural, one{{count} работа} few{{count} работы} other{{count} работ}}",
+  "@worksCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "toNextMark": "до «{mark}» не хватает {pct} %",
+  "@toNextMark": {
+    "placeholders": {
+      "mark": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "works": "Работы",
+  "newestFirst": "новые сверху",
+  "kindFo": "ФО",
+  "kindSor": "СОР",
+  "kindSoch": "СОЧ",
+  "gradeSemantic": "Оценка {value}, {tone}",
+  "@gradeSemantic": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "tone": {
+        "type": "String"
+      }
+    }
+  },
+  "toneExcellent": "отлично",
+  "toneGood": "хорошо",
+  "toneFair": "удовлетворительно",
+  "tonePoor": "неудовлетворительно",
+  "newWord": "новая",
+  "tasksEyebrow": "На неделе: {count, plural, one{{count} задание} few{{count} задания} other{{count} заданий}}",
+  "@tasksEyebrow": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionOverdue": "Просрочено",
+  "sectionToday": "Сегодня",
+  "sectionTomorrow": "Завтра",
+  "sectionWeek": "На этой неделе",
+  "sectionLater": "Позже",
+  "sectionDone": "Выполнено: {count}",
+  "@sectionDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allSubjects": "Все",
+  "markDone": "Отметить готовым",
+  "markUndone": "Вернуть в невыполненные",
+  "doneToast": "Задание отмечено готовым",
+  "undoneToast": "Задание вернулось в список",
+  "hwDone": "сделано",
+  "hwNotDone": "не сделано",
+  "dueBy": "к {date}",
+  "@dueBy": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "attachmentsCount": "{count, plural, one{{count} вложение} few{{count} вложения} other{{count} вложений}}",
+  "@attachmentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tasksEmpty": "Заданий нет",
+  "tasksEmptyHint": "Новые задания от учителей появятся здесь",
+  "taskToggleDone": "Отметить «{title}» готовым",
+  "@taskToggleDone": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "taskToggleUndone": "Вернуть «{title}»",
+  "@taskToggleUndone": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "openFile": "Открыть файл",
+  "loadToday": "Нагрузка {used} из {norm} мин",
+  "@loadToday": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "norm": {
+        "type": "int"
+      }
+    }
+  },
+  "verdictOk": "Всё в порядке",
+  "verdictQuestion": "Есть вопрос",
+  "verdictAction": "Нужно действие",
+  "verdictAlarm": "Не отметился в школе",
+  "verdictNoLessons": "Сегодня уроков нет",
+  "verdictUpdated": "Данные на {time}",
+  "@verdictUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factArrived": "В школе с {time}.",
+  "@factArrived": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factLessons": "{done} из {total} уроков.",
+  "@factLessons": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "factBeforeLessons": "Первый урок в {time}.",
+  "@factBeforeLessons": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factAbsent": "Пропущен урок: {subject}",
+  "@factAbsent": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "factNoReason": "причина не указана.",
+  "factLate": "Опоздание: отметка в {time}.",
+  "@factLate": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factLowGrade": "Низкая оценка: {subject} {value}.",
+  "@factLowGrade": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "factExcused": "Отпрошен(а) на сегодня.",
+  "factAlarm": "Первый урок начался в {time}. Отметки и заявки нет.",
+  "@factAlarm": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factNoConsent": "Отметка по селфи ждёт вашего разрешения.",
+  "factTomorrow": "Завтра {lessons} с {time}.",
+  "@factTomorrow": {
+    "placeholders": {
+      "lessons": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "factNewGrade": "новая оценка · {subject}",
+  "@factNewGrade": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "actExcuse": "Отпросить",
+  "actExplain": "Объяснить",
+  "actAllow": "Разрешить",
+  "attentionTitle": "Требует внимания",
+  "attAbsent": "Пропуск · {time}",
+  "@attAbsent": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "attNoConsent": "Отметка по селфи",
+  "attNoConsentSub": "Нужно ваше разрешение",
+  "attRejected": "Заявка отклонена",
+  "attPending": "Заявка на рассмотрении у классрука",
+  "feedTitle": "Лента дня",
+  "feedNewest": "новое сверху",
+  "feedArrived": "Пришёл(ла) в школу",
+  "feedArrivedSub": "отметка по селфи · {state}",
+  "@feedArrivedSub": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "feedOnTime": "вовремя",
+  "feedLate": "опоздание",
+  "feedNow": "идёт сейчас",
+  "feedMarkedAbsent": "отмечен пропуск",
+  "feedEmpty": "Пока ничего не произошло",
+  "forTomorrowLine": "{tasks} · ≈ {m} мин · готово {done}",
+  "@forTomorrowLine": {
+    "placeholders": {
+      "tasks": {
+        "type": "String"
+      },
+      "m": {
+        "type": "int"
+      },
+      "done": {
+        "type": "int"
+      }
+    }
+  },
+  "familyTitle": "Семья",
+  "familyNotChecked": "не отмечен",
+  "familyAllGood": "всё в порядке",
+  "familyQuestion": "есть вопрос",
+  "familyNoLessons": "нет уроков",
+  "familyExcuseCard": "Отпросить ребёнка",
+  "familyExcuseHint": "Болезнь, семейные дела, врач — заявка уйдёт классруку",
+  "requests": "Заявки",
+  "reqPending": "на рассмотрении",
+  "reqApproved": "одобрена",
+  "reqRejected": "отклонена",
+  "reqCancelled": "отозвана",
+  "reqWithdraw": "Отозвать заявку",
+  "reqWithdrawConfirm": "Отозвать заявку?",
+  "reqEmpty": "Заявок пока нет",
+  "reqEmptyHint": "Когда отпросите ребёнка, заявка появится здесь",
+  "catIllness": "Болезнь",
+  "catFamily": "Семейные",
+  "catAppointment": "Врач или дела",
+  "catOther": "Другое",
+  "excuseTitle": "Отпросить: {name}",
+  "@excuseTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "excuseWhen": "Когда",
+  "excuseDates": "Даты",
+  "excuseLessons": "Уроки",
+  "excuseFrom": "С",
+  "excuseTo": "По",
+  "excuseReason": "Причина",
+  "excuseComment": "Комментарий",
+  "excuseCommentHint": "Необязательно",
+  "excuseProof": "Справка",
+  "excuseCamera": "Камера",
+  "excuseGallery": "Галерея",
+  "excuseRemoveProof": "Убрать справку",
+  "excuseSend": "Отправить классруку",
+  "excuseSent": "Заявка отправлена",
+  "excusePickLessons": "Выберите хотя бы один урок",
+  "excuseOffline": "Нет сети. Отправьте, когда появится связь",
+  "excuseFailed": "Не получилось отправить заявку",
+  "consentSheetTitle": "Разрешить отметку по селфи?",
+  "consentWho": "Фото видит только персонал школы",
+  "consentKeep": "Удаляется через 30 дней",
+  "consentWhere": "Можно отозвать в профиле ребёнка",
+  "consentAllowed": "{name} может отмечаться",
+  "@consentAllowed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "consentFailed": "Не получилось сохранить разрешение",
+  "tUntilBell": "до звонка {m} мин",
+  "@tUntilBell": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "tStartsIn": "через {m} мин",
+  "@tStartsIn": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "tFree": "окно {m} мин",
+  "@tFree": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "tStudents": "{count, plural, one{{count} ученик} few{{count} ученика} other{{count} учеников}}",
+  "@tStudents": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tRollNotDone": "Перекличка не сделана",
+  "tRollDone": "Перекличка сделана",
+  "tTopicDone": "тема ✓",
+  "tCloseDay": "Закрыть день",
+  "tActions": "{count, plural, one{{count} действие} few{{count} действия} other{{count} действий}}",
+  "@tActions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tDayClosed": "День закрыт",
+  "tDayClosedHint": "Все уроки заполнены",
+  "tNoLessons": "Сегодня уроков нет",
+  "tUnmarked": "не отмечено",
+  "tNoTopic": "без темы",
+  "tLessons": "Уроки",
+  "tTodayCount": "{count} сегодня",
+  "@tTodayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "missingAttendance": "посещаемость",
+  "missingTopic": "тема",
   "missingHomework": "ДЗ",
-  "missingGrades": "Оценки",
-  "allFilled": "Всё заполнено",
-
-  "lessonStart": "Начать урок",
-  "lessonFinish": "Завершить урок",
-  "lessonFinished": "Урок завершён",
-  "lessonCancelled": "Урок отменён",
-  "topic": "Тема урока",
-  "topicHint": "Например: Квадратные уравнения",
-  "allPresent": "Все на месте",
-  "presentCount": "Присутствуют {present} из {total}",
-  "@presentCount": {"placeholders": {"present": {"type": "int"}, "total": {"type": "int"}}},
-  "fromCheckIn": "Отметился сам",
-  "fromHomeroom": "Отметка классрука",
+  "missingGrades": "оценки",
+  "tMissingWhat": "{what}: {lesson}",
+  "@tMissingWhat": {
+    "placeholders": {
+      "what": {
+        "type": "String"
+      },
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "tDebts": "Долги за 14 дней",
+  "tDebtsUnmarked": "{count, plural, one{{count} урок без отметки} few{{count} урока без отметки} other{{count} уроков без отметки}}",
+  "@tDebtsUnmarked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tCloseAll": "Закрыть все без отсутствующих",
+  "tCloseAllConfirm": "Отметить всех присутствующими?",
+  "tCloseAllBody": "Только уроки, где отметок ещё нет. Исправить можно потом в уроке",
+  "tAllPresentToast": "{cls}: все на месте",
+  "@tAllPresentToast": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "tAllPresent": "Все на месте",
+  "tLessonRowSemantic": "{time}, {cls}, {subject}. {state}",
+  "@tLessonRowSemantic": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "cls": {
+        "type": "String"
+      },
+      "subject": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "tAllFilled": "всё заполнено",
+  "tJointClasses": "{a} + {b}",
+  "@tJointClasses": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "lessonOver": "урок закончился",
+  "topicCard": "Тема урока",
+  "ktpChip": "КТП: {topic}",
+  "@ktpChip": {
+    "placeholders": {
+      "topic": {
+        "type": "String"
+      }
+    }
+  },
+  "sameAsLast": "Как в прошлый раз",
+  "topicHint": "Например: Подобие треугольников",
+  "topicSaved": "Тема сохранена",
+  "presentLabel": "Присутствуют",
+  "searchStudent": "Найти ученика",
+  "viewList": "Список",
+  "viewFaces": "Лица",
+  "sourceCheckIn": "отметился сам · {time}",
+  "@sourceCheckIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceCheckInShort": "отметился сам",
+  "sourceHomeroom": "отметка классрука",
+  "lateBy": "опоздал на {m} мин",
+  "@lateBy": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "notSaved": "не сохранено: {reason}",
+  "@notSaved": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "reasonSochShort": "день СОЧ",
+  "reasonSoch": "День СОЧ — отметки не принимаются",
+  "reasonForbiddenShort": "нет прав на урок",
+  "reasonForbidden": "Нет прав на этот урок",
+  "reasonNotFound": "Урок или ученик удалён",
+  "reasonInvalid": "Сервер не принял запись",
+  "sochBanner": "Сегодня СОЧ по предмету «{subject}».",
+  "@sochBanner": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "sochBannerBody": "Текущие оценки и посещаемость не выставляются",
+  "pendingBanner": "{count, plural, one{{count} отметка ждёт сети.} few{{count} отметки ждут сети.} other{{count} отметок ждут сети.}}",
+  "@pendingBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pendingBannerBody": "Отправим сами",
+  "rejectedBanner": "{count, plural, one{{count} запись не сохранена.} few{{count} записи не сохранены.} other{{count} записей не сохранено.}}",
+  "@rejectedBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "openQueue": "Открыть",
+  "dockHomework": "ДЗ",
+  "dockSummary": "Итог",
+  "dockAllPresent": "Все на месте · {count}",
+  "@dockAllPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dockDone": "Готово · {n} из {m}",
+  "@dockDone": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "dockFinish": "Завершить урок",
+  "dockSochDay": "День СОЧ",
+  "rollSaved": "Перекличка сохранена",
+  "markedToast": "{name} — {state}",
+  "@markedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "stateAbsent": "Н",
+  "statePresent": "есть",
+  "rowPresentHint": "Двойное касание — отметить отсутствие",
+  "rowAbsentHint": "Двойное касание — отметить присутствие",
+  "actionCodes": "Коды посещаемости",
+  "codesTitle": "{name}",
+  "@codesTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "codeLate": "Опоздал",
+  "codeLateMinutes": "На сколько минут",
+  "codeCustom": "Своё",
+  "codeSick": "Болеет",
+  "codeExcused": "Уважительная",
+  "codePresent": "Есть",
+  "codeAbsent": "Отсутствует",
+  "lessonStartedToast": "Урок начат",
+  "padOf": "{n} из {total}",
+  "@padOf": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "padComment": "Комментарий",
+  "padCommentHint": "Привяжется к следующей оценке",
+  "padAbsentWarn": "{name} отмечен «Н». Поставить оценку?",
+  "@padAbsentWarn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "padPut": "Поставить",
+  "padRemoved": "Оценка снята",
+  "padKey": "Поставить {v}, {tone}",
+  "@padKey": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      },
+      "tone": {
+        "type": "String"
+      }
+    }
+  },
+  "padSelected": "Выбрано: {count}",
+  "@padSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "padPrev": "Предыдущий ученик",
+  "padNext": "Следующий ученик",
+  "gradeSlot": "Оценка: {name}",
+  "@gradeSlot": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gradeLocked": "Оценки закрыты",
+  "scaleViewOnly": "Эту шкалу выставляют в веб-журнале",
+  "selectMode": "Выбор учеников",
   "workType": "Вид работы",
-  "gradeFor": "Оценка: {name}",
-  "@gradeFor": {"placeholders": {"name": {"type": "String"}}},
-  "removeGrade": "Убрать",
-  "gradeAbsentWarn": "{name} отсутствует. Всё равно поставить оценку?",
-  "@gradeAbsentWarn": {"placeholders": {"name": {"type": "String"}}},
+  "menuMore": "Ещё",
+  "menuGradeAll": "Оценить всех",
+  "menuOpenWeb": "Открыть журнал в вебе",
+  "menuStart": "Начать урок",
+  "jointPill": "совмещённый · {count}",
+  "@jointPill": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "classHeader": "{cls} · {count}",
+  "@classHeader": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "rosterEmpty": "В классе нет учеников",
-  "autoNext": "Сразу к следующему",
-  "done": "Готово",
-  "attendanceCodes": "Код посещаемости",
-  "save": "Сохранить"
+  "hwSheetTitle": "Задание для {cls}",
+  "@hwSheetTitle": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "hwTextHint": "Параграф 12, номера 3–7",
+  "hwDue": "Срок",
+  "hwDueNextLesson": "Следующий урок · {date}",
+  "@hwDueNextLesson": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "hwTime": "Время на выполнение",
+  "hwLoad": "{day}: уже {used} из {norm} мин",
+  "@hwLoad": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "used": {
+        "type": "int"
+      },
+      "norm": {
+        "type": "int"
+      }
+    }
+  },
+  "hwOverNorm": "больше нормы на {m} мин",
+  "@hwOverNorm": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "hwAssign": "Задать",
+  "hwAssigned": "ДЗ задано · {cls}",
+  "@hwAssigned": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "hwExisting": "Уже задано",
+  "hwFailed": "Не получилось задать ДЗ",
+  "hwOffline": "Нет сети — задание уйдёт, когда появится связь",
+  "hwOtherDate": "Другая дата",
+  "sumTitle": "Итог урока",
+  "sumAttendance": "Посещаемость · {n} из {m}",
+  "@sumAttendance": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "sumTopic": "Тема",
+  "sumHomework": "ДЗ",
+  "sumGrades": "Оценки · {count}",
+  "@sumGrades": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sumField": "Итог урока, необязательно",
+  "lessonFinishedToast": "Урок завершён",
+  "syncTitle": "Синхронизация",
+  "syncLast": "Последняя отправка в {time}",
+  "@syncLast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "syncRejected": "Отклонено · {count}",
+  "@syncRejected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncWaiting": "Ждут сети · {count}",
+  "@syncWaiting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncAllSent": "Всё отправлено",
+  "syncAllSentHint": "Отметки, оценки и темы уже на сервере",
+  "syncDeleteConfirm": "Удалить запись?",
+  "syncDeleteBody": "Она пропадёт без отправки",
+  "syncSending": "Отправляем",
+  "syncPendingN": "Ждут отправки: {count}",
+  "@syncPendingN": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncRejectedN": "Не сохранено: {count}",
+  "@syncRejectedN": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "whatAttendance": "Посещаемость «{state}»",
+  "@whatAttendance": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "whatGrade": "Оценка {v}",
+  "@whatGrade": {
+    "placeholders": {
+      "v": {
+        "type": "String"
+      }
+    }
+  },
+  "whatGradeRemoved": "Оценка снята",
+  "whatTopic": "Тема урока",
+  "whatStart": "Начало урока",
+  "whatFinish": "Завершение урока",
+  "whatHomework": "Домашнее задание",
+  "whatAllPresent": "Все на месте · {count}",
+  "@whatAllPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "whatSummary": "Итог урока",
+  "createdAt": "создано в {time}",
+  "@createdAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "inboxAction": "Требует действия",
+  "inboxSchedule": "Расписание",
+  "inboxOther": "Остальное",
+  "inboxEmpty": "Входящих нет",
+  "inboxEmptyHint": "Здесь будут уроки без отметки, отклонённые записи, замены и объявления",
+  "inboxRejected": "Записи не сохранены",
+  "inboxRejectedSub": "Откройте очередь, чтобы повторить или удалить",
+  "inboxExcuses": "{count, plural, one{{count} заявка на отсутствие} few{{count} заявки на отсутствие} other{{count} заявок на отсутствие}}",
+  "@inboxExcuses": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "inboxExcusesSub": "Одобрить или отклонить можно в веб-версии",
+  "markRead": "Прочитано",
+  "markAllRead": "Прочитать всё",
+  "notifEmpty": "Уведомлений нет",
+  "notifEmptyHint": "Здесь будут оценки, задания, замены и решения по заявкам",
+  "notifUnavailable": "Запись удалена или недоступна",
+  "notifUnavailableHint": "Возможно, её изменили в школе. Остальное в приложении работает как обычно",
+  "ntGradeCreated": "Новая оценка",
+  "ntGradeUpdated": "Оценка изменена",
+  "ntHomework": "Домашнее задание",
+  "ntHomeworkReminder": "Напоминание о задании",
+  "ntLessonCancelled": "Урок отменён",
+  "ntLessonRescheduled": "Урок перенесён",
+  "ntSubstitution": "Замена",
+  "ntLessonStarted": "Урок начался",
+  "ntCheckIn": "Ребёнок пришёл в школу",
+  "ntAttendance": "Посещаемость",
+  "ntUnmarked": "Отметьте посещаемость",
+  "ntGradesReminder": "Поставьте оценки",
+  "ntExcusePending": "Новая заявка",
+  "ntExcuseApproved": "Заявка одобрена",
+  "ntExcuseRejected": "Заявка отклонена",
+  "ntExcuseCancelled": "Заявка отозвана",
+  "ntInvoice": "Счёт на оплату",
+  "ntEvent": "Событие школы",
+  "ntChat": "Новое сообщение",
+  "ntOther": "Уведомление"
 }
