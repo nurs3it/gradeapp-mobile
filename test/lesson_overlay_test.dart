@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gradeapp/core/offline/outbox.dart';
-import 'package:gradeapp/features/learner/models.dart';
+import 'package:gradeapp/features/common/models.dart';
 import 'package:gradeapp/features/teacher/teacher_providers.dart';
 
 void main() {
