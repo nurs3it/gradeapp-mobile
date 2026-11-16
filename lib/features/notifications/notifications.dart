@@ -99,6 +99,7 @@ String notificationTitle(AppLocalizations l, String type) => switch (type) {
   'lesson.substitution' || 'lesson.substitution_cancelled' => l.ntSubstitution,
   'lesson.started' => l.ntLessonStarted,
   'checkin.arrived' => l.ntCheckIn,
+  'checkin.missing' => l.ntCheckInMissing,
   'attendance.flagged' => l.ntAttendance,
   'attendance.unmarked' => l.ntUnmarked,
   'grades.reminder' => l.ntGradesReminder,

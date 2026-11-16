@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/json.dart';
 import '../../core/providers.dart';
@@ -15,7 +16,12 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../auth/auth_controller.dart';
 import '../auth/user.dart';
+import '../common/models.dart';
+import '../common/pulse.dart';
 import '../learner/learner_providers.dart';
+import '../parent/excuse_sheet.dart';
+import '../platform/push_background.dart';
+import '../platform/push_intent.dart';
 import 'notifications.dart';
 
 /// Firebase options come from the build, not from plist/json files:
@@ -113,6 +119,7 @@ class Push {
     if (options == null) return;
     try {
       await Firebase.initializeApp(options: options);
+      FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
       enabled = true;
     } catch (e) {
       debugPrint('firebase init failed: $e');
@@ -210,19 +217,78 @@ AppNotification notificationFromPush(Map<String, dynamic> data) {
   );
 }
 
-/// Opens what a tapped push points at: picks the child for a parent, then
-/// routes like the inbox does.
-Future<void> openPush(BuildContext context, WidgetRef ref, RemoteMessage m) async {
+/// Opens what a tapped push points at, or does what its button asked: picks
+/// the child for a parent, then routes like the inbox does (§4.3).
+/// [actionId] is the tapped button (`EXPLAIN`, `APPROVE`, `OPEN`), null for a
+/// plain tap.
+Future<void> openPush(BuildContext context, WidgetRef ref, Map<String, dynamic> data, {String? actionId}) async {
   await ref.read(authProvider.future);
   final role = ref.read(activeRoleProvider);
   if (role == null || !context.mounted) return;
-  final n = notificationFromPush(m.data);
+  final intent = intentFor(data, actionId: isDefaultAction(actionId) ? null : actionId);
+  if (intent is SyncIntent) return;
+  final n = notificationFromPush(data);
   final studentId = n.payload.strOrNull('student_id');
-  if (role == AppRole.parent && studentId != null) {
-    final children = ref.read(childrenProvider).value ?? const [];
-    if (children.any((c) => c.id == studentId)) ref.read(selectedChildProvider.notifier).select(studentId);
+  if (role == AppRole.parent && studentId != null) await _selectChild(ref, studentId);
+  if (!context.mounted) return;
+  switch (intent) {
+    case ApproveIntent(:final excuseId):
+      await _approveExcuse(context, ref, excuseId, n);
+    case ExplainIntent():
+      await _explainAbsence(context, ref, intent);
+    case _:
+      await openNotification(context, ref, n);
   }
-  await openNotification(context, ref, n);
+}
+
+/// A push can arrive before the children list is loaded.
+Future<void> _selectChild(WidgetRef ref, String studentId) async {
+  try {
+    final children = await ref.read(childrenProvider.future);
+    if (children.any((c) => c.id == studentId)) ref.read(selectedChildProvider.notifier).select(studentId);
+  } catch (_) {
+    // Offline and never loaded: Today opens on the remembered child.
+  }
+}
+
+/// «Одобрить» from the notification: no extra screen, one confirmation.
+Future<void> _approveExcuse(BuildContext context, WidgetRef ref, String excuseId, AppNotification n) async {
+  final l = context.l10n;
+  try {
+    await ref.read(dioProvider).post<void>('/excuses/$excuseId/approve/');
+    GHaptics.success();
+    unawaited(markRead(ref, n));
+    ref.invalidate(notificationsProvider);
+    unawaited(ref.read(pulseProvider.notifier).refresh());
+    if (context.mounted) GToast.show(context, l.excuseApprovedToast, icon: GIcons.ok);
+  } catch (_) {
+    GHaptics.error();
+    if (context.mounted) GToast.show(context, l.excuseApproveFailed, icon: GIcons.error);
+  }
+}
+
+/// «Объяснить пропуск»: the excuse form for that miss — its lesson when the
+/// server tells which, else its day.
+Future<void> _explainAbsence(BuildContext context, WidgetRef ref, ExplainIntent e) async {
+  final studentId = e.studentId ?? ref.read(learnerIdProvider);
+  if (studentId == null) return;
+  Lesson? lesson;
+  DateTime? date = e.date == null ? null : DateTime.tryParse(e.date!);
+  final id = e.attendanceId;
+  if (id != null) {
+    try {
+      final dio = ref.read(dioProvider);
+      final att = (await dio.get<Json>('/attendance/$id/')).data!;
+      date ??= DateTime.tryParse(att.str('lesson_date'));
+      final lessonId = att.strOrNull('lesson');
+      if (lessonId != null) lesson = Lesson.fromJson((await dio.get<Json>('/lessons/$lessonId/')).data!);
+    } catch (_) {
+      // Falls back to the plain form.
+    }
+  }
+  if (!context.mounted) return;
+  context.go('/p/today');
+  await showExcuseSheet(context, studentId: studentId, lesson: lesson, date: lesson == null ? date : null);
 }
 
 /// C3: ask for notifications once, at a moment they make sense, with one

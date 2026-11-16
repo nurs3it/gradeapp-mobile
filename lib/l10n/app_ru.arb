@@ -1542,5 +1542,71 @@
   "pushOffOpen": "Открыть настройки",
   "pushTurnOn": "Включить уведомления",
   "pushUnavailable": "В этой сборке пуши недоступны",
-  "notifOpen": "Открыть"
+  "notifOpen": "Открыть",
+  "actApprove": "Одобрить",
+  "excuseApprovedToast": "Заявка одобрена",
+  "excuseApproveFailed": "Не удалось одобрить заявку",
+  "liveNow": "Идёт урок",
+  "liveMarked": "Отмечено {done}/{total}",
+  "@liveMarked": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "liveEnded": "Урок закончен",
+  "liveEndedTopic": "Урок закончен: не заполнена тема",
+  "liveUntilBell": "До звонка",
+  "liveChannel": "Идёт урок",
+  "remChannel": "Напоминания",
+  "remTitle": "{cls}: посещаемость не отмечена",
+  "@remTitle": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "remBody": "{subject}, {start}–{end}",
+  "@remBody": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "wgNext": "Следующий урок",
+  "wgNow": "Сейчас",
+  "wgDay": "День",
+  "wgUpdated": "Обновлено {time}",
+  "@wgUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "wgStale": "Откройте приложение, чтобы обновить",
+  "wgNoMore": "Сегодня уроков больше нет",
+  "wgNoLessons": "Сегодня уроков нет",
+  "wgHomeworkTomorrow": "ДЗ на завтра",
+  "wgNoHomework": "На завтра ничего не задано",
+  "wgSignedOut": "Войдите в GradeApp",
+  "wgTomorrow": "Завтра",
+  "wgStartsIn": "Начнётся через",
+  "wgEndsIn": "До конца",
+  "setLocalTitle": "На этом телефоне",
+  "setReminders": "Напоминания об отметке посещаемости",
+  "setLive": "«Идёт урок» на экране блокировки",
+  "ntCheckInMissing": "Не отметился в школе"
 }

@@ -11,11 +11,16 @@ import 'core/storage/json_cache.dart';
 import 'features/auth/auth_controller.dart';
 import 'features/learner/learner_providers.dart';
 import 'features/notifications/push.dart';
+import 'features/platform/local_notifications.dart';
+import 'features/platform/push_background.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final (cache, prefs, outbox, _) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open(), Push.init()).wait;
+  // Local notifications must be ready before the first frame so a tap that
+  // launched the app is not lost.
+  await LocalNotifications.init(await resolveL10n(prefs), onBackgroundResponse: notificationActionInBackground);
   final boot = {
     for (final k in [SettingsController.key, ActiveRole.key, SelectedChild.key]) k: await prefs.read(k),
   };

@@ -2038,4 +2038,99 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notifOpen => 'Открыть';
+
+  @override
+  String get actApprove => 'Одобрить';
+
+  @override
+  String get excuseApprovedToast => 'Заявка одобрена';
+
+  @override
+  String get excuseApproveFailed => 'Не удалось одобрить заявку';
+
+  @override
+  String get liveNow => 'Идёт урок';
+
+  @override
+  String liveMarked(int done, int total) {
+    return 'Отмечено $done/$total';
+  }
+
+  @override
+  String get liveEnded => 'Урок закончен';
+
+  @override
+  String get liveEndedTopic => 'Урок закончен: не заполнена тема';
+
+  @override
+  String get liveUntilBell => 'До звонка';
+
+  @override
+  String get liveChannel => 'Идёт урок';
+
+  @override
+  String get remChannel => 'Напоминания';
+
+  @override
+  String remTitle(String cls) {
+    return '$cls: посещаемость не отмечена';
+  }
+
+  @override
+  String remBody(String subject, String start, String end) {
+    return '$subject, $start–$end';
+  }
+
+  @override
+  String get wgNext => 'Следующий урок';
+
+  @override
+  String get wgNow => 'Сейчас';
+
+  @override
+  String get wgDay => 'День';
+
+  @override
+  String wgUpdated(String time) {
+    return 'Обновлено $time';
+  }
+
+  @override
+  String get wgStale => 'Откройте приложение, чтобы обновить';
+
+  @override
+  String get wgNoMore => 'Сегодня уроков больше нет';
+
+  @override
+  String get wgNoLessons => 'Сегодня уроков нет';
+
+  @override
+  String get wgHomeworkTomorrow => 'ДЗ на завтра';
+
+  @override
+  String get wgNoHomework => 'На завтра ничего не задано';
+
+  @override
+  String get wgSignedOut => 'Войдите в GradeApp';
+
+  @override
+  String get wgTomorrow => 'Завтра';
+
+  @override
+  String get wgStartsIn => 'Начнётся через';
+
+  @override
+  String get wgEndsIn => 'До конца';
+
+  @override
+  String get setLocalTitle => 'На этом телефоне';
+
+  @override
+  String get setReminders => 'Напоминания об отметке посещаемости';
+
+  @override
+  String get setLive => '«Идёт урок» на экране блокировки';
+
+  @override
+  String get ntCheckInMissing => 'Не отметился в школе';
 }

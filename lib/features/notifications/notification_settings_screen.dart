@@ -10,6 +10,8 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../auth/auth_controller.dart';
 import '../auth/user.dart';
+import '../platform/lesson_live.dart';
+import '../platform/reminders.dart';
 import 'push.dart';
 
 /// C6: which groups come as a push. Optimistic, rolled back on error; the
@@ -118,8 +120,81 @@ class _State extends ConsumerState<NotificationSettingsScreen> {
                       ),
                   ],
                 ),
+                if (role == AppRole.teacher) const _LocalSwitches(),
               ],
             ),
+    );
+  }
+}
+
+/// Teacher: things that live on this phone only (T10, W5).
+class _LocalSwitches extends ConsumerStatefulWidget {
+  const _LocalSwitches();
+
+  @override
+  ConsumerState<_LocalSwitches> createState() => _LocalSwitchesState();
+}
+
+class _LocalSwitchesState extends ConsumerState<_LocalSwitches> {
+  bool _reminders = true;
+  bool _live = true;
+
+  @override
+  void initState() {
+    super.initState();
+    final prefs = ref.read(prefsProvider);
+    unawaited(
+      Future.wait([Reminders.enabled(prefs), LessonLive.enabled(prefs)]).then((v) {
+        if (mounted) {
+          setState(() {
+            _reminders = v[0];
+            _live = v[1];
+          });
+        }
+      }),
+    );
+  }
+
+  Future<void> _set(String key, bool on) async {
+    await ref.read(prefsProvider).write(key, on);
+    if (key == remindersPrefKey && !on) await Reminders.cancelAll();
+    if (key == LessonLive.prefKey && !on) {
+      final live = LessonLive.current;
+      if (live != null) await LessonLive.finish(live.lessonId);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final t = context.t;
+    final c = context.c;
+    Widget row(String title, bool value, String key, ValueChanged<bool> apply) => GRow(
+      minHeight: GSpace.rowCompact,
+      title: Text(title),
+      trailing: Switch.adaptive(
+        value: value,
+        activeTrackColor: GColors.brand,
+        onChanged: (v) {
+          apply(v);
+          unawaited(_set(key, v));
+        },
+      ),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 24, 4, 12),
+          child: Text(l.setLocalTitle, style: t.callout.copyWith(color: c.ink2)),
+        ),
+        GGroup(
+          children: [
+            row(l.setReminders, _reminders, remindersPrefKey, (v) => setState(() => _reminders = v)),
+            row(l.setLive, _live, LessonLive.prefKey, (v) => setState(() => _live = v)),
+          ],
+        ),
+      ],
     );
   }
 }

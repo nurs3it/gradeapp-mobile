@@ -1937,4 +1937,99 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get notifOpen => 'Ашу';
+
+  @override
+  String get actApprove => 'Мақұлдау';
+
+  @override
+  String get excuseApprovedToast => 'Өтінім мақұлданды';
+
+  @override
+  String get excuseApproveFailed => 'Өтінімді мақұлдау мүмкін болмады';
+
+  @override
+  String get liveNow => 'Сабақ жүріп жатыр';
+
+  @override
+  String liveMarked(int done, int total) {
+    return 'Белгіленді $done/$total';
+  }
+
+  @override
+  String get liveEnded => 'Сабақ аяқталды';
+
+  @override
+  String get liveEndedTopic => 'Сабақ аяқталды: тақырып толтырылмаған';
+
+  @override
+  String get liveUntilBell => 'Қоңырауға дейін';
+
+  @override
+  String get liveChannel => 'Сабақ жүріп жатыр';
+
+  @override
+  String get remChannel => 'Еске салулар';
+
+  @override
+  String remTitle(String cls) {
+    return '$cls: қатысу белгіленбеген';
+  }
+
+  @override
+  String remBody(String subject, String start, String end) {
+    return '$subject, $start–$end';
+  }
+
+  @override
+  String get wgNext => 'Келесі сабақ';
+
+  @override
+  String get wgNow => 'Қазір';
+
+  @override
+  String get wgDay => 'Күн';
+
+  @override
+  String wgUpdated(String time) {
+    return 'Жаңартылды $time';
+  }
+
+  @override
+  String get wgStale => 'Жаңарту үшін қолданбаны ашыңыз';
+
+  @override
+  String get wgNoMore => 'Бүгін сабақ қалмады';
+
+  @override
+  String get wgNoLessons => 'Бүгін сабақ жоқ';
+
+  @override
+  String get wgHomeworkTomorrow => 'Ертеңгі үй тапсырмасы';
+
+  @override
+  String get wgNoHomework => 'Ертеңге тапсырма жоқ';
+
+  @override
+  String get wgSignedOut => 'GradeApp-қа кіріңіз';
+
+  @override
+  String get wgTomorrow => 'Ертең';
+
+  @override
+  String get wgStartsIn => 'Басталуына';
+
+  @override
+  String get wgEndsIn => 'Аяқталуына';
+
+  @override
+  String get setLocalTitle => 'Осы телефонда';
+
+  @override
+  String get setReminders => 'Қатысуды белгілеу туралы еске салу';
+
+  @override
+  String get setLive => 'Құлыптау экранындағы «Сабақ жүріп жатыр»';
+
+  @override
+  String get ntCheckInMissing => 'Мектепке белгі қойылмады';
 }
