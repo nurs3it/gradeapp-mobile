@@ -8,6 +8,8 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Камера нужна для отметки «Я в школе» — селфи у входа.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Face ID защищает доступ к оценкам и данным ребёнка, если вы включили блокировку приложения.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Школа проверяет, что вы на её территории, когда вы отмечаетесь «Я в школе».</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -10,6 +10,9 @@ import 'package:path_provider/path_provider.dart';
 class JsonCache {
   JsonCache._(this._dir);
 
+  /// Store in a given directory (tests).
+  JsonCache.inDirectory(this._dir);
+
   final Directory _dir;
   final _memory = <String, Object?>{};
 

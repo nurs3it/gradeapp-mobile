@@ -558,5 +558,11 @@
   "pushTurnOn": "Turn on notifications",
   "pushUnavailable": "Push notifications are not available in this build",
   "notifOpen": "Open",
-  "presenceOnline": "Online"
+  "presenceOnline": "Online",
+  "lockSetting": "App lock",
+  "lockSettingHint": "Face ID, fingerprint or phone passcode at launch and after 5 minutes in the background",
+  "lockReason": "Confirm it's you",
+  "lockTitle": "GradeApp is locked",
+  "lockUnlock": "Unlock",
+  "lockUnavailable": "Set up Face ID, a fingerprint or a passcode in the phone's settings"
 }

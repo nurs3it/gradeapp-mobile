@@ -16,6 +16,7 @@ import '../l10n/l10n.dart';
 import '../ui/ui.dart';
 import 'router.dart';
 import 'settings.dart';
+import '../features/shell/app_lock.dart';
 
 final _light = buildTheme(Brightness.light);
 final _dark = buildTheme(Brightness.dark);
@@ -124,7 +125,7 @@ class _GradeAppState extends ConsumerState<GradeApp> {
         final scale = math.min(mq.textScaler.scale(1), GScale.max);
         return MediaQuery(
           data: mq.copyWith(textScaler: TextScaler.linear(scale)),
-          child: child!,
+          child: AppLockGate(child: child!),
         );
       },
       routerConfig: ref.watch(routerProvider),

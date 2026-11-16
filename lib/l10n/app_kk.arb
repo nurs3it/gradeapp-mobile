@@ -558,5 +558,11 @@
   "pushTurnOn": "Хабарламаларды қосу",
   "pushUnavailable": "Бұл нұсқада пуш-хабарламалар жоқ",
   "notifOpen": "Ашу",
-  "presenceOnline": "Желіде"
+  "presenceOnline": "Желіде",
+  "lockSetting": "Қолданбаны құлыптау",
+  "lockSettingHint": "Іске қосқанда және 5 минуттан артық фонда болғаннан кейін — Face ID, саусақ ізі немесе телефон коды",
+  "lockReason": "Бұл өзіңіз екеніңізді растаңыз",
+  "lockTitle": "GradeApp құлыпталған",
+  "lockUnlock": "Құлыпты ашу",
+  "lockUnavailable": "Телефон баптауларында Face ID, саусақ ізін немесе құпиякодты қосыңыз"
 }

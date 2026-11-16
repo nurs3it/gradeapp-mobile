@@ -1992,4 +1992,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get presenceOnline => 'Online';
+
+  @override
+  String get lockSetting => 'App lock';
+
+  @override
+  String get lockSettingHint =>
+      'Face ID, fingerprint or phone passcode at launch and after 5 minutes in the background';
+
+  @override
+  String get lockReason => 'Confirm it\'s you';
+
+  @override
+  String get lockTitle => 'GradeApp is locked';
+
+  @override
+  String get lockUnlock => 'Unlock';
+
+  @override
+  String get lockUnavailable => 'Set up Face ID, a fingerprint or a passcode in the phone\'s settings';
 }

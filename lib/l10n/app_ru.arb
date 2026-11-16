@@ -1543,5 +1543,11 @@
   "pushTurnOn": "Включить уведомления",
   "pushUnavailable": "В этой сборке пуши недоступны",
   "notifOpen": "Открыть",
-  "presenceOnline": "В сети"
+  "presenceOnline": "В сети",
+  "lockSetting": "Блокировка приложения",
+  "lockSettingHint": "Face ID, отпечаток или код телефона при запуске и после 5 минут в фоне",
+  "lockReason": "Подтвердите, что это вы",
+  "lockTitle": "GradeApp заблокирован",
+  "lockUnlock": "Разблокировать",
+  "lockUnavailable": "Включите Face ID, отпечаток или код-пароль в настройках телефона"
 }

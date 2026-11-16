@@ -2041,4 +2041,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get presenceOnline => 'В сети';
+
+  @override
+  String get lockSetting => 'Блокировка приложения';
+
+  @override
+  String get lockSettingHint => 'Face ID, отпечаток или код телефона при запуске и после 5 минут в фоне';
+
+  @override
+  String get lockReason => 'Подтвердите, что это вы';
+
+  @override
+  String get lockTitle => 'GradeApp заблокирован';
+
+  @override
+  String get lockUnlock => 'Разблокировать';
+
+  @override
+  String get lockUnavailable => 'Включите Face ID, отпечаток или код-пароль в настройках телефона';
 }

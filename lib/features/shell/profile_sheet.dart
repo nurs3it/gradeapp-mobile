@@ -15,6 +15,7 @@ import '../common/models.dart';
 import '../learner/learner_providers.dart';
 import 'header.dart';
 import '../common/presence.dart';
+import 'app_lock.dart';
 
 const _webUrl = 'https://grade-app.kz';
 const _appVersion = '1.0.0';
@@ -133,6 +134,7 @@ class _ProfileSheet extends ConsumerWidget {
                 chevron: true,
                 onTap: () => _pickTheme(context, ref),
               ),
+              const _AppLockRow(),
               GRow(
                 minHeight: GSpace.rowCompact,
                 leading: GIcon(GIcons.openInNew, size: 20, color: c.ink2),
@@ -472,6 +474,36 @@ class _ChildrenSheet extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Opt-in Face ID / fingerprint lock.
+class _AppLockRow extends ConsumerWidget {
+  const _AppLockRow();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    final c = context.c;
+    final on = ref.watch(appLockProvider.select((s) => s.enabled));
+    Future<void> toggle(bool want) async {
+      final ctl = ref.read(appLockProvider.notifier);
+      final ok = want ? await ctl.enable(l.lockReason) : await ctl.disable(l.lockReason);
+      if (ok) {
+        GHaptics.selection();
+      } else if (want && context.mounted) {
+        GToast.show(context, l.lockUnavailable, icon: GIcons.error);
+      }
+    }
+
+    return GRow(
+      minHeight: GSpace.rowCompact,
+      leading: GIcon(GIcons.faceId, size: 20, color: c.ink2),
+      title: Text(l.lockSetting),
+      subtitle: Text(l.lockSettingHint),
+      trailing: Switch.adaptive(value: on, onChanged: (v) => unawaited(toggle(v))),
+      onTap: () => unawaited(toggle(!on)),
     );
   }
 }

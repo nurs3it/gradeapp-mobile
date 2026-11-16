@@ -1940,4 +1940,23 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get presenceOnline => 'Желіде';
+
+  @override
+  String get lockSetting => 'Қолданбаны құлыптау';
+
+  @override
+  String get lockSettingHint =>
+      'Іске қосқанда және 5 минуттан артық фонда болғаннан кейін — Face ID, саусақ ізі немесе телефон коды';
+
+  @override
+  String get lockReason => 'Бұл өзіңіз екеніңізді растаңыз';
+
+  @override
+  String get lockTitle => 'GradeApp құлыпталған';
+
+  @override
+  String get lockUnlock => 'Құлыпты ашу';
+
+  @override
+  String get lockUnavailable => 'Телефон баптауларында Face ID, саусақ ізін немесе құпиякодты қосыңыз';
 }

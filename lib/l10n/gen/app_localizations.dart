@@ -3446,6 +3446,42 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'В сети'**
   String get presenceOnline;
+
+  /// No description provided for @lockSetting.
+  ///
+  /// In ru, this message translates to:
+  /// **'Блокировка приложения'**
+  String get lockSetting;
+
+  /// No description provided for @lockSettingHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Face ID, отпечаток или код телефона при запуске и после 5 минут в фоне'**
+  String get lockSettingHint;
+
+  /// No description provided for @lockReason.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердите, что это вы'**
+  String get lockReason;
+
+  /// No description provided for @lockTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'GradeApp заблокирован'**
+  String get lockTitle;
+
+  /// No description provided for @lockUnlock.
+  ///
+  /// In ru, this message translates to:
+  /// **'Разблокировать'**
+  String get lockUnlock;
+
+  /// No description provided for @lockUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включите Face ID, отпечаток или код-пароль в настройках телефона'**
+  String get lockUnavailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
