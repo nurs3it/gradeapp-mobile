@@ -30,6 +30,9 @@ import UserNotifications
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "GSystem") {
       SystemChannel.register(messenger: registrar.messenger())
     }
+    if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "GLiveActivity") {
+      LiveActivityChannel.register(messenger: registrar.messenger())
+    }
   }
 }
 

@@ -1,0 +1,4 @@
+// Version numbers for the widget extension (FLUTTER_BUILD_NAME / NUMBER).
+// Not Debug/Release.xcconfig: those pull in the CocoaPods link flags, and the
+// extension links no pods.
+#include "Generated.xcconfig"

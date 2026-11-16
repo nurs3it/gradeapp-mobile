@@ -8,15 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		197912F6DF1E2EF5D9DF66D7 /* GradeAppWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */; };
+		1F96D0A2C9F65FD734D4AC51 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D350473D7C27191A3559F716 /* Tokens.swift */; };
+		2CFD34A5F9C46D141F538F37 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B2D31E64ADD6CC2C7BE0D0 /* LiveActivity.swift */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
+		38FB02E6F9D6E33FA6B60888 /* LessonLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		4A85DB5D028237B46C6D9372 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D406034C090B3B0CA69505E3 /* Common.swift */; };
+		57F0A608E49221483E1F036D /* Onest-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB2712844F559FCE54A6F33C /* Onest-Regular.ttf */; };
+		5F2ACC7C3D9DB0A9D8D242B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A53A685694BA5780983C31 /* Foundation.framework */; };
+		60F0F3BCFF044B771C862183 /* DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8891EE92750E8CDF33FCF4E /* DayWidget.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */; };
+		860C5CF899246DAC4DD389A5 /* GradeAppWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0AAD5967C85436EC4C8E85BA /* GradeAppWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		87CBC5C351FD3DECC180915C /* NextLessonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */; };
+		91D7D7704515B19EEA335973 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58671A9936990612DC221318 /* Snapshot.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		A59B91F2063286A5387505C4 /* Onest-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4009BB8E3CA8358BC84B8F1 /* Onest-Bold.ttf */; };
 		AD578577FD47E389698E7679 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB52BDB6C3B5EBE6D2B3BB7B /* Pods_RunnerTests.framework */; };
+		B746E7BDD5F0E12F34F80BB4 /* Onest-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F72280C2D1726D8034BF0426 /* Onest-ExtraBold.ttf */; };
+		BF49FDC3AEF75EA58226BF1A /* LessonActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3780821D44FECDDD0DB80A7 /* LessonActivityAttributes.swift */; };
+		C7B184FE0B6F555E251C18B1 /* LessonActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3780821D44FECDDD0DB80A7 /* LessonActivityAttributes.swift */; };
 		CB30166F3F1711FF736C6A98 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB2183393DD9ABFFA34F119 /* Pods_Runner.framework */; };
+		FF2A884EFC834F7D8879052A /* Onest-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8D1F639144D96F8522FE084 /* Onest-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +42,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 97C146ED1CF9000F007C117D;
 			remoteInfo = Runner;
+		};
+		6F3905D68B9AC04BBA7DE098 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03C13C0101A40C6C93DFF84B;
+			remoteInfo = GradeAppWidgets;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -40,23 +63,42 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BC6C681BCCA671FE13FEC3C2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				860C5CF899246DAC4DD389A5 /* GradeAppWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		037F3B87EB299460F53AD99D /* GradeAppWidgets.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = GradeAppWidgets.xcconfig; path = Flutter/GradeAppWidgets.xcconfig; sourceTree = "<group>"; };
+		0AAD5967C85436EC4C8E85BA /* GradeAppWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GradeAppWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonLiveActivity.swift; sourceTree = "<group>"; };
 		13CF9C2D6307F3CC0286D65E /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		19E88F09DF0BE22A53193895 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		2F77AD726A4E04CF241F2B4F /* GradeAppWidgets.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = GradeAppWidgets.entitlements; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38A53A685694BA5780983C31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3D584464F07E447E7A3C59D2 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		58671A9936990612DC221318 /* Snapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75C042187BA40B9C0816E3FF /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GradeAppWidgets.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7C6D1A14CDEA46D7DB610F58 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		80B2D31E64ADD6CC2C7BE0D0 /* LiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,12 +106,30 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8D1F639144D96F8522FE084 /* Onest-SemiBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-SemiBold.ttf"; path = "../assets/fonts/Onest-SemiBold.ttf"; sourceTree = "<group>"; };
+		AB2712844F559FCE54A6F33C /* Onest-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-Regular.ttf"; path = "../assets/fonts/Onest-Regular.ttf"; sourceTree = "<group>"; };
 		AB52BDB6C3B5EBE6D2B3BB7B /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3780821D44FECDDD0DB80A7 /* LessonActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonActivityAttributes.swift; sourceTree = "<group>"; };
+		C8B18303AF9D668803F2402F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NextLessonWidget.swift; sourceTree = "<group>"; };
+		D350473D7C27191A3559F716 /* Tokens.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		D406034C090B3B0CA69505E3 /* Common.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E7E0E9265C8BF380850CF14B /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E8891EE92750E8CDF33FCF4E /* DayWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DayWidget.swift; sourceTree = "<group>"; };
 		EEB2183393DD9ABFFA34F119 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4009BB8E3CA8358BC84B8F1 /* Onest-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-Bold.ttf"; path = "../assets/fonts/Onest-Bold.ttf"; sourceTree = "<group>"; };
+		F72280C2D1726D8034BF0426 /* Onest-ExtraBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-ExtraBold.ttf"; path = "../assets/fonts/Onest-ExtraBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1AAF8D01B6FA55885AE7AA5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F2ACC7C3D9DB0A9D8D242B7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F6460F3D8A2B3AE25D46E66 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,12 +149,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D82DC08997FACA04AB2FF16 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				38A53A685694BA5780983C31 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		331C8082294A63A400263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
 				331C807B294A618700263BE5 /* RunnerTests.swift */,
 			);
 			path = RunnerTests;
+			sourceTree = "<group>";
+		};
+		6E2CC181AC408E8C047D9294 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B3780821D44FECDDD0DB80A7 /* LessonActivityAttributes.swift */,
+			);
+			name = Shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		90B33A9F961B7500788107DE /* Pods */ = {
@@ -118,6 +195,7 @@
 				9740EEB21CF90195004384FC /* Debug.xcconfig */,
 				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
 				9740EEB31CF90195004384FC /* Generated.xcconfig */,
+				037F3B87EB299460F53AD99D /* GradeAppWidgets.xcconfig */,
 			);
 			name = Flutter;
 			sourceTree = "<group>";
@@ -131,6 +209,12 @@
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				90B33A9F961B7500788107DE /* Pods */,
 				DBBBC9825B6982C32FE5AC3E /* Frameworks */,
+				FED1B5DC2473254F6DC8A538 /* GradeAppWidgets */,
+				6E2CC181AC408E8C047D9294 /* Shared */,
+				AB2712844F559FCE54A6F33C /* Onest-Regular.ttf */,
+				A8D1F639144D96F8522FE084 /* Onest-SemiBold.ttf */,
+				F4009BB8E3CA8358BC84B8F1 /* Onest-Bold.ttf */,
+				F72280C2D1726D8034BF0426 /* Onest-ExtraBold.ttf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +223,7 @@
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 				331C8081294A63A400263BE5 /* RunnerTests.xctest */,
+				0AAD5967C85436EC4C8E85BA /* GradeAppWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,6 +240,7 @@
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				80B2D31E64ADD6CC2C7BE0D0 /* LiveActivity.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -164,13 +250,48 @@
 			children = (
 				EEB2183393DD9ABFFA34F119 /* Pods_Runner.framework */,
 				AB52BDB6C3B5EBE6D2B3BB7B /* Pods_RunnerTests.framework */,
+				2D82DC08997FACA04AB2FF16 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FED1B5DC2473254F6DC8A538 /* GradeAppWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				D406034C090B3B0CA69505E3 /* Common.swift */,
+				E8891EE92750E8CDF33FCF4E /* DayWidget.swift */,
+				7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */,
+				0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */,
+				CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */,
+				58671A9936990612DC221318 /* Snapshot.swift */,
+				D350473D7C27191A3559F716 /* Tokens.swift */,
+				C8B18303AF9D668803F2402F /* Info.plist */,
+				2F77AD726A4E04CF241F2B4F /* GradeAppWidgets.entitlements */,
+			);
+			name = GradeAppWidgets;
+			path = GradeAppWidgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		03C13C0101A40C6C93DFF84B /* GradeAppWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 424CEDFA24ACCFE55B62348C /* Build configuration list for PBXNativeTarget "GradeAppWidgets" */;
+			buildPhases = (
+				489E8D0847CB438F1107D074 /* Sources */,
+				1AAF8D01B6FA55885AE7AA5C /* Frameworks */,
+				D94AD7831CA6AB8519855E6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GradeAppWidgets;
+			productName = GradeAppWidgets;
+			productReference = 0AAD5967C85436EC4C8E85BA /* GradeAppWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		331C8080294A63A400263BE5 /* RunnerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 331C8087294A63A400263BE5 /* Build configuration list for PBXNativeTarget "RunnerTests" */;
@@ -200,6 +321,7 @@
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
+				BC6C681BCCA671FE13FEC3C2 /* Embed Foundation Extensions */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				7DB0C3088848AE0BB400078B /* [CP] Embed Pods Frameworks */,
 				61CB67C5EDEFBB0FA591173E /* [CP] Copy Pods Resources */,
@@ -207,6 +329,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5F26437C91D81957BB057995 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -248,6 +371,7 @@
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 				331C8080294A63A400263BE5 /* RunnerTests */,
+				03C13C0101A40C6C93DFF84B /* GradeAppWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +392,17 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D94AD7831CA6AB8519855E6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57F0A608E49221483E1F036D /* Onest-Regular.ttf in Resources */,
+				FF2A884EFC834F7D8879052A /* Onest-SemiBold.ttf in Resources */,
+				A59B91F2063286A5387505C4 /* Onest-Bold.ttf in Resources */,
+				B746E7BDD5F0E12F34F80BB4 /* Onest-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +529,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		489E8D0847CB438F1107D074 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A85DB5D028237B46C6D9372 /* Common.swift in Sources */,
+				60F0F3BCFF044B771C862183 /* DayWidget.swift in Sources */,
+				197912F6DF1E2EF5D9DF66D7 /* GradeAppWidgets.swift in Sources */,
+				38FB02E6F9D6E33FA6B60888 /* LessonLiveActivity.swift in Sources */,
+				87CBC5C351FD3DECC180915C /* NextLessonWidget.swift in Sources */,
+				91D7D7704515B19EEA335973 /* Snapshot.swift in Sources */,
+				1F96D0A2C9F65FD734D4AC51 /* Tokens.swift in Sources */,
+				BF49FDC3AEF75EA58226BF1A /* LessonActivityAttributes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EA1CF9000F007C117D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,6 +551,8 @@
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */,
+				C7B184FE0B6F555E251C18B1 /* LessonActivityAttributes.swift in Sources */,
+				2CFD34A5F9C46D141F538F37 /* LiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +563,12 @@
 			isa = PBXTargetDependency;
 			target = 97C146ED1CF9000F007C117D /* Runner */;
 			targetProxy = 331C8085294A63A400263BE5 /* PBXContainerItemProxy */;
+		};
+		5F26437C91D81957BB057995 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GradeAppWidgets;
+			target = 03C13C0101A40C6C93DFF84B /* GradeAppWidgets */;
+			targetProxy = 6F3905D68B9AC04BBA7DE098 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -434,6 +592,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		138B8BE62FFDBBBBC632F1BD /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 037F3B87EB299460F53AD99D /* GradeAppWidgets.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = GradeAppWidgets/GradeAppWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6Y5RQZ368G;
+				INFOPLIST_FILE = GradeAppWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kz.gradeapp.gradeapp.GradeAppWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Profile;
+		};
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -717,6 +902,59 @@
 			};
 			name = Release;
 		};
+		9DF9FD68964085AD26A0CA9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 037F3B87EB299460F53AD99D /* GradeAppWidgets.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = GradeAppWidgets/GradeAppWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6Y5RQZ368G;
+				INFOPLIST_FILE = GradeAppWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kz.gradeapp.gradeapp.GradeAppWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2E81E10405EA45BF96D2F41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 037F3B87EB299460F53AD99D /* GradeAppWidgets.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = GradeAppWidgets/GradeAppWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6Y5RQZ368G;
+				INFOPLIST_FILE = GradeAppWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kz.gradeapp.gradeapp.GradeAppWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -726,6 +964,16 @@
 				331C8088294A63A400263BE5 /* Debug */,
 				331C8089294A63A400263BE5 /* Release */,
 				331C808A294A63A400263BE5 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		424CEDFA24ACCFE55B62348C /* Build configuration list for PBXNativeTarget "GradeAppWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2E81E10405EA45BF96D2F41 /* Release */,
+				9DF9FD68964085AD26A0CA9A /* Debug */,
+				138B8BE62FFDBBBBC632F1BD /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
