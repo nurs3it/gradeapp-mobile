@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/json.dart';
 import '../../core/providers.dart';
+import '../notifications/push.dart';
 import 'user.dart';
 
 /// Signed-in user, or null. Boot uses the cached profile so the app opens
@@ -55,6 +56,7 @@ class AuthController extends AsyncNotifier<AppUser?> {
     final user = body['user'];
     if (user is Json) await ref.read(jsonCacheProvider).write(_meKey, user);
     if (publish) state = AsyncData(user is Json ? AppUser.fromJson(user) : await _fetchMe());
+    unawaited(ref.read(pushProvider).register());
   }
 
   /// C11: another school. Data of the previous one must not linger.
@@ -65,12 +67,17 @@ class AuthController extends AsyncNotifier<AppUser?> {
   }
 
   Future<void> logout() async {
+    await ref.read(pushProvider).unregister();
     await ref.read(apiClientProvider).logout();
     await _wipe();
   }
 
-  /// Server revoked the session (refresh → 401).
-  Future<void> sessionLost() => _wipe();
+  /// Server revoked the session (refresh → 401): the token dies locally so
+  /// this phone stops getting the account's pushes.
+  Future<void> sessionLost() async {
+    await ref.read(pushProvider).unregister(withServer: false);
+    await _wipe();
+  }
 
   Future<void> _wipe() async {
     await ref.read(jsonCacheProvider).clear();

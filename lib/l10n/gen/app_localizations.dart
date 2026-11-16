@@ -3326,6 +3326,120 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Уведомление'**
   String get ntOther;
+
+  /// No description provided for @ngGrades.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оценки'**
+  String get ngGrades;
+
+  /// No description provided for @ngHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'Задания'**
+  String get ngHomework;
+
+  /// No description provided for @ngSchedule.
+  ///
+  /// In ru, this message translates to:
+  /// **'Расписание и замены'**
+  String get ngSchedule;
+
+  /// No description provided for @ngAttendance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Посещаемость и приход в школу'**
+  String get ngAttendance;
+
+  /// No description provided for @ngChat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сообщения'**
+  String get ngChat;
+
+  /// No description provided for @ngBilling.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get ngBilling;
+
+  /// No description provided for @ngGeneral.
+  ///
+  /// In ru, this message translates to:
+  /// **'Важное'**
+  String get ngGeneral;
+
+  /// No description provided for @pushAskTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включить уведомления?'**
+  String get pushAskTitle;
+
+  /// No description provided for @pushAskAllow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включить'**
+  String get pushAskAllow;
+
+  /// No description provided for @pushWhyStudent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сразу узнаешь о новой оценке, задании или замене урока.'**
+  String get pushWhyStudent;
+
+  /// No description provided for @pushWhyParent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Узнавайте сразу, когда ребёнок пришёл в школу, получил оценку или пропустил урок. Сами оценки на заблокированном экране не показываются.'**
+  String get pushWhyParent;
+
+  /// No description provided for @pushWhyTeacher.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напомним о неотмеченной посещаемости и сообщим о заменах и новых заявках.'**
+  String get pushWhyTeacher;
+
+  /// No description provided for @notifSettings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления'**
+  String get notifSettings;
+
+  /// No description provided for @notifSettingsHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'В колокольчике приложения видно всё. Здесь — что приходит пушем на телефон.'**
+  String get notifSettingsHint;
+
+  /// No description provided for @pushOffTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления выключены в настройках телефона'**
+  String get pushOffTitle;
+
+  /// No description provided for @pushOffOpen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыть настройки'**
+  String get pushOffOpen;
+
+  /// No description provided for @pushTurnOn.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включить уведомления'**
+  String get pushTurnOn;
+
+  /// No description provided for @pushUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'В этой сборке пуши недоступны'**
+  String get pushUnavailable;
+
+  /// No description provided for @notifOpen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыть'**
+  String get notifOpen;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

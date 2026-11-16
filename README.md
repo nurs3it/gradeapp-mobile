@@ -19,6 +19,24 @@ flutter analyze   # ноль замечаний
 flutter test
 ```
 
+## Пуши (FCM)
+
+Без конфигурации Firebase пуши выключены, остальное работает. Чтобы включить:
+
+1. Создать проект Firebase, добавить приложения iOS и Android с bundle id `kz.gradeapp.gradeapp`.
+2. Загрузить в Firebase APNs-ключ (.p8) из Apple Developer (Project settings → Cloud Messaging).
+3. Скопировать `firebase.example.json` в `firebase.json` (он в `.gitignore`), заполнить значениями из настроек приложений в Firebase.
+4. Запускать с `--dart-define-from-file=firebase.json`.
+5. На бэкенде: сервисный аккаунт Firebase (JSON) в переменную `FCM_SERVICE_ACCOUNT`. Отправка — `backend/users/fcm.py`.
+
+Как устроено:
+- токен уходит на `POST /api/push/devices/` после входа и только если уведомления разрешены; при выходе — `DELETE`;
+- разрешение спрашивается один раз, с пояснением: у ученика после первой отметки «Я в школе», у родителя и учителя через пару секунд после первого открытия;
+- в открытом приложении пуш — тост с кнопкой «Открыть»; тап по системному пушу открывает экран по карте §4.3 спеки (и при холодном старте);
+- текст пуша собирает сервер на языке пользователя, оценок и баллов в нём нет;
+- Android: канал на каждую группу настроек; iOS: бейдж = непрочитанные в колокольчике;
+- настройки групп — профиль → «Уведомления» (`notification_prefs`, канал `push`).
+
 ## Структура
 
 ```
@@ -66,7 +84,7 @@ assets/fonts/     Onest 400–800 (OFL, лицензия рядом)
 - Цвета только из `ui/tokens/colors.dart` (`context.c`), текст — `context.t`. Hex в экранах не пишем.
 - Строки только через `context.l10n`. ARB генерируются из таблицы строк: правьте все три языка сразу, казахский — отдельно, не калькой с русского.
 - Нажатие — `GPressable` (масштаб и пружина), ripple выключен. Анимируются только transform и opacity; переключатели состояний строятся из постоянных слоёв с `AnimatedOpacity`, а не из `AnimatedSwitcher` с повторяющимися ключами.
-- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`.
+- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`, `push_test.dart`.
 
 ## Демо-аккаунты (локальная сид-база)
 

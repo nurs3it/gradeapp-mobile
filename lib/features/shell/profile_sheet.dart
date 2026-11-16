@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/settings.dart';
@@ -98,6 +99,17 @@ class _ProfileSheet extends ConsumerWidget {
           GGroup(
             inset: 48,
             children: [
+              GRow(
+                minHeight: GSpace.rowCompact,
+                leading: GIcon(GIcons.bell, size: 20, color: c.ink2),
+                title: Text(l.notifSettings),
+                chevron: true,
+                onTap: () {
+                  final router = GoRouter.of(context);
+                  Navigator.of(context).pop();
+                  unawaited(router.push('/settings/notifications'));
+                },
+              ),
               GRow(
                 minHeight: GSpace.rowCompact,
                 leading: GIcon(GIcons.language, size: 20, color: c.ink2),

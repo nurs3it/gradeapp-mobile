@@ -1877,4 +1877,64 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get ntOther => 'Хабарлама';
+
+  @override
+  String get ngGrades => 'Бағалар';
+
+  @override
+  String get ngHomework => 'Тапсырмалар';
+
+  @override
+  String get ngSchedule => 'Кесте және алмастыру';
+
+  @override
+  String get ngAttendance => 'Қатысу және мектепке келу';
+
+  @override
+  String get ngChat => 'Хабарламалар';
+
+  @override
+  String get ngBilling => 'Төлем';
+
+  @override
+  String get ngGeneral => 'Маңызды';
+
+  @override
+  String get pushAskTitle => 'Хабарламаларды қосасыз ба?';
+
+  @override
+  String get pushAskAllow => 'Қосу';
+
+  @override
+  String get pushWhyStudent => 'Жаңа баға, тапсырма немесе сабақтың ауысқаны туралы бірден білесің.';
+
+  @override
+  String get pushWhyParent =>
+      'Бала мектепке келгенін, баға алғанын немесе сабаққа келмегенін бірден біліп отырыңыз. Бағаның өзі құлыпталған экранда көрсетілмейді.';
+
+  @override
+  String get pushWhyTeacher =>
+      'Белгіленбеген қатысуды еске саламыз, алмастырулар мен жаңа өтініштер туралы хабарлаймыз.';
+
+  @override
+  String get notifSettings => 'Хабарламалар';
+
+  @override
+  String get notifSettingsHint =>
+      'Қосымшадағы қоңыраудан бәрі көрінеді. Мұнда телефонға пуш болып не келетінін таңдайсыз.';
+
+  @override
+  String get pushOffTitle => 'Хабарламалар телефон баптауларында өшірулі';
+
+  @override
+  String get pushOffOpen => 'Баптауларды ашу';
+
+  @override
+  String get pushTurnOn => 'Хабарламаларды қосу';
+
+  @override
+  String get pushUnavailable => 'Бұл нұсқада пуш-хабарламалар жоқ';
+
+  @override
+  String get notifOpen => 'Ашу';
 }

@@ -15,6 +15,7 @@ import '../../ui/ui.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
 import '../learner/learner_providers.dart';
+import '../notifications/push.dart';
 import 'check_in_state.dart';
 
 enum _Stage { explain, camera, preview, sending, success, unavailable, denied }
@@ -185,6 +186,20 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
     if (mounted) Navigator.of(context).maybePop();
   }
 
+  /// C3: the first successful check-in is the moment to offer notifications,
+  /// on the screen below once this flow has gone.
+  void _closeDone() {
+    if (!mounted) return;
+    final root = Navigator.of(context, rootNavigator: true).context;
+    final push = ref.read(pushProvider);
+    final prefs = ref.read(prefsProvider);
+    final reason = context.l10n.pushWhyStudent;
+    _close();
+    Future<void>.delayed(const Duration(milliseconds: 600), () {
+      if (root.mounted) unawaited(askForPushOnce(root, push, prefs, reason));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -202,7 +217,7 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
               },
               onClose: _close,
             ),
-            _Stage.success => _Success(onDone: _close, status: _status),
+            _Stage.success => _Success(onDone: _closeDone, status: _status),
             _ => Scaffold(
               backgroundColor: GColors.camera,
               body: Stack(

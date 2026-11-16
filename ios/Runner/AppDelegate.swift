@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
@@ -14,6 +15,9 @@ import UIKit
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "GHaptics") {
       HapticsChannel.register(messenger: registrar.messenger())
+    }
+    if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "GSystem") {
+      SystemChannel.register(messenger: registrar.messenger())
     }
   }
 }
@@ -38,6 +42,35 @@ enum HapticsChannel {
       generator.prepare()
       generator.notificationOccurred(type)
       result(nil)
+    }
+  }
+}
+
+/// App badge and the system settings page. Dart side:
+/// lib/features/notifications/push.dart (SystemBridge).
+enum SystemChannel {
+  static func register(messenger: FlutterBinaryMessenger) {
+    let channel = FlutterMethodChannel(name: "kz.gradeapp/system", binaryMessenger: messenger)
+    channel.setMethodCallHandler { call, result in
+      switch call.method {
+      case "setBadge":
+        let count = call.arguments as? Int ?? 0
+        if #available(iOS 16.0, *) {
+          UNUserNotificationCenter.current().setBadgeCount(count)
+        } else {
+          UIApplication.shared.applicationIconBadgeNumber = count
+        }
+        result(nil)
+      case "openSettings":
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+          UIApplication.shared.open(url)
+        }
+        result(nil)
+      case "createChannels":
+        result(nil)  // Android only
+      default:
+        result(FlutterMethodNotImplemented)
+      }
     }
   }
 }

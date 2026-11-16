@@ -10,11 +10,12 @@ import 'core/providers.dart';
 import 'core/storage/json_cache.dart';
 import 'features/auth/auth_controller.dart';
 import 'features/learner/learner_providers.dart';
+import 'features/notifications/push.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final (cache, prefs, outbox) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open()).wait;
+  final (cache, prefs, outbox, _) = await (JsonCache.open(), JsonCache.open('prefs'), Outbox.open(), Push.init()).wait;
   final boot = {
     for (final k in [SettingsController.key, ActiveRole.key, SelectedChild.key]) k: await prefs.read(k),
   };

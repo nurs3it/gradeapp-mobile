@@ -1980,4 +1980,62 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ntOther => 'Уведомление';
+
+  @override
+  String get ngGrades => 'Оценки';
+
+  @override
+  String get ngHomework => 'Задания';
+
+  @override
+  String get ngSchedule => 'Расписание и замены';
+
+  @override
+  String get ngAttendance => 'Посещаемость и приход в школу';
+
+  @override
+  String get ngChat => 'Сообщения';
+
+  @override
+  String get ngBilling => 'Оплата';
+
+  @override
+  String get ngGeneral => 'Важное';
+
+  @override
+  String get pushAskTitle => 'Включить уведомления?';
+
+  @override
+  String get pushAskAllow => 'Включить';
+
+  @override
+  String get pushWhyStudent => 'Сразу узнаешь о новой оценке, задании или замене урока.';
+
+  @override
+  String get pushWhyParent =>
+      'Узнавайте сразу, когда ребёнок пришёл в школу, получил оценку или пропустил урок. Сами оценки на заблокированном экране не показываются.';
+
+  @override
+  String get pushWhyTeacher => 'Напомним о неотмеченной посещаемости и сообщим о заменах и новых заявках.';
+
+  @override
+  String get notifSettings => 'Уведомления';
+
+  @override
+  String get notifSettingsHint => 'В колокольчике приложения видно всё. Здесь — что приходит пушем на телефон.';
+
+  @override
+  String get pushOffTitle => 'Уведомления выключены в настройках телефона';
+
+  @override
+  String get pushOffOpen => 'Открыть настройки';
+
+  @override
+  String get pushTurnOn => 'Включить уведомления';
+
+  @override
+  String get pushUnavailable => 'В этой сборке пуши недоступны';
+
+  @override
+  String get notifOpen => 'Открыть';
 }

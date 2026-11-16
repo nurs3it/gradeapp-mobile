@@ -29,6 +29,7 @@ class AppUser {
     this.permissions = const {},
     this.schools = const [],
     this.homeroomClassIds = const [],
+    this.notificationPrefs = const {},
   });
 
   final String id;
@@ -46,6 +47,11 @@ class AppUser {
   final Set<String> permissions;
   final List<SchoolRef> schools;
   final List<String> homeroomClassIds;
+
+  /// `{group: {push|telegram|email: bool}}`; a missing entry means on.
+  final Json notificationPrefs;
+
+  bool pushOn(String group) => (notificationPrefs[group] as Json?)?['push'] != false;
 
   String get fullName => [firstName, lastName].where((s) => s.isNotEmpty).join(' ');
 
@@ -74,5 +80,6 @@ class AppUser {
     permissions: j.strings('permissions').toSet(),
     schools: j.list('schools', SchoolRef.fromJson),
     homeroomClassIds: j.strings('homeroom_class_ids'),
+    notificationPrefs: (j['notification_prefs'] as Json?) ?? const {},
   );
 }

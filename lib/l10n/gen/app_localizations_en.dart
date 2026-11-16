@@ -1929,4 +1929,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ntOther => 'Notification';
+
+  @override
+  String get ngGrades => 'Grades';
+
+  @override
+  String get ngHomework => 'Homework';
+
+  @override
+  String get ngSchedule => 'Schedule and substitutions';
+
+  @override
+  String get ngAttendance => 'Attendance and arrival';
+
+  @override
+  String get ngChat => 'Messages';
+
+  @override
+  String get ngBilling => 'Payments';
+
+  @override
+  String get ngGeneral => 'Important';
+
+  @override
+  String get pushAskTitle => 'Turn on notifications?';
+
+  @override
+  String get pushAskAllow => 'Turn on';
+
+  @override
+  String get pushWhyStudent => 'Know right away about a new grade, homework or a lesson change.';
+
+  @override
+  String get pushWhyParent =>
+      'Know right away when your child arrives at school, gets a grade or misses a lesson. Grades themselves never show on the lock screen.';
+
+  @override
+  String get pushWhyTeacher =>
+      'We\'ll remind you about unmarked attendance and tell you about substitutions and new requests.';
+
+  @override
+  String get notifSettings => 'Notifications';
+
+  @override
+  String get notifSettingsHint =>
+      'The bell in the app shows everything. Here you choose what comes to the phone as a push.';
+
+  @override
+  String get pushOffTitle => 'Notifications are off in phone settings';
+
+  @override
+  String get pushOffOpen => 'Open settings';
+
+  @override
+  String get pushTurnOn => 'Turn on notifications';
+
+  @override
+  String get pushUnavailable => 'Push notifications are not available in this build';
+
+  @override
+  String get notifOpen => 'Open';
 }

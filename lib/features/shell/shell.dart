@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,7 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../auth/user.dart';
 import '../common/pulse.dart';
+import '../notifications/push.dart';
 
 class _Signal extends ChangeNotifier {
   void fire() => notifyListeners();
@@ -43,8 +46,25 @@ class AppShell extends ConsumerWidget {
   final StatefulNavigationShell shell;
   final AppRole role;
 
+  static bool _askScheduled = false;
+
+  /// C3: parents and teachers are offered notifications shortly after the
+  /// shell first shows (students — after their first check-in).
+  void _offerPush(BuildContext context, WidgetRef ref) {
+    if (_askScheduled || role == AppRole.student) return;
+    _askScheduled = true;
+    final push = ref.read(pushProvider);
+    final prefs = ref.read(prefsProvider);
+    final l = context.l10n;
+    final reason = role == AppRole.parent ? l.pushWhyParent : l.pushWhyTeacher;
+    Future<void>.delayed(const Duration(seconds: 2), () {
+      if (context.mounted) unawaited(askForPushOnce(context, push, prefs, reason));
+    });
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    _offerPush(context, ref);
     final l = context.l10n;
     final rejected = ref.watch(outboxStateProvider.select((s) => s.value?.rejected.length ?? 0));
     final inbox = ref.watch(pulseProvider.select((p) => p.inbox + p.notificationsUnread));

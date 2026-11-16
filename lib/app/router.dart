@@ -8,6 +8,7 @@ import '../features/auth/user.dart';
 import '../features/learner/grades_screen.dart';
 import '../features/learner/tasks_screen.dart';
 import '../features/learner/week_screen.dart';
+import '../features/notifications/notification_settings_screen.dart';
 import '../features/notifications/notifications_screen.dart';
 import '../features/parent/family_screen.dart';
 import '../features/parent/parent_today_screen.dart';
@@ -114,6 +115,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!),
       ),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
+      GoRoute(path: '/settings/notifications', builder: (_, _) => const NotificationSettingsScreen()),
       GoRoute(
         path: '/checkin',
         pageBuilder: (_, _) => const MaterialPage(fullscreenDialog: true, child: CheckInFlow()),
