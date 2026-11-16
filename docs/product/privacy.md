@@ -14,7 +14,7 @@
 
 `app_open`, `login`, `checkin_start`, `checkin_success`, `checkin_fail` (`reason`), `roll_call_done` (`seconds`, `absent`), `homework_created`, `push_open` (`type`), `excuse_sent`, `report_card_download`, `feedback_sent`. Другие имена приложение даже не ставит в очередь, а сервер отбрасывает.
 
-Свойства: только ключи `reason`, `seconds`, `absent`, `type`; значения только числа, булевы и короткие строки (до 40 символов). Клиент вырезает остальное до отправки (`lib/core/analytics.dart`, `cleanProps`), сервер проверяет ещё раз.
+Свойства: только ключи `reason`, `seconds`, `absent`, `type`; значения только числа, булевы и коды вида `[a-z0-9_.-]{1,40}` (свободный текст отбрасывается). Клиент вырезает остальное до отправки (`lib/core/analytics.dart`, `cleanProps`), сервер проверяет ещё раз.
 
 ## Чего нет
 

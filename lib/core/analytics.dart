@@ -64,6 +64,8 @@ class AnalyticsEvent {
 
 /// Whitelisted keys, scalar values only (strings cut short): no free text and
 /// nothing that identifies a child can slip into an event.
+final _slug = RegExp(r'^[a-z0-9_.-]{1,40}$');
+
 Map<String, Object> cleanProps(Object? raw) {
   if (raw is! Map) return const {};
   final out = <String, Object>{};
@@ -75,8 +77,9 @@ Map<String, Object> cleanProps(Object? raw) {
       out[k] = v;
     } else if (v is bool) {
       out[k] = v;
-    } else if (v is String) {
-      out[k] = v.length > 40 ? v.substring(0, 40) : v;
+    } else if (v is String && _slug.hasMatch(v)) {
+      // The server only stores [a-z0-9_.-]{1,40}: codes, never free text.
+      out[k] = v;
     }
   }
   return out;

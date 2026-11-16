@@ -49,7 +49,7 @@ void main() {
     now = DateTime.utc(2026, 11, 17, 9);
   });
 
-  test('props are whitelisted, scalar and short; unknown events are not queued', () {
+  test('props are whitelisted, scalar and slug-shaped; unknown events are not queued', () {
     final a = make();
     a.track('roll_call_done', {
       'seconds': 95,
@@ -60,7 +60,7 @@ void main() {
     });
     a.track('made_up_event');
     expect(a.pending, hasLength(1));
-    expect(a.pending.single.props, {'seconds': 95, 'absent': 2, 'type': 'x' * 40});
+    expect(a.pending.single.props, {'seconds': 95, 'absent': 2, 'type': 'grade.created'});
   });
 
   test('a flush sends the contract body and empties the queue', () async {

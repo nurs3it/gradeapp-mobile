@@ -215,6 +215,7 @@ Future<void> showLessonSheet(
   final l = context.l10n;
   return showGSheet<void>(
     context,
+    hero: true,
     closeLabel: l.close,
     builder: (ctx) => _LessonSheet(
       lesson: lesson,
