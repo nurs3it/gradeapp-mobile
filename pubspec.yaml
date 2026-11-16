@@ -1,5 +1,5 @@
 name: gradeapp
-description: "A new Flutter project."
+description: "GradeApp — школа в телефоне для ученика, родителя и учителя."
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -7,6 +7,7 @@ environment:
   sdk: ^3.11.0
 
 dependencies:
+  camera: ^0.12.0+2
   dio: ^5.11.1
   flutter:
     sdk: flutter
@@ -18,6 +19,7 @@ dependencies:
   go_router: ^17.5.0
   image_picker: ^1.2.4
   intl: ^0.20.2
+  material_symbols_icons: ^4.2960.0
   path_provider: ^2.1.6
   url_launcher: ^6.3.3
 
@@ -30,6 +32,21 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+  fonts:
+    # Onest (SIL OFL 1.1, assets/fonts/OFL.txt): static instances of the
+    # variable font, one file per weight used by the type scale.
+    - family: Onest
+      fonts:
+        - asset: assets/fonts/Onest-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Onest-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Onest-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Onest-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Onest-ExtraBold.ttf
+          weight: 800
 
 flutter_launcher_icons:
   image_path: assets/brand/icon-1024.png
