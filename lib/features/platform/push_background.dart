@@ -61,6 +61,7 @@ Future<void> runBackgroundSync(AppLocalizations l) async {
 Future<void> notificationActionInBackground(NotificationResponse r) async {
   DartPluginRegistrant.ensureInitialized();
   final intent = intentFor(LocalNotifications.decode(r.payload), actionId: r.actionId);
+  debugPrint('notification action ${r.actionId} -> ${intent.runtimeType}');
   if (intent is! ApproveIntent) return;
   final l = await resolveL10n();
   final sessions = SessionStore();

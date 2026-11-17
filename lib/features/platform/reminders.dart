@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -81,8 +82,9 @@ abstract final class Reminders {
           ),
         );
       }
-    } catch (_) {
+    } catch (e) {
       // Notifications not allowed or the plugin is not ready: nothing to do.
+      debugPrint('reminders: $e');
     }
   }
 
