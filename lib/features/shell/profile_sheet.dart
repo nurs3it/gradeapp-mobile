@@ -502,7 +502,7 @@ class _AppLockRow extends ConsumerWidget {
       leading: GIcon(GIcons.faceId, size: 20, color: c.ink2),
       title: Text(l.lockSetting),
       subtitle: Text(l.lockSettingHint),
-      trailing: Switch.adaptive(value: on, onChanged: (v) => unawaited(toggle(v))),
+      trailing: Switch.adaptive(value: on, activeTrackColor: GColors.brand, onChanged: (v) => unawaited(toggle(v))),
       onTap: () => unawaited(toggle(!on)),
     );
   }

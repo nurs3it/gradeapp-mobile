@@ -199,7 +199,9 @@ class _LockScreenState extends ConsumerState<_LockScreen> {
   Widget build(BuildContext context) {
     final c = context.c;
     final l = context.l10n;
-    return ColoredBox(
+    // Sits above the Navigator, so it brings its own Material (text style,
+    // ink) instead of inheriting one from a route.
+    return Material(
       color: c.canvas,
       child: SafeArea(
         child: Center(
