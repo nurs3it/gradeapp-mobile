@@ -9,6 +9,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../core/storage/json_cache.dart';
 import '../../l10n/gen/app_localizations.dart';
 import 'local_notifications.dart';
+import 'push_intent.dart';
 
 /// The lesson the teacher is running (W5). No student names, no grades: only
 /// class, subject, the bell and how many are marked.
@@ -203,6 +204,7 @@ abstract final class LessonLive {
         'labelUntil': l.liveUntilBell,
         'labelMarked': l.liveMarked(s.marked, s.total),
         'labelEnded': s.topicMissing ? l.liveEndedTopic : l.liveEnded,
+        'labelAllPresent': l.tAllPresent,
         'endedUntil': s.endsAt.add(liveLingerAfterBell).millisecondsSinceEpoch,
       });
     } else if (Platform.isAndroid) {
@@ -246,6 +248,11 @@ abstract final class LessonLive {
             when: s.endsAt.millisecondsSinceEpoch,
             showWhen: !ended,
             timeoutAfter: hardStop > 0 ? hardStop : 1,
+            // W5: opens the lesson and marks everyone present. Not while the
+            // lesson is over, and not once everyone is already marked.
+            actions: ended || (s.total > 0 && s.marked >= s.total)
+                ? null
+                : [AndroidNotificationAction(PushActions.allPresent, l.tAllPresent, showsUserInterface: true)],
           ),
         ),
       );

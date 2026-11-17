@@ -26,6 +26,13 @@ class ApproveIntent extends PushIntent {
   final String excuseId;
 }
 
+/// «Все на месте» on the lesson-in-progress notification: the lesson screen
+/// opens and marks everyone present.
+class AllPresentIntent extends PushIntent {
+  const AllPresentIntent(this.lessonId);
+  final String lessonId;
+}
+
 /// Data-only `sync.today` / `sync.schedule`: refresh caches and widgets.
 class SyncIntent extends PushIntent {
   const SyncIntent({required this.today, required this.schedule, this.studentId, this.date});
@@ -40,6 +47,7 @@ abstract final class PushActions {
   static const explain = 'EXPLAIN';
   static const approve = 'APPROVE';
   static const open = 'OPEN';
+  static const allPresent = 'ALL_PRESENT';
 
   static const attendanceCategory = 'ATTENDANCE_FLAGGED';
   static const excuseCategory = 'EXCUSE_PENDING';
@@ -68,6 +76,9 @@ PushIntent intentFor(Map<String, dynamic> data, {String? actionId}) {
     );
   }
   switch (actionId) {
+    case PushActions.allPresent when type == 'lesson.started':
+      final id = _s(data, 'target_id') ?? _s(data, 'lesson_id');
+      if (id != null) return AllPresentIntent(id);
     case PushActions.explain when type == 'attendance.flagged':
       final kind = _s(data, 'target_kind');
       return ExplainIntent(

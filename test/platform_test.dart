@@ -5,6 +5,7 @@ import 'package:gradeapp/features/common/models.dart';
 import 'package:gradeapp/features/notifications/notifications.dart';
 import 'package:gradeapp/features/notifications/push.dart';
 import 'package:gradeapp/features/platform/deep_links.dart';
+import 'package:gradeapp/features/platform/lesson_link.dart';
 import 'package:gradeapp/features/platform/lesson_live.dart';
 import 'package:gradeapp/features/platform/platform_host.dart';
 import 'package:gradeapp/features/platform/push_intent.dart';
@@ -290,6 +291,55 @@ void main() {
     test('state survives a restart', () {
       final back = LiveLesson.fromJson(s.copyWith(marked: 24, total: 26).toJson())!;
       expect((back.marked, back.total, back.endsAt), (24, 26, s.endsAt));
+    });
+  });
+
+  group('«Все на месте» link (W5)', () {
+    test('parses the app scheme, the bare route and the web link', () {
+      expect(
+        parseLessonLink(Uri.parse('gradeapp://app/lesson/abc?all_present=1')),
+        const LessonLink('abc', allPresent: true),
+      );
+      expect(parseLessonLink(Uri.parse('/lesson/abc?all_present=1')), const LessonLink('abc', allPresent: true));
+      expect(parseLessonLink(Uri.parse('gradeapp://app/lesson/abc')), const LessonLink('abc'));
+      expect(parseLessonLink(Uri.parse('https://grade-app.kz/teacher/lesson/abc')), const LessonLink('abc'));
+    });
+
+    test('only the exact value 1 asks for the roll call; other paths are not lessons', () {
+      expect(parseLessonLink(Uri.parse('gradeapp://app/lesson/abc?all_present=true'))!.allPresent, isFalse);
+      expect(parseLessonLink(Uri.parse('gradeapp://app/lesson/abc?all_present=0'))!.allPresent, isFalse);
+      expect(parseLessonLink(Uri.parse('gradeapp://app/t/today')), isNull);
+      expect(parseLessonLink(Uri.parse('gradeapp://app/lesson')), isNull);
+      expect(parseLessonLink(Uri.parse('https://grade-app.kz/student/lesson/abc')), isNull);
+    });
+
+    test('lessonPath builds what the parser reads', () {
+      expect(lessonPath('x1', allPresent: true), '/lesson/x1?all_present=1');
+      expect(lessonPath('x1'), '/lesson/x1');
+      expect(parseLessonLink(Uri.parse(lessonPath('x1', allPresent: true))), const LessonLink('x1', allPresent: true));
+    });
+
+    test('the second open within the window does not send again', () {
+      final gate = AllPresentGate();
+      final t = DateTime(2026, 11, 17, 10);
+      expect(gate.claim('a', t), isTrue);
+      expect(gate.claim('a', t.add(const Duration(seconds: 5))), isFalse);
+      expect(gate.claim('b', t), isTrue);
+      expect(gate.claim('a', t.add(const Duration(minutes: 11))), isTrue);
+      gate.release('b');
+      expect(gate.claim('b', t), isTrue);
+    });
+
+    test('the lock-screen button maps to an intent only on the lesson notification', () {
+      final data = {'type': 'lesson.started', 'target_kind': 'lesson', 'target_id': 'L1'};
+      final i = intentFor(data, actionId: PushActions.allPresent);
+      expect(i, isA<AllPresentIntent>());
+      expect((i as AllPresentIntent).lessonId, 'L1');
+      expect(intentFor(data), isA<OpenIntent>());
+      expect(
+        intentFor({'type': 'excuse.pending', 'target_id': 'E'}, actionId: PushActions.allPresent),
+        isA<OpenIntent>(),
+      );
     });
   });
 }

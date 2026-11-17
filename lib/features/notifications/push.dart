@@ -21,6 +21,7 @@ import '../common/models.dart';
 import '../common/pulse.dart';
 import '../learner/learner_providers.dart';
 import '../parent/excuse_sheet.dart';
+import '../platform/lesson_link.dart';
 import '../platform/push_background.dart';
 import '../platform/push_intent.dart';
 import 'notifications.dart';
@@ -238,6 +239,16 @@ Future<void> openPush(BuildContext context, WidgetRef ref, Map<String, dynamic> 
       await _approveExcuse(context, ref, excuseId, n);
     case ExplainIntent():
       await _explainAbsence(context, ref, intent);
+    case AllPresentIntent(:final lessonId):
+      final router = GoRouter.of(context);
+      final here = router.routerDelegate.currentConfiguration.uri;
+      final path = lessonPath(lessonId, allPresent: true);
+      // Already on this lesson: the screen takes the request in place.
+      if (parseLessonLink(here)?.lessonId == lessonId) {
+        unawaited(router.replace<void>(path));
+      } else {
+        unawaited(router.push<void>(path));
+      }
     case _:
       await openNotification(context, ref, n);
   }

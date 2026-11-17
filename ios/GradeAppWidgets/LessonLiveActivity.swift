@@ -11,7 +11,7 @@ struct LessonLiveActivity: Widget {
       LockView(state: context.state, id: context.attributes.lessonId, stale: context.isStale)
         .activityBackgroundTint(Color(UIColor(hex: 0x161820)).opacity(0.9))
         .activitySystemActionForegroundColor(.white)
-        .widgetURL(URL(string: "gradeapp://app/lesson/\(context.attributes.lessonId)"))
+        .widgetURL(lessonURL(context.attributes.lessonId))
     } dynamicIsland: { context in
       DynamicIsland {
         DynamicIslandExpandedRegion(.leading) {
@@ -29,8 +29,13 @@ struct LessonLiveActivity: Widget {
           }
         }
         DynamicIslandExpandedRegion(.bottom) {
-          Text(context.state.ended || context.isStale ? context.state.labelEnded : context.state.labelMarked)
-            .font(G.font(13, .semibold))
+          VStack(alignment: .leading, spacing: 8) {
+            Text(context.state.ended || context.isStale ? context.state.labelEnded : context.state.labelMarked)
+              .font(G.font(13, .semibold))
+            if !(context.state.ended || context.isStale), let label = context.state.labelAllPresent {
+              AllPresentButton(label: label, id: context.attributes.lessonId)
+            }
+          }
         }
       } compactLeading: {
         Image(systemName: "rectangle.stack.fill").foregroundStyle(G.toastAction)
@@ -45,7 +50,32 @@ struct LessonLiveActivity: Widget {
         ProgressView(timerInterval: context.state.startsAt...context.state.endsAt, countsDown: false, label: { EmptyView() }, currentValueLabel: { EmptyView() })
           .progressViewStyle(.circular).tint(G.toastAction)
       }
-      .widgetURL(URL(string: "gradeapp://app/lesson/\(context.attributes.lessonId)"))
+      .widgetURL(lessonURL(context.attributes.lessonId))
+    }
+  }
+}
+
+/// `gradeapp://app/lesson/<id>`; with `allPresent` the app also marks the
+/// whole class present (the lesson screen's «Все на месте», sent once).
+private func lessonURL(_ id: String, allPresent: Bool = false) -> URL? {
+  URL(string: "gradeapp://app/lesson/\(id)" + (allPresent ? "?all_present=1" : ""))
+}
+
+/// W5 «Все на месте»: opens the app on the lesson and records the roll call.
+@available(iOS 16.2, *)
+private struct AllPresentButton: View {
+  let label: String
+  let id: String
+
+  var body: some View {
+    if let url = lessonURL(id, allPresent: true) {
+      Link(destination: url) {
+        Text(label)
+          .font(G.font(15, .bold))
+          .foregroundStyle(.white)
+          .frame(maxWidth: .infinity, minHeight: 36)
+          .background(G.brand, in: Capsule())
+      }
     }
   }
 }
@@ -75,6 +105,9 @@ private struct LockView: View {
               .monospacedDigit().multilineTextAlignment(.trailing).frame(maxWidth: 110, alignment: .trailing)
           }
         }
+      }
+      if !over, let label = state.labelAllPresent {
+        AllPresentButton(label: label, id: id)
       }
       if !over {
         ProgressView(timerInterval: state.startsAt...state.endsAt, countsDown: false, label: { EmptyView() }, currentValueLabel: { EmptyView() })

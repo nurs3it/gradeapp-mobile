@@ -19,6 +19,8 @@ struct LessonActivityAttributes: ActivityAttributes {
     var labelUntil: String
     var labelMarked: String
     var labelEnded: String
+    /// Button text of «Все на месте» (W5); nil from an older app version.
+    var labelAllPresent: String?
     /// After this the activity has nothing left to say (bell + 15 min).
     var endedUntil: Date
   }

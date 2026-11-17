@@ -49,6 +49,7 @@ enum LiveActivityBridge {
       labelUntil: a["labelUntil"] as? String ?? "",
       labelMarked: a["labelMarked"] as? String ?? "",
       labelEnded: a["labelEnded"] as? String ?? "",
+      labelAllPresent: a["labelAllPresent"] as? String,
       endedUntil: date(a["endedUntil"])
     )
   }

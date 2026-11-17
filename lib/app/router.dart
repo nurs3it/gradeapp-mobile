@@ -17,6 +17,7 @@ import '../features/shell/shell.dart';
 import '../features/student/check_in_flow.dart';
 import '../features/student/student_today_screen.dart';
 import '../features/teacher/inbox_screen.dart';
+import '../features/platform/lesson_link.dart';
 import '../features/teacher/lesson_screen.dart';
 import '../features/teacher/teacher_today_screen.dart';
 import '../features/teacher/teacher_week_screen.dart';
@@ -50,15 +51,18 @@ final routerProvider = Provider<GoRouter>((ref) {
     // A web link (C7) that cannot open yet waits for sign-in, then continues.
     final link = routeForWebLink(s.uri);
     final pending = ref.read(pendingLinkProvider.notifier);
+    // A lesson link from the lock screen (with its roll-call request) also
+    // waits for sign-in; it is not a web link, so it is only held, not routed.
+    final lesson = loc.startsWith('/lesson/') ? s.uri.toString() : null;
     if (auth.isLoading && !auth.hasValue) {
-      if (link != null) pending.hold(link);
+      if (link != null || lesson != null) pending.hold(link ?? lesson!);
       return loc == '/splash' ? null : '/splash';
     }
     final user = auth.value;
     final role = ref.read(activeRoleProvider);
     final inLogin = loc.startsWith('/login');
     if (user == null || role == null) {
-      if (link != null) pending.hold(link);
+      if (link != null || lesson != null) pending.hold(link ?? lesson!);
       return inLogin ? null : '/login';
     }
     if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
@@ -123,7 +127,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       ]),
       GoRoute(
         path: '/lesson/:id',
-        builder: (_, s) => LessonScreen(lessonId: s.pathParameters['id']!),
+        builder: (_, s) =>
+            LessonScreen(lessonId: s.pathParameters['id']!, allPresent: s.uri.queryParameters[allPresentParam] == '1'),
       ),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => const NotificationSettingsScreen()),

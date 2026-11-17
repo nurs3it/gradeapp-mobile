@@ -12,6 +12,7 @@ import '../../ui/ui.dart';
 import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
+import '../platform/lesson_link.dart';
 import '../platform/lesson_live.dart';
 import '../platform/reminders.dart';
 import '../shell/header.dart';
@@ -27,15 +28,18 @@ import '../../core/analytics.dart';
 /// exceptions, grades from the dock pad, homework and summary in the dock.
 /// Works offline — every write goes through the outbox.
 class LessonScreen extends ConsumerWidget {
-  const LessonScreen({super.key, required this.lessonId});
+  const LessonScreen({super.key, required this.lessonId, this.allPresent = false});
   final String lessonId;
+
+  /// Opened from «Все на месте» on the lock screen: mark everyone present.
+  final bool allPresent;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     final lesson = ref.watch(lessonProvider(lessonId));
     return switch (lesson) {
-      AsyncValue(:final value?) => _LessonBody(key: ValueKey(value.id), lesson: value),
+      AsyncValue(:final value?) => _LessonBody(key: ValueKey(value.id), lesson: value, allPresent: allPresent),
       AsyncValue(:final error?) when !lesson.hasValue => Scaffold(
         appBar: GNavBar(backLabel: l.tabToday),
         body: GEmpty(
@@ -57,8 +61,9 @@ class LessonScreen extends ConsumerWidget {
 enum _View { list, faces }
 
 class _LessonBody extends ConsumerStatefulWidget {
-  const _LessonBody({super.key, required this.lesson});
+  const _LessonBody({super.key, required this.lesson, this.allPresent = false});
   final Lesson lesson;
+  final bool allPresent;
 
   @override
   ConsumerState<_LessonBody> createState() => _LessonBodyState();
@@ -81,6 +86,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
   _View _view = _View.list;
   bool _search = false;
   String _query = '';
+  bool _linkHandled = false;
 
   Lesson get lesson => widget.lesson;
 
@@ -209,8 +215,22 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
     if (pick != null) await _mark(s, cell, pick.status, pick.code, reason: pick.reason);
   }
 
-  Future<void> _rollCall(List<RosterStudent> roster, Map<String, RollCell> cells) async {
+  /// «Все на месте» from the lock screen (W5): the same roll call as the dock
+  /// button — students with a recorded absence or late (check-in) stay as they
+  /// are, only the rest become present — once per lesson (the gate), and only
+  /// when the lesson accepts marks.
+  void _allPresentFromLink(List<RosterStudent> roster, Map<String, RollCell> cells, {required bool blocked}) {
+    if (!widget.allPresent || _linkHandled || roster.isEmpty) return;
+    _linkHandled = true;
+    if (blocked || !allPresentGate.claim(lesson.id, DateTime.now())) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) unawaited(_rollCall(roster, cells, fromLink: true));
+    });
+  }
+
+  Future<void> _rollCall(List<RosterStudent> roster, Map<String, RollCell> cells, {bool fromLink = false}) async {
     final l = context.l10n;
+    final title = lesson.classGroupName ?? lesson.subject;
     final unsaved = {
       for (final s in roster)
         if (!cells[s.id]!.saved) s.id: (status: cells[s.id]!.status, code: cells[s.id]!.code),
@@ -219,12 +239,22 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
       await _ensureStarted();
       await _actions.markMany(unsaved);
     }
-    GHaptics.light();
+    if (fromLink) {
+      GHaptics.success();
+    } else {
+      GHaptics.light();
+    }
     ref.read(analyticsProvider).track(AnalyticsEvents.rollCallDone, {
       'seconds': DateTime.now().difference(_openedAt).inSeconds,
       'absent': cells.values.where((c) => c.status == Presence.absent).length,
     });
-    if (mounted) GToast.show(context, l.rollSaved, bottomOffset: GSpace.tabbarH + GSpace.tabbarBottom + 12);
+    if (mounted) {
+      GToast.show(
+        context,
+        fromLink ? l.tAllPresentToast(title) : l.rollSaved,
+        bottomOffset: GSpace.tabbarH + GSpace.tabbarBottom + 12,
+      );
+    }
   }
 
   Future<void> _setTopic(String topic) async {
@@ -397,6 +427,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
         ? ordered
         : ordered.where((s) => s.name.toLowerCase().contains(_query.toLowerCase())).toList();
     final present = presentCount(cells);
+    _allPresentFromLink(students, cells, blocked: locked || readOnly);
     final saved = cells.values.where((x) => x.saved).length;
     final anySaved = saved > 0;
     final allSaved = saved == students.length && students.isNotEmpty;
