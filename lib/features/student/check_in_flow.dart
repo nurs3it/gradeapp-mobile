@@ -54,9 +54,13 @@ class _CheckInFlowState extends ConsumerState<CheckInFlow> with WidgetsBindingOb
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    ref.read(checkInProvider.notifier).reset();
     ref.read(analyticsProvider).track(AnalyticsEvents.checkinStart);
-    unawaited(_start());
+    // A provider must not change while the tree builds (Today listens to it).
+    Future(() {
+      if (!mounted) return;
+      ref.read(checkInProvider.notifier).reset();
+      unawaited(_start());
+    });
   }
 
   Future<void> _start() async {
