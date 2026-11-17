@@ -1056,7 +1056,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get actExcuse => 'Сұрап алу';
 
   @override
-  String get actExplain => 'Түсіндіру';
+  String get actExplain => 'Себебін түсіндіру';
 
   @override
   String get actAllow => 'Рұқсат беру';

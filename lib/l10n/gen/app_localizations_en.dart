@@ -1083,7 +1083,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actExcuse => 'Excuse';
 
   @override
-  String get actExplain => 'Explain';
+  String get actExplain => 'Explain absence';
 
   @override
   String get actAllow => 'Allow';

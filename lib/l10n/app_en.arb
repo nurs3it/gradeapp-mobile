@@ -299,7 +299,7 @@
   "factTomorrow": "Tomorrow {lessons} from {time}.",
   "factNewGrade": "new grade · {subject}",
   "actExcuse": "Excuse",
-  "actExplain": "Explain",
+  "actExplain": "Explain absence",
   "actAllow": "Allow",
   "attentionTitle": "Needs attention",
   "attAbsent": "Absent · {time}",

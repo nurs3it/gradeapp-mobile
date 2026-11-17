@@ -1118,7 +1118,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get actExcuse => 'Отпросить';
 
   @override
-  String get actExplain => 'Объяснить';
+  String get actExplain => 'Объяснить пропуск';
 
   @override
   String get actAllow => 'Разрешить';

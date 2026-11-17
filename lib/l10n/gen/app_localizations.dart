@@ -1890,7 +1890,7 @@ abstract class AppLocalizations {
   /// No description provided for @actExplain.
   ///
   /// In ru, this message translates to:
-  /// **'Объяснить'**
+  /// **'Объяснить пропуск'**
   String get actExplain;
 
   /// No description provided for @actAllow.

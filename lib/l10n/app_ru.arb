@@ -882,7 +882,7 @@
     }
   },
   "actExcuse": "Отпросить",
-  "actExplain": "Объяснить",
+  "actExplain": "Объяснить пропуск",
   "actAllow": "Разрешить",
   "attentionTitle": "Требует внимания",
   "attAbsent": "Пропуск · {time}",

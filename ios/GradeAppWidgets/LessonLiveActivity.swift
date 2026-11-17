@@ -24,7 +24,7 @@ struct LessonLiveActivity: Widget {
           if context.state.ended {
             Image(systemName: "checkmark.circle.fill").font(.system(size: 26)).foregroundStyle(G.toastAction)
           } else {
-            Text(context.state.endsAt, style: .timer).font(G.font(26, .heavy)).foregroundStyle(G.toastAction)
+            Text(timerInterval: context.state.startsAt...context.state.endsAt, countsDown: true).font(G.font(26, .heavy)).monospacedDigit().lineLimit(1).minimumScaleFactor(0.6).foregroundStyle(G.toastAction)
               .monospacedDigit().multilineTextAlignment(.trailing).frame(maxWidth: 90)
           }
         }
@@ -43,7 +43,7 @@ struct LessonLiveActivity: Widget {
         if context.state.ended {
           Image(systemName: "checkmark").foregroundStyle(G.toastAction)
         } else {
-          Text(context.state.endsAt, style: .timer).font(G.font(13, .bold)).foregroundStyle(G.toastAction)
+          Text(timerInterval: context.state.startsAt...context.state.endsAt, countsDown: true).font(G.font(13, .bold)).monospacedDigit().lineLimit(1).minimumScaleFactor(0.6).foregroundStyle(G.toastAction)
             .monospacedDigit().frame(maxWidth: 48)
         }
       } minimal: {
@@ -101,7 +101,7 @@ private struct LockView: View {
         if !over {
           VStack(alignment: .trailing, spacing: 0) {
             Text(state.labelUntil.uppercased()).font(G.font(11, .bold)).foregroundStyle(.white.opacity(0.7))
-            Text(state.endsAt, style: .timer).font(G.font(28, .heavy)).foregroundStyle(G.toastAction)
+            Text(timerInterval: state.startsAt...state.endsAt, countsDown: true).font(G.font(28, .heavy)).monospacedDigit().lineLimit(1).minimumScaleFactor(0.6).foregroundStyle(G.toastAction)
               .monospacedDigit().multilineTextAlignment(.trailing).frame(maxWidth: 110, alignment: .trailing)
           }
         }

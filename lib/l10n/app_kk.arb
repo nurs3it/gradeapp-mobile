@@ -299,7 +299,7 @@
   "factTomorrow": "Ертең {time} бастап {lessons}.",
   "factNewGrade": "жаңа баға · {subject}",
   "actExcuse": "Сұрап алу",
-  "actExplain": "Түсіндіру",
+  "actExplain": "Себебін түсіндіру",
   "actAllow": "Рұқсат беру",
   "attentionTitle": "Назар аударыңыз",
   "attAbsent": "Келмеді · {time}",
