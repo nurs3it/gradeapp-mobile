@@ -42,7 +42,8 @@
             android:maxLines="1"
             android:textSize="13sp" />
 
-        <Space
+        <!-- Space is not allowed in RemoteViews; an empty FrameLayout takes the slack. -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
