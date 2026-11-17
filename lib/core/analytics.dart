@@ -11,7 +11,7 @@ import 'env.dart';
 import 'providers.dart';
 import 'storage/json_cache.dart';
 
-/// Event names the backend accepts (`CONTRACTS-stage2.md`, first-party
+/// Event names the backend accepts (`docs/product/contracts-stage2.md`, first-party
 /// analytics). Anything else is not even queued.
 abstract final class AnalyticsEvents {
   static const appOpen = 'app_open';

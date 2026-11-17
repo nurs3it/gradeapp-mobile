@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// the closest screen; an unknown sub-path ends on «Сегодня» of that role.
 ///
 /// The claimed set must match the backend's apple-app-site-association and
-/// assetlinks.json (CONTRACTS-stage2 «Deep links») and the Android
+/// assetlinks.json (docs/product/contracts-stage2.md «Deep links») and the Android
 /// intent-filters in AndroidManifest.xml.
 String? routeForWebLink(Uri uri) {
   final path = uri.path.length > 1 && uri.path.endsWith('/') ? uri.path.substring(0, uri.path.length - 1) : uri.path;

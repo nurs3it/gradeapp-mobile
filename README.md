@@ -49,7 +49,7 @@ flutter test
 
 ## Платформа: действия в пушах, ссылки, виджеты, Live Activity
 
-Код — `lib/features/platform/`, нативная часть — `ios/GradeAppWidgets`, `ios/Runner/LiveActivity.swift`, `android/.../widgets`. Контракт с бэкендом — `CONTRACTS-stage2.md`.
+Код — `lib/features/platform/`, нативная часть — `ios/GradeAppWidgets`, `ios/Runner/LiveActivity.swift`, `android/.../widgets`. Контракт с бэкендом — `docs/product/contracts-stage2.md`.
 
 **Кнопки в пушах.** `attendance.flagged` → «Объяснить пропуск» (форма отпроса для этого пропуска: урок по `/attendance/<id>/`, иначе день), `excuse.pending` → «Одобрить» (`POST /excuses/<id>/approve/`, хаптик и тост) и «Открыть».
 - iOS: категории `ATTENDANCE_FLAGGED` / `EXCUSE_PENDING` регистрирует `flutter_local_notifications` (`LocalNotifications._categories`, названия на языке приложения). Нажатую кнопку отдаёт `firebase_messaging` как `RemoteMessage.actionIdentifier`; делегат `UNUserNotificationCenter` остаётся у цепочки `FlutterAppDelegate`, `flutter_local_notifications` берёт только свои локальные уведомления. Все кнопки открывают приложение (`foreground`): «Одобрить» выполняется и подтверждается тостом.
