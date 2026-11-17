@@ -2130,6 +2130,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get liveUntilBell => 'Until the bell';
 
   @override
+  String get notifPublicTitle => 'GradeApp';
+
+  @override
+  String get notifPublicBody => 'New notification';
+
+  @override
+  String liveShortMinutes(int n) {
+    return '$n min';
+  }
+
+  @override
   String get liveChannel => 'Lesson in progress';
 
   @override

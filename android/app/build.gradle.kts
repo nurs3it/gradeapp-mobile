@@ -7,7 +7,8 @@ plugins {
 
 android {
     namespace = "kz.gradeapp.gradeapp"
-    compileSdk = flutter.compileSdkVersion
+    // 36: Notification.ProgressStyle (Android 16 Live Updates).
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

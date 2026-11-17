@@ -1,0 +1,19 @@
+name: gradeapp_native
+description: "Android-only notification helpers flutter_local_notifications lacks: public (redacted) version and Android 16 Live Updates."
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.11.0
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: kz.gradeapp.native_notif
+        pluginClass: GradeappNativePlugin

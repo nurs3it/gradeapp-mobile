@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:gradeapp_native/gradeapp_native.dart';
 
 import '../../core/storage/json_cache.dart';
 import '../../l10n/gen/app_localizations.dart';
@@ -84,6 +85,13 @@ enum LivePhase { running, ended, gone }
 LivePhase livePhase(LiveLesson s, DateTime now) {
   if (now.isBefore(s.endsAt)) return LivePhase.running;
   return now.isBefore(s.endsAt.add(liveLingerAfterBell)) ? LivePhase.ended : LivePhase.gone;
+}
+
+/// Whole minutes to the bell (rounded up, never below 1 while running): the
+/// text of the Android 16 status-bar chip.
+int liveMinutesLeft(LiveLesson s, DateTime now) {
+  final left = s.endsAt.difference(now).inSeconds;
+  return left <= 0 ? 0 : (left + 59) ~/ 60;
 }
 
 /// W5: Live Activity (iOS, ActivityKit — ios/Runner/LiveActivity.swift) and
@@ -256,6 +264,20 @@ abstract final class LessonLive {
           ),
         ),
       );
+      // Secure lock screen: generic text. On Android 16 the running lesson
+      // also becomes a Live Update (progress style, status-bar chip).
+      if (ended) {
+        await LocalNotifications.hideOnLockScreen(_androidId, l);
+      } else {
+        await GradeappNative.promoteLessonLive(
+          id: _androidId,
+          startMs: s.startsAt.millisecondsSinceEpoch,
+          endMs: s.endsAt.millisecondsSinceEpoch,
+          shortText: l.liveShortMinutes(liveMinutesLeft(s, now)),
+          publicTitle: l.notifPublicTitle,
+          publicBody: l.notifPublicBody,
+        );
+      }
     } catch (e) {
       debugPrint('lesson live notification: $e');
     }

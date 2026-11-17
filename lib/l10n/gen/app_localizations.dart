@@ -3681,6 +3681,24 @@ abstract class AppLocalizations {
   /// **'До звонка'**
   String get liveUntilBell;
 
+  /// No description provided for @notifPublicTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'GradeApp'**
+  String get notifPublicTitle;
+
+  /// No description provided for @notifPublicBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новое уведомление'**
+  String get notifPublicBody;
+
+  /// Status-bar chip of the Android 16 Live Update: minutes to the bell
+  ///
+  /// In ru, this message translates to:
+  /// **'{n} мин'**
+  String liveShortMinutes(int n);
+
   /// No description provided for @liveChannel.
   ///
   /// In ru, this message translates to:

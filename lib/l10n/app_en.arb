@@ -660,6 +660,16 @@
   "liveEnded": "Lesson ended",
   "liveEndedTopic": "Lesson ended: topic missing",
   "liveUntilBell": "Until the bell",
+  "notifPublicTitle": "GradeApp",
+  "notifPublicBody": "New notification",
+  "liveShortMinutes": "{n} min",
+  "@liveShortMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "liveChannel": "Lesson in progress",
   "remChannel": "Reminders",
   "remTitle": "{cls}: attendance not marked",

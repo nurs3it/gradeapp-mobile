@@ -2177,6 +2177,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get liveUntilBell => 'До звонка';
 
   @override
+  String get notifPublicTitle => 'GradeApp';
+
+  @override
+  String get notifPublicBody => 'Новое уведомление';
+
+  @override
+  String liveShortMinutes(int n) {
+    return '$n мин';
+  }
+
+  @override
   String get liveChannel => 'Идёт урок';
 
   @override

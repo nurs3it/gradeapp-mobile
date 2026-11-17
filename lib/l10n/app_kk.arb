@@ -660,6 +660,16 @@
   "liveEnded": "Сабақ аяқталды",
   "liveEndedTopic": "Сабақ аяқталды: тақырып толтырылмаған",
   "liveUntilBell": "Қоңырауға дейін",
+  "notifPublicTitle": "GradeApp",
+  "notifPublicBody": "Жаңа хабарландыру",
+  "liveShortMinutes": "{n} мин",
+  "@liveShortMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "liveChannel": "Сабақ жүріп жатыр",
   "remChannel": "Еске салулар",
   "remTitle": "{cls}: қатысу белгіленбеген",

@@ -2077,6 +2077,17 @@ class AppLocalizationsKk extends AppLocalizations {
   String get liveUntilBell => 'Қоңырауға дейін';
 
   @override
+  String get notifPublicTitle => 'GradeApp';
+
+  @override
+  String get notifPublicBody => 'Жаңа хабарландыру';
+
+  @override
+  String liveShortMinutes(int n) {
+    return '$n мин';
+  }
+
+  @override
   String get liveChannel => 'Сабақ жүріп жатыр';
 
   @override

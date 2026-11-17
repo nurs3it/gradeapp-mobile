@@ -91,4 +91,5 @@ Future<void> notificationActionInBackground(NotificationResponse r) async {
     ),
     payload: r.payload,
   );
+  await LocalNotifications.hideOnLockScreen(id, l);
 }

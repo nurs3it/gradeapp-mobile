@@ -1645,6 +1645,17 @@
   "liveEnded": "Урок закончен",
   "liveEndedTopic": "Урок закончен: не заполнена тема",
   "liveUntilBell": "До звонка",
+  "notifPublicTitle": "GradeApp",
+  "notifPublicBody": "Новое уведомление",
+  "liveShortMinutes": "{n} мин",
+  "@liveShortMinutes": {
+    "description": "Status-bar chip of the Android 16 Live Update: minutes to the bell",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "liveChannel": "Идёт урок",
   "remChannel": "Напоминания",
   "remTitle": "{cls}: посещаемость не отмечена",

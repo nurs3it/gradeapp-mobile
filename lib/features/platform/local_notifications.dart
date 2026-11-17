@@ -6,6 +6,7 @@ import 'dart:ui' show Locale, PlatformDispatcher;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:gradeapp_native/gradeapp_native.dart';
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -189,7 +190,14 @@ abstract final class LocalNotifications {
         ),
       ),
     );
+    await hideOnLockScreen(notificationIdOf(data), l);
   }
+
+  /// Gives the notification [id] a public version with generic text («GradeApp
+  /// · Новое уведомление»): a secure lock screen shows that instead of the
+  /// child's name. Android only; actions stay as they were.
+  static Future<void> hideOnLockScreen(int id, AppLocalizations l) =>
+      GradeappNative.addPublicVersion(id: id, title: l.notifPublicTitle, body: l.notifPublicBody);
 
   static int notificationIdOf(Map<String, dynamic> data) =>
       ('${data['notification_id'] ?? data['target_id'] ?? DateTime.now().microsecondsSinceEpoch}'.hashCode &

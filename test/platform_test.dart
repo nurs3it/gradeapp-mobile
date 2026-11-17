@@ -283,6 +283,13 @@ void main() {
       expect(livePhase(s, DateTime(2026, 11, 17, 11)), LivePhase.gone);
     });
 
+    test('minutes to the bell round up for the status-bar chip', () {
+      expect(liveMinutesLeft(s, DateTime(2026, 11, 17, 10, 30)), 15);
+      expect(liveMinutesLeft(s, DateTime(2026, 11, 17, 10, 44, 10)), 1);
+      expect(liveMinutesLeft(s, DateTime(2026, 11, 17, 10, 45)), 0);
+      expect(liveMinutesLeft(s, DateTime(2026, 11, 17, 10, 50)), 0);
+    });
+
     test('never outlives the bell by more than the hard limit', () {
       expect(liveLingerAfterBell, lessThan(liveHardLimit));
       expect(liveHardLimit, const Duration(minutes: 30));
