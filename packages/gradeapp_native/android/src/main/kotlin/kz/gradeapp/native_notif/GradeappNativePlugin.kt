@@ -115,7 +115,6 @@ class GradeappNativePlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
         val done = ((System.currentTimeMillis() - start) / 1000).toInt().coerceIn(0, total)
         b.setStyle(
             Notification.ProgressStyle()
-                .setStyledByProgress(false)
                 .setProgressSegments(listOf(Notification.ProgressStyle.Segment(total)))
                 .setProgress(done)
         )
