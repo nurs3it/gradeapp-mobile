@@ -4,7 +4,3 @@ const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https:/
 
 /// Shown in «О приложении» and sent with analytics.
 const appVersion = '1.0.0';
-
-/// Crash reports go to Sentry only when the build carries a DSN
-/// (`--dart-define=SENTRY_DSN=…`); without it they are off.
-const sentryDsn = String.fromEnvironment('SENTRY_DSN');

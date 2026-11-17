@@ -22,4 +22,4 @@
 - `POST /api/analytics/events/` (IsAuthenticated, throttled) body `{"events": [{"name": str, "at": iso8601, "props": {..}}], "platform": "ios"|"android"|"web", "app_version": str}` → 204. ≤ 50 events per call.
 - Stored WITHOUT user id: name, at, role (active role), school_id, platform, app_version, props (whitelisted keys only, scalars only).
 - Names: `app_open`, `login`, `checkin_start`, `checkin_success`, `checkin_fail` (props.reason), `roll_call_done` (props.seconds, props.absent), `homework_created`, `push_open` (props.type), `excuse_sent`, `report_card_download`, `feedback_sent`. Unknown names are dropped.
-- Crash reports: Sentry, mobile DSN via `--dart-define=SENTRY_DSN`; no DSN → off. `sendDefaultPii=false`, strip user, request bodies, breadcrumbs with URLs query strings.
+- Crash reports: our own backend, `POST /api/analytics/crashes/` `{platform, app_version, os_version, crashes:[{error_type,message,stack,fatal}]}` → 204, no auth, throttled 30/hour per IP, stored without user. No third-party crash service.

@@ -44,7 +44,7 @@ flutter test
 - **Табель** (оценки → «Табель за …»): PDF с `/grades/period/report_card/`, системное меню «Поделиться».
 - **Отзывы учителей**: ученик и родитель видят их в «Оценках»; учитель пишет из урока (долгое нажатие на ученика → «Отзыв ученику»), через офлайн-очередь.
 - **Вложения к ДЗ**: показ и открытие у ученика/родителя; учитель прикладывает фото и файлы при выдаче ДЗ (файлы идут только онлайн, без сети текст уходит через очередь).
-- **Крэши и аналитика**: Sentry только со сборкой `--dart-define=SENTRY_DSN=…`; собственные события в `POST /analytics/events/`. Решение по приватности — `docs/product/privacy.md`.
+- **Крэши и аналитика**: всё на нашем сервере. Крэши — `POST /analytics/crashes/` (без входа, очистка e-mail/телефонов/токенов/query на телефоне, очередь до 20), события — `POST /analytics/events/`. Сторонних SDK нет. В debug-сборке долгое нажатие на «О приложении» в профиле вызывает тестовый сбой. Решение по приватности — `docs/product/privacy.md`.
 - Карточка урока раскрывается через Hero (страничный маршрут вместо modal-sheet: Flutter не летает героями в модальные шиты).
 
 ## Платформа: действия в пушах, ссылки, виджеты, Live Activity
@@ -121,7 +121,7 @@ assets/fonts/     Onest 400–800 (OFL, лицензия рядом)
 - Цвета только из `ui/tokens/colors.dart` (`context.c`), текст — `context.t`. Hex в экранах не пишем.
 - Строки только через `context.l10n`. ARB генерируются из таблицы строк: правьте все три языка сразу, казахский — отдельно, не калькой с русского.
 - Нажатие — `GPressable` (масштаб и пружина), ripple выключен. Анимируются только transform и opacity; переключатели состояний строятся из постоянных слоёв с `AnimatedOpacity`, а не из `AnimatedSwitcher` с повторяющимися ключами.
-- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`, `push_test.dart`, `presence_test.dart`, `app_lock_test.dart`, `report_card_test.dart`, `feedback_test.dart`, `homework_upload_test.dart`, `analytics_test.dart`, `platform_test.dart`, `lesson_label_test.dart`.
+- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`, `push_test.dart`, `presence_test.dart`, `app_lock_test.dart`, `report_card_test.dart`, `feedback_test.dart`, `homework_upload_test.dart`, `analytics_test.dart`, `crash_reporting_test.dart`, `platform_test.dart`, `lesson_label_test.dart`.
 
 ## Демо-аккаунты (локальная сид-база)
 

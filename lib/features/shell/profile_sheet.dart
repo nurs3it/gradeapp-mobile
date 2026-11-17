@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/settings.dart';
+import '../../core/crash_reporting.dart';
 import '../../core/env.dart';
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
@@ -146,6 +148,8 @@ class _ProfileSheet extends ConsumerWidget {
                 leading: GIcon(GIcons.info, size: 20, color: c.ink2),
                 title: Text(l.about),
                 trailing: Text(l.version(appVersion), style: context.t.callout.copyWith(color: c.ink2)),
+                // Debug builds only: raises a test crash to check the reporter.
+                onLongPress: kDebugMode ? debugTestCrash : null,
               ),
             ],
           ),

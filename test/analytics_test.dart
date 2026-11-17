@@ -5,7 +5,6 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gradeapp/core/analytics.dart';
-import 'package:gradeapp/core/crash_reporting.dart';
 import 'package:gradeapp/core/storage/json_cache.dart';
 
 class _Adapter implements HttpClientAdapter {
@@ -157,17 +156,5 @@ void main() {
     await Future<void>.delayed(const Duration(milliseconds: 50));
     await a.flush();
     expect((adapter.calls.single.data as Map)['events'], hasLength(1));
-  });
-
-  test('crash reports lose query strings from URLs', () {
-    expect(scrubUrl('https://grade-app.kz/api/grades/?student_id=abc&term=1'), 'https://grade-app.kz/api/grades/');
-    expect(scrubUrl('https://grade-app.kz/api/me/#x'), 'https://grade-app.kz/api/me/');
-    expect(scrubUrl('https://grade-app.kz/api/me/'), 'https://grade-app.kz/api/me/');
-    expect(scrubCrumbData({'url': 'https://x/a?token=1', 'method': 'GET', 'query': 'token=1', 'status_code': 200}), {
-      'url': 'https://x/a',
-      'method': 'GET',
-      'status_code': 200,
-    });
-    expect(scrubCrumbData(null), isNull);
   });
 }
