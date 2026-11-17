@@ -144,6 +144,14 @@ void main() {
       slow.dispose();
     });
 
+    test('network and HTTP failures are not reported', () {
+      final r = make();
+      r.record(DioException(requestOptions: RequestOptions(path: '/x')), null, fatal: true);
+      r.record(const SocketException('down'), null, fatal: true);
+      expect(r.pending, isEmpty);
+      r.dispose();
+    });
+
     test('the same error is not queued twice within a minute', () {
       final r = make();
       r.record(StateError('same'), null, fatal: false);

@@ -113,6 +113,9 @@ class CrashReporter {
   /// Queues an error and schedules sending; the same error is not queued
   /// twice within a minute (a broken widget repeats itself every frame).
   void record(Object error, StackTrace? stack, {required bool fatal}) {
+    // A dead network or a 4xx/5xx is the weather, not a crash: the screens
+    // handle it (offline banner, retry) and the server logs the request.
+    if (isExpectedFailure(error)) return;
     try {
       final r = CrashReport.from(error, stack, fatal: fatal);
       final sig = '${r.errorType}|${r.message}';
@@ -188,6 +191,10 @@ class CrashReporter {
 
   void dispose() => _timer?.cancel();
 }
+
+/// Network and HTTP failures are not reported as crashes.
+bool isExpectedFailure(Object error) =>
+    error is DioException || error is SocketException || error is HttpException || error is TimeoutException;
 
 /// The reporter of this process (set by [runWithCrashReporting]).
 CrashReporter? crashReporter;
