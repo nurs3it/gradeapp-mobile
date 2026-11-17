@@ -173,6 +173,14 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
         SliverToBoxAdapter(
           child: GEmpty(title: l.gradesEmpty, message: l.gradesEmptyHint),
         ),
+        // A teacher may write before the first grade of the quarter.
+        if (term != null && learner != null)
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: g),
+            sliver: SliverToBoxAdapter(
+              child: FeedbackSection(studentId: learner, term: term),
+            ),
+          ),
       ];
     }
     if (_view == _View.feed) return [_Feed(list: list, seen: seen)];
