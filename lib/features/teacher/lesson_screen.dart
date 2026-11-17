@@ -104,6 +104,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
     ref
       ..invalidate(lessonDefaultsProvider(lesson.id))
       ..invalidate(lessonGradesProvider(lesson.id))
+      ..invalidate(courseHomeworkProvider(lesson.courseId))
       ..invalidate(teacherDayProvider);
   }
 

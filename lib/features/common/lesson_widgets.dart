@@ -300,9 +300,7 @@ class _LessonSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  teacher && lesson.classGroupName != null
-                      ? '${lesson.classGroupName} · ${lesson.subject}'
-                      : lesson.subject,
+                  teacher && lesson.classLabel != null ? '${lesson.classLabel} · ${lesson.subject}' : lesson.subject,
                   style: t.heroTitle.copyWith(
                     color: fg,
                     decoration: lesson.isCancelled ? TextDecoration.lineThrough : null,

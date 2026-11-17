@@ -42,6 +42,7 @@ class Lesson {
     this.classGroupId,
     this.classGroupName,
     this.additionalClassGroups = const [],
+    this.additionalClassGroupNames = const [],
     this.subgroup = '',
     this.status = LessonStatus.scheduled,
     this.topic = '',
@@ -64,6 +65,9 @@ class Lesson {
   /// Joint lesson: other classes taught together with [classGroupId].
   final List<String> additionalClassGroups;
 
+  /// Names of [additionalClassGroups] when the API sends them (teacher day).
+  final List<String> additionalClassGroupNames;
+
   /// Subgroup label («1 подгруппа»), empty for the whole class.
   final String subgroup;
   final LessonStatus status;
@@ -75,6 +79,14 @@ class Lesson {
 
   /// Every class whose students sit in this lesson.
   List<String> get classIds => [?classGroupId, ...additionalClassGroups];
+
+  /// «1A», «1A + 1B» for a joint lesson, or «1A +1» when the API sent only
+  /// the ids of the other classes.
+  String? get classLabel {
+    if (classGroupName == null || !isJoint) return classGroupName;
+    if (additionalClassGroupNames.isNotEmpty) return [classGroupName!, ...additionalClassGroupNames].join(' + ');
+    return '$classGroupName +${additionalClassGroups.length}';
+  }
 
   int get startMin => minutesOf(start);
   int get endMin => minutesOf(end);
@@ -101,6 +113,7 @@ class Lesson {
     classGroupId: classGroupId,
     classGroupName: classGroupName,
     additionalClassGroups: additionalClassGroups,
+    additionalClassGroupNames: additionalClassGroupNames,
     subgroup: subgroup,
     status: status ?? this.status,
     topic: topic ?? this.topic,
@@ -120,6 +133,7 @@ class Lesson {
     classGroupId: j.strOrNull('class_group_id'),
     classGroupName: j.strOrNull('class_group_name'),
     additionalClassGroups: j.strings('additional_class_groups'),
+    additionalClassGroupNames: j.strings('additional_class_group_names'),
     subgroup: j.str('subgroup'),
     status: lessonStatusOf(j.str('status')),
     topic: j.str('topic'),

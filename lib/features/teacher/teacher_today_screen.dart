@@ -69,7 +69,7 @@ class _TeacherTodayScreenState extends ConsumerState<TeacherTodayScreen> {
   }
 }
 
-String lessonTitle(Lesson l) => [?l.classGroupName, l.subject].join(' · ');
+String lessonTitle(Lesson l) => [?l.classLabel, l.subject].join(' · ');
 
 /// Marks every student of a lesson present, through the queue (swipe on a
 /// past lesson, «Закрыть все без отсутствующих»). Returns the queued item
@@ -475,7 +475,7 @@ class _TeacherHero extends ConsumerWidget {
             crossAxisAlignment: WrapCrossAlignment.end,
             spacing: 10,
             children: [
-              CappedText(lesson.classGroupName ?? '', style: t.titleXl.copyWith(color: on)),
+              CappedText(lesson.classLabel ?? '', style: t.titleXl.copyWith(color: on)),
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(lesson.subject, style: t.title2.copyWith(color: on)),
