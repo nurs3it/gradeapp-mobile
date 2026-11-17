@@ -74,6 +74,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>kz.gradeapp.gradeapp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gradeapp</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

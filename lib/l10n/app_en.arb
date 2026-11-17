@@ -641,5 +641,72 @@
   },
   "hwFilesOffline": "No connection: the homework is saved without files and will be sent later. Attach files once you're online.",
   "hwFilesError": "Couldn't assign the homework. Please try again.",
-  "attachmentOpenFailed": "Couldn't open the file"
+  "attachmentOpenFailed": "Couldn't open the file",
+  "actApprove": "Approve",
+  "excuseApprovedToast": "Request approved",
+  "excuseApproveFailed": "Could not approve the request",
+  "liveNow": "Lesson in progress",
+  "liveMarked": "Marked {done}/{total}",
+  "@liveMarked": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "liveEnded": "Lesson ended",
+  "liveEndedTopic": "Lesson ended: topic missing",
+  "liveUntilBell": "Until the bell",
+  "liveChannel": "Lesson in progress",
+  "remChannel": "Reminders",
+  "remTitle": "{cls}: attendance not marked",
+  "@remTitle": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "remBody": "{subject}, {start}–{end}",
+  "@remBody": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "wgNext": "Next lesson",
+  "wgNow": "Now",
+  "wgDay": "Day",
+  "wgUpdated": "Updated {time}",
+  "@wgUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "wgStale": "Open the app to refresh",
+  "wgNoMore": "No more lessons today",
+  "wgNoLessons": "No lessons today",
+  "wgHomeworkTomorrow": "Homework for tomorrow",
+  "wgNoHomework": "Nothing due tomorrow",
+  "wgSignedOut": "Sign in to GradeApp",
+  "wgTomorrow": "Tomorrow",
+  "wgStartsIn": "Starts in",
+  "wgEndsIn": "Ends in",
+  "setLocalTitle": "On this phone",
+  "setReminders": "Attendance reminders",
+  "setLive": "Lesson on the lock screen",
+  "ntCheckInMissing": "Has not checked in",
+  "wgNextShort": "Next"
 }

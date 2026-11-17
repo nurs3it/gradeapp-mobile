@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «Веер» tokens for the widgets, mirrored from lib/ui/tokens/colors.dart
+     (the source of truth). Dark values: values-night/widget_colors.xml. -->
+<resources>
+    <color name="g_surface">#FFFFFF</color>
+    <color name="g_surface2">#EAEEF4</color>
+    <color name="g_ink">#0D1320</color>
+    <color name="g_ink2">#4A5466</color>
+    <color name="g_ink3">#5D6779</color>
+    <color name="g_brand">#0A5BD8</color>
+    <color name="g_on_fill">#FFFFFF</color>
+    <color name="g_on_fill_soft">#D9FFFFFF</color>
+
+    <!-- Subject fills (the same in both themes) and light tints / markers. -->
+    <color name="g_subject_0_fill">#4F46E5</color>
+    <color name="g_subject_1_fill">#0B6F43</color>
+    <color name="g_subject_2_fill">#AE3A0B</color>
+    <color name="g_subject_3_fill">#6D35DB</color>
+    <color name="g_subject_4_fill">#A61F84</color>
+    <color name="g_subject_5_fill">#0A6476</color>
+    <color name="g_subject_6_fill">#875500</color>
+    <color name="g_subject_7_fill">#B41F48</color>
+    <color name="g_subject_0_marker">#4F46E5</color>
+    <color name="g_subject_1_marker">#0B6F43</color>
+    <color name="g_subject_2_marker">#AE3A0B</color>
+    <color name="g_subject_3_marker">#6D35DB</color>
+    <color name="g_subject_4_marker">#A61F84</color>
+    <color name="g_subject_5_marker">#0A6476</color>
+    <color name="g_subject_6_marker">#875500</color>
+    <color name="g_subject_7_marker">#B41F48</color>
+</resources>

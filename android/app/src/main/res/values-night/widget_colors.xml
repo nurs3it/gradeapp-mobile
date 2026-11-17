@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="g_surface">#131821</color>
+    <color name="g_surface2">#1B212C</color>
+    <color name="g_ink">#F2F5FA</color>
+    <color name="g_ink2">#A3ADBE</color>
+    <color name="g_ink3">#8B96A8</color>
+    <color name="g_brand">#7AABFF</color>
+    <color name="g_subject_0_marker">#9A94FF</color>
+    <color name="g_subject_1_marker">#5BD69A</color>
+    <color name="g_subject_2_marker">#FF8F5E</color>
+    <color name="g_subject_3_marker">#B38CFF</color>
+    <color name="g_subject_4_marker">#F17ACF</color>
+    <color name="g_subject_5_marker">#4FC6DB</color>
+    <color name="g_subject_6_marker">#F2B33D</color>
+    <color name="g_subject_7_marker">#FF7E9F</color>
+</resources>

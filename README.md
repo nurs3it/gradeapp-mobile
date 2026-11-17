@@ -47,6 +47,32 @@ flutter test
 - **Крэши и аналитика**: Sentry только со сборкой `--dart-define=SENTRY_DSN=…`; собственные события в `POST /analytics/events/`. Решение по приватности — `docs/product/privacy.md`.
 - Карточка урока раскрывается через Hero (страничный маршрут вместо modal-sheet: Flutter не летает героями в модальные шиты).
 
+## Платформа: действия в пушах, ссылки, виджеты, Live Activity
+
+Код — `lib/features/platform/`, нативная часть — `ios/GradeAppWidgets`, `ios/Runner/LiveActivity.swift`, `android/.../widgets`. Контракт с бэкендом — `CONTRACTS-stage2.md`.
+
+**Кнопки в пушах.** `attendance.flagged` → «Объяснить пропуск» (форма отпроса для этого пропуска: урок по `/attendance/<id>/`, иначе день), `excuse.pending` → «Одобрить» (`POST /excuses/<id>/approve/`, хаптик и тост) и «Открыть».
+- iOS: категории `ATTENDANCE_FLAGGED` / `EXCUSE_PENDING` регистрирует `flutter_local_notifications` (`LocalNotifications._categories`, названия на языке приложения). Нажатую кнопку отдаёт `firebase_messaging` как `RemoteMessage.actionIdentifier`; делегат `UNUserNotificationCenter` остаётся у цепочки `FlutterAppDelegate`, `flutter_local_notifications` берёт только свои локальные уведомления. Все кнопки открывают приложение (`foreground`): «Одобрить» выполняется и подтверждается тостом.
+- Android: для этих двух типов сервер шлёт data-only; `firebaseBackgroundHandler` (`push_background.dart`, изолят с `Firebase.initializeApp`) рисует уведомление сам с кнопками. «Одобрить» работает без открытия приложения (фоновый изолят, свой `ApiClient`), результат заменяет уведомление. Видимость всегда `private`: на защищённом экране блокировки система показывает свою обезличенную версию (`flutter_local_notifications` не умеет `publicVersion`).
+- Парсинг и выбор действия — `push_intent.dart` (чистый, покрыт тестами). `checkin.missing` ведёт на «Сегодня» родителя с выбранным ребёнком.
+
+**Тихая синхронизация.** `sync.today` / `sync.schedule` (data-only) → `PlatformSync.refresh`: перечитывает «сегодня» и неделю в тот же кэш, что читают экраны (`cacheKeyOf`), пересобирает снимок для виджетов и напоминания учителя. В открытом приложении ещё и сбрасывает провайдеры экранов. В пуше нет `student_id`, поэтому у родителя обновляются все дети. Тот же refresh идёт при старте, возврате в приложение, смене роли и ребёнка. Выход очищает виджеты и напоминания.
+
+**Ссылки (C7).** `https://grade-app.kz/student|parent|teacher/lesson|…` → экран по таблице в `deep_links.dart` (`routeForWebLink`), тот же набор путей в `AndroidManifest.xml` (`autoVerify`) и в `applinks:grade-app.kz` (`Runner.entitlements`). Ссылка без входа ждёт (`pendingLinkProvider`) и открывается после входа. Виджеты и уведомление урока открывают `gradeapp://app/<маршрут>` (своя схема).
+
+**Виджеты W1, W2.** Приложение пишет один JSON-снимок (`widget_snapshot.dart`: уроки на 4 дня, ДЗ на завтра, подписи на языке приложения, время обновления) через `home_widget` (iOS: App Group `group.kz.gradeapp.gradeapp`, Android: `HomeWidgetPreferences`). Нативная часть только раскладывает: выбирает урок по часам телефона и ничего не придумывает. iOS: расширение `GradeAppWidgets` (WidgetKit, таймлайн по звонкам, обратный отсчёт `Text(style: .timer)`, lock screen: rectangular, inline, circular; Onest внутри). Android: `NextLessonWidget` 2×2 и `DayWidget` 4×2 на RemoteViews, отсчёт `Chronometer`, будильник на ближайший звонок. Данные старше суток — «Откройте приложение, чтобы обновить»; «Обновлено в …» всегда на виджете. Токены повторены в `Tokens.swift` и `res/values*/widget_colors.xml`. Расширение к проекту добавляет скрипт `ios/scripts/add_widget_extension.rb` (gem `xcodeproj`, команда `cd ios && ruby scripts/add_widget_extension.rb`; повторный запуск ничего не делает).
+
+**Live Activity W5.** Старт, обновление и конец локальные, из экрана урока (`lesson_live.dart`): запускается, когда урок идёт и учитель начал его; «Отмечено n/m» обновляется с отметками; «Завершить урок» убирает сразу; после звонка показывает «Урок закончен» и через 15 минут снимается. Без ФИО и оценок. iOS: ActivityKit (`ios/Runner/LiveActivity.swift`, вид в расширении). У iOS нет таймера «закончить само»: пока жив процесс, конец ставит таймер, иначе при следующем запуске и возврате (`LessonLive.sweep`); до этого лок-скрин сам показывает «Урок закончен» (stale-дата = звонок). Android: ongoing-уведомление с обратным отсчётом и прогрессом, `timeoutAfter` = звонок + 30 минут, так что оно уйдёт даже при убитом приложении. Выключатель — «Уведомления → На этом телефоне».
+
+**Напоминания учителю T10.** Локально, через 5 минут после звонка, если посещаемость урока не отмечена; не больше 6 в день; пересчитываются при каждой синхронизации, снимаются при сохранении отметок. Выключатель — там же.
+
+**Что требует реального устройства или консолей**
+- Пуши с APNs и их кнопки: симулятор токена не получает; кнопки проверены через `xcrun simctl push` с категорией, сквозной путь — только на устройстве.
+- Apple Developer: App ID с Push, App Groups (`group.kz.gradeapp.gradeapp` для приложения и `kz.gradeapp.gradeapp.GradeAppWidgets`), Associated Domains, Live Activities; профили подписи для обоих таргетов.
+- Universal Links / App Links проверяются только на устройстве после выкладки `apple-app-site-association` и `assetlinks.json` на grade-app.kz (на Android нужен SHA-256 релизного ключа).
+- Виджеты на Xiaomi и Samsung с экономией батареи, Live Activity «не позже звонка + 30 минут» без приложения — только на железе.
+- «Все на месте» на Live Activity и в ongoing-уведомлении не сделано (нужны App Intent / действие в очередь).
+
 ## Структура
 
 ```
@@ -68,6 +94,7 @@ lib/
     parent/       итог дня (правила вердикта), обзор семьи, «Отпросить», согласие на фото, «Семья»
     teacher/      «Сегодня», урок (перекличка, пэд оценок, тема, ДЗ, итог), очередь, неделя, входящие
     notifications/ уведомления и переход по target
+    platform/     кнопки в пушах, тихая синхронизация, ссылки, виджеты, Live Activity, напоминания
 assets/fonts/     Onest 400–800 (OFL, лицензия рядом)
 ```
 
@@ -94,7 +121,7 @@ assets/fonts/     Onest 400–800 (OFL, лицензия рядом)
 - Цвета только из `ui/tokens/colors.dart` (`context.c`), текст — `context.t`. Hex в экранах не пишем.
 - Строки только через `context.l10n`. ARB генерируются из таблицы строк: правьте все три языка сразу, казахский — отдельно, не калькой с русского.
 - Нажатие — `GPressable` (масштаб и пружина), ripple выключен. Анимируются только transform и opacity; переключатели состояний строятся из постоянных слоёв с `AnimatedOpacity`, а не из `AnimatedSwitcher` с повторяющимися ключами.
-- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`, `push_test.dart`, `presence_test.dart`, `app_lock_test.dart`, `report_card_test.dart`, `feedback_test.dart`, `homework_upload_test.dart`, `analytics_test.dart`.
+- Нетривиальная логика покрыта тестами: `test/quarter_test.dart`, `verdict_test.dart`, `outbox_test.dart`, `roll_call_test.dart`, `lesson_overlay_test.dart`, `widgets_test.dart`, `push_test.dart`, `presence_test.dart`, `app_lock_test.dart`, `report_card_test.dart`, `feedback_test.dart`, `homework_upload_test.dart`, `analytics_test.dart`, `platform_test.dart`, `lesson_label_test.dart`.
 
 ## Демо-аккаунты (локальная сид-база)
 

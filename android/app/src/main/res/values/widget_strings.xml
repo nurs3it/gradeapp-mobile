@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_next_label">Next lesson</string>
+    <string name="widget_next_description">The lesson, the room and time to the bell.</string>
+    <string name="widget_day_label">Day</string>
+    <string name="widget_day_description">Today\'s lessons and tomorrow\'s homework.</string>
+</resources>

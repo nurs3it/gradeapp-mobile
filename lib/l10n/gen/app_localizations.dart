@@ -3632,6 +3632,186 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не удалось открыть файл'**
   String get attachmentOpenFailed;
+
+  /// No description provided for @actApprove.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одобрить'**
+  String get actApprove;
+
+  /// No description provided for @excuseApprovedToast.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявка одобрена'**
+  String get excuseApprovedToast;
+
+  /// No description provided for @excuseApproveFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось одобрить заявку'**
+  String get excuseApproveFailed;
+
+  /// No description provided for @liveNow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Идёт урок'**
+  String get liveNow;
+
+  /// No description provided for @liveMarked.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмечено {done}/{total}'**
+  String liveMarked(int done, int total);
+
+  /// No description provided for @liveEnded.
+  ///
+  /// In ru, this message translates to:
+  /// **'Урок закончен'**
+  String get liveEnded;
+
+  /// No description provided for @liveEndedTopic.
+  ///
+  /// In ru, this message translates to:
+  /// **'Урок закончен: не заполнена тема'**
+  String get liveEndedTopic;
+
+  /// No description provided for @liveUntilBell.
+  ///
+  /// In ru, this message translates to:
+  /// **'До звонка'**
+  String get liveUntilBell;
+
+  /// No description provided for @liveChannel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Идёт урок'**
+  String get liveChannel;
+
+  /// No description provided for @remChannel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напоминания'**
+  String get remChannel;
+
+  /// No description provided for @remTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'{cls}: посещаемость не отмечена'**
+  String remTitle(String cls);
+
+  /// No description provided for @remBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'{subject}, {start}–{end}'**
+  String remBody(String subject, String start, String end);
+
+  /// No description provided for @wgNext.
+  ///
+  /// In ru, this message translates to:
+  /// **'Следующий урок'**
+  String get wgNext;
+
+  /// No description provided for @wgNow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сейчас'**
+  String get wgNow;
+
+  /// No description provided for @wgDay.
+  ///
+  /// In ru, this message translates to:
+  /// **'День'**
+  String get wgDay;
+
+  /// No description provided for @wgUpdated.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обновлено {time}'**
+  String wgUpdated(String time);
+
+  /// No description provided for @wgStale.
+  ///
+  /// In ru, this message translates to:
+  /// **'Откройте приложение, чтобы обновить'**
+  String get wgStale;
+
+  /// No description provided for @wgNoMore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня уроков больше нет'**
+  String get wgNoMore;
+
+  /// No description provided for @wgNoLessons.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня уроков нет'**
+  String get wgNoLessons;
+
+  /// No description provided for @wgHomeworkTomorrow.
+  ///
+  /// In ru, this message translates to:
+  /// **'ДЗ на завтра'**
+  String get wgHomeworkTomorrow;
+
+  /// No description provided for @wgNoHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'На завтра ничего не задано'**
+  String get wgNoHomework;
+
+  /// No description provided for @wgSignedOut.
+  ///
+  /// In ru, this message translates to:
+  /// **'Войдите в GradeApp'**
+  String get wgSignedOut;
+
+  /// No description provided for @wgTomorrow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завтра'**
+  String get wgTomorrow;
+
+  /// No description provided for @wgStartsIn.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начнётся через'**
+  String get wgStartsIn;
+
+  /// No description provided for @wgEndsIn.
+  ///
+  /// In ru, this message translates to:
+  /// **'До конца'**
+  String get wgEndsIn;
+
+  /// No description provided for @setLocalTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'На этом телефоне'**
+  String get setLocalTitle;
+
+  /// No description provided for @setReminders.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напоминания об отметке посещаемости'**
+  String get setReminders;
+
+  /// No description provided for @setLive.
+  ///
+  /// In ru, this message translates to:
+  /// **'«Идёт урок» на экране блокировки'**
+  String get setLive;
+
+  /// No description provided for @ntCheckInMissing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не отметился в школе'**
+  String get ntCheckInMissing;
+
+  /// No description provided for @wgNextShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше'**
+  String get wgNextShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

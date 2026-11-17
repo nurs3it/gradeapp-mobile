@@ -12,6 +12,7 @@ import '../features/notifications/notification_settings_screen.dart';
 import '../features/notifications/notifications_screen.dart';
 import '../features/parent/family_screen.dart';
 import '../features/parent/parent_today_screen.dart';
+import '../features/platform/deep_links.dart';
 import '../features/shell/shell.dart';
 import '../features/student/check_in_flow.dart';
 import '../features/student/student_today_screen.dart';
@@ -46,12 +47,22 @@ final routerProvider = Provider<GoRouter>((ref) {
   String? redirect(BuildContext _, GoRouterState s) {
     final auth = ref.read(authProvider);
     final loc = s.matchedLocation;
-    if (auth.isLoading && !auth.hasValue) return loc == '/splash' ? null : '/splash';
+    // A web link (C7) that cannot open yet waits for sign-in, then continues.
+    final link = routeForWebLink(s.uri);
+    final pending = ref.read(pendingLinkProvider.notifier);
+    if (auth.isLoading && !auth.hasValue) {
+      if (link != null) pending.hold(link);
+      return loc == '/splash' ? null : '/splash';
+    }
     final user = auth.value;
     final role = ref.read(activeRoleProvider);
     final inLogin = loc.startsWith('/login');
-    if (user == null || role == null) return inLogin ? null : '/login';
-    if (inLogin || loc == '/splash') return homeOf(role);
+    if (user == null || role == null) {
+      if (link != null) pending.hold(link);
+      return inLogin ? null : '/login';
+    }
+    if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
+    if (link != null && link != loc) return link;
     final other = AppRole.values.where((r) => r != role).any((r) => loc.startsWith(_prefixOf(r)));
     return other ? homeOf(role) : null;
   }

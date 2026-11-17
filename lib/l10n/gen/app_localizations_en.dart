@@ -2102,4 +2102,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get attachmentOpenFailed => 'Couldn\'t open the file';
+
+  @override
+  String get actApprove => 'Approve';
+
+  @override
+  String get excuseApprovedToast => 'Request approved';
+
+  @override
+  String get excuseApproveFailed => 'Could not approve the request';
+
+  @override
+  String get liveNow => 'Lesson in progress';
+
+  @override
+  String liveMarked(int done, int total) {
+    return 'Marked $done/$total';
+  }
+
+  @override
+  String get liveEnded => 'Lesson ended';
+
+  @override
+  String get liveEndedTopic => 'Lesson ended: topic missing';
+
+  @override
+  String get liveUntilBell => 'Until the bell';
+
+  @override
+  String get liveChannel => 'Lesson in progress';
+
+  @override
+  String get remChannel => 'Reminders';
+
+  @override
+  String remTitle(String cls) {
+    return '$cls: attendance not marked';
+  }
+
+  @override
+  String remBody(String subject, String start, String end) {
+    return '$subject, $start–$end';
+  }
+
+  @override
+  String get wgNext => 'Next lesson';
+
+  @override
+  String get wgNow => 'Now';
+
+  @override
+  String get wgDay => 'Day';
+
+  @override
+  String wgUpdated(String time) {
+    return 'Updated $time';
+  }
+
+  @override
+  String get wgStale => 'Open the app to refresh';
+
+  @override
+  String get wgNoMore => 'No more lessons today';
+
+  @override
+  String get wgNoLessons => 'No lessons today';
+
+  @override
+  String get wgHomeworkTomorrow => 'Homework for tomorrow';
+
+  @override
+  String get wgNoHomework => 'Nothing due tomorrow';
+
+  @override
+  String get wgSignedOut => 'Sign in to GradeApp';
+
+  @override
+  String get wgTomorrow => 'Tomorrow';
+
+  @override
+  String get wgStartsIn => 'Starts in';
+
+  @override
+  String get wgEndsIn => 'Ends in';
+
+  @override
+  String get setLocalTitle => 'On this phone';
+
+  @override
+  String get setReminders => 'Attendance reminders';
+
+  @override
+  String get setLive => 'Lesson on the lock screen';
+
+  @override
+  String get ntCheckInMissing => 'Has not checked in';
+
+  @override
+  String get wgNextShort => 'Next';
 }

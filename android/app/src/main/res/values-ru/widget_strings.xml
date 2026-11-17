@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_next_label">Следующий урок</string>
+    <string name="widget_next_description">Урок, кабинет и время до звонка.</string>
+    <string name="widget_day_label">День</string>
+    <string name="widget_day_description">Уроки дня и домашнее задание на завтра.</string>
+</resources>

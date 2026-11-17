@@ -6,6 +6,8 @@
     <!-- Android 13+: asked once, at a moment it makes sense (C3). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <!-- T10 reminders survive a reboot. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:label="GradeApp"
         android:name="${applicationName}"
@@ -31,7 +33,54 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!-- C7: App Links for grade-app.kz. The paths are the ones claimed in
+                 CONTRACTS-stage2 («Deep links»); the backend serves assetlinks.json.
+                 Flutter hands the URL to go_router (lib/app/router.dart). -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="grade-app.kz" />
+                <data android:pathPrefix="/student" />
+                <data android:pathPrefix="/parent" />
+                <data android:pathPrefix="/teacher/lesson" />
+                <data android:path="/teacher/my-day" />
+                <data android:path="/teacher/schedule" />
+                <data android:path="/check-in" />
+                <data android:path="/notifications" />
+            </intent-filter>
+            <!-- Widgets and the lesson notification open the app through this
+                 scheme: gradeapp://app/lesson/<id>. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="gradeapp" android:host="app" />
+            </intent-filter>
         </activity>
+        <!-- Widgets W1, W2 (data from lib/features/platform/widget_snapshot.dart). -->
+        <receiver
+            android:name=".widgets.NextLessonWidget"
+            android:exported="false"
+            android:label="@string/widget_next_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_next_info" />
+        </receiver>
+        <receiver
+            android:name=".widgets.DayWidget"
+            android:exported="false"
+            android:label="@string/widget_day_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_day_info" />
+        </receiver>
         <!-- FCM: channels are created by MainActivity (one per preference group). -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

@@ -107,7 +107,9 @@ class ApiClient {
   Future<String> refreshAccess() => _refreshing ??= _doRefresh().whenComplete(() => _refreshing = null);
 
   Future<String> _doRefresh() async {
-    final s = sessions.current;
+    // Another isolate (silent-push sync, notification button) may have
+    // rotated the tokens since this one loaded them; use the stored pair.
+    final s = await sessions.load() ?? sessions.current;
     if (s == null) throw StateError('no session');
     try {
       final res = await _raw.post<Json>('/auth/refresh/', data: {'session_id': s.sessionId, 'refresh': s.refresh});

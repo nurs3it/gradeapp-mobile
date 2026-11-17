@@ -72,6 +72,10 @@ class NetStatus extends Notifier<NetState> {
 
 final netProvider = NotifierProvider<NetStatus, NetState>(NetStatus.new);
 
+/// Key of one answer in the JSON cache. Background code (silent sync) writes
+/// the same keys, so a screen opens on fresh data.
+String cacheKeyOf(String path, [Map<String, Object?>? query]) => '$path?${query ?? const {}}';
+
 /// Stale-while-revalidate: emits the cached answer at once (if any), then the
 /// fresh one. Offline with a cache — the cached value simply stays on screen
 /// (and the offline bar says how old it is); offline without one — the error
@@ -83,7 +87,7 @@ Stream<T> cachedGet<T>(
   required T Function(Object? data) parse,
 }) async* {
   final cache = ref.read(jsonCacheProvider);
-  final key = '$path?${query ?? const {}}';
+  final key = cacheKeyOf(path, query);
   final cached = await cache.read(key);
   if (cached != null) yield parse(cached);
   try {

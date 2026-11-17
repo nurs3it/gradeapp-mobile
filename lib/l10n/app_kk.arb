@@ -641,5 +641,72 @@
   },
   "hwFilesOffline": "Желі жоқ: тапсырма файлсыз сақталды, кейін жіберіледі. Файлдарды интернет пайда болғанда тіркеңіз.",
   "hwFilesError": "Тапсырманы беру мүмкін болмады. Қайтадан көріңіз.",
-  "attachmentOpenFailed": "Файлды ашу мүмкін болмады"
+  "attachmentOpenFailed": "Файлды ашу мүмкін болмады",
+  "actApprove": "Мақұлдау",
+  "excuseApprovedToast": "Өтінім мақұлданды",
+  "excuseApproveFailed": "Өтінімді мақұлдау мүмкін болмады",
+  "liveNow": "Сабақ жүріп жатыр",
+  "liveMarked": "Белгіленді {done}/{total}",
+  "@liveMarked": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "liveEnded": "Сабақ аяқталды",
+  "liveEndedTopic": "Сабақ аяқталды: тақырып толтырылмаған",
+  "liveUntilBell": "Қоңырауға дейін",
+  "liveChannel": "Сабақ жүріп жатыр",
+  "remChannel": "Еске салулар",
+  "remTitle": "{cls}: қатысу белгіленбеген",
+  "@remTitle": {
+    "placeholders": {
+      "cls": {
+        "type": "String"
+      }
+    }
+  },
+  "remBody": "{subject}, {start}–{end}",
+  "@remBody": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "wgNext": "Келесі сабақ",
+  "wgNow": "Қазір",
+  "wgDay": "Күн",
+  "wgUpdated": "Жаңартылды {time}",
+  "@wgUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "wgStale": "Жаңарту үшін қолданбаны ашыңыз",
+  "wgNoMore": "Бүгін сабақ қалмады",
+  "wgNoLessons": "Бүгін сабақ жоқ",
+  "wgHomeworkTomorrow": "Ертеңгі үй тапсырмасы",
+  "wgNoHomework": "Ертеңге тапсырма жоқ",
+  "wgSignedOut": "GradeApp-қа кіріңіз",
+  "wgTomorrow": "Ертең",
+  "wgStartsIn": "Басталуына",
+  "wgEndsIn": "Аяқталуына",
+  "setLocalTitle": "Осы телефонда",
+  "setReminders": "Қатысуды белгілеу туралы еске салу",
+  "setLive": "Құлыптау экранындағы «Сабақ жүріп жатыр»",
+  "ntCheckInMissing": "Мектепке белгі қойылмады",
+  "wgNextShort": "Келесі"
 }

@@ -33,33 +33,40 @@ String categoryName(AppLocalizations l, String c) => switch (c) {
 
 /// «Отпросить» (P4, §4.3): sensible defaults (today, whole day, illness), one
 /// screen, optional note photo. [lesson] preselects «Уроки» with it.
-Future<void> showExcuseSheet(BuildContext context, {required String studentId, Lesson? lesson}) {
+Future<void> showExcuseSheet(BuildContext context, {required String studentId, Lesson? lesson, DateTime? date}) {
   return showGSheet<void>(
     context,
     full: true,
     scrollable: false,
     closeLabel: context.l10n.cancel,
-    builder: (_) => _ExcuseForm(studentId: studentId, lesson: lesson),
+    builder: (_) => _ExcuseForm(studentId: studentId, lesson: lesson, date: date),
   );
 }
 
 enum _When { today, tomorrow, dates, lessons }
 
 class _ExcuseForm extends ConsumerStatefulWidget {
-  const _ExcuseForm({required this.studentId, this.lesson});
+  const _ExcuseForm({required this.studentId, this.lesson, this.date});
   final String studentId;
   final Lesson? lesson;
+
+  /// Preselects «Даты» with this day (from a push about an absence).
+  final DateTime? date;
 
   @override
   ConsumerState<_ExcuseForm> createState() => _ExcuseFormState();
 }
 
 class _ExcuseFormState extends ConsumerState<_ExcuseForm> {
-  late _When _when = widget.lesson == null ? _When.today : _When.lessons;
+  late _When _when = widget.lesson != null
+      ? _When.lessons
+      : widget.date != null
+      ? _When.dates
+      : _When.today;
   String _category = 'illness';
   final _comment = TextEditingController();
-  late DateTime _from = DateTime.now();
-  late DateTime _to = DateTime.now();
+  late DateTime _from = widget.date ?? DateTime.now();
+  late DateTime _to = widget.date ?? DateTime.now();
   late final Set<String> _lessons = {?widget.lesson?.id};
   XFile? _proof;
   bool _busy = false;

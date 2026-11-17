@@ -12,6 +12,8 @@ import '../../ui/ui.dart';
 import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
+import '../platform/lesson_live.dart';
+import '../platform/reminders.dart';
 import '../shell/header.dart';
 import 'grade_pad.dart';
 import 'lesson_sheets.dart';
@@ -81,6 +83,51 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
   String _query = '';
 
   Lesson get lesson => widget.lesson;
+
+  String? _platformSig;
+
+  /// Platform side of the lesson (W5, T10): the lock-screen activity follows
+  /// start / marks / finish, and saved attendance drops the reminder.
+  void _syncPlatform({
+    required LessonStatus status,
+    required int saved,
+    required int total,
+    required String title,
+    required bool noTopic,
+    required DateTime now,
+  }) {
+    final running = status == LessonStatus.inProgress && lesson.isNow(now);
+    final sig = '${status.name}|$running|$saved|$total|$noTopic';
+    if (sig == _platformSig) return;
+    _platformSig = sig;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final l = context.l10n;
+      final prefs = ref.read(prefsProvider);
+      if (saved > 0) unawaited(Reminders.cancelFor(lesson.id));
+      if (running) {
+        unawaited(
+          LessonLive.start(
+            LiveLesson(
+              lessonId: lesson.id,
+              title: title,
+              subject: lesson.subject,
+              startsAt: lesson.startsAt(),
+              endsAt: lesson.endsAt(),
+              marked: saved,
+              total: total,
+              topicMissing: noTopic,
+            ),
+            l,
+            prefs,
+          ),
+        );
+      } else if (status == LessonStatus.completed) {
+        unawaited(LessonLive.finish(lesson.id));
+      }
+    });
+  }
+
   String get _typeKey => 'worktype:${lesson.courseId}';
 
   @override
@@ -372,6 +419,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
         ? l.lessonOver
         : null;
     final topic = _savedTopic ?? lesson.topic;
+    _syncPlatform(status: status, saved: saved, total: students.length, title: title, noTopic: topic.isEmpty, now: now);
     final bottomPad =
         (_padOpen ? GradePad.height : GSpace.tabbarH + GSpace.tabbarBottom + 24) + MediaQuery.paddingOf(context).bottom;
 

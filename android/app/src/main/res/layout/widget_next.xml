@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- W1 «Следующий урок», 2x2. Filled in by NextLessonWidget.kt. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/widget_round" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/eyebrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_bold"
+            android:maxLines="1"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_extrabold"
+            android:maxLines="2"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_semibold"
+            android:maxLines="1"
+            android:textSize="13sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Chronometer
+            android:id="@+id/countdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_extrabold"
+            android:maxLines="1"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/countdown_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_semibold"
+            android:maxLines="1"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/updated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/onest_semibold"
+            android:maxLines="1"
+            android:textSize="11sp" />
+    </LinearLayout>
+</FrameLayout>
