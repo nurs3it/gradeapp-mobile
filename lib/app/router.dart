@@ -6,6 +6,7 @@ import '../features/auth/auth_controller.dart';
 import '../features/auth/login_screens.dart';
 import '../features/auth/user.dart';
 import '../features/learner/grades_screen.dart';
+import '../features/learner/learner_providers.dart' show familyModeProvider, selectedChildProvider;
 import '../features/learner/tasks_screen.dart';
 import '../features/learner/week_screen.dart';
 import '../features/notifications/notification_settings_screen.dart';
@@ -55,19 +56,26 @@ final routerProvider = Provider<GoRouter>((ref) {
     // A lesson link from the lock screen (with its roll-call request) also
     // waits for sign-in; it is not a web link, so it is only held, not routed.
     final lesson = loc.startsWith('/lesson/') ? s.uri.toString() : null;
+    // The parent status widget (W3) opens «Сегодня» of one child.
+    final childId = loc == '/p/today' ? s.uri.queryParameters['child'] : null;
     if (auth.isLoading && !auth.hasValue) {
-      if (link != null || lesson != null) pending.hold(link ?? lesson!);
+      if (link != null || lesson != null || childId != null) pending.hold(link ?? lesson ?? s.uri.toString());
       return loc == '/splash' ? null : '/splash';
     }
     final user = auth.value;
     final role = ref.read(activeRoleProvider);
     final inLogin = loc.startsWith('/login');
     if (user == null || role == null) {
-      if (link != null || lesson != null) pending.hold(link ?? lesson!);
+      if (link != null || lesson != null || childId != null) pending.hold(link ?? lesson ?? s.uri.toString());
       return inLogin ? null : '/login';
     }
     if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
     if (link != null && link != loc) return link;
+    if (childId != null && role == AppRole.parent) {
+      ref.read(selectedChildProvider.notifier).select(childId);
+      ref.read(familyModeProvider.notifier).set(false);
+      return '/p/today';
+    }
     final other = AppRole.values.where((r) => r != role).any((r) => loc.startsWith(_prefixOf(r)));
     return other ? homeOf(role) : null;
   }

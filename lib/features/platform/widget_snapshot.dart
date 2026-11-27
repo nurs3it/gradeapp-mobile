@@ -2,6 +2,7 @@ import '../../core/json.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../../ui/tokens/colors.dart';
 import '../common/models.dart';
+import 'child_status.dart';
 
 /// Who the widgets are for. Saved with the snapshot so a background refresh
 /// (silent push) knows what to fetch without the UI.
@@ -43,8 +44,12 @@ const snapshotDays = 4;
 /// lays out and never invents: it picks the lesson for *its* current time and
 /// says «обновлено в …» from [generatedAt].
 ///
-/// Schema version 1; keep ios/GradeAppWidgets/Snapshot.swift and
-/// android/.../WidgetSnapshot.kt in step.
+/// Schema version 2 (v1 + `children` for the parent widget «Статус ребёнка»,
+/// W3). A v1 snapshot is still valid: the natives treat a missing `children`
+/// as none. Keep ios/GradeAppWidgets/Snapshot.swift and
+/// android/.../widgets/WidgetData.kt in step.
+const snapshotVersion = 2;
+
 Json buildSnapshot({
   required WidgetTarget target,
   required List<Lesson> lessons,
@@ -52,6 +57,7 @@ Json buildSnapshot({
   required DateTime now,
   required AppLocalizations l,
   required String langCode,
+  List<ChildStatus> children = const [],
 }) {
   final today = dateOnly(now);
   final dates = [for (var i = 0; i < snapshotDays; i++) isoDate(today.add(Duration(days: i)))];
@@ -61,7 +67,7 @@ Json buildSnapshot({
   final due = homework.where((h) => h.dueDate == tomorrow && !h.isDone).toList();
   final teacher = target.role == 'teacher';
   return {
-    'v': 1,
+    'v': snapshotVersion,
     'role': target.role,
     'who': target.who,
     'lang': langCode,
@@ -112,12 +118,15 @@ Json buildSnapshot({
         for (final h in due.take(4)) {'course': h.courseName, 'title': h.title},
       ],
     },
+    // W3: one entry per child, the selected one first; status only, never a
+    // grade value.
+    if (target.role == 'parent') 'children': [for (final c in children) c.toJson()],
   };
 }
 
 /// The empty snapshot of a signed-out phone: widgets say «Войдите».
 Json signedOutSnapshot(AppLocalizations l, String langCode, DateTime now) => {
-  'v': 1,
+  'v': snapshotVersion,
   'role': 'none',
   'who': '',
   'lang': langCode,
