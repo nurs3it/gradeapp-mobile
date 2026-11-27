@@ -2788,4 +2788,238 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get p10EventsEmptyHint => 'Мұнда алдағы апталардағы іс-шаралар көрінеді.';
+
+  @override
+  String get t6Praise => 'Мақтау';
+
+  @override
+  String get t6Remark => 'Ескерту';
+
+  @override
+  String t6PraiseTitle(String name) {
+    return 'Мақтау: $name';
+  }
+
+  @override
+  String t6RemarkTitle(String name) {
+    return 'Ескерту: $name';
+  }
+
+  @override
+  String get t6TextHint => 'Қажет болса, бір-екі сөз (міндетті емес)';
+
+  @override
+  String get t6TagActive => 'Белсенді болды';
+
+  @override
+  String get t6TagHelped => 'Басқаларға көмектесті';
+
+  @override
+  String get t6TagProgress => 'Айқын жетістік';
+
+  @override
+  String get t6TagGreatAnswer => 'Тамаша жауап';
+
+  @override
+  String get t6TagLate => 'Кешікті';
+
+  @override
+  String get t6TagNoHomework => 'Үй тапсырмасы жоқ';
+
+  @override
+  String get t6TagDistracted => 'Алаңдады';
+
+  @override
+  String get t6TagNoMaterials => 'Құрал-жабдығы жоқ';
+
+  @override
+  String get t9Substitution => 'Ауыстыру';
+
+  @override
+  String t9ForTeacher(String name) {
+    return '$name орнына';
+  }
+
+  @override
+  String t9TaughtBy(String name) {
+    return '$name жүргізеді';
+  }
+
+  @override
+  String get t12Title => 'ҮТ орындалуы';
+
+  @override
+  String t12Done(int done, int total) {
+    return '$total оқушының $done-і орындады';
+  }
+
+  @override
+  String get t12AllDone => 'Барлығы орындады';
+
+  @override
+  String t12NotDone(int count) {
+    return 'Орындамағандар: $count';
+  }
+
+  @override
+  String get t12Remind => 'Еске салу';
+
+  @override
+  String t12Reminded(int count) {
+    return 'Еске салуды $count адам алды';
+  }
+
+  @override
+  String get t12TooSoon => 'Сағатына бір рет қана болады';
+
+  @override
+  String get t12RemindFailed => 'Еске салу жіберілмеді';
+
+  @override
+  String get t12Loading => 'Кім орындағанын санап жатырмыз…';
+
+  @override
+  String get t12Open => 'Кім орындады';
+
+  @override
+  String get t8Tab => 'Менің сыныбым';
+
+  @override
+  String t8Came(int came, int total) {
+    return '$total оқушының $came-і келді';
+  }
+
+  @override
+  String t8Unmarked(int count) {
+    return 'Белгісіз: $count';
+  }
+
+  @override
+  String get t8AllMarked => 'Бәрі белгіленген';
+
+  @override
+  String t8NextLesson(String subject, String time) {
+    return 'Келесі: $subject, $time';
+  }
+
+  @override
+  String get t8RollCall => 'Таңертеңгі белгі';
+
+  @override
+  String get t8MarkClass => 'Сыныпты күнге белгілеу';
+
+  @override
+  String get t8AllCame => 'Барлығы келді';
+
+  @override
+  String get t8MarkSent => 'Сынып белгісі жіберілуде';
+
+  @override
+  String get t8SourceExcuse => 'Өтініш бойынша';
+
+  @override
+  String get t8SourcePending => 'Өтініш бар';
+
+  @override
+  String get t8Requests => 'Келмеу өтініштері';
+
+  @override
+  String get t8Approve => 'Қабылдау';
+
+  @override
+  String get t8Reject => 'Қабылдамау';
+
+  @override
+  String get t8RejectTitle => 'Неге қабылдамайсыз?';
+
+  @override
+  String get t8RejectHint => 'Ата-ана бұл хабарламаны көреді';
+
+  @override
+  String get t8RejectSend => 'Өтінішті қабылдамау';
+
+  @override
+  String get t8Approved => 'Өтініш қабылданды';
+
+  @override
+  String get t8Rejected => 'Өтініш қабылданбады';
+
+  @override
+  String get t8ReviewFailed => 'Шешім жіберілмеді';
+
+  @override
+  String get t8Photo => 'Өтінішке фото';
+
+  @override
+  String t8From(String name) {
+    return 'Жіберген: $name';
+  }
+
+  @override
+  String get t8Week => 'Сыныптың аптасы';
+
+  @override
+  String t8WeekRate(String rate) {
+    return 'Қатысу $rate%';
+  }
+
+  @override
+  String t8WeekAbsent(int count) {
+    return 'Жіберулер: $count';
+  }
+
+  @override
+  String t8WeekTardy(int count) {
+    return 'Кешігулер: $count';
+  }
+
+  @override
+  String get t8AtRisk => 'Тәуекел тобы';
+
+  @override
+  String get t8AtRiskNone => 'Тәуекел тобында ешкім жоқ';
+
+  @override
+  String get t8OpenWeb => 'Веб-нұсқада ашу';
+
+  @override
+  String get t8Empty => 'Сыныпта оқушы жоқ';
+
+  @override
+  String get t8NotHomeroom => 'Бөлім сынып жетекшілеріне арналған';
+
+  @override
+  String get t8InboxSub => '«Менің сыныбым» бөлімінде қабылдауға болады';
+
+  @override
+  String t8WhatDay(int count) {
+    return 'Күнге сынып белгісі: $count';
+  }
+
+  @override
+  String t8ClassPick(String name) {
+    return '$name сыныбы';
+  }
+
+  @override
+  String wgChildIn(String time) {
+    return '$time-ден бері мектепте';
+  }
+
+  @override
+  String get wgChildInNoTime => 'Мектепте';
+
+  @override
+  String get wgChildNotYet => 'Әзірге белгі жоқ';
+
+  @override
+  String wgChildNewGrades(int count) {
+    return '$count жаңа баға';
+  }
+
+  @override
+  String get wgChildNoNew => 'Жаңа баға жоқ';
+
+  @override
+  String get wgChildAbsent => 'Мектепте жоқ';
 }

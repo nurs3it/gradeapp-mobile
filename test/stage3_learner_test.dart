@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gradeapp/core/grading.dart';
 import 'package:gradeapp/features/common/models.dart';
 import 'package:gradeapp/features/learner/streaks.dart';
 import 'package:gradeapp/features/learner/week_card.dart';
@@ -70,7 +69,7 @@ void main() {
       'grades': {
         'count': 2,
         'by_subject': [
-          {'course_id': 'a', 'name': 'Алгебра', 'avg': 8.5, 'prev_avg': 7.9, 'items': []},
+          {'course_id': 'a', 'name': 'Алгебра', 'avg': 8.5, 'prev_avg': 7.9, 'items': <Object>[]},
         ],
       },
       'homework': {'assigned': 9, 'done': 7, 'overdue': 0},
@@ -321,7 +320,7 @@ void main() {
       expect(d.requisites.bin, '123456789012');
       expect(d.requisites.values.containsKey('junk'), isFalse);
       expect(d.kaspiEnabled, isTrue);
-      expect(MyInvoices.fromJson({'results': [], 'kaspi_enabled': false}).requisites.isEmpty, isTrue);
+      expect(MyInvoices.fromJson({'results': <Object>[], 'kaspi_enabled': false}).requisites.isEmpty, isTrue);
     });
 
     test('confirmation text carries school, BIN, amount and the disclaimer', () {

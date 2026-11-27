@@ -12,6 +12,7 @@ import '../features/parent/attendance_screen.dart';
 import '../features/parent/billing_screen.dart';
 import '../features/parent/teachers_screen.dart';
 import '../features/parent/weekly_summary_screen.dart';
+import '../features/learner/learner_providers.dart' show familyModeProvider, selectedChildProvider;
 import '../features/learner/tasks_screen.dart';
 import '../features/learner/week_screen.dart';
 import '../features/notifications/notification_settings_screen.dart';
@@ -25,6 +26,7 @@ import '../features/student/student_today_screen.dart';
 import '../features/teacher/inbox_screen.dart';
 import '../features/platform/lesson_link.dart';
 import '../features/teacher/lesson_screen.dart';
+import '../features/teacher/my_class_screen.dart';
 import '../features/teacher/teacher_today_screen.dart';
 import '../features/teacher/teacher_week_screen.dart';
 
@@ -60,19 +62,26 @@ final routerProvider = Provider<GoRouter>((ref) {
     // A lesson link from the lock screen (with its roll-call request) also
     // waits for sign-in; it is not a web link, so it is only held, not routed.
     final lesson = loc.startsWith('/lesson/') ? s.uri.toString() : null;
+    // The parent status widget (W3) opens «Сегодня» of one child.
+    final childId = loc == '/p/today' ? s.uri.queryParameters['child'] : null;
     if (auth.isLoading && !auth.hasValue) {
-      if (link != null || lesson != null) pending.hold(link ?? lesson!);
+      if (link != null || lesson != null || childId != null) pending.hold(link ?? lesson ?? s.uri.toString());
       return loc == '/splash' ? null : '/splash';
     }
     final user = auth.value;
     final role = ref.read(activeRoleProvider);
     final inLogin = loc.startsWith('/login');
     if (user == null || role == null) {
-      if (link != null || lesson != null) pending.hold(link ?? lesson!);
+      if (link != null || lesson != null || childId != null) pending.hold(link ?? lesson ?? s.uri.toString());
       return inLogin ? null : '/login';
     }
     if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
     if (link != null && link != loc) return link;
+    if (childId != null && role == AppRole.parent) {
+      ref.read(selectedChildProvider.notifier).select(childId);
+      ref.read(familyModeProvider.notifier).set(false);
+      return '/p/today';
+    }
     final other = AppRole.values.where((r) => r != role).any((r) => loc.startsWith(_prefixOf(r)));
     return other ? homeOf(role) : null;
   }
@@ -130,6 +139,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         branch('/t/today', const TeacherTodayScreen()),
         branch('/t/week', const TeacherWeekScreen()),
         branch('/t/inbox', const InboxScreen()),
+        // Stage 3: the 4th tab, only shown to a homeroom teacher (T8).
+        branch('/t/class', const MyClassScreen()),
       ]),
       GoRoute(
         path: '/lesson/:id',
@@ -143,13 +154,24 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, s) =>
             WeeklySummaryScreen(studentId: s.uri.queryParameters['student'], week: s.uri.queryParameters['week']),
       ),
-      GoRoute(path: '/attendance', builder: (_, s) => AttendanceScreen(studentId: s.uri.queryParameters['student'])),
+      GoRoute(
+        path: '/attendance',
+        builder: (_, s) => AttendanceScreen(studentId: s.uri.queryParameters['student']),
+      ),
       GoRoute(
         path: '/billing',
         builder: (_, _) => const BillingScreen(),
-        routes: [GoRoute(path: ':id', builder: (_, s) => InvoiceScreen(invoiceId: s.pathParameters['id']!))],
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (_, s) => InvoiceScreen(invoiceId: s.pathParameters['id']!),
+          ),
+        ],
       ),
-      GoRoute(path: '/teachers', builder: (_, s) => TeachersScreen(studentId: s.uri.queryParameters['student'])),
+      GoRoute(
+        path: '/teachers',
+        builder: (_, s) => TeachersScreen(studentId: s.uri.queryParameters['student']),
+      ),
       GoRoute(path: '/events', builder: (_, _) => const EventsScreen()),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => const NotificationSettingsScreen()),

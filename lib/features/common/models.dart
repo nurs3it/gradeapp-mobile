@@ -48,6 +48,8 @@ class Lesson {
     this.topic = '',
     this.summary = '',
     this.teacherId,
+    this.isSubstitution = false,
+    this.courseTeacherName,
   });
 
   final String id;
@@ -59,6 +61,12 @@ class Lesson {
   final String? room;
   final String? teacherName;
   final String? teacherId;
+
+  /// T9: the lesson is taught by someone other than the course teacher.
+  final bool isSubstitution;
+
+  /// The course's own teacher — whom the substitute stands in for.
+  final String? courseTeacherName;
   final String? classGroupId;
   final String? classGroupName;
 
@@ -110,6 +118,8 @@ class Lesson {
     room: room,
     teacherName: teacherName,
     teacherId: teacherId,
+    isSubstitution: isSubstitution,
+    courseTeacherName: courseTeacherName,
     classGroupId: classGroupId,
     classGroupName: classGroupName,
     additionalClassGroups: additionalClassGroups,
@@ -130,6 +140,8 @@ class Lesson {
     room: j.strOrNull('room_name') ?? j.strOrNull('classroom'),
     teacherName: j.strOrNull('teacher_name'),
     teacherId: j.strOrNull('teacher'),
+    isSubstitution: j.flag('is_substitution'),
+    courseTeacherName: j.strOrNull('course_teacher_name'),
     classGroupId: j.strOrNull('class_group_id'),
     classGroupName: j.strOrNull('class_group_name'),
     additionalClassGroups: j.strings('additional_class_groups'),

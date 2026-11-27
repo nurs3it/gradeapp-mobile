@@ -2865,4 +2865,244 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get p10EventsEmptyHint => 'Events for the coming weeks will appear here.';
+
+  @override
+  String get t6Praise => 'Praise';
+
+  @override
+  String get t6Remark => 'Remark';
+
+  @override
+  String t6PraiseTitle(String name) {
+    return 'Praise: $name';
+  }
+
+  @override
+  String t6RemarkTitle(String name) {
+    return 'Remark: $name';
+  }
+
+  @override
+  String get t6TextHint => 'A few words if needed (optional)';
+
+  @override
+  String get t6TagActive => 'Was active';
+
+  @override
+  String get t6TagHelped => 'Helped others';
+
+  @override
+  String get t6TagProgress => 'Clear progress';
+
+  @override
+  String get t6TagGreatAnswer => 'Great answer';
+
+  @override
+  String get t6TagLate => 'Was late';
+
+  @override
+  String get t6TagNoHomework => 'No homework';
+
+  @override
+  String get t6TagDistracted => 'Was distracted';
+
+  @override
+  String get t6TagNoMaterials => 'No materials';
+
+  @override
+  String get t9Substitution => 'Substitute';
+
+  @override
+  String t9ForTeacher(String name) {
+    return 'for $name';
+  }
+
+  @override
+  String t9TaughtBy(String name) {
+    return 'taught by $name';
+  }
+
+  @override
+  String get t12Title => 'Homework progress';
+
+  @override
+  String t12Done(int done, int total) {
+    return '$done of $total did it';
+  }
+
+  @override
+  String get t12AllDone => 'Everyone did it';
+
+  @override
+  String t12NotDone(int count) {
+    return 'Not done: $count';
+  }
+
+  @override
+  String get t12Remind => 'Remind';
+
+  @override
+  String t12Reminded(int count) {
+    return '$count got the reminder';
+  }
+
+  @override
+  String get t12TooSoon => 'Once an hour only';
+
+  @override
+  String get t12RemindFailed => 'Could not send the reminder';
+
+  @override
+  String get t12Loading => 'Counting who did it…';
+
+  @override
+  String get t12Open => 'Who did it';
+
+  @override
+  String get t8Tab => 'My class';
+
+  @override
+  String t8Came(int came, int total) {
+    return '$came of $total came';
+  }
+
+  @override
+  String t8Unmarked(int count) {
+    return 'Not marked: $count';
+  }
+
+  @override
+  String get t8AllMarked => 'Everyone is marked';
+
+  @override
+  String t8NextLesson(String subject, String time) {
+    return 'Next: $subject at $time';
+  }
+
+  @override
+  String get t8RollCall => 'Morning roll call';
+
+  @override
+  String get t8MarkClass => 'Mark the class for the day';
+
+  @override
+  String get t8AllCame => 'Everyone came';
+
+  @override
+  String get t8MarkSent => 'Class marks are being sent';
+
+  @override
+  String get t8SourceExcuse => 'By request';
+
+  @override
+  String get t8SourcePending => 'Request waiting';
+
+  @override
+  String get t8Requests => 'Absence requests';
+
+  @override
+  String get t8Approve => 'Approve';
+
+  @override
+  String get t8Reject => 'Reject';
+
+  @override
+  String get t8RejectTitle => 'Why reject?';
+
+  @override
+  String get t8RejectHint => 'The parent will see this note';
+
+  @override
+  String get t8RejectSend => 'Reject the request';
+
+  @override
+  String get t8Approved => 'Request approved';
+
+  @override
+  String get t8Rejected => 'Request rejected';
+
+  @override
+  String get t8ReviewFailed => 'Could not send the decision';
+
+  @override
+  String get t8Photo => 'Photo of the request';
+
+  @override
+  String t8From(String name) {
+    return 'From $name';
+  }
+
+  @override
+  String get t8Week => 'The class this week';
+
+  @override
+  String t8WeekRate(String rate) {
+    return 'Attendance $rate%';
+  }
+
+  @override
+  String t8WeekAbsent(int count) {
+    return 'Absences: $count';
+  }
+
+  @override
+  String t8WeekTardy(int count) {
+    return 'Late: $count';
+  }
+
+  @override
+  String get t8AtRisk => 'At risk';
+
+  @override
+  String get t8AtRiskNone => 'Nobody is at risk';
+
+  @override
+  String get t8OpenWeb => 'Open on the web';
+
+  @override
+  String get t8Empty => 'No students in the class';
+
+  @override
+  String get t8NotHomeroom => 'This section is for homeroom teachers';
+
+  @override
+  String get t8InboxSub => 'Approve them in «My class»';
+
+  @override
+  String t8WhatDay(int count) {
+    return 'Class marks for the day: $count';
+  }
+
+  @override
+  String t8ClassPick(String name) {
+    return 'Class $name';
+  }
+
+  @override
+  String wgChildIn(String time) {
+    return 'At school since $time';
+  }
+
+  @override
+  String get wgChildInNoTime => 'At school';
+
+  @override
+  String get wgChildNotYet => 'Not checked in yet';
+
+  @override
+  String wgChildNewGrades(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new grades',
+      one: '$count new grade',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wgChildNoNew => 'No new grades';
+
+  @override
+  String get wgChildAbsent => 'Not at school';
 }

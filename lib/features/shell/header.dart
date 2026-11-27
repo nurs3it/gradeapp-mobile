@@ -218,6 +218,7 @@ String outboxWhat(AppLocalizations l, OutboxItem item) {
     'summary' => l.whatSummary,
     'homework' => l.whatHomework,
     'feedback' => l.whatFeedback,
+    'day_marks' => l.t8WhatDay(int.tryParse(state) ?? 0),
     _ => item.path,
   };
 }

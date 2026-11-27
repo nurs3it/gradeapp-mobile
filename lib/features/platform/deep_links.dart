@@ -32,6 +32,7 @@ String? routeForWebLink(Uri uri) {
       return switch (sub) {
         'schedule' => '/t/week',
         'my-day' => '/t/today',
+        'my-class' => '/t/class',
         _ => null,
       };
     case 'check-in':

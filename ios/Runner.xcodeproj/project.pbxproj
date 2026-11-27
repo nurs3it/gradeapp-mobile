@@ -18,6 +18,7 @@
 		57F0A608E49221483E1F036D /* Onest-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB2712844F559FCE54A6F33C /* Onest-Regular.ttf */; };
 		5F2ACC7C3D9DB0A9D8D242B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A53A685694BA5780983C31 /* Foundation.framework */; };
 		60F0F3BCFF044B771C862183 /* DayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8891EE92750E8CDF33FCF4E /* DayWidget.swift */; };
+		C3A10002D0C5E1B200A0F002 /* ChildStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A10001D0C5E1B200A0F001 /* ChildStatusWidget.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884E8672EC3CC0400C636F2 /* SceneDelegate.swift */; };
 		860C5CF899246DAC4DD389A5 /* GradeAppWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0AAD5967C85436EC4C8E85BA /* GradeAppWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -116,6 +117,7 @@
 		D406034C090B3B0CA69505E3 /* Common.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		E7E0E9265C8BF380850CF14B /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E8891EE92750E8CDF33FCF4E /* DayWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DayWidget.swift; sourceTree = "<group>"; };
+		C3A10001D0C5E1B200A0F001 /* ChildStatusWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChildStatusWidget.swift; sourceTree = "<group>"; };
 		EEB2183393DD9ABFFA34F119 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4009BB8E3CA8358BC84B8F1 /* Onest-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-Bold.ttf"; path = "../assets/fonts/Onest-Bold.ttf"; sourceTree = "<group>"; };
 		F72280C2D1726D8034BF0426 /* Onest-ExtraBold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Onest-ExtraBold.ttf"; path = "../assets/fonts/Onest-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				D406034C090B3B0CA69505E3 /* Common.swift */,
 				E8891EE92750E8CDF33FCF4E /* DayWidget.swift */,
+				C3A10001D0C5E1B200A0F001 /* ChildStatusWidget.swift */,
 				7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */,
 				0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */,
 				CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */,
@@ -535,6 +538,7 @@
 			files = (
 				4A85DB5D028237B46C6D9372 /* Common.swift in Sources */,
 				60F0F3BCFF044B771C862183 /* DayWidget.swift in Sources */,
+				C3A10002D0C5E1B200A0F002 /* ChildStatusWidget.swift in Sources */,
 				197912F6DF1E2EF5D9DF66D7 /* GradeAppWidgets.swift in Sources */,
 				38FB02E6F9D6E33FA6B60888 /* LessonLiveActivity.swift in Sources */,
 				87CBC5C351FD3DECC180915C /* NextLessonWidget.swift in Sources */,

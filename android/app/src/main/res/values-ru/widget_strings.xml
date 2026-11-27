@@ -4,4 +4,9 @@
     <string name="widget_next_description">Урок, кабинет и время до звонка.</string>
     <string name="widget_day_label">День</string>
     <string name="widget_day_description">Уроки дня и домашнее задание на завтра.</string>
+    <string name="widget_child_label">Статус ребёнка</string>
+    <string name="widget_child_description">В школе или нет и сколько новых оценок (без самих оценок).</string>
+    <string name="widget_child_pick">Выберите ребёнка</string>
+    <string name="widget_child_open">Откройте GradeApp, чтобы увидеть статус ребёнка.</string>
+    <string name="widget_child_parent_only">Войдите в GradeApp как родитель.</string>
 </resources>

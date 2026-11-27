@@ -4910,6 +4910,402 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Здесь появятся события на ближайшие недели.'**
   String get p10EventsEmptyHint;
+
+  /// No description provided for @t6Praise.
+  ///
+  /// In ru, this message translates to:
+  /// **'Похвалить'**
+  String get t6Praise;
+
+  /// No description provided for @t6Remark.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замечание'**
+  String get t6Remark;
+
+  /// No description provided for @t6PraiseTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Похвала: {name}'**
+  String t6PraiseTitle(String name);
+
+  /// No description provided for @t6RemarkTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замечание: {name}'**
+  String t6RemarkTitle(String name);
+
+  /// No description provided for @t6TextHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пара слов, если нужно (необязательно)'**
+  String get t6TextHint;
+
+  /// No description provided for @t6TagActive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Был активен'**
+  String get t6TagActive;
+
+  /// No description provided for @t6TagHelped.
+  ///
+  /// In ru, this message translates to:
+  /// **'Помогал другим'**
+  String get t6TagHelped;
+
+  /// No description provided for @t6TagProgress.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заметный прогресс'**
+  String get t6TagProgress;
+
+  /// No description provided for @t6TagGreatAnswer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отличный ответ'**
+  String get t6TagGreatAnswer;
+
+  /// No description provided for @t6TagLate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Опоздал'**
+  String get t6TagLate;
+
+  /// No description provided for @t6TagNoHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет домашнего задания'**
+  String get t6TagNoHomework;
+
+  /// No description provided for @t6TagDistracted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отвлекался'**
+  String get t6TagDistracted;
+
+  /// No description provided for @t6TagNoMaterials.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет принадлежностей'**
+  String get t6TagNoMaterials;
+
+  /// No description provided for @t9Substitution.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замена'**
+  String get t9Substitution;
+
+  /// No description provided for @t9ForTeacher.
+  ///
+  /// In ru, this message translates to:
+  /// **'за {name}'**
+  String t9ForTeacher(String name);
+
+  /// No description provided for @t9TaughtBy.
+  ///
+  /// In ru, this message translates to:
+  /// **'ведёт {name}'**
+  String t9TaughtBy(String name);
+
+  /// No description provided for @t12Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выполнение ДЗ'**
+  String get t12Title;
+
+  /// No description provided for @t12Done.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выполнили {done} из {total}'**
+  String t12Done(int done, int total);
+
+  /// No description provided for @t12AllDone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все выполнили'**
+  String get t12AllDone;
+
+  /// No description provided for @t12NotDone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не выполнили: {count}'**
+  String t12NotDone(int count);
+
+  /// No description provided for @t12Remind.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напомнить'**
+  String get t12Remind;
+
+  /// No description provided for @t12Reminded.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напоминание получили {count}'**
+  String t12Reminded(int count);
+
+  /// No description provided for @t12TooSoon.
+  ///
+  /// In ru, this message translates to:
+  /// **'Можно раз в час'**
+  String get t12TooSoon;
+
+  /// No description provided for @t12RemindFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось отправить напоминание'**
+  String get t12RemindFailed;
+
+  /// No description provided for @t12Loading.
+  ///
+  /// In ru, this message translates to:
+  /// **'Считаем, кто сделал…'**
+  String get t12Loading;
+
+  /// No description provided for @t12Open.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кто сделал'**
+  String get t12Open;
+
+  /// No description provided for @t8Tab.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мой класс'**
+  String get t8Tab;
+
+  /// No description provided for @t8Came.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пришли {came} из {total}'**
+  String t8Came(int came, int total);
+
+  /// No description provided for @t8Unmarked.
+  ///
+  /// In ru, this message translates to:
+  /// **'Без отметки: {count}'**
+  String t8Unmarked(int count);
+
+  /// No description provided for @t8AllMarked.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все отмечены'**
+  String get t8AllMarked;
+
+  /// No description provided for @t8NextLesson.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дальше: {subject} в {time}'**
+  String t8NextLesson(String subject, String time);
+
+  /// No description provided for @t8RollCall.
+  ///
+  /// In ru, this message translates to:
+  /// **'Утренняя отметка'**
+  String get t8RollCall;
+
+  /// No description provided for @t8MarkClass.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отметить класс за день'**
+  String get t8MarkClass;
+
+  /// No description provided for @t8AllCame.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все пришли'**
+  String get t8AllCame;
+
+  /// No description provided for @t8MarkSent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отметка класса отправляется'**
+  String get t8MarkSent;
+
+  /// No description provided for @t8SourceExcuse.
+  ///
+  /// In ru, this message translates to:
+  /// **'По заявке'**
+  String get t8SourceExcuse;
+
+  /// No description provided for @t8SourcePending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Есть заявка'**
+  String get t8SourcePending;
+
+  /// No description provided for @t8Requests.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявки на отсутствие'**
+  String get t8Requests;
+
+  /// No description provided for @t8Approve.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одобрить'**
+  String get t8Approve;
+
+  /// No description provided for @t8Reject.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отклонить'**
+  String get t8Reject;
+
+  /// No description provided for @t8RejectTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Почему отклоняете?'**
+  String get t8RejectTitle;
+
+  /// No description provided for @t8RejectHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Родитель увидит это сообщение'**
+  String get t8RejectHint;
+
+  /// No description provided for @t8RejectSend.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отклонить заявку'**
+  String get t8RejectSend;
+
+  /// No description provided for @t8Approved.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявка одобрена'**
+  String get t8Approved;
+
+  /// No description provided for @t8Rejected.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявка отклонена'**
+  String get t8Rejected;
+
+  /// No description provided for @t8ReviewFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось отправить решение'**
+  String get t8ReviewFailed;
+
+  /// No description provided for @t8Photo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото к заявке'**
+  String get t8Photo;
+
+  /// No description provided for @t8From.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подала: {name}'**
+  String t8From(String name);
+
+  /// No description provided for @t8Week.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя класса'**
+  String get t8Week;
+
+  /// No description provided for @t8WeekRate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Посещаемость {rate}%'**
+  String t8WeekRate(String rate);
+
+  /// No description provided for @t8WeekAbsent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропусков: {count}'**
+  String t8WeekAbsent(int count);
+
+  /// No description provided for @t8WeekTardy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Опозданий: {count}'**
+  String t8WeekTardy(int count);
+
+  /// No description provided for @t8AtRisk.
+  ///
+  /// In ru, this message translates to:
+  /// **'В зоне риска'**
+  String get t8AtRisk;
+
+  /// No description provided for @t8AtRiskNone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Никого в зоне риска'**
+  String get t8AtRiskNone;
+
+  /// No description provided for @t8OpenWeb.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыть в вебе'**
+  String get t8OpenWeb;
+
+  /// No description provided for @t8Empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'В классе нет учеников'**
+  String get t8Empty;
+
+  /// No description provided for @t8NotHomeroom.
+  ///
+  /// In ru, this message translates to:
+  /// **'Раздел для классных руководителей'**
+  String get t8NotHomeroom;
+
+  /// No description provided for @t8InboxSub.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одобрить можно в разделе «Мой класс»'**
+  String get t8InboxSub;
+
+  /// No description provided for @t8WhatDay.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отметка класса за день: {count}'**
+  String t8WhatDay(int count);
+
+  /// No description provided for @t8ClassPick.
+  ///
+  /// In ru, this message translates to:
+  /// **'Класс {name}'**
+  String t8ClassPick(String name);
+
+  /// No description provided for @wgChildIn.
+  ///
+  /// In ru, this message translates to:
+  /// **'В школе с {time}'**
+  String wgChildIn(String time);
+
+  /// No description provided for @wgChildInNoTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'В школе'**
+  String get wgChildInNoTime;
+
+  /// No description provided for @wgChildNotYet.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ещё нет отметки'**
+  String get wgChildNotYet;
+
+  /// No description provided for @wgChildNewGrades.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} новая оценка} few{{count} новые оценки} other{{count} новых оценок}}'**
+  String wgChildNewGrades(int count);
+
+  /// No description provided for @wgChildNoNew.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новых оценок нет'**
+  String get wgChildNoNew;
+
+  /// No description provided for @wgChildAbsent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не в школе'**
+  String get wgChildAbsent;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

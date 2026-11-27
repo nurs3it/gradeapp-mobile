@@ -12,6 +12,7 @@ import '../../core/storage/json_cache.dart';
 import '../../l10n/gen/app_localizations.dart';
 import '../common/models.dart';
 import '../teacher/teacher_models.dart';
+import 'child_status.dart';
 import 'reminders.dart';
 import 'widget_snapshot.dart';
 
@@ -21,9 +22,14 @@ abstract final class WidgetBridge {
   static const appGroup = 'group.kz.gradeapp.gradeapp';
   static const _key = 'snapshot';
 
-  /// WidgetKit `kind`s and Android provider classes of the two widgets.
-  static const _ios = ['NextLessonWidget', 'DayWidget'];
-  static const _android = ['kz.gradeapp.gradeapp.widgets.NextLessonWidget', 'kz.gradeapp.gradeapp.widgets.DayWidget'];
+  /// WidgetKit `kind`s and Android provider classes of the widgets (W1, W2
+  /// and the parent's W3 «Статус ребёнка»).
+  static const _ios = ['NextLessonWidget', 'DayWidget', 'ChildStatusWidget'];
+  static const _android = [
+    'kz.gradeapp.gradeapp.widgets.NextLessonWidget',
+    'kz.gradeapp.gradeapp.widgets.DayWidget',
+    'kz.gradeapp.gradeapp.widgets.ChildStatusWidget',
+  ];
 
   static bool get supported => !kIsWeb && (Platform.isIOS || Platform.isAndroid);
 
@@ -104,10 +110,15 @@ class PlatformSync {
         );
         if (remind && dayJson is Json) await Reminders.reschedule(TeacherDay.fromJson(dayJson), now, l, prefs);
       } else {
-        _refreshStudentCaches(t.learnerId!, today, monday, sunday);
         // Sync pushes carry no child id and a parent may have several:
-        // every child's cached day and week are refreshed.
-        if (t.role == 'parent') unawaited(_refreshOtherChildren(t.learnerId!, today, monday, sunday));
+        // every child's cached day and week are refreshed (W3 reads them for
+        // the status widget too).
+        var kids = const <ChildStatus>[];
+        if (t.role == 'parent') {
+          kids = await _childStatuses(t, today, monday, sunday, now, l);
+        } else {
+          _refreshStudentCaches(t.learnerId!, today, monday, sunday);
+        }
         final aheadQ = <String, Object?>{
           'student_id': t.learnerId,
           'date_from': today,
@@ -120,7 +131,15 @@ class PlatformSync {
         await cache.write(cacheKeyOf('/homework/', hwQ), hwJson);
         final homework = parseList(hwJson, Homework.fromJson);
         await WidgetBridge.publish(
-          buildSnapshot(target: t, lessons: lessons, homework: homework, now: now, l: l, langCode: langCode),
+          buildSnapshot(
+            target: t,
+            lessons: lessons,
+            homework: homework,
+            now: now,
+            l: l,
+            langCode: langCode,
+            children: kids,
+          ),
         );
       }
       return true;
@@ -133,23 +152,55 @@ class PlatformSync {
   }
 
   /// Cached «today» and week of one student, under the keys the screens read.
-  void _refreshStudentCaches(String id, String today, String monday, String sunday) {
+  void _refreshStudentCaches(String id, String today, String monday, String sunday, {bool day = true}) {
     final dayPath = '/students/$id/today/';
     final dayQ = {'date': today};
     final weekQ = <String, Object?>{'student_id': id, 'date_from': monday, 'date_to': sunday, 'page_size': 500};
-    unawaited(_get(dayPath, dayQ).then((j) => cache.write(cacheKeyOf(dayPath, dayQ), j)).catchError((Object _) {}));
+    if (day) {
+      unawaited(_get(dayPath, dayQ).then((j) => cache.write(cacheKeyOf(dayPath, dayQ), j)).catchError((Object _) {}));
+    }
     unawaited(
       _get('/lessons/', weekQ).then((j) => cache.write(cacheKeyOf('/lessons/', weekQ), j)).catchError((Object _) {}),
     );
   }
 
-  Future<void> _refreshOtherChildren(String selected, String today, String monday, String sunday) async {
+  /// W3: refreshes every child's cached day and week and reads the status
+  /// line of each (the selected child first). A child whose day fails stays
+  /// in the list as «unknown»; a failing child list gives none, so the
+  /// widget keeps the previous snapshot's lessons and says nothing new.
+  Future<List<ChildStatus>> _childStatuses(
+    WidgetTarget t,
+    String today,
+    String monday,
+    String sunday,
+    DateTime now,
+    AppLocalizations l,
+  ) async {
     try {
-      final kids = parseList(await _get('/users/me/children/', const {}), (j) => j.str('id'));
-      for (final id in kids.where((k) => k.isNotEmpty && k != selected)) {
-        _refreshStudentCaches(id, today, monday, sunday);
-      }
-    } catch (_) {}
+      final raw = await _get('/users/me/children/', const {});
+      await cache.write(cacheKeyOf('/users/me/children/'), raw);
+      final children = selectedFirst(parseList(raw, Child.fromJson), t.learnerId);
+      final seenRaw = await prefs.read('grades_seen_at');
+      final seen = seenRaw is String ? DateTime.tryParse(seenRaw) : null;
+      final dayQ = {'date': today};
+      return await Future.wait([
+        for (final c in children)
+          () async {
+            _refreshStudentCaches(c.id, today, monday, sunday, day: false);
+            LearnerDay? day;
+            try {
+              final path = '/students/${c.id}/today/';
+              final j = await _get(path, dayQ);
+              await cache.write(cacheKeyOf(path, dayQ), j);
+              day = LearnerDay.fromJson(j! as Json);
+            } catch (_) {}
+            return childStatusOf(child: c, day: day, now: now, l: l, gradesSeenAt: seen);
+          }(),
+      ]);
+    } catch (e) {
+      debugPrint('child statuses: $e');
+      return const [];
+    }
   }
 
   Future<Object?> _get(String path, Map<String, Object?> q) async =>

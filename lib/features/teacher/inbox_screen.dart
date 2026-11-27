@@ -10,6 +10,7 @@ import '../common/models.dart';
 import '../common/pulse.dart';
 import '../notifications/notifications.dart';
 import '../shell/header.dart';
+import 'my_class_providers.dart' show hasHomeroomProvider;
 import 'sync_sheet.dart';
 import 'teacher_providers.dart';
 
@@ -28,6 +29,7 @@ class InboxScreen extends ConsumerWidget {
     final day = ref.watch(teacherDayProvider(isoDate(now))).value;
     final unmarked = day?.overdue.where((t) => t.needsAttendance).length ?? 0;
     final excuses = ref.watch(pulseProvider.select((p) => p.inbox));
+    final homeroom = ref.watch(hasHomeroomProvider);
     final list = ref.watch(notificationsProvider);
     final read = ref.watch(readIdsProvider);
     final items = list.value ?? const <AppNotification>[];
@@ -58,9 +60,13 @@ class InboxScreen extends ConsumerWidget {
           minHeight: 72,
           leading: const _Plate(icon: GIcons.excuse, tone: GTone.info),
           title: Text(l.inboxExcuses(excuses)),
-          subtitle: Text(l.inboxExcusesSub),
-          trailing: GIcon(GIcons.openInNew, size: 20, color: c.ink3),
-          onTap: () => launchUrl(Uri.parse('https://grade-app.kz/teacher'), mode: LaunchMode.externalApplication),
+          subtitle: Text(homeroom ? l.t8InboxSub : l.inboxExcusesSub),
+          trailing: homeroom ? null : GIcon(GIcons.openInNew, size: 20, color: c.ink3),
+          chevron: homeroom,
+          // T8: a homeroom teacher decides in «Мой класс», others on the web.
+          onTap: homeroom
+              ? () => context.go('/t/class')
+              : () => launchUrl(Uri.parse('https://grade-app.kz/teacher'), mode: LaunchMode.externalApplication),
         ),
     ];
 

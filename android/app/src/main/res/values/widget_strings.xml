@@ -4,4 +4,9 @@
     <string name="widget_next_description">The lesson, the room and time to the bell.</string>
     <string name="widget_day_label">Day</string>
     <string name="widget_day_description">Today\'s lessons and tomorrow\'s homework.</string>
+    <string name="widget_child_label">Child status</string>
+    <string name="widget_child_description">At school or not, and how many new grades (no marks).</string>
+    <string name="widget_child_pick">Choose a child</string>
+    <string name="widget_child_open">Open GradeApp to see your child\'s status.</string>
+    <string name="widget_child_parent_only">Sign in to GradeApp as a parent.</string>
 </resources>

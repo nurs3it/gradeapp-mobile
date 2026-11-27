@@ -4,4 +4,9 @@
     <string name="widget_next_description">Сабақ, кабинет және қоңырауға дейінгі уақыт.</string>
     <string name="widget_day_label">Күн</string>
     <string name="widget_day_description">Күндегі сабақтар және ертеңгі үй тапсырмасы.</string>
+    <string name="widget_child_label">Баланың күйі</string>
+    <string name="widget_child_description">Мектепте ме, жоқ па және жаңа бағалар саны (бағасыз).</string>
+    <string name="widget_child_pick">Баланы таңдаңыз</string>
+    <string name="widget_child_open">Баланың күйін көру үшін GradeApp ашыңыз.</string>
+    <string name="widget_child_parent_only">GradeApp-қа ата-ана ретінде кіріңіз.</string>
 </resources>

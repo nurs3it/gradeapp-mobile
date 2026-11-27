@@ -16,6 +16,8 @@ enum G {
   static let ink3 = color(0x5D6779, 0x8B96A8)
   static let primarySoft = color(0xE6EFFD, 0x132545)
   static let warn = color(0x975400, 0xFFB547)
+  static let ok = color(0x0B7A47, 0x4CCB88)
+  static let bad = color(0xC42127, 0xFF7B7B)
   static let brand = Color(UIColor(hex: 0x0A5BD8))
   static let onFill = Color.white
   /// Brand blue readable on the dark Live Activity surface.
