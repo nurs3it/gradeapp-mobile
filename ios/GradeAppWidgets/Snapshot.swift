@@ -2,7 +2,8 @@ import Foundation
 import WidgetKit
 
 /// What the app wrote for the widgets (lib/features/platform/widget_snapshot.dart,
-/// schema v1). Everything is decided there; this file only reads it and
+/// schema v2 — v1 plus `children`; a v1 file decodes with `children == nil`).
+/// Everything is decided there; this file only reads it and
 /// answers «what is on at time T» — it never invents a lesson.
 struct Snapshot: Decodable {
   struct Lesson: Decodable, Hashable {
@@ -27,6 +28,17 @@ struct Snapshot: Decodable {
     let items: [Item]
   }
 
+  /// W3 «Статус ребёнка»: status text and counts, never a grade value.
+  struct Child: Decodable, Hashable {
+    let id: String
+    let name: String
+    let cls: String
+    let kind: String
+    let text: String
+    let newGrades: Int
+    let gradesText: String
+  }
+
   let v: Int
   let role: String
   let who: String
@@ -36,6 +48,15 @@ struct Snapshot: Decodable {
   let labels: [String: String]
   let days: [Day]
   let homework: Hw
+  let children: [Child]?
+
+  /// The first child (the app puts the selected one first), if any.
+  var firstChild: Child? { children?.first }
+  var isParent: Bool { role == "parent" }
+
+  func childURL(_ c: Child?) -> URL {
+    URL(string: c.map { "gradeapp://app/p/today?child=\($0.id)" } ?? "gradeapp://app/p/today")!
+  }
 
   func label(_ k: String) -> String { labels[k] ?? "" }
 

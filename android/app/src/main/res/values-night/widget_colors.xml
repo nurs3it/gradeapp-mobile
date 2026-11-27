@@ -6,6 +6,9 @@
     <color name="g_ink2">#A3ADBE</color>
     <color name="g_ink3">#8B96A8</color>
     <color name="g_brand">#7AABFF</color>
+    <color name="g_ok">#4CCB88</color>
+    <color name="g_warn">#FFB547</color>
+    <color name="g_bad">#FF7B7B</color>
     <color name="g_subject_0_marker">#9A94FF</color>
     <color name="g_subject_1_marker">#5BD69A</color>
     <color name="g_subject_2_marker">#FF8F5E</color>

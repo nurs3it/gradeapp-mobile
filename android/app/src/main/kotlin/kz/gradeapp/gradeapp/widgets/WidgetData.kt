@@ -8,9 +8,9 @@ import java.util.Locale
 
 /**
  * What the app wrote for the widgets (lib/features/platform/widget_snapshot.dart,
- * schema v1; iOS reads the same JSON in ios/GradeAppWidgets/Snapshot.swift).
- * The widgets only answer «what is on at time T» from it and never invent a
- * lesson.
+ * schema v2 — v1 plus `children`; a v1 file reads as «no children». iOS reads
+ * the same JSON in ios/GradeAppWidgets/Snapshot.swift). The widgets only
+ * answer «what is on at time T» from it and never invent a lesson.
  */
 class Slot(
     val id: String,
@@ -23,6 +23,17 @@ class Slot(
     val date: String,
     val starts: Long,
     val ends: Long,
+)
+
+/** One child of the parent widget «Статус ребёнка» (W3): status text and counts only. */
+class ChildEntry(
+    val id: String,
+    val name: String,
+    val cls: String,
+    val kind: String,
+    val text: String,
+    val newGrades: Int,
+    val gradesText: String,
 )
 
 class WidgetData(private val json: JSONObject) {
@@ -59,6 +70,28 @@ class WidgetData(private val json: JSONObject) {
         }
         out.sortedBy { it.starts }
     }
+
+    val children: List<ChildEntry> by lazy {
+        val out = ArrayList<ChildEntry>()
+        val arr = json.optJSONArray("children") ?: return@lazy out
+        for (i in 0 until arr.length()) {
+            val c = arr.optJSONObject(i) ?: continue
+            out.add(
+                ChildEntry(
+                    c.optString("id"), c.optString("name"), c.optString("cls"), c.optString("kind"),
+                    c.optString("text"), c.optInt("newGrades"), c.optString("gradesText"),
+                ),
+            )
+        }
+        out
+    }
+
+    /** The configured child, else the first (the app puts the selected one first). */
+    fun child(id: String?): ChildEntry? = children.firstOrNull { it.id == id } ?: children.firstOrNull()
+
+    /** Where a tap on a child goes: that child's «Сегодня». */
+    fun childUri(c: ChildEntry?): String =
+        if (c == null) "gradeapp://app/p/today" else "gradeapp://app/p/today?child=${c.id}"
 
     val homeworkCount: Int get() = hw?.optJSONArray("items")?.length() ?: 0
     val homeworkMinutes: Int get() = hw?.optInt("minutes") ?: 0
