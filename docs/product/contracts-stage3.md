@@ -84,3 +84,11 @@
 - **P10:** `GET /engagement/events/?pinned=1`, `?date_from=&date_to=`, `POST /engagement/events/{id}/read/`.
 - **T8:** `GET /classes/mine/` (таб только при `is_homeroom`), `GET /attendance/check-ins/?class_group=&date=`, `GET /attendance/day_marks/?class_group_id=&date=`, `POST /attendance/mark_day/`, `GET /excuses/pending/`, `POST /excuses/{id}/approve/`, `POST /excuses/{id}/reject/ {review_note}`, `GET /classes/{id}/overview/`, `GET /attendance/statistics/?class_group_id=&date_from=&date_to=` (`per_student`).
 - **T12:** `GET /homework/{id}/completions/`, `POST /homework/{id}/remind/` (429 `reminder_too_soon`).
+
+## Поправки после юридической проверки
+
+- **Пуши без персональных данных.** Тексты `digest.weekly` и `consent.requested` без имени ребёнка и вывода: «Недельная сводка готова. Откройте приложение, чтобы посмотреть.», «У вас новый запрос от ребёнка. Откройте приложение.» (ru/kk/en). Подробности только внутри приложения. В payload — `student_id`, `week`, код, без текста.
+- **Родитель может отключить серии своему ребёнку.** Поле `Student.streaks_disabled` (BooleanField, default `False`). `POST /students/{id}/streaks/settings/ {enabled: bool}` — только родитель этого ребёнка, ответ — объект GET. При отключении GET отдаёт `{"enabled": false, "disabled_by_parent": true}` (ребёнку и родителю). Флаг школы выключен — `{"enabled": false, "disabled_by_parent": false}`.
+- **Карточка «Твоя неделя»** по умолчанию без оценок, имени, фото и школы: дни вовремя, закрытые ДЗ, веха. Оценки — только явным переключателем с предупреждением «В карточке будут оценки. Поделившись ей, вы сделаете их видимыми другим людям.» Шаринг только через системное меню.
+- **Серии:** без давления («сгорит», «не подведи» — нельзя), без пуш-напоминаний про серию. Текст: «Болеешь — оставайся дома: заявка серию не прерывает.»
+- **Оплата (P8):** PDF называется «Счёт на оплату» с подписью «Информационный документ, не является фискальным чеком». Перед переходом: «Вы оплачиваете обучение напрямую школе «{название}», БИН {БИН}. Сумма: {сумма} ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.» После возврата из Kaspi — «Проверяем оплату», пока сервер не вернёт `paid` / `partially_paid`; клиент сам статус не ставит.
