@@ -23,6 +23,7 @@ class LessonRow extends StatelessWidget {
     this.twoLineTime = false,
     this.secondLine,
     this.semanticLabel,
+    this.substitutionNote,
   });
 
   final Lesson lesson;
@@ -42,6 +43,10 @@ class LessonRow extends StatelessWidget {
   final String? secondLine;
   final String? semanticLabel;
 
+  /// T9: «за Иванов» under a substituted lesson. Defaults to the course
+  /// teacher's name; null hides it.
+  final String? substitutionNote;
+
   @override
   Widget build(BuildContext context) {
     final c = context.c;
@@ -50,13 +55,21 @@ class LessonRow extends StatelessWidget {
     final current = lesson.isNow(now) && !lesson.isCancelled;
     final past = lesson.isPast(now);
     final timeStyle = t.callout.copyWith(fontWeight: FontWeight.w600, color: past ? c.ink3 : c.ink);
-    final sub = subtitle ?? [if (lesson.room != null) l.room(lesson.room!), ?lesson.teacherName].join(' · ');
+    final baseSub = subtitle ?? [if (lesson.room != null) l.room(lesson.room!), ?lesson.teacherName].join(' · ');
+    final note = lesson.isSubstitution
+        ? (substitutionNote ?? (lesson.courseTeacherName == null ? null : l.t9ForTeacher(lesson.courseTeacherName!)))
+        : null;
+    final sub = [baseSub, ?note].where((x) => x.isNotEmpty).join(' · ');
     return GRow(
       onTap: onTap,
       onLongPress: onLongPress,
       semanticLabel: semanticLabel,
       minHeight: twoLineTime ? 72 : GSpace.rowMin,
-      background: current ? c.subjectTint(lesson.colorKey) : null,
+      background: current
+          ? c.subjectTint(lesson.colorKey)
+          : lesson.isSubstitution && !lesson.isCancelled
+          ? c.warnSoft
+          : null,
       leading: SizedBox(
         width: 48,
         child: twoLineTime
@@ -94,6 +107,11 @@ class LessonRow extends StatelessWidget {
               ? GStatusPill(label: l.pillCancelled, tone: GTone.warn, icon: GIcons.excuse)
               : current
               ? GStatusPill(label: l.pillNow, tone: GTone.info)
+              : lesson.isSubstitution
+              ? Tooltip(
+                  message: note ?? l.t9Substitution,
+                  child: GStatusPill(label: l.t9Substitution, tone: GTone.warn, icon: GIcons.swap),
+                )
               : lesson.isJoint
               ? GStatusPill(label: l.pillJoint, tone: GTone.neutral)
               : null),
