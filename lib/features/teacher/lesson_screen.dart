@@ -16,6 +16,7 @@ import '../platform/lesson_link.dart';
 import '../platform/lesson_live.dart';
 import '../platform/reminders.dart';
 import '../shell/header.dart';
+import 'feedback_quick.dart';
 import 'grade_pad.dart';
 import 'lesson_sheets.dart';
 import 'sync_sheet.dart';
@@ -487,56 +488,76 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
       rows.add(
         KeyedSubtree(
           key: _rowKeys.putIfAbsent(s.id, GlobalKey.new),
-          child: _StudentRow(
-            student: s,
-            cell: cell,
-            lesson: lesson,
-            grading: grading,
-            readOnly: readOnly || locked,
-            gradeMode: locked
-                ? _GradeMode.locked
-                : scale <= 5
-                ? _GradeMode.inline
-                : scale <= 10
-                ? _GradeMode.pad
-                : _GradeMode.view,
-            highlighted: _padOpen && index == _padIndex,
-            selecting: _selected.isNotEmpty,
-            selected: _selected.contains(s.id),
-            inlineOpen: _inline == s.id,
-            onTap: () {
-              if (_selected.isNotEmpty) {
-                setState(() => _selected.contains(s.id) ? _selected.remove(s.id) : _selected.add(s.id));
-                return;
-              }
-              _toggle(s, cell, grading);
-            },
-            onLongPress: () => _codes(s, cell, grading),
-            onSelect: scale <= 10 && scale > 5
-                ? () {
-                    GHaptics.medium();
-                    setState(() {
-                      _selected.add(s.id);
-                      _padOpen = true;
-                    });
-                  }
-                : null,
-            onGradeSlot: () {
-              if (scale <= 5) {
-                GHaptics.selection();
-                setState(() => _inline = _inline == s.id ? null : s.id);
-              } else {
-                _openPad(index, ordered);
-              }
-            },
-            onInlinePick: (v) {
-              GHaptics.medium();
-              unawaited(_ensureStarted());
-              unawaited(
-                _actions.grade(s.id, cell.grade == v ? null : v, type: type, scaleMax: grading.max, name: s.name),
-              );
-              setState(() => _inline = null);
-            },
+          child: SwipeActions(
+            enabled: _selected.isEmpty && !_padOpen,
+            actions: [
+              SwipeAction(
+                label: l.t6Praise,
+                icon: GIcons.ok,
+                tone: GTone.ok,
+                onTap: () => unawaited(showQuickFeedbackSheet(context, student: s, actions: _actions, positive: true)),
+              ),
+              SwipeAction(
+                label: l.t6Remark,
+                icon: GIcons.info,
+                tone: GTone.warn,
+                onTap: () => unawaited(showQuickFeedbackSheet(context, student: s, actions: _actions, positive: false)),
+              ),
+            ],
+            child: _StudentRow(
+              student: s,
+              cell: cell,
+              lesson: lesson,
+              grading: grading,
+              readOnly: readOnly || locked,
+              gradeMode: locked
+                  ? _GradeMode.locked
+                  : scale <= 5
+                  ? _GradeMode.inline
+                  : scale <= 10
+                  ? _GradeMode.pad
+                  : _GradeMode.view,
+              highlighted: _padOpen && index == _padIndex,
+              selecting: _selected.isNotEmpty,
+              selected: _selected.contains(s.id),
+              inlineOpen: _inline == s.id,
+              onTap: () {
+                if (_selected.isNotEmpty) {
+                  setState(() => _selected.contains(s.id) ? _selected.remove(s.id) : _selected.add(s.id));
+                  return;
+                }
+                _toggle(s, cell, grading);
+              },
+              onLongPress: () => _codes(s, cell, grading),
+              onSelect: scale <= 10 && scale > 5
+                  ? () {
+                      GHaptics.medium();
+                      setState(() {
+                        _selected.add(s.id);
+                        _padOpen = true;
+                      });
+                    }
+                  : null,
+              onGradeSlot: () {
+                if (scale <= 5) {
+                  GHaptics.selection();
+                  setState(() => _inline = _inline == s.id ? null : s.id);
+                } else {
+                  _openPad(index, ordered);
+                }
+              },
+              onInlinePick: (v) {
+                GHaptics.medium();
+                unawaited(_ensureStarted());
+                unawaited(
+                  _actions.grade(s.id, cell.grade == v ? null : v, type: type, scaleMax: grading.max, name: s.name),
+                );
+                setState(() => _inline = null);
+              },
+              onPraise: () => unawaited(showQuickFeedbackSheet(context, student: s, actions: _actions, positive: true)),
+              onRemark: () =>
+                  unawaited(showQuickFeedbackSheet(context, student: s, actions: _actions, positive: false)),
+            ),
           ),
         ),
       );
@@ -1004,6 +1025,8 @@ class _StudentRow extends StatelessWidget {
     required this.onGradeSlot,
     required this.onInlinePick,
     this.onSelect,
+    this.onPraise,
+    this.onRemark,
   });
 
   final RosterStudent student;
@@ -1021,6 +1044,10 @@ class _StudentRow extends StatelessWidget {
   final VoidCallback onGradeSlot;
   final ValueChanged<num> onInlinePick;
   final VoidCallback? onSelect;
+
+  /// T6: quick feedback, also offered as screen-reader actions.
+  final VoidCallback? onPraise;
+  final VoidCallback? onRemark;
 
   @override
   Widget build(BuildContext context) {
@@ -1073,7 +1100,11 @@ class _StudentRow extends StatelessWidget {
       hint: readOnly ? null : (absent ? l.rowAbsentHint : l.rowPresentHint),
       button: !readOnly,
       onTap: readOnly ? null : onTap,
-      customSemanticsActions: readOnly ? null : {CustomSemanticsAction(label: l.actionCodes): onLongPress},
+      customSemanticsActions: {
+        if (!readOnly) CustomSemanticsAction(label: l.actionCodes): onLongPress,
+        CustomSemanticsAction(label: l.t6Praise): ?onPraise,
+        CustomSemanticsAction(label: l.t6Remark): ?onRemark,
+      },
       excludeSemantics: !inlineOpen, // open inline chips stay reachable
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,

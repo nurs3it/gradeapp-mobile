@@ -12,6 +12,8 @@ import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import 'feedback_quick.dart';
+import 'homework_completions.dart';
 import 'homework_upload.dart';
 import 'teacher_models.dart';
 import 'teacher_providers.dart';
@@ -385,6 +387,7 @@ class _HomeworkFormState extends ConsumerState<_HomeworkForm> {
                   tone: GTone.info,
                   icon: GIcons.homework,
                 ),
+                for (final h in existing) HomeworkCompletionsCard(key: ValueKey('done-${h.id}'), homework: h),
               ],
               const SizedBox(height: 16),
               if (previous != null && _text.text.isEmpty) ...[
@@ -614,93 +617,12 @@ Future<bool> showSummarySheet(
   return true;
 }
 
-/// Feedback to one student from the lesson: a few words, optionally marked
-/// as praise or a remark. Goes through the queue like the rest.
+/// Feedback to one student from the lesson (long press): praise or remark
+/// with template tags and optional words. Goes through the queue like the rest.
 Future<void> showFeedbackSheet(BuildContext context, {required RosterStudent student, required LessonActions actions}) {
   return showGSheet<void>(
     context,
     title: context.l10n.feedbackSheetTitle(student.name),
-    builder: (_) => _FeedbackForm(student: student, actions: actions),
+    builder: (_) => FeedbackForm(student: student, actions: actions),
   );
-}
-
-class _FeedbackForm extends ConsumerStatefulWidget {
-  const _FeedbackForm({required this.student, required this.actions});
-  final RosterStudent student;
-  final LessonActions actions;
-
-  @override
-  ConsumerState<_FeedbackForm> createState() => _FeedbackFormState();
-}
-
-class _FeedbackFormState extends ConsumerState<_FeedbackForm> {
-  final _text = TextEditingController();
-  String? _tone;
-
-  @override
-  void dispose() {
-    _text.dispose();
-    super.dispose();
-  }
-
-  Future<void> _send() async {
-    final text = _text.text.trim();
-    if (text.isEmpty) return;
-    final toast = context.l10n.feedbackSent(
-      widget.student.firstName.isEmpty ? widget.student.name : widget.student.firstName,
-    );
-    final nav = Navigator.of(context);
-    final host = nav.context;
-    await widget.actions.feedback(widget.student.id, text, tone: _tone, name: widget.student.name);
-    GHaptics.success();
-    ref.read(analyticsProvider).track(AnalyticsEvents.feedbackSent);
-    nav.pop();
-    if (host.mounted) GToast.show(host, toast, bottomOffset: 100);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GField(
-            controller: _text,
-            hint: l.feedbackHint,
-            maxLines: 5,
-            minLines: 3,
-            autofocus: true,
-            textCapitalization: TextCapitalization.sentences,
-            onChanged: (_) => setState(() {}),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            children: [
-              GChip(
-                label: l.feedbackPraise,
-                selected: _tone == 'positive',
-                onTap: () => setState(() => _tone = _tone == 'positive' ? null : 'positive'),
-              ),
-              GChip(
-                label: l.feedbackRemark,
-                selected: _tone == 'negative',
-                onTap: () => setState(() => _tone = _tone == 'negative' ? null : 'negative'),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          GButton(
-            label: l.feedbackSend,
-            size: GButtonSize.l,
-            expand: true,
-            onPressed: _text.text.trim().isEmpty ? null : () => unawaited(_send()),
-          ),
-        ],
-      ),
-    );
-  }
 }

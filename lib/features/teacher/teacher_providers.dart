@@ -5,6 +5,7 @@ import '../../core/offline/outbox.dart';
 import '../../core/providers.dart';
 import '../auth/auth_controller.dart';
 import '../common/models.dart';
+import 'feedback_quick.dart' show feedbackTags;
 import 'homework_upload.dart';
 import 'teacher_models.dart';
 
@@ -388,19 +389,21 @@ class LessonActions {
   );
 
   /// Feedback to one student from the lesson; [tone] is `positive`,
-  /// `negative` or null (plain).
-  Future<void> feedback(String studentId, String text, {String? tone, String name = ''}) => _outbox.add(
+  /// `negative` or null (plain), [templates] the chosen template tags (T6).
+  /// The text may be empty when there is a tone.
+  Future<void> feedback(
+    String studentId,
+    String text, {
+    String? tone,
+    Iterable<String> templates = const [],
+    String name = '',
+  }) => _outbox.add(
     OutboxItem(
       key: 'fb:${lesson.id}:$studentId:${DateTime.now().microsecondsSinceEpoch}',
       method: 'POST',
       path: '/feedback/',
       label: _label('feedback', student: name),
-      data: {
-        'to_student': studentId,
-        'text': text,
-        'tags': [?tone],
-        'date': lesson.date,
-      },
+      data: {'to_student': studentId, 'text': text, 'tags': feedbackTags(tone, templates), 'date': lesson.date},
     ),
   );
 
