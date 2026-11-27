@@ -10,12 +10,30 @@ import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../auth/auth_controller.dart';
 import '../auth/user.dart';
+import '../common/school_providers.dart';
 import '../platform/lesson_live.dart';
 import '../platform/reminders.dart';
 import 'push.dart';
 
 /// C6: which groups come as a push. Optimistic, rolled back on error; the
 /// phone-level switch is checked again when the app returns from settings.
+/// Weekly digest settings (B3): `notification_prefs.digest` with its defaults.
+typedef DigestPrefs = ({bool push, String day, int hour});
+
+DigestPrefs digestPrefsOf(Json prefs) {
+  final d = (prefs['digest'] as Json?) ?? const {};
+  final day = d['day'];
+  final hour = d['hour'];
+  return (
+    push: d['push'] != false,
+    day: day == 'sun' ? 'sun' : 'fri',
+    hour: hour is int && hour >= 0 && hour < 24 ? hour : 18,
+  );
+}
+
+/// Hours a parent can pick for the digest.
+const digestHours = [16, 17, 18, 19, 20, 21];
+
 class NotificationSettingsScreen extends ConsumerStatefulWidget {
   const NotificationSettingsScreen({super.key});
 
@@ -78,6 +96,7 @@ class _State extends ConsumerState<NotificationSettingsScreen> {
       PushGroup.attendance,
       PushGroup.chat,
       if (role == AppRole.parent) PushGroup.billing,
+      if (role == AppRole.parent && ref.watch(mobileFlagsProvider).weeklyDigestEnabled) PushGroup.digest,
     ];
     final off = _status == AuthorizationStatus.denied;
     final ask = _status == AuthorizationStatus.notDetermined && Push.enabled;
@@ -120,9 +139,102 @@ class _State extends ConsumerState<NotificationSettingsScreen> {
                       ),
                   ],
                 ),
+                if (groups.contains(PushGroup.digest)) _DigestOptions(user: user, enabled: !off),
                 if (role == AppRole.teacher) const _LocalSwitches(),
               ],
             ),
+    );
+  }
+}
+
+/// Day and hour of the weekly digest (P6), saved into `notification_prefs.digest`.
+class _DigestOptions extends ConsumerStatefulWidget {
+  const _DigestOptions({required this.user, required this.enabled});
+  final AppUser user;
+  final bool enabled;
+
+  @override
+  ConsumerState<_DigestOptions> createState() => _DigestOptionsState();
+}
+
+class _DigestOptionsState extends ConsumerState<_DigestOptions> {
+  DigestPrefs? _local;
+
+  Future<void> _save(DigestPrefs next) async {
+    final before = _local ?? digestPrefsOf(widget.user.notificationPrefs);
+    setState(() => _local = next);
+    final prefs = {
+      ...widget.user.notificationPrefs,
+      'digest': {
+        ...?(widget.user.notificationPrefs['digest'] as Json?),
+        'push': next.push,
+        'day': next.day,
+        'hour': next.hour,
+      },
+    };
+    try {
+      await ref.read(dioProvider).patch<void>('/users/me/', data: {'notification_prefs': prefs});
+      await ref.read(authProvider.notifier).refreshMe();
+    } catch (_) {
+      if (mounted) {
+        setState(() => _local = before);
+        GToast.show(context, context.l10n.errorGeneric, icon: GIcons.error);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final p = _local ?? digestPrefsOf(widget.user.notificationPrefs);
+    if (!p.push) return const SizedBox.shrink();
+    final l = context.l10n;
+    final c = context.c;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 20, 4, 10),
+          child: Text(l.p6DigestWhen, style: context.t.callout.copyWith(color: c.ink2)),
+        ),
+        GSegmented<String>(
+          values: const ['fri', 'sun'],
+          labels: [l.p6DayFri, l.p6DaySun],
+          selected: p.day,
+          onChanged: (d) => _save((push: p.push, day: d, hour: p.hour)),
+        ),
+        const SizedBox(height: 10),
+        GGroup(
+          children: [
+            GRow(
+              minHeight: GSpace.rowCompact,
+              title: Text(l.p6DigestHour),
+              trailing: Text('${p.hour.toString().padLeft(2, '0')}:00', style: context.t.callout.copyWith(color: c.ink2)),
+              chevron: true,
+              onTap: () => showGSheet<void>(
+                context,
+                title: l.p6DigestHour,
+                builder: (ctx) => Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+                  child: GGroup(
+                    children: [
+                      for (final h in digestHours)
+                        GRow(
+                          minHeight: GSpace.rowCompact,
+                          title: Text('${h.toString().padLeft(2, '0')}:00'),
+                          trailing: h == p.hour ? const GIcon(GIcons.check, size: 22, color: GColors.brand) : null,
+                          onTap: () {
+                            Navigator.of(ctx).pop();
+                            unawaited(_save((push: p.push, day: p.day, hour: h)));
+                          },
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

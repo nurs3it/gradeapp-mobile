@@ -3830,6 +3830,1086 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Дальше'**
   String get wgNextShort;
+
+  /// No description provided for @s7Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Прогноз'**
+  String get s7Title;
+
+  /// No description provided for @s7Now.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сейчас'**
+  String get s7Now;
+
+  /// No description provided for @s7NowLine.
+  ///
+  /// In ru, this message translates to:
+  /// **'{pct} % · отметка {mark}'**
+  String s7NowLine(String pct, String mark);
+
+  /// No description provided for @s7NextWork.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ближайшая работа: {title}, {date}'**
+  String s7NextWork(String title, String date);
+
+  /// No description provided for @s7MaxScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Максимум баллов за работу'**
+  String get s7MaxScore;
+
+  /// No description provided for @s7Less.
+  ///
+  /// In ru, this message translates to:
+  /// **'Меньше баллов'**
+  String get s7Less;
+
+  /// No description provided for @s7More.
+  ///
+  /// In ru, this message translates to:
+  /// **'Больше баллов'**
+  String get s7More;
+
+  /// No description provided for @s7Need.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы выйти на {mark}, нужно на {kind} набрать не меньше {need} из {max}'**
+  String s7Need(String mark, String kind, int need, int max);
+
+  /// No description provided for @s7NoStep.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эта работа оценку уже не поднимет, но она всё равно важна: пусть получится как можно лучше.'**
+  String get s7NoStep;
+
+  /// No description provided for @s7Top.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сейчас у вас самая высокая отметка. Так держать!'**
+  String get s7Top;
+
+  /// No description provided for @s7IfIGet.
+  ///
+  /// In ru, this message translates to:
+  /// **'Если получу на {kind} {score} из {max}'**
+  String s7IfIGet(String kind, int score, int max);
+
+  /// No description provided for @s7Result.
+  ///
+  /// In ru, this message translates to:
+  /// **'Четвертная: {mark} ({pct} %)'**
+  String s7Result(String mark, String pct);
+
+  /// No description provided for @s7Disclaimer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это примерный расчёт по формуле школы. Итог поставит учитель.'**
+  String get s7Disclaimer;
+
+  /// No description provided for @s7Hidden.
+  ///
+  /// In ru, this message translates to:
+  /// **'Прогноз пока недоступен'**
+  String get s7Hidden;
+
+  /// No description provided for @s7HiddenFormula.
+  ///
+  /// In ru, this message translates to:
+  /// **'Формула школы ещё не загрузилась. Попробуйте позже.'**
+  String get s7HiddenFormula;
+
+  /// No description provided for @s7HiddenFew.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нужно хотя бы {count} оценённые работы, чтобы прогноз был честным.'**
+  String s7HiddenFew(int count);
+
+  /// No description provided for @s10Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серии и достижения'**
+  String get s10Title;
+
+  /// No description provided for @s10Unavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серии в вашей школе не включены.'**
+  String get s10Unavailable;
+
+  /// No description provided for @s10ParentOff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серии отключили родители. Это нормально, на учёбу это не влияет.'**
+  String get s10ParentOff;
+
+  /// No description provided for @s10CardStart.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серия вовремя: начните с сегодняшнего дня'**
+  String get s10CardStart;
+
+  /// No description provided for @s10CardCheckin.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} день вовремя} few{{count} дня вовремя} other{{count} дней вовремя}}'**
+  String s10CardCheckin(int count);
+
+  /// No description provided for @s10CardHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{ДЗ в срок: {count} день} few{ДЗ в срок: {count} дня} other{ДЗ в срок: {count} дней}}'**
+  String s10CardHomework(int count);
+
+  /// No description provided for @s10Days.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} день} few{{count} дня} other{{count} дней}}'**
+  String s10Days(int count);
+
+  /// No description provided for @s10DaysShort.
+  ///
+  /// In ru, this message translates to:
+  /// **'дн.'**
+  String get s10DaysShort;
+
+  /// No description provided for @s10Best.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лучшая: {count}'**
+  String s10Best(int count);
+
+  /// No description provided for @s10FreezesLeft.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{осталась {count} заморозка} few{осталось {count} заморозки} other{осталось {count} заморозок}}'**
+  String s10FreezesLeft(int count);
+
+  /// No description provided for @s10KindCheckin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вовремя в школе'**
+  String get s10KindCheckin;
+
+  /// No description provided for @s10KindHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'ДЗ в срок'**
+  String get s10KindHomework;
+
+  /// No description provided for @s10TodayDoneCheckin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня отмечено'**
+  String get s10TodayDoneCheckin;
+
+  /// No description provided for @s10TodayDoneHomework.
+  ///
+  /// In ru, this message translates to:
+  /// **'На сегодня всё сдано в срок'**
+  String get s10TodayDoneHomework;
+
+  /// No description provided for @s10TodayPending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня ещё можно успеть'**
+  String get s10TodayPending;
+
+  /// No description provided for @s10TodayFrozen.
+  ///
+  /// In ru, this message translates to:
+  /// **'День заморожен: серия сохранена'**
+  String get s10TodayFrozen;
+
+  /// No description provided for @s10TodayExcused.
+  ///
+  /// In ru, this message translates to:
+  /// **'Есть заявка: серия на паузе'**
+  String get s10TodayExcused;
+
+  /// No description provided for @s10TodayOff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня не учебный день'**
+  String get s10TodayOff;
+
+  /// No description provided for @s10ExcusedTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявка принята.'**
+  String get s10ExcusedTitle;
+
+  /// No description provided for @s10ExcusedBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серия не прерывается и не растёт: просто ждёт вас.'**
+  String get s10ExcusedBody;
+
+  /// No description provided for @s10Milestones.
+  ///
+  /// In ru, this message translates to:
+  /// **'Страницы знака'**
+  String get s10Milestones;
+
+  /// No description provided for @s10MilestoneReached.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days, plural, other{Достигнуто: {days} дней}}'**
+  String s10MilestoneReached(int days);
+
+  /// No description provided for @s10MilestoneAhead.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days, plural, other{Впереди: {days} дней}}'**
+  String s10MilestoneAhead(int days);
+
+  /// No description provided for @s10MilestoneToday.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days, plural, other{{days} дней вовремя: раскрылась ещё одна страница}}'**
+  String s10MilestoneToday(int days);
+
+  /// No description provided for @s10Missed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропущенные дни'**
+  String get s10Missed;
+
+  /// No description provided for @s10MissedHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заморозка возвращает день в серию. Её можно использовать в течение суток.'**
+  String get s10MissedHint;
+
+  /// No description provided for @s10Freeze.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заморозить'**
+  String get s10Freeze;
+
+  /// No description provided for @s10Frozen.
+  ///
+  /// In ru, this message translates to:
+  /// **'День заморожен'**
+  String get s10Frozen;
+
+  /// No description provided for @s10FreezeExpired.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время для заморозки вышло'**
+  String get s10FreezeExpired;
+
+  /// No description provided for @s10NoFreezes.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заморозки на эту четверть закончились'**
+  String get s10NoFreezes;
+
+  /// No description provided for @s10SickNote.
+  ///
+  /// In ru, this message translates to:
+  /// **'Болеешь — оставайся дома: заявка серию не прерывает.'**
+  String get s10SickNote;
+
+  /// No description provided for @s10ParentSwitch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серии и достижения'**
+  String get s10ParentSwitch;
+
+  /// No description provided for @s10ParentExplain.
+  ///
+  /// In ru, this message translates to:
+  /// **'Приложение отмечает, пришёл ли ученик вовремя и сдал ли ДЗ. Это видно ученику и родителям, не видно другим ученикам и сотрудникам. Заявка по болезни серию не прерывает.'**
+  String get s10ParentExplain;
+
+  /// No description provided for @s11Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Твоя неделя'**
+  String get s11Title;
+
+  /// No description provided for @s11DaysOnTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'дней вовремя'**
+  String get s11DaysOnTime;
+
+  /// No description provided for @s11Homework.
+  ///
+  /// In ru, this message translates to:
+  /// **'ДЗ сдано'**
+  String get s11Homework;
+
+  /// No description provided for @s11Milestone.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days, plural, other{{days} дней вовремя: новая страница}}'**
+  String s11Milestone(int days);
+
+  /// No description provided for @s11WithMarks.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показать оценки в картинке'**
+  String get s11WithMarks;
+
+  /// No description provided for @s11MarksWarning.
+  ///
+  /// In ru, this message translates to:
+  /// **'В карточке будут оценки. Поделившись ей, вы сделаете их видимыми другим людям.'**
+  String get s11MarksWarning;
+
+  /// No description provided for @s11Save.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить картинкой'**
+  String get s11Save;
+
+  /// No description provided for @p5Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Посещаемость'**
+  String get p5Title;
+
+  /// No description provided for @p5RowHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Календарь, пропуски и причины'**
+  String get p5RowHint;
+
+  /// No description provided for @p5Quarter.
+  ///
+  /// In ru, this message translates to:
+  /// **'Посещаемость · {name}'**
+  String p5Quarter(String name);
+
+  /// No description provided for @p5CountAbsent.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} пропуск} few{{count} пропуска} other{{count} пропусков}}'**
+  String p5CountAbsent(int count);
+
+  /// No description provided for @p5CountTardy.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} опоздание} few{{count} опоздания} other{{count} опозданий}}'**
+  String p5CountTardy(int count);
+
+  /// No description provided for @p5CountExcused.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} по заявке} few{{count} по заявке} other{{count} по заявкам}}'**
+  String p5CountExcused(int count);
+
+  /// No description provided for @p5NoMisses.
+  ///
+  /// In ru, this message translates to:
+  /// **'Без пропусков'**
+  String get p5NoMisses;
+
+  /// No description provided for @p5PrevMonth.
+  ///
+  /// In ru, this message translates to:
+  /// **'Предыдущий месяц'**
+  String get p5PrevMonth;
+
+  /// No description provided for @p5NextMonth.
+  ///
+  /// In ru, this message translates to:
+  /// **'Следующий месяц'**
+  String get p5NextMonth;
+
+  /// No description provided for @p5Present.
+  ///
+  /// In ru, this message translates to:
+  /// **'Был'**
+  String get p5Present;
+
+  /// No description provided for @p5Tardy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Опоздание'**
+  String get p5Tardy;
+
+  /// No description provided for @p5Absent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропуск'**
+  String get p5Absent;
+
+  /// No description provided for @p5Excused.
+  ///
+  /// In ru, this message translates to:
+  /// **'По заявке'**
+  String get p5Excused;
+
+  /// No description provided for @p5NoLessons.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уроков нет'**
+  String get p5NoLessons;
+
+  /// No description provided for @p5Absences.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропуски месяца'**
+  String get p5Absences;
+
+  /// No description provided for @p5NoReason.
+  ///
+  /// In ru, this message translates to:
+  /// **'причина не указана'**
+  String get p5NoReason;
+
+  /// No description provided for @p6Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итоги недели'**
+  String get p6Title;
+
+  /// No description provided for @p6OpenSummary.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подробнее'**
+  String get p6OpenSummary;
+
+  /// No description provided for @p6PrevWeek.
+  ///
+  /// In ru, this message translates to:
+  /// **'Предыдущая неделя'**
+  String get p6PrevWeek;
+
+  /// No description provided for @p6NextWeek.
+  ///
+  /// In ru, this message translates to:
+  /// **'Следующая неделя'**
+  String get p6NextWeek;
+
+  /// No description provided for @p6WeekOf.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя {range}'**
+  String p6WeekOf(String range);
+
+  /// No description provided for @p6EmptyTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Учебных дней не было'**
+  String get p6EmptyTitle;
+
+  /// No description provided for @p6EmptyBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'На этой неделе сводки нет: каникулы или выходные.'**
+  String get p6EmptyBody;
+
+  /// No description provided for @p6VerdictEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'На этой неделе уроков не было.'**
+  String get p6VerdictEmpty;
+
+  /// No description provided for @p6VerdictGreat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отличная неделя: все дни вовремя, задания сданы.'**
+  String get p6VerdictGreat;
+
+  /// No description provided for @p6VerdictSteady.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя прошла ровно.'**
+  String get p6VerdictSteady;
+
+  /// No description provided for @p6VerdictAbsences.
+  ///
+  /// In ru, this message translates to:
+  /// **'Есть пропуск без причины: его можно объяснить.'**
+  String get p6VerdictAbsences;
+
+  /// No description provided for @p6VerdictOverdue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Есть задания, которые пока не сданы.'**
+  String get p6VerdictOverdue;
+
+  /// No description provided for @p6VerdictDip.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя ровная, просела отметка по предмету «{course}».'**
+  String p6VerdictDip(String course);
+
+  /// No description provided for @p6VerdictDipPlain.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя ровная, по одному предмету отметка просела.'**
+  String get p6VerdictDipPlain;
+
+  /// No description provided for @p6Attendance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Посещаемость'**
+  String get p6Attendance;
+
+  /// No description provided for @p6DaysOnTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дней вовремя'**
+  String get p6DaysOnTime;
+
+  /// No description provided for @p6OfDays.
+  ///
+  /// In ru, this message translates to:
+  /// **'{ontime} из {days}'**
+  String p6OfDays(int ontime, int days);
+
+  /// No description provided for @p6Tardy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Опоздания'**
+  String get p6Tardy;
+
+  /// No description provided for @p6Absent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропуски без причины'**
+  String get p6Absent;
+
+  /// No description provided for @p6Excused.
+  ///
+  /// In ru, this message translates to:
+  /// **'По заявке'**
+  String get p6Excused;
+
+  /// No description provided for @p6Grades.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оценки по предметам'**
+  String get p6Grades;
+
+  /// No description provided for @p6GradesCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} оценка} few{{count} оценки} other{{count} оценок}}'**
+  String p6GradesCount(int count);
+
+  /// No description provided for @p6Avg.
+  ///
+  /// In ru, this message translates to:
+  /// **'средняя {value}'**
+  String p6Avg(String value);
+
+  /// No description provided for @p6Up.
+  ///
+  /// In ru, this message translates to:
+  /// **'выше на {delta}'**
+  String p6Up(String delta);
+
+  /// No description provided for @p6Down.
+  ///
+  /// In ru, this message translates to:
+  /// **'ниже на {delta}'**
+  String p6Down(String delta);
+
+  /// No description provided for @p6Same.
+  ///
+  /// In ru, this message translates to:
+  /// **'без изменений'**
+  String get p6Same;
+
+  /// No description provided for @p6Homework.
+  ///
+  /// In ru, this message translates to:
+  /// **'Домашние задания'**
+  String get p6Homework;
+
+  /// No description provided for @p6HwDone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сдано'**
+  String get p6HwDone;
+
+  /// No description provided for @p6OfTotal.
+  ///
+  /// In ru, this message translates to:
+  /// **'{done} из {total}'**
+  String p6OfTotal(int done, int total);
+
+  /// No description provided for @p6HwOverdue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не сдано в срок'**
+  String get p6HwOverdue;
+
+  /// No description provided for @p6Feedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзывы учителей'**
+  String get p6Feedback;
+
+  /// No description provided for @p6Praise.
+  ///
+  /// In ru, this message translates to:
+  /// **'Похвала'**
+  String get p6Praise;
+
+  /// No description provided for @p6Remark.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замечание'**
+  String get p6Remark;
+
+  /// No description provided for @p6Upcoming.
+  ///
+  /// In ru, this message translates to:
+  /// **'На следующей неделе'**
+  String get p6Upcoming;
+
+  /// No description provided for @p6TodayCard.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итоги недели'**
+  String get p6TodayCard;
+
+  /// No description provided for @p6TodayCardHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Как прошла неделя и о чём поговорить'**
+  String get p6TodayCardHint;
+
+  /// No description provided for @p6DigestWhen.
+  ///
+  /// In ru, this message translates to:
+  /// **'Когда присылать итоги недели'**
+  String get p6DigestWhen;
+
+  /// No description provided for @p6DayFri.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пятница'**
+  String get p6DayFri;
+
+  /// No description provided for @p6DaySun.
+  ///
+  /// In ru, this message translates to:
+  /// **'Воскресенье'**
+  String get p6DaySun;
+
+  /// No description provided for @p6DigestHour.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время отправки'**
+  String get p6DigestHour;
+
+  /// No description provided for @ngDigest.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итоги недели'**
+  String get ngDigest;
+
+  /// No description provided for @ntDigest.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итоги недели'**
+  String get ntDigest;
+
+  /// No description provided for @ntConsentRequested.
+  ///
+  /// In ru, this message translates to:
+  /// **'Запрос от ребёнка'**
+  String get ntConsentRequested;
+
+  /// No description provided for @p7Ask.
+  ///
+  /// In ru, this message translates to:
+  /// **'Попросить родителя'**
+  String get p7Ask;
+
+  /// No description provided for @p7Sent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мы отправили запрос родителю.'**
+  String get p7Sent;
+
+  /// No description provided for @p7TooSoon.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы уже просили. Попробуйте завтра.'**
+  String get p7TooSoon;
+
+  /// No description provided for @p7AlreadyGranted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Родитель уже разрешил. Обновите экран.'**
+  String get p7AlreadyGranted;
+
+  /// No description provided for @p8Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Счета и оплата'**
+  String get p8Title;
+
+  /// No description provided for @p8ToPay.
+  ///
+  /// In ru, this message translates to:
+  /// **'К оплате'**
+  String get p8ToPay;
+
+  /// No description provided for @p8History.
+  ///
+  /// In ru, this message translates to:
+  /// **'История'**
+  String get p8History;
+
+  /// No description provided for @p8Empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Счетов пока нет'**
+  String get p8Empty;
+
+  /// No description provided for @p8EmptyHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Здесь появятся счета за обучение.'**
+  String get p8EmptyHint;
+
+  /// No description provided for @p8InvoiceNo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Счёт № {number}'**
+  String p8InvoiceNo(String number);
+
+  /// No description provided for @p8DueDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'до {date}'**
+  String p8DueDate(String date);
+
+  /// No description provided for @p8PaidSoFar.
+  ///
+  /// In ru, this message translates to:
+  /// **'оплачено {amount} ₸'**
+  String p8PaidSoFar(String amount);
+
+  /// No description provided for @p8PayableSemantic.
+  ///
+  /// In ru, this message translates to:
+  /// **'К оплате {amount} тенге, {due}'**
+  String p8PayableSemantic(String amount, String due);
+
+  /// No description provided for @p8StatusSent.
+  ///
+  /// In ru, this message translates to:
+  /// **'К оплате'**
+  String get p8StatusSent;
+
+  /// No description provided for @p8StatusPartial.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплачен частично'**
+  String get p8StatusPartial;
+
+  /// No description provided for @p8StatusPaid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплачен'**
+  String get p8StatusPaid;
+
+  /// No description provided for @p8StatusOverdue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Просрочен'**
+  String get p8StatusOverdue;
+
+  /// No description provided for @p8StatusCancelled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменён'**
+  String get p8StatusCancelled;
+
+  /// No description provided for @p8Pay.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплатить'**
+  String get p8Pay;
+
+  /// No description provided for @p8PayFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось открыть оплату. Попробуйте ещё раз.'**
+  String get p8PayFailed;
+
+  /// No description provided for @p8PayUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Онлайн-оплата у школы сейчас недоступна.'**
+  String get p8PayUnavailable;
+
+  /// No description provided for @p8ConfirmTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перед оплатой'**
+  String get p8ConfirmTitle;
+
+  /// No description provided for @p8Confirm.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы оплачиваете обучение напрямую школе «{name}», БИН {bin}. Сумма: {amount} ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.'**
+  String p8Confirm(String name, String bin, String amount);
+
+  /// No description provided for @p8ConfirmNoBin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы оплачиваете обучение напрямую школе «{name}». Сумма: {amount} ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.'**
+  String p8ConfirmNoBin(String name, String amount);
+
+  /// No description provided for @p8ConfirmGo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перейти к оплате'**
+  String get p8ConfirmGo;
+
+  /// No description provided for @p8Checking.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проверяем оплату'**
+  String get p8Checking;
+
+  /// No description provided for @p8CheckingHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обычно это занимает меньше минуты.'**
+  String get p8CheckingHint;
+
+  /// No description provided for @p8Arrived.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата получена. Спасибо!'**
+  String get p8Arrived;
+
+  /// No description provided for @p8Delayed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Платёж пока не виден.'**
+  String get p8Delayed;
+
+  /// No description provided for @p8DelayedHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Банк иногда подтверждает оплату дольше. Если деньги уже списаны, платить повторно не нужно: статус обновится сам.'**
+  String get p8DelayedHint;
+
+  /// No description provided for @p8CheckNow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проверить'**
+  String get p8CheckNow;
+
+  /// No description provided for @p8OnlineOff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Онлайн-оплаты нет.'**
+  String get p8OnlineOff;
+
+  /// No description provided for @p8OnlineOffHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплатите переводом по реквизитам ниже.'**
+  String get p8OnlineOffHint;
+
+  /// No description provided for @p8Payments.
+  ///
+  /// In ru, this message translates to:
+  /// **'Платежи'**
+  String get p8Payments;
+
+  /// No description provided for @p8MethodCash.
+  ///
+  /// In ru, this message translates to:
+  /// **'Наличные'**
+  String get p8MethodCash;
+
+  /// No description provided for @p8MethodTransfer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перевод'**
+  String get p8MethodTransfer;
+
+  /// No description provided for @p8HowToPay.
+  ///
+  /// In ru, this message translates to:
+  /// **'Как оплатить переводом'**
+  String get p8HowToPay;
+
+  /// No description provided for @p8ReqRecipient.
+  ///
+  /// In ru, this message translates to:
+  /// **'Получатель'**
+  String get p8ReqRecipient;
+
+  /// No description provided for @p8ReqBin.
+  ///
+  /// In ru, this message translates to:
+  /// **'БИН'**
+  String get p8ReqBin;
+
+  /// No description provided for @p8ReqBank.
+  ///
+  /// In ru, this message translates to:
+  /// **'Банк'**
+  String get p8ReqBank;
+
+  /// No description provided for @p8ReqBik.
+  ///
+  /// In ru, this message translates to:
+  /// **'БИК'**
+  String get p8ReqBik;
+
+  /// No description provided for @p8ReqKbe.
+  ///
+  /// In ru, this message translates to:
+  /// **'КБе'**
+  String get p8ReqKbe;
+
+  /// No description provided for @p8ReqKnp.
+  ///
+  /// In ru, this message translates to:
+  /// **'КНП'**
+  String get p8ReqKnp;
+
+  /// No description provided for @p8ReqPurpose.
+  ///
+  /// In ru, this message translates to:
+  /// **'Назначение платежа'**
+  String get p8ReqPurpose;
+
+  /// No description provided for @p8PurposeValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата за обучение, счёт № {number}'**
+  String p8PurposeValue(String number);
+
+  /// No description provided for @p8Copy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Скопировать'**
+  String get p8Copy;
+
+  /// No description provided for @p8Copied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Скопировано'**
+  String get p8Copied;
+
+  /// No description provided for @p8Document.
+  ///
+  /// In ru, this message translates to:
+  /// **'Документ'**
+  String get p8Document;
+
+  /// No description provided for @p8PdfTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Счёт на оплату'**
+  String get p8PdfTitle;
+
+  /// No description provided for @p8PdfCaption.
+  ///
+  /// In ru, this message translates to:
+  /// **'Информационный документ, не является фискальным чеком'**
+  String get p8PdfCaption;
+
+  /// No description provided for @p8PdfFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось получить документ.'**
+  String get p8PdfFailed;
+
+  /// No description provided for @p9Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Учителя'**
+  String get p9Title;
+
+  /// No description provided for @p9Homeroom.
+  ///
+  /// In ru, this message translates to:
+  /// **'Классный руководитель'**
+  String get p9Homeroom;
+
+  /// No description provided for @p9Write.
+  ///
+  /// In ru, this message translates to:
+  /// **'Написать'**
+  String get p9Write;
+
+  /// No description provided for @p9WriteTo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Написать: {name}'**
+  String p9WriteTo(String name);
+
+  /// No description provided for @p9AllTeachers.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{Все учителя ({count})} few{Все учителя ({count})} other{Все учителя ({count})}}'**
+  String p9AllTeachers(int count);
+
+  /// No description provided for @p9Empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Список учителей пока пуст'**
+  String get p9Empty;
+
+  /// No description provided for @p10Pinned.
+  ///
+  /// In ru, this message translates to:
+  /// **'Объявление'**
+  String get p10Pinned;
+
+  /// No description provided for @p10PinnedMany.
+  ///
+  /// In ru, this message translates to:
+  /// **'{title} и ещё {more}'**
+  String p10PinnedMany(String title, int more);
+
+  /// No description provided for @p10Expand.
+  ///
+  /// In ru, this message translates to:
+  /// **'Развернуть'**
+  String get p10Expand;
+
+  /// No description provided for @p10Collapse.
+  ///
+  /// In ru, this message translates to:
+  /// **'Свернуть'**
+  String get p10Collapse;
+
+  /// No description provided for @p10AllEvents.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все события'**
+  String get p10AllEvents;
+
+  /// No description provided for @p10Events.
+  ///
+  /// In ru, this message translates to:
+  /// **'События школы'**
+  String get p10Events;
+
+  /// No description provided for @p10EventsEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ближайших событий нет'**
+  String get p10EventsEmpty;
+
+  /// No description provided for @p10EventsEmptyHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Здесь появятся события на ближайшие недели.'**
+  String get p10EventsEmptyHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

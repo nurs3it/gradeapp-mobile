@@ -2211,4 +2211,658 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wgNextShort => 'Next';
+
+  @override
+  String get s7Title => 'Forecast';
+
+  @override
+  String get s7Now => 'Now';
+
+  @override
+  String s7NowLine(String pct, String mark) {
+    return '$pct% · mark $mark';
+  }
+
+  @override
+  String s7NextWork(String title, String date) {
+    return 'Next up: $title, $date';
+  }
+
+  @override
+  String get s7MaxScore => 'Maximum points for the work';
+
+  @override
+  String get s7Less => 'Fewer points';
+
+  @override
+  String get s7More => 'More points';
+
+  @override
+  String s7Need(String mark, String kind, int need, int max) {
+    return 'To reach $mark, you need at least $need of $max on the $kind';
+  }
+
+  @override
+  String get s7NoStep => 'This work will not change the mark, but it still counts: just do your best.';
+
+  @override
+  String get s7Top => 'You have the top mark right now. Keep it up!';
+
+  @override
+  String s7IfIGet(String kind, int score, int max) {
+    return 'If I get $score of $max on the $kind';
+  }
+
+  @override
+  String s7Result(String mark, String pct) {
+    return 'Quarter: $mark ($pct%)';
+  }
+
+  @override
+  String get s7Disclaimer => 'This is an estimate by the school formula. The teacher sets the final mark.';
+
+  @override
+  String get s7Hidden => 'No forecast yet';
+
+  @override
+  String get s7HiddenFormula => 'The school formula has not loaded yet. Please try again later.';
+
+  @override
+  String s7HiddenFew(int count) {
+    return 'At least $count graded works are needed for a fair forecast.';
+  }
+
+  @override
+  String get s10Title => 'Streaks and milestones';
+
+  @override
+  String get s10Unavailable => 'Streaks are not turned on at your school.';
+
+  @override
+  String get s10ParentOff => 'Your parents turned streaks off. That is fine and does not affect school.';
+
+  @override
+  String get s10CardStart => 'On-time streak: start today';
+
+  @override
+  String s10CardCheckin(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days on time',
+      one: '$count day on time',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s10CardHomework(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Homework on time: $count days',
+      one: 'Homework on time: $count day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s10Days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count days', one: '$count day');
+    return '$_temp0';
+  }
+
+  @override
+  String get s10DaysShort => 'days';
+
+  @override
+  String s10Best(int count) {
+    return 'Best: $count';
+  }
+
+  @override
+  String s10FreezesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count freezes left',
+      one: '$count freeze left',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get s10KindCheckin => 'On time at school';
+
+  @override
+  String get s10KindHomework => 'Homework on time';
+
+  @override
+  String get s10TodayDoneCheckin => 'Done today';
+
+  @override
+  String get s10TodayDoneHomework => 'Everything for today is in on time';
+
+  @override
+  String get s10TodayPending => 'Still time today';
+
+  @override
+  String get s10TodayFrozen => 'Day frozen: the streak is kept';
+
+  @override
+  String get s10TodayExcused => 'Request approved: streak is paused';
+
+  @override
+  String get s10TodayOff => 'Not a school day today';
+
+  @override
+  String get s10ExcusedTitle => 'Request approved.';
+
+  @override
+  String get s10ExcusedBody => 'Your streak does not break or grow: it simply waits for you.';
+
+  @override
+  String get s10Milestones => 'Pages of the mark';
+
+  @override
+  String s10MilestoneReached(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Reached: $days days');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneAhead(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Ahead: $days days');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneToday(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days days on time: another page opened');
+    return '$_temp0';
+  }
+
+  @override
+  String get s10Missed => 'Missed days';
+
+  @override
+  String get s10MissedHint => 'A freeze puts the day back into your streak. You can use it within a day.';
+
+  @override
+  String get s10Freeze => 'Freeze';
+
+  @override
+  String get s10Frozen => 'Day frozen';
+
+  @override
+  String get s10FreezeExpired => 'The time to freeze this day has passed';
+
+  @override
+  String get s10NoFreezes => 'No freezes left this quarter';
+
+  @override
+  String get s10SickNote => 'Sick? Stay home: an excuse request does not break your streak.';
+
+  @override
+  String get s10ParentSwitch => 'Streaks and milestones';
+
+  @override
+  String get s10ParentExplain =>
+      'The app notes whether the student arrived on time and handed in homework on time. This is visible to the student and parents, not to other students or staff. A sick-leave request does not break the streak.';
+
+  @override
+  String get s11Title => 'Your week';
+
+  @override
+  String get s11DaysOnTime => 'days on time';
+
+  @override
+  String get s11Homework => 'homework done';
+
+  @override
+  String s11Milestone(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days days on time: a new page');
+    return '$_temp0';
+  }
+
+  @override
+  String get s11WithMarks => 'Show marks in the picture';
+
+  @override
+  String get s11MarksWarning => 'Marks will be on the card. By sharing it, you make them visible to other people.';
+
+  @override
+  String get s11Save => 'Save as picture';
+
+  @override
+  String get p5Title => 'Attendance';
+
+  @override
+  String get p5RowHint => 'Calendar, absences and reasons';
+
+  @override
+  String p5Quarter(String name) {
+    return 'Attendance · $name';
+  }
+
+  @override
+  String p5CountAbsent(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count absences', one: '$count absence');
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountTardy(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count late arrivals',
+      one: '$count late arrival',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountExcused(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count excused', one: '$count excused');
+    return '$_temp0';
+  }
+
+  @override
+  String get p5NoMisses => 'No absences';
+
+  @override
+  String get p5PrevMonth => 'Previous month';
+
+  @override
+  String get p5NextMonth => 'Next month';
+
+  @override
+  String get p5Present => 'Present';
+
+  @override
+  String get p5Tardy => 'Late';
+
+  @override
+  String get p5Absent => 'Absent';
+
+  @override
+  String get p5Excused => 'Excused';
+
+  @override
+  String get p5NoLessons => 'No lessons';
+
+  @override
+  String get p5Absences => 'Absences this month';
+
+  @override
+  String get p5NoReason => 'no reason given';
+
+  @override
+  String get p6Title => 'Weekly summary';
+
+  @override
+  String get p6OpenSummary => 'Details';
+
+  @override
+  String get p6PrevWeek => 'Previous week';
+
+  @override
+  String get p6NextWeek => 'Next week';
+
+  @override
+  String p6WeekOf(String range) {
+    return 'Week $range';
+  }
+
+  @override
+  String get p6EmptyTitle => 'No school days';
+
+  @override
+  String get p6EmptyBody => 'No summary for this week: holidays or time off.';
+
+  @override
+  String get p6VerdictEmpty => 'There were no lessons this week.';
+
+  @override
+  String get p6VerdictGreat => 'A great week: on time every day, homework handed in.';
+
+  @override
+  String get p6VerdictSteady => 'A steady week.';
+
+  @override
+  String get p6VerdictAbsences => 'There is an unexplained absence: it can be explained.';
+
+  @override
+  String get p6VerdictOverdue => 'Some homework is still not handed in.';
+
+  @override
+  String p6VerdictDip(String course) {
+    return 'A steady week, the mark in “$course” dipped.';
+  }
+
+  @override
+  String get p6VerdictDipPlain => 'A steady week, one subject dipped.';
+
+  @override
+  String get p6Attendance => 'Attendance';
+
+  @override
+  String get p6DaysOnTime => 'Days on time';
+
+  @override
+  String p6OfDays(int ontime, int days) {
+    return '$ontime of $days';
+  }
+
+  @override
+  String get p6Tardy => 'Late arrivals';
+
+  @override
+  String get p6Absent => 'Unexplained absences';
+
+  @override
+  String get p6Excused => 'Excused';
+
+  @override
+  String get p6Grades => 'Marks by subject';
+
+  @override
+  String p6GradesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count marks', one: '$count mark');
+    return '$_temp0';
+  }
+
+  @override
+  String p6Avg(String value) {
+    return 'average $value';
+  }
+
+  @override
+  String p6Up(String delta) {
+    return 'up by $delta';
+  }
+
+  @override
+  String p6Down(String delta) {
+    return 'down by $delta';
+  }
+
+  @override
+  String get p6Same => 'unchanged';
+
+  @override
+  String get p6Homework => 'Homework';
+
+  @override
+  String get p6HwDone => 'Handed in';
+
+  @override
+  String p6OfTotal(int done, int total) {
+    return '$done of $total';
+  }
+
+  @override
+  String get p6HwOverdue => 'Not handed in on time';
+
+  @override
+  String get p6Feedback => 'Teacher feedback';
+
+  @override
+  String get p6Praise => 'Praise';
+
+  @override
+  String get p6Remark => 'Remark';
+
+  @override
+  String get p6Upcoming => 'Coming up';
+
+  @override
+  String get p6TodayCard => 'Weekly summary';
+
+  @override
+  String get p6TodayCardHint => 'How the week went and what to talk about';
+
+  @override
+  String get p6DigestWhen => 'When to send the weekly summary';
+
+  @override
+  String get p6DayFri => 'Friday';
+
+  @override
+  String get p6DaySun => 'Sunday';
+
+  @override
+  String get p6DigestHour => 'Time';
+
+  @override
+  String get ngDigest => 'Weekly summary';
+
+  @override
+  String get ntDigest => 'Weekly summary';
+
+  @override
+  String get ntConsentRequested => 'Request from your child';
+
+  @override
+  String get p7Ask => 'Ask a parent';
+
+  @override
+  String get p7Sent => 'We sent the request to your parent.';
+
+  @override
+  String get p7TooSoon => 'You have already asked. Try again tomorrow.';
+
+  @override
+  String get p7AlreadyGranted => 'Your parent has already allowed it. Refresh the screen.';
+
+  @override
+  String get p8Title => 'Invoices and payment';
+
+  @override
+  String get p8ToPay => 'To pay';
+
+  @override
+  String get p8History => 'History';
+
+  @override
+  String get p8Empty => 'No invoices yet';
+
+  @override
+  String get p8EmptyHint => 'Tuition invoices will appear here.';
+
+  @override
+  String p8InvoiceNo(String number) {
+    return 'Invoice no. $number';
+  }
+
+  @override
+  String p8DueDate(String date) {
+    return 'due $date';
+  }
+
+  @override
+  String p8PaidSoFar(String amount) {
+    return 'paid $amount ₸';
+  }
+
+  @override
+  String p8PayableSemantic(String amount, String due) {
+    return 'To pay $amount tenge, $due';
+  }
+
+  @override
+  String get p8StatusSent => 'To pay';
+
+  @override
+  String get p8StatusPartial => 'Partly paid';
+
+  @override
+  String get p8StatusPaid => 'Paid';
+
+  @override
+  String get p8StatusOverdue => 'Overdue';
+
+  @override
+  String get p8StatusCancelled => 'Cancelled';
+
+  @override
+  String get p8Pay => 'Pay';
+
+  @override
+  String get p8PayFailed => 'Could not open the payment. Please try again.';
+
+  @override
+  String get p8PayUnavailable => 'Online payment is not available at this school.';
+
+  @override
+  String get p8ConfirmTitle => 'Before you pay';
+
+  @override
+  String p8Confirm(String name, String bin, String amount) {
+    return 'You are paying for tuition directly to the school “$name”, BIN $bin. Amount: $amount ₸. GradeApp does not receive or transfer money. The fiscal receipt is issued by the school or the payment service.';
+  }
+
+  @override
+  String p8ConfirmNoBin(String name, String amount) {
+    return 'You are paying for tuition directly to the school “$name”. Amount: $amount ₸. GradeApp does not receive or transfer money. The fiscal receipt is issued by the school or the payment service.';
+  }
+
+  @override
+  String get p8ConfirmGo => 'Go to payment';
+
+  @override
+  String get p8Checking => 'Checking the payment';
+
+  @override
+  String get p8CheckingHint => 'This usually takes less than a minute.';
+
+  @override
+  String get p8Arrived => 'Payment received. Thank you!';
+
+  @override
+  String get p8Delayed => 'The payment is not visible yet.';
+
+  @override
+  String get p8DelayedHint =>
+      'The bank sometimes confirms later. If the money was already charged, do not pay again: the status will update by itself.';
+
+  @override
+  String get p8CheckNow => 'Check';
+
+  @override
+  String get p8OnlineOff => 'No online payment.';
+
+  @override
+  String get p8OnlineOffHint => 'Pay by bank transfer using the details below.';
+
+  @override
+  String get p8Payments => 'Payments';
+
+  @override
+  String get p8MethodCash => 'Cash';
+
+  @override
+  String get p8MethodTransfer => 'Transfer';
+
+  @override
+  String get p8HowToPay => 'How to pay by transfer';
+
+  @override
+  String get p8ReqRecipient => 'Recipient';
+
+  @override
+  String get p8ReqBin => 'BIN';
+
+  @override
+  String get p8ReqBank => 'Bank';
+
+  @override
+  String get p8ReqBik => 'BIC';
+
+  @override
+  String get p8ReqKbe => 'KBe';
+
+  @override
+  String get p8ReqKnp => 'KNP';
+
+  @override
+  String get p8ReqPurpose => 'Payment purpose';
+
+  @override
+  String p8PurposeValue(String number) {
+    return 'Tuition payment, invoice no. $number';
+  }
+
+  @override
+  String get p8Copy => 'Copy';
+
+  @override
+  String get p8Copied => 'Copied';
+
+  @override
+  String get p8Document => 'Document';
+
+  @override
+  String get p8PdfTitle => 'Invoice for payment';
+
+  @override
+  String get p8PdfCaption => 'Informational document, not a fiscal receipt';
+
+  @override
+  String get p8PdfFailed => 'Could not get the document.';
+
+  @override
+  String get p9Title => 'Teachers';
+
+  @override
+  String get p9Homeroom => 'Homeroom teacher';
+
+  @override
+  String get p9Write => 'Write';
+
+  @override
+  String p9WriteTo(String name) {
+    return 'Write to $name';
+  }
+
+  @override
+  String p9AllTeachers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'All teachers ($count)',
+      one: 'All teachers ($count)',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get p9Empty => 'No teachers listed yet';
+
+  @override
+  String get p10Pinned => 'Announcement';
+
+  @override
+  String p10PinnedMany(String title, int more) {
+    return '$title and $more more';
+  }
+
+  @override
+  String get p10Expand => 'Expand';
+
+  @override
+  String get p10Collapse => 'Collapse';
+
+  @override
+  String get p10AllEvents => 'All events';
+
+  @override
+  String get p10Events => 'School events';
+
+  @override
+  String get p10EventsEmpty => 'No upcoming events';
+
+  @override
+  String get p10EventsEmptyHint => 'Events for the coming weeks will appear here.';
 }

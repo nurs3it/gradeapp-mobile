@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../core/api/api_client.dart';
 import '../common/models.dart';
 import '../learner/learner_providers.dart';
+import '../learner/streaks.dart';
 import '../../core/analytics.dart';
 
 enum CheckInPhase { idle, sending, failed, done }
@@ -92,7 +93,9 @@ class CheckInController extends Notifier<CheckInRun> {
       );
       state = state.copy(phase: CheckInPhase.done, progress: 1, at: DateTime.now());
       ref.read(analyticsProvider).track(AnalyticsEvents.checkinSuccess);
-      ref.invalidate(learnerDayProvider);
+      ref
+        ..invalidate(learnerDayProvider)
+        ..invalidate(streaksProvider);
       return true;
     } catch (e) {
       final err = checkInError(e);

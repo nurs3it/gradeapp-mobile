@@ -33,6 +33,7 @@ void main() {
       'attendance',
       'chat',
       'billing',
+      'digest',
       'general',
     ]);
   });

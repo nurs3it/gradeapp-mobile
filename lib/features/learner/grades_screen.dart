@@ -17,6 +17,7 @@ import 'learner_providers.dart';
 import 'report_card.dart';
 import 'seen.dart';
 import 'feedback.dart';
+import 'forecast.dart';
 
 /// Quarter picked in «Оценки» (null = the current one).
 class SelectedTerm extends Notifier<String?> {
@@ -624,6 +625,7 @@ class SubjectScreen extends ConsumerWidget {
                     onPressed: () => showFormulaSheet(context, ref),
                   ),
                 ),
+                ForecastBlock(summary: s),
                 GSectionTitle(
                   title: l.works,
                   trailing: Text(l.newestFirst, style: t.footnote.copyWith(color: c.ink2)),

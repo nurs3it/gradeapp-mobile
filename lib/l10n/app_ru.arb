@@ -1704,5 +1704,489 @@
   "setReminders": "Напоминания об отметке посещаемости",
   "setLive": "«Идёт урок» на экране блокировки",
   "ntCheckInMissing": "Не отметился в школе",
-  "wgNextShort": "Дальше"
+  "wgNextShort": "Дальше",
+  "s7Title": "Прогноз",
+  "s7Now": "Сейчас",
+  "s7NowLine": "{pct} % · отметка {mark}",
+  "@s7NowLine": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "mark": {
+        "type": "String"
+      }
+    }
+  },
+  "s7NextWork": "Ближайшая работа: {title}, {date}",
+  "@s7NextWork": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "s7MaxScore": "Максимум баллов за работу",
+  "s7Less": "Меньше баллов",
+  "s7More": "Больше баллов",
+  "s7Need": "Чтобы выйти на {mark}, нужно на {kind} набрать не меньше {need} из {max}",
+  "@s7Need": {
+    "placeholders": {
+      "mark": {
+        "type": "String"
+      },
+      "kind": {
+        "type": "String"
+      },
+      "need": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "s7NoStep": "Эта работа оценку уже не поднимет, но она всё равно важна: пусть получится как можно лучше.",
+  "s7Top": "Сейчас у вас самая высокая отметка. Так держать!",
+  "s7IfIGet": "Если получу на {kind} {score} из {max}",
+  "@s7IfIGet": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "s7Result": "Четвертная: {mark} ({pct} %)",
+  "@s7Result": {
+    "placeholders": {
+      "mark": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "s7Disclaimer": "Это примерный расчёт по формуле школы. Итог поставит учитель.",
+  "s7Hidden": "Прогноз пока недоступен",
+  "s7HiddenFormula": "Формула школы ещё не загрузилась. Попробуйте позже.",
+  "s7HiddenFew": "Нужно хотя бы {count} оценённые работы, чтобы прогноз был честным.",
+  "@s7HiddenFew": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10Title": "Серии и достижения",
+  "s10Unavailable": "Серии в вашей школе не включены.",
+  "s10ParentOff": "Серии отключили родители. Это нормально, на учёбу это не влияет.",
+  "s10CardStart": "Серия вовремя: начните с сегодняшнего дня",
+  "s10CardCheckin": "{count, plural, one{{count} день вовремя} few{{count} дня вовремя} other{{count} дней вовремя}}",
+  "@s10CardCheckin": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10CardHomework": "{count, plural, one{ДЗ в срок: {count} день} few{ДЗ в срок: {count} дня} other{ДЗ в срок: {count} дней}}",
+  "@s10CardHomework": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10Days": "{count, plural, one{{count} день} few{{count} дня} other{{count} дней}}",
+  "@s10Days": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10DaysShort": "дн.",
+  "s10Best": "Лучшая: {count}",
+  "@s10Best": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10FreezesLeft": "{count, plural, one{осталась {count} заморозка} few{осталось {count} заморозки} other{осталось {count} заморозок}}",
+  "@s10FreezesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "s10KindCheckin": "Вовремя в школе",
+  "s10KindHomework": "ДЗ в срок",
+  "s10TodayDoneCheckin": "Сегодня отмечено",
+  "s10TodayDoneHomework": "На сегодня всё сдано в срок",
+  "s10TodayPending": "Сегодня ещё можно успеть",
+  "s10TodayFrozen": "День заморожен: серия сохранена",
+  "s10TodayExcused": "Есть заявка: серия на паузе",
+  "s10TodayOff": "Сегодня не учебный день",
+  "s10ExcusedTitle": "Заявка принята.",
+  "s10ExcusedBody": "Серия не прерывается и не растёт: просто ждёт вас.",
+  "s10Milestones": "Страницы знака",
+  "s10MilestoneReached": "{days, plural, other{Достигнуто: {days} дней}}",
+  "@s10MilestoneReached": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "s10MilestoneAhead": "{days, plural, other{Впереди: {days} дней}}",
+  "@s10MilestoneAhead": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "s10MilestoneToday": "{days, plural, other{{days} дней вовремя: раскрылась ещё одна страница}}",
+  "@s10MilestoneToday": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "s10Missed": "Пропущенные дни",
+  "s10MissedHint": "Заморозка возвращает день в серию. Её можно использовать в течение суток.",
+  "s10Freeze": "Заморозить",
+  "s10Frozen": "День заморожен",
+  "s10FreezeExpired": "Время для заморозки вышло",
+  "s10NoFreezes": "Заморозки на эту четверть закончились",
+  "s10SickNote": "Болеешь — оставайся дома: заявка серию не прерывает.",
+  "s10ParentSwitch": "Серии и достижения",
+  "s10ParentExplain": "Приложение отмечает, пришёл ли ученик вовремя и сдал ли ДЗ. Это видно ученику и родителям, не видно другим ученикам и сотрудникам. Заявка по болезни серию не прерывает.",
+  "s11Title": "Твоя неделя",
+  "s11DaysOnTime": "дней вовремя",
+  "s11Homework": "ДЗ сдано",
+  "s11Milestone": "{days, plural, other{{days} дней вовремя: новая страница}}",
+  "@s11Milestone": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "s11WithMarks": "Показать оценки в картинке",
+  "s11MarksWarning": "В карточке будут оценки. Поделившись ей, вы сделаете их видимыми другим людям.",
+  "s11Save": "Сохранить картинкой",
+  "p5Title": "Посещаемость",
+  "p5RowHint": "Календарь, пропуски и причины",
+  "p5Quarter": "Посещаемость · {name}",
+  "@p5Quarter": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "p5CountAbsent": "{count, plural, one{{count} пропуск} few{{count} пропуска} other{{count} пропусков}}",
+  "@p5CountAbsent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "p5CountTardy": "{count, plural, one{{count} опоздание} few{{count} опоздания} other{{count} опозданий}}",
+  "@p5CountTardy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "p5CountExcused": "{count, plural, one{{count} по заявке} few{{count} по заявке} other{{count} по заявкам}}",
+  "@p5CountExcused": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "p5NoMisses": "Без пропусков",
+  "p5PrevMonth": "Предыдущий месяц",
+  "p5NextMonth": "Следующий месяц",
+  "p5Present": "Был",
+  "p5Tardy": "Опоздание",
+  "p5Absent": "Пропуск",
+  "p5Excused": "По заявке",
+  "p5NoLessons": "Уроков нет",
+  "p5Absences": "Пропуски месяца",
+  "p5NoReason": "причина не указана",
+  "p6Title": "Итоги недели",
+  "p6OpenSummary": "Подробнее",
+  "p6PrevWeek": "Предыдущая неделя",
+  "p6NextWeek": "Следующая неделя",
+  "p6WeekOf": "Неделя {range}",
+  "@p6WeekOf": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "p6EmptyTitle": "Учебных дней не было",
+  "p6EmptyBody": "На этой неделе сводки нет: каникулы или выходные.",
+  "p6VerdictEmpty": "На этой неделе уроков не было.",
+  "p6VerdictGreat": "Отличная неделя: все дни вовремя, задания сданы.",
+  "p6VerdictSteady": "Неделя прошла ровно.",
+  "p6VerdictAbsences": "Есть пропуск без причины: его можно объяснить.",
+  "p6VerdictOverdue": "Есть задания, которые пока не сданы.",
+  "p6VerdictDip": "Неделя ровная, просела отметка по предмету «{course}».",
+  "@p6VerdictDip": {
+    "placeholders": {
+      "course": {
+        "type": "String"
+      }
+    }
+  },
+  "p6VerdictDipPlain": "Неделя ровная, по одному предмету отметка просела.",
+  "p6Attendance": "Посещаемость",
+  "p6DaysOnTime": "Дней вовремя",
+  "p6OfDays": "{ontime} из {days}",
+  "@p6OfDays": {
+    "placeholders": {
+      "ontime": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "p6Tardy": "Опоздания",
+  "p6Absent": "Пропуски без причины",
+  "p6Excused": "По заявке",
+  "p6Grades": "Оценки по предметам",
+  "p6GradesCount": "{count, plural, one{{count} оценка} few{{count} оценки} other{{count} оценок}}",
+  "@p6GradesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "p6Avg": "средняя {value}",
+  "@p6Avg": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "p6Up": "выше на {delta}",
+  "@p6Up": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "p6Down": "ниже на {delta}",
+  "@p6Down": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "p6Same": "без изменений",
+  "p6Homework": "Домашние задания",
+  "p6HwDone": "Сдано",
+  "p6OfTotal": "{done} из {total}",
+  "@p6OfTotal": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "p6HwOverdue": "Не сдано в срок",
+  "p6Feedback": "Отзывы учителей",
+  "p6Praise": "Похвала",
+  "p6Remark": "Замечание",
+  "p6Upcoming": "На следующей неделе",
+  "p6TodayCard": "Итоги недели",
+  "p6TodayCardHint": "Как прошла неделя и о чём поговорить",
+  "p6DigestWhen": "Когда присылать итоги недели",
+  "p6DayFri": "Пятница",
+  "p6DaySun": "Воскресенье",
+  "p6DigestHour": "Время отправки",
+  "ngDigest": "Итоги недели",
+  "ntDigest": "Итоги недели",
+  "ntConsentRequested": "Запрос от ребёнка",
+  "p7Ask": "Попросить родителя",
+  "p7Sent": "Мы отправили запрос родителю.",
+  "p7TooSoon": "Вы уже просили. Попробуйте завтра.",
+  "p7AlreadyGranted": "Родитель уже разрешил. Обновите экран.",
+  "p8Title": "Счета и оплата",
+  "p8ToPay": "К оплате",
+  "p8History": "История",
+  "p8Empty": "Счетов пока нет",
+  "p8EmptyHint": "Здесь появятся счета за обучение.",
+  "p8InvoiceNo": "Счёт № {number}",
+  "@p8InvoiceNo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "p8DueDate": "до {date}",
+  "@p8DueDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "p8PaidSoFar": "оплачено {amount} ₸",
+  "@p8PaidSoFar": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "p8PayableSemantic": "К оплате {amount} тенге, {due}",
+  "@p8PayableSemantic": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "p8StatusSent": "К оплате",
+  "p8StatusPartial": "Оплачен частично",
+  "p8StatusPaid": "Оплачен",
+  "p8StatusOverdue": "Просрочен",
+  "p8StatusCancelled": "Отменён",
+  "p8Pay": "Оплатить",
+  "p8PayFailed": "Не удалось открыть оплату. Попробуйте ещё раз.",
+  "p8PayUnavailable": "Онлайн-оплата у школы сейчас недоступна.",
+  "p8ConfirmTitle": "Перед оплатой",
+  "p8Confirm": "Вы оплачиваете обучение напрямую школе «{name}», БИН {bin}. Сумма: {amount} ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.",
+  "@p8Confirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "bin": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "p8ConfirmNoBin": "Вы оплачиваете обучение напрямую школе «{name}». Сумма: {amount} ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.",
+  "@p8ConfirmNoBin": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "p8ConfirmGo": "Перейти к оплате",
+  "p8Checking": "Проверяем оплату",
+  "p8CheckingHint": "Обычно это занимает меньше минуты.",
+  "p8Arrived": "Оплата получена. Спасибо!",
+  "p8Delayed": "Платёж пока не виден.",
+  "p8DelayedHint": "Банк иногда подтверждает оплату дольше. Если деньги уже списаны, платить повторно не нужно: статус обновится сам.",
+  "p8CheckNow": "Проверить",
+  "p8OnlineOff": "Онлайн-оплаты нет.",
+  "p8OnlineOffHint": "Оплатите переводом по реквизитам ниже.",
+  "p8Payments": "Платежи",
+  "p8MethodCash": "Наличные",
+  "p8MethodTransfer": "Перевод",
+  "p8HowToPay": "Как оплатить переводом",
+  "p8ReqRecipient": "Получатель",
+  "p8ReqBin": "БИН",
+  "p8ReqBank": "Банк",
+  "p8ReqBik": "БИК",
+  "p8ReqKbe": "КБе",
+  "p8ReqKnp": "КНП",
+  "p8ReqPurpose": "Назначение платежа",
+  "p8PurposeValue": "Оплата за обучение, счёт № {number}",
+  "@p8PurposeValue": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "p8Copy": "Скопировать",
+  "p8Copied": "Скопировано",
+  "p8Document": "Документ",
+  "p8PdfTitle": "Счёт на оплату",
+  "p8PdfCaption": "Информационный документ, не является фискальным чеком",
+  "p8PdfFailed": "Не удалось получить документ.",
+  "p9Title": "Учителя",
+  "p9Homeroom": "Классный руководитель",
+  "p9Write": "Написать",
+  "p9WriteTo": "Написать: {name}",
+  "@p9WriteTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "p9AllTeachers": "{count, plural, one{Все учителя ({count})} few{Все учителя ({count})} other{Все учителя ({count})}}",
+  "@p9AllTeachers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "p9Empty": "Список учителей пока пуст",
+  "p10Pinned": "Объявление",
+  "p10PinnedMany": "{title} и ещё {more}",
+  "@p10PinnedMany": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "more": {
+        "type": "int"
+      }
+    }
+  },
+  "p10Expand": "Развернуть",
+  "p10Collapse": "Свернуть",
+  "p10AllEvents": "Все события",
+  "p10Events": "События школы",
+  "p10EventsEmpty": "Ближайших событий нет",
+  "p10EventsEmptyHint": "Здесь появятся события на ближайшие недели."
 }

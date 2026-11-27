@@ -2258,4 +2258,691 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get wgNextShort => 'Дальше';
+
+  @override
+  String get s7Title => 'Прогноз';
+
+  @override
+  String get s7Now => 'Сейчас';
+
+  @override
+  String s7NowLine(String pct, String mark) {
+    return '$pct % · отметка $mark';
+  }
+
+  @override
+  String s7NextWork(String title, String date) {
+    return 'Ближайшая работа: $title, $date';
+  }
+
+  @override
+  String get s7MaxScore => 'Максимум баллов за работу';
+
+  @override
+  String get s7Less => 'Меньше баллов';
+
+  @override
+  String get s7More => 'Больше баллов';
+
+  @override
+  String s7Need(String mark, String kind, int need, int max) {
+    return 'Чтобы выйти на $mark, нужно на $kind набрать не меньше $need из $max';
+  }
+
+  @override
+  String get s7NoStep => 'Эта работа оценку уже не поднимет, но она всё равно важна: пусть получится как можно лучше.';
+
+  @override
+  String get s7Top => 'Сейчас у вас самая высокая отметка. Так держать!';
+
+  @override
+  String s7IfIGet(String kind, int score, int max) {
+    return 'Если получу на $kind $score из $max';
+  }
+
+  @override
+  String s7Result(String mark, String pct) {
+    return 'Четвертная: $mark ($pct %)';
+  }
+
+  @override
+  String get s7Disclaimer => 'Это примерный расчёт по формуле школы. Итог поставит учитель.';
+
+  @override
+  String get s7Hidden => 'Прогноз пока недоступен';
+
+  @override
+  String get s7HiddenFormula => 'Формула школы ещё не загрузилась. Попробуйте позже.';
+
+  @override
+  String s7HiddenFew(int count) {
+    return 'Нужно хотя бы $count оценённые работы, чтобы прогноз был честным.';
+  }
+
+  @override
+  String get s10Title => 'Серии и достижения';
+
+  @override
+  String get s10Unavailable => 'Серии в вашей школе не включены.';
+
+  @override
+  String get s10ParentOff => 'Серии отключили родители. Это нормально, на учёбу это не влияет.';
+
+  @override
+  String get s10CardStart => 'Серия вовремя: начните с сегодняшнего дня';
+
+  @override
+  String s10CardCheckin(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count дней вовремя',
+      few: '$count дня вовремя',
+      one: '$count день вовремя',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s10CardHomework(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'ДЗ в срок: $count дней',
+      few: 'ДЗ в срок: $count дня',
+      one: 'ДЗ в срок: $count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String s10Days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count дней',
+      few: '$count дня',
+      one: '$count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get s10DaysShort => 'дн.';
+
+  @override
+  String s10Best(int count) {
+    return 'Лучшая: $count';
+  }
+
+  @override
+  String s10FreezesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'осталось $count заморозок',
+      few: 'осталось $count заморозки',
+      one: 'осталась $count заморозка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get s10KindCheckin => 'Вовремя в школе';
+
+  @override
+  String get s10KindHomework => 'ДЗ в срок';
+
+  @override
+  String get s10TodayDoneCheckin => 'Сегодня отмечено';
+
+  @override
+  String get s10TodayDoneHomework => 'На сегодня всё сдано в срок';
+
+  @override
+  String get s10TodayPending => 'Сегодня ещё можно успеть';
+
+  @override
+  String get s10TodayFrozen => 'День заморожен: серия сохранена';
+
+  @override
+  String get s10TodayExcused => 'Есть заявка: серия на паузе';
+
+  @override
+  String get s10TodayOff => 'Сегодня не учебный день';
+
+  @override
+  String get s10ExcusedTitle => 'Заявка принята.';
+
+  @override
+  String get s10ExcusedBody => 'Серия не прерывается и не растёт: просто ждёт вас.';
+
+  @override
+  String get s10Milestones => 'Страницы знака';
+
+  @override
+  String s10MilestoneReached(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Достигнуто: $days дней');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneAhead(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Впереди: $days дней');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneToday(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days дней вовремя: раскрылась ещё одна страница',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get s10Missed => 'Пропущенные дни';
+
+  @override
+  String get s10MissedHint => 'Заморозка возвращает день в серию. Её можно использовать в течение суток.';
+
+  @override
+  String get s10Freeze => 'Заморозить';
+
+  @override
+  String get s10Frozen => 'День заморожен';
+
+  @override
+  String get s10FreezeExpired => 'Время для заморозки вышло';
+
+  @override
+  String get s10NoFreezes => 'Заморозки на эту четверть закончились';
+
+  @override
+  String get s10SickNote => 'Болеешь — оставайся дома: заявка серию не прерывает.';
+
+  @override
+  String get s10ParentSwitch => 'Серии и достижения';
+
+  @override
+  String get s10ParentExplain =>
+      'Приложение отмечает, пришёл ли ученик вовремя и сдал ли ДЗ. Это видно ученику и родителям, не видно другим ученикам и сотрудникам. Заявка по болезни серию не прерывает.';
+
+  @override
+  String get s11Title => 'Твоя неделя';
+
+  @override
+  String get s11DaysOnTime => 'дней вовремя';
+
+  @override
+  String get s11Homework => 'ДЗ сдано';
+
+  @override
+  String s11Milestone(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days дней вовремя: новая страница');
+    return '$_temp0';
+  }
+
+  @override
+  String get s11WithMarks => 'Показать оценки в картинке';
+
+  @override
+  String get s11MarksWarning => 'В карточке будут оценки. Поделившись ей, вы сделаете их видимыми другим людям.';
+
+  @override
+  String get s11Save => 'Сохранить картинкой';
+
+  @override
+  String get p5Title => 'Посещаемость';
+
+  @override
+  String get p5RowHint => 'Календарь, пропуски и причины';
+
+  @override
+  String p5Quarter(String name) {
+    return 'Посещаемость · $name';
+  }
+
+  @override
+  String p5CountAbsent(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count пропусков',
+      few: '$count пропуска',
+      one: '$count пропуск',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountTardy(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count опозданий',
+      few: '$count опоздания',
+      one: '$count опоздание',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountExcused(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count по заявкам',
+      few: '$count по заявке',
+      one: '$count по заявке',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get p5NoMisses => 'Без пропусков';
+
+  @override
+  String get p5PrevMonth => 'Предыдущий месяц';
+
+  @override
+  String get p5NextMonth => 'Следующий месяц';
+
+  @override
+  String get p5Present => 'Был';
+
+  @override
+  String get p5Tardy => 'Опоздание';
+
+  @override
+  String get p5Absent => 'Пропуск';
+
+  @override
+  String get p5Excused => 'По заявке';
+
+  @override
+  String get p5NoLessons => 'Уроков нет';
+
+  @override
+  String get p5Absences => 'Пропуски месяца';
+
+  @override
+  String get p5NoReason => 'причина не указана';
+
+  @override
+  String get p6Title => 'Итоги недели';
+
+  @override
+  String get p6OpenSummary => 'Подробнее';
+
+  @override
+  String get p6PrevWeek => 'Предыдущая неделя';
+
+  @override
+  String get p6NextWeek => 'Следующая неделя';
+
+  @override
+  String p6WeekOf(String range) {
+    return 'Неделя $range';
+  }
+
+  @override
+  String get p6EmptyTitle => 'Учебных дней не было';
+
+  @override
+  String get p6EmptyBody => 'На этой неделе сводки нет: каникулы или выходные.';
+
+  @override
+  String get p6VerdictEmpty => 'На этой неделе уроков не было.';
+
+  @override
+  String get p6VerdictGreat => 'Отличная неделя: все дни вовремя, задания сданы.';
+
+  @override
+  String get p6VerdictSteady => 'Неделя прошла ровно.';
+
+  @override
+  String get p6VerdictAbsences => 'Есть пропуск без причины: его можно объяснить.';
+
+  @override
+  String get p6VerdictOverdue => 'Есть задания, которые пока не сданы.';
+
+  @override
+  String p6VerdictDip(String course) {
+    return 'Неделя ровная, просела отметка по предмету «$course».';
+  }
+
+  @override
+  String get p6VerdictDipPlain => 'Неделя ровная, по одному предмету отметка просела.';
+
+  @override
+  String get p6Attendance => 'Посещаемость';
+
+  @override
+  String get p6DaysOnTime => 'Дней вовремя';
+
+  @override
+  String p6OfDays(int ontime, int days) {
+    return '$ontime из $days';
+  }
+
+  @override
+  String get p6Tardy => 'Опоздания';
+
+  @override
+  String get p6Absent => 'Пропуски без причины';
+
+  @override
+  String get p6Excused => 'По заявке';
+
+  @override
+  String get p6Grades => 'Оценки по предметам';
+
+  @override
+  String p6GradesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count оценок',
+      few: '$count оценки',
+      one: '$count оценка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String p6Avg(String value) {
+    return 'средняя $value';
+  }
+
+  @override
+  String p6Up(String delta) {
+    return 'выше на $delta';
+  }
+
+  @override
+  String p6Down(String delta) {
+    return 'ниже на $delta';
+  }
+
+  @override
+  String get p6Same => 'без изменений';
+
+  @override
+  String get p6Homework => 'Домашние задания';
+
+  @override
+  String get p6HwDone => 'Сдано';
+
+  @override
+  String p6OfTotal(int done, int total) {
+    return '$done из $total';
+  }
+
+  @override
+  String get p6HwOverdue => 'Не сдано в срок';
+
+  @override
+  String get p6Feedback => 'Отзывы учителей';
+
+  @override
+  String get p6Praise => 'Похвала';
+
+  @override
+  String get p6Remark => 'Замечание';
+
+  @override
+  String get p6Upcoming => 'На следующей неделе';
+
+  @override
+  String get p6TodayCard => 'Итоги недели';
+
+  @override
+  String get p6TodayCardHint => 'Как прошла неделя и о чём поговорить';
+
+  @override
+  String get p6DigestWhen => 'Когда присылать итоги недели';
+
+  @override
+  String get p6DayFri => 'Пятница';
+
+  @override
+  String get p6DaySun => 'Воскресенье';
+
+  @override
+  String get p6DigestHour => 'Время отправки';
+
+  @override
+  String get ngDigest => 'Итоги недели';
+
+  @override
+  String get ntDigest => 'Итоги недели';
+
+  @override
+  String get ntConsentRequested => 'Запрос от ребёнка';
+
+  @override
+  String get p7Ask => 'Попросить родителя';
+
+  @override
+  String get p7Sent => 'Мы отправили запрос родителю.';
+
+  @override
+  String get p7TooSoon => 'Вы уже просили. Попробуйте завтра.';
+
+  @override
+  String get p7AlreadyGranted => 'Родитель уже разрешил. Обновите экран.';
+
+  @override
+  String get p8Title => 'Счета и оплата';
+
+  @override
+  String get p8ToPay => 'К оплате';
+
+  @override
+  String get p8History => 'История';
+
+  @override
+  String get p8Empty => 'Счетов пока нет';
+
+  @override
+  String get p8EmptyHint => 'Здесь появятся счета за обучение.';
+
+  @override
+  String p8InvoiceNo(String number) {
+    return 'Счёт № $number';
+  }
+
+  @override
+  String p8DueDate(String date) {
+    return 'до $date';
+  }
+
+  @override
+  String p8PaidSoFar(String amount) {
+    return 'оплачено $amount ₸';
+  }
+
+  @override
+  String p8PayableSemantic(String amount, String due) {
+    return 'К оплате $amount тенге, $due';
+  }
+
+  @override
+  String get p8StatusSent => 'К оплате';
+
+  @override
+  String get p8StatusPartial => 'Оплачен частично';
+
+  @override
+  String get p8StatusPaid => 'Оплачен';
+
+  @override
+  String get p8StatusOverdue => 'Просрочен';
+
+  @override
+  String get p8StatusCancelled => 'Отменён';
+
+  @override
+  String get p8Pay => 'Оплатить';
+
+  @override
+  String get p8PayFailed => 'Не удалось открыть оплату. Попробуйте ещё раз.';
+
+  @override
+  String get p8PayUnavailable => 'Онлайн-оплата у школы сейчас недоступна.';
+
+  @override
+  String get p8ConfirmTitle => 'Перед оплатой';
+
+  @override
+  String p8Confirm(String name, String bin, String amount) {
+    return 'Вы оплачиваете обучение напрямую школе «$name», БИН $bin. Сумма: $amount ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.';
+  }
+
+  @override
+  String p8ConfirmNoBin(String name, String amount) {
+    return 'Вы оплачиваете обучение напрямую школе «$name». Сумма: $amount ₸. GradeApp не получает и не передаёт деньги. Фискальный чек формирует школа или платёжный сервис.';
+  }
+
+  @override
+  String get p8ConfirmGo => 'Перейти к оплате';
+
+  @override
+  String get p8Checking => 'Проверяем оплату';
+
+  @override
+  String get p8CheckingHint => 'Обычно это занимает меньше минуты.';
+
+  @override
+  String get p8Arrived => 'Оплата получена. Спасибо!';
+
+  @override
+  String get p8Delayed => 'Платёж пока не виден.';
+
+  @override
+  String get p8DelayedHint =>
+      'Банк иногда подтверждает оплату дольше. Если деньги уже списаны, платить повторно не нужно: статус обновится сам.';
+
+  @override
+  String get p8CheckNow => 'Проверить';
+
+  @override
+  String get p8OnlineOff => 'Онлайн-оплаты нет.';
+
+  @override
+  String get p8OnlineOffHint => 'Оплатите переводом по реквизитам ниже.';
+
+  @override
+  String get p8Payments => 'Платежи';
+
+  @override
+  String get p8MethodCash => 'Наличные';
+
+  @override
+  String get p8MethodTransfer => 'Перевод';
+
+  @override
+  String get p8HowToPay => 'Как оплатить переводом';
+
+  @override
+  String get p8ReqRecipient => 'Получатель';
+
+  @override
+  String get p8ReqBin => 'БИН';
+
+  @override
+  String get p8ReqBank => 'Банк';
+
+  @override
+  String get p8ReqBik => 'БИК';
+
+  @override
+  String get p8ReqKbe => 'КБе';
+
+  @override
+  String get p8ReqKnp => 'КНП';
+
+  @override
+  String get p8ReqPurpose => 'Назначение платежа';
+
+  @override
+  String p8PurposeValue(String number) {
+    return 'Оплата за обучение, счёт № $number';
+  }
+
+  @override
+  String get p8Copy => 'Скопировать';
+
+  @override
+  String get p8Copied => 'Скопировано';
+
+  @override
+  String get p8Document => 'Документ';
+
+  @override
+  String get p8PdfTitle => 'Счёт на оплату';
+
+  @override
+  String get p8PdfCaption => 'Информационный документ, не является фискальным чеком';
+
+  @override
+  String get p8PdfFailed => 'Не удалось получить документ.';
+
+  @override
+  String get p9Title => 'Учителя';
+
+  @override
+  String get p9Homeroom => 'Классный руководитель';
+
+  @override
+  String get p9Write => 'Написать';
+
+  @override
+  String p9WriteTo(String name) {
+    return 'Написать: $name';
+  }
+
+  @override
+  String p9AllTeachers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Все учителя ($count)',
+      few: 'Все учителя ($count)',
+      one: 'Все учителя ($count)',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get p9Empty => 'Список учителей пока пуст';
+
+  @override
+  String get p10Pinned => 'Объявление';
+
+  @override
+  String p10PinnedMany(String title, int more) {
+    return '$title и ещё $more';
+  }
+
+  @override
+  String get p10Expand => 'Развернуть';
+
+  @override
+  String get p10Collapse => 'Свернуть';
+
+  @override
+  String get p10AllEvents => 'Все события';
+
+  @override
+  String get p10Events => 'События школы';
+
+  @override
+  String get p10EventsEmpty => 'Ближайших событий нет';
+
+  @override
+  String get p10EventsEmptyHint => 'Здесь появятся события на ближайшие недели.';
 }

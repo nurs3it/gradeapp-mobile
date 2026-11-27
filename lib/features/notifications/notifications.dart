@@ -109,6 +109,8 @@ String notificationTitle(AppLocalizations l, String type) => switch (type) {
   'excuse.cancelled' => l.ntExcuseCancelled,
   'school_event' => l.ntEvent,
   'chat.message' => l.ntChat,
+  'digest.weekly' => l.ntDigest,
+  'consent.requested' => l.ntConsentRequested,
   _ when type.startsWith('invoice.') => l.ntInvoice,
   _ => l.ntOther,
 };
@@ -136,11 +138,22 @@ IconData notificationIcon(String type) => switch (type.split('.').first) {
   'checkin' => GIcons.checkIn,
   'attendance' => GIcons.info,
   'chat' => GIcons.chat,
+  'digest' => GIcons.summary,
+  'consent' => GIcons.checkIn,
   _ => GIcons.bell,
 };
 
 /// Where a notification leads (spec §4.3) for the active role.
 String? notificationRoute(AppNotification n, AppRole role) {
+  // Stage 3: the summary opens on the week the push names; a consent request
+  // lands on the parent's «Сегодня», where the consent card is.
+  if (n.type == 'digest.weekly' && role != AppRole.teacher) {
+    final student = n.payload.strOrNull('student_id') ?? n.target?.id;
+    final week = n.payload.strOrNull('week');
+    final q = [if (student != null) 'student=$student', if (week != null) 'week=$week'].join('&');
+    return q.isEmpty ? '/week-summary' : '/week-summary?$q';
+  }
+  if (n.type == 'consent.requested') return role == AppRole.parent ? '/p/today' : null;
   final kind = n.target?.kind ?? n.type.split('.').first;
   final id = n.target?.id ?? '';
   return switch ((kind, role)) {
@@ -177,7 +190,7 @@ Future<void> openNotification(BuildContext context, WidgetRef ref, AppNotificati
   final role = ref.read(activeRoleProvider);
   final route = role == null ? null : notificationRoute(n, role);
   if (route == null || !context.mounted) return;
-  if (route.startsWith('/lesson/')) {
+  if (route.startsWith('/lesson/') || route.startsWith('/week-summary')) {
     unawaited(context.push(route));
   } else {
     context.go(route);

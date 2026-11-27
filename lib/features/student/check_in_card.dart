@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import '../learner/learner_providers.dart';
 import 'check_in_state.dart';
 
 /// «Я в школе» on the student's «Сегодня» (§3.15). Loud (brand) only while
@@ -44,15 +47,9 @@ class CheckInCard extends ConsumerWidget {
           icon: GIcons.lock,
           tone: GTone.warn,
           title: l.checkInNoConsent,
-          action: l.checkInAskParent,
-          onAction: () => showGSheet<void>(
-            context,
-            title: l.checkInAskParent,
-            builder: (ctx) => Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-              child: Text(l.checkInAskParentHint, style: ctx.t.body.copyWith(color: ctx.c.ink2)),
-            ),
-          ),
+          message: l.checkInAskParentHint,
+          action: l.p7Ask,
+          onAction: () => unawaited(_askParent(context, ref)),
         );
       case CheckInCardState.open:
         final sending = run.phase == CheckInPhase.sending;
@@ -227,4 +224,31 @@ class _Quiet extends StatelessWidget {
       ),
     );
   }
+}
+
+/// P7: «Попросить родителя» — one request a day; the parent gets a push.
+Future<void> _askParent(BuildContext context, WidgetRef ref) async {
+  final l = context.l10n;
+  final id = ref.read(myStudentIdProvider);
+  if (id == null) return;
+  String message;
+  var icon = GIcons.ok;
+  try {
+    await ref.read(dioProvider).post<Object?>('/students/$id/photo-consent/request/');
+    GHaptics.success();
+    message = l.p7Sent;
+  } on DioException catch (e) {
+    GHaptics.error();
+    icon = GIcons.error;
+    switch (e.response?.statusCode) {
+      case 429:
+        message = l.p7TooSoon;
+      case 409:
+        message = l.p7AlreadyGranted;
+        ref.invalidate(learnerDayProvider);
+      default:
+        message = l.errorGeneric;
+    }
+  }
+  if (context.mounted) GToast.show(context, message, icon: icon);
 }

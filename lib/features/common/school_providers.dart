@@ -6,6 +6,20 @@ import '../../core/providers.dart';
 import '../auth/auth_controller.dart';
 import 'models.dart';
 
+/// School flags of the mobile app (B9): a disabled flag hides the feature.
+class MobileFlags {
+  const MobileFlags({this.streaksEnabled = false, this.weeklyDigestEnabled = false, this.checkinMissingAlert = false});
+  final bool streaksEnabled;
+  final bool weeklyDigestEnabled;
+  final bool checkinMissingAlert;
+
+  factory MobileFlags.fromJson(Json j) => MobileFlags(
+    streaksEnabled: j.flag('streaks_enabled'),
+    weeklyDigestEnabled: j.flag('weekly_digest_enabled'),
+    checkinMissingAlert: j.flag('checkin_missing_alert'),
+  );
+}
+
 /// The active school: grading config, check-in flag, terms.
 class School {
   const School({
@@ -13,6 +27,7 @@ class School {
     required this.name,
     required this.grading,
     this.checkinEnabled = false,
+    this.mobile = const MobileFlags(),
     this.lat,
     this.lon,
   });
@@ -20,6 +35,9 @@ class School {
   final String name;
   final Grading grading;
   final bool checkinEnabled;
+
+  /// Mobile mechanics the school switched on (`mobile` of `/schools/{id}/`).
+  final MobileFlags mobile;
 
   /// School location (for «Вы у школы / Далеко» in the camera).
   final double? lat;
@@ -30,6 +48,7 @@ class School {
     name: j.str('name'),
     grading: Grading.fromSchool(j),
     checkinEnabled: j.flag('checkin_enabled'),
+    mobile: MobileFlags.fromJson((j['mobile'] as Json?) ?? const {}),
     lat: j.number('latitude')?.toDouble(),
     lon: j.number('longitude')?.toDouble(),
   );
@@ -40,6 +59,10 @@ final schoolProvider = StreamProvider<School?>((ref) {
   if (id == null) return Stream.value(null);
   return cachedGet(ref, '/schools/$id/', parse: (d) => School.fromJson(d as Json));
 });
+
+final mobileFlagsProvider = Provider<MobileFlags>(
+  (ref) => ref.watch(schoolProvider.select((s) => s.value?.mobile)) ?? const MobileFlags(),
+);
 
 /// Grading scale of the active school; the KZ preset while loading.
 final gradingProvider = Provider<Grading>(
