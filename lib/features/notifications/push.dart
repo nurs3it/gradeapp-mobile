@@ -86,6 +86,7 @@ enum PushGroup {
   attendance,
   chat,
   billing,
+  digest,
   general;
 
   String label(AppLocalizations l) => switch (this) {
@@ -95,6 +96,7 @@ enum PushGroup {
     attendance => l.ngAttendance,
     chat => l.ngChat,
     billing => l.ngBilling,
+    digest => l.ngDigest,
     general => l.ngGeneral,
   };
 }
@@ -212,7 +214,7 @@ AppNotification notificationFromPush(Map<String, dynamic> data) {
   return AppNotification(
     id: (data['notification_id'] as String?) ?? '',
     type: (data['type'] as String?) ?? '',
-    payload: {'student_id': ?studentId},
+    payload: {'student_id': ?studentId, 'week': ?(data['week'] as String?)},
     read: false,
     createdAt: DateTime.now(),
     target: kind == null || id == null ? null : NotificationTarget(kind: kind, id: id, available: true),

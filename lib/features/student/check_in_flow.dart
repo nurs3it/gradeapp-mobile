@@ -15,6 +15,7 @@ import '../../ui/ui.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
 import '../learner/learner_providers.dart';
+import '../learner/streaks.dart';
 import '../notifications/push.dart';
 import 'check_in_state.dart';
 import '../../core/analytics.dart';
@@ -605,6 +606,8 @@ class _SuccessState extends ConsumerState<_Success> {
     final first = day?.lessons.where((x) => !x.isCancelled && !x.isPast(at)).firstOrNull;
     final firstStart = first?.startsAt();
     final lateMin = firstStart != null && at.isAfter(firstStart) ? at.difference(firstStart).inMinutes : 0;
+    final streaks = ref.watch(streaksOfLearnerProvider);
+    final milestone = streaks == null ? null : milestoneReachedOn(streaks, isoDate(at));
     final late =
         (day?.checkIn?.late ?? false) || lateMin > 0 || (end != null && at.hour * 60 + at.minute > minutesOf(end));
     return Scaffold(
@@ -626,6 +629,25 @@ class _SuccessState extends ConsumerState<_Success> {
                 late ? (lateMin > 0 ? l.doneLateMin(time, lateMin) : l.doneLate(time)) : l.doneOnTime(time),
                 style: t.title2.copyWith(color: GColors.onFill.withValues(alpha: 0.9), fontWeight: FontWeight.w600),
               ),
+              if (milestone != null) ...[
+                const SizedBox(height: 20),
+                Semantics(
+                  liveRegion: true,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GFanProgress(earned: pagesOf(milestone.days).toDouble(), size: 36, color: GColors.onFill),
+                      const SizedBox(width: 12),
+                      Flexible(
+                        child: Text(
+                          l.s10MilestoneToday(milestone.days),
+                          style: t.bodyStrong.copyWith(color: GColors.onFill),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               const Spacer(),
               if (first != null)
                 Container(

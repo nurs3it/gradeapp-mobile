@@ -5,12 +5,15 @@ import 'package:go_router/go_router.dart';
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
+import '../common/events.dart';
 import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/now_next.dart';
 import '../learner/learner_hero.dart';
 import '../learner/learner_providers.dart';
 import '../learner/seen.dart';
+import '../learner/streaks.dart';
+import '../learner/week_card.dart';
 import '../shell/header.dart';
 import 'check_in_card.dart';
 import 'check_in_state.dart';
@@ -138,6 +141,7 @@ class _Body extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: g),
       sliver: SliverList.list(
         children: [
+          const PinnedEventsLine(),
           if (cardState != CheckInCardState.hidden) ...[
             CheckInCard(status: day.checkIn!, state: cardState),
             const SizedBox(height: 14),
@@ -155,6 +159,8 @@ class _Body extends ConsumerWidget {
             ),
           ),
           if (tiles.isNotEmpty) ...[const SizedBox(height: 24), GTileRow(tiles: tiles)],
+          const StreakCard(),
+          WeekCard(studentId: studentId, lessons: day.lessons, now: now),
           if (day.lessons.isNotEmpty) ...[
             GSectionTitle(title: l.dayPlan, action: l.tabWeek, onAction: () => goTab(1)),
             GGroup(

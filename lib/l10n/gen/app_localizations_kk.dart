@@ -2158,4 +2158,634 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get wgNextShort => 'Келесі';
+
+  @override
+  String get s7Title => 'Болжам';
+
+  @override
+  String get s7Now => 'Қазір';
+
+  @override
+  String s7NowLine(String pct, String mark) {
+    return '$pct % · баға $mark';
+  }
+
+  @override
+  String s7NextWork(String title, String date) {
+    return 'Жақын жұмыс: $title, $date';
+  }
+
+  @override
+  String get s7MaxScore => 'Жұмыстың ең жоғары балы';
+
+  @override
+  String get s7Less => 'Баллды азайту';
+
+  @override
+  String get s7More => 'Баллды көбейту';
+
+  @override
+  String s7Need(String mark, String kind, int need, int max) {
+    return '$mark деңгейіне шығу үшін $kind жұмысынан кемінде $need / $max жинау керек';
+  }
+
+  @override
+  String get s7NoStep => 'Бұл жұмыс бағаны өзгертпейді, бірақ ол маңызды: мүмкіндігінше жақсы орындап көріңіз.';
+
+  @override
+  String get s7Top => 'Қазір ең жоғары бағаңыз бар. Осылай жалғастырыңыз!';
+
+  @override
+  String s7IfIGet(String kind, int score, int max) {
+    return 'Егер $kind жұмысынан $score / $max алсам';
+  }
+
+  @override
+  String s7Result(String mark, String pct) {
+    return 'Тоқсандық: $mark ($pct %)';
+  }
+
+  @override
+  String get s7Disclaimer => 'Бұл мектеп формуласы бойынша шамамен есептеу. Қорытынды бағаны мұғалім қояды.';
+
+  @override
+  String get s7Hidden => 'Болжам әзірге қолжетімсіз';
+
+  @override
+  String get s7HiddenFormula => 'Мектеп формуласы әлі жүктелген жоқ. Кейінірек қайталап көріңіз.';
+
+  @override
+  String s7HiddenFew(int count) {
+    return 'Болжам шынайы болу үшін кемінде $count бағаланған жұмыс қажет.';
+  }
+
+  @override
+  String get s10Title => 'Серия және жетістіктер';
+
+  @override
+  String get s10Unavailable => 'Мектебіңізде серия қосылмаған.';
+
+  @override
+  String get s10ParentOff => 'Серияны ата-анаңыз өшірген. Бұл оқуға әсер етпейді.';
+
+  @override
+  String get s10CardStart => 'Уақытында келу сериясы: бүгіннен бастаңыз';
+
+  @override
+  String s10CardCheckin(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count күн уақытында');
+    return '$_temp0';
+  }
+
+  @override
+  String s10CardHomework(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: 'ҮТ мерзімінде: $count күн');
+    return '$_temp0';
+  }
+
+  @override
+  String s10Days(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count күн');
+    return '$_temp0';
+  }
+
+  @override
+  String get s10DaysShort => 'күн';
+
+  @override
+  String s10Best(int count) {
+    return 'Үздік: $count';
+  }
+
+  @override
+  String s10FreezesLeft(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count мұздату қалды');
+    return '$_temp0';
+  }
+
+  @override
+  String get s10KindCheckin => 'Мектепке уақытында келу';
+
+  @override
+  String get s10KindHomework => 'ҮТ мерзімінде';
+
+  @override
+  String get s10TodayDoneCheckin => 'Бүгін белгіленді';
+
+  @override
+  String get s10TodayDoneHomework => 'Бүгінге бәрі мерзімінде тапсырылды';
+
+  @override
+  String get s10TodayPending => 'Бүгін әлі үлгеруге болады';
+
+  @override
+  String get s10TodayFrozen => 'Күн мұздатылды: серия сақталды';
+
+  @override
+  String get s10TodayExcused => 'Өтініш бар: серия аялдап тұр';
+
+  @override
+  String get s10TodayOff => 'Бүгін оқу күні емес';
+
+  @override
+  String get s10ExcusedTitle => 'Өтініш қабылданды.';
+
+  @override
+  String get s10ExcusedBody => 'Серия үзілмейді және өспейді: сізді күтіп тұр.';
+
+  @override
+  String get s10Milestones => 'Белгі беттері';
+
+  @override
+  String s10MilestoneReached(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Жетті: $days күн');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneAhead(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: 'Алда: $days күн');
+    return '$_temp0';
+  }
+
+  @override
+  String s10MilestoneToday(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days күн уақытында: тағы бір бет ашылды');
+    return '$_temp0';
+  }
+
+  @override
+  String get s10Missed => 'Өткізілген күндер';
+
+  @override
+  String get s10MissedHint => 'Мұздату күнді серияға қайтарады. Оны тәулік ішінде қолдануға болады.';
+
+  @override
+  String get s10Freeze => 'Мұздату';
+
+  @override
+  String get s10Frozen => 'Күн мұздатылды';
+
+  @override
+  String get s10FreezeExpired => 'Мұздату уақыты өтті';
+
+  @override
+  String get s10NoFreezes => 'Осы тоқсанға мұздату қалмады';
+
+  @override
+  String get s10SickNote => 'Ауырып қалсаң — үйде қал: өтініш болса, серия үзілмейді.';
+
+  @override
+  String get s10ParentSwitch => 'Серия және жетістіктер';
+
+  @override
+  String get s10ParentExplain =>
+      'Қолданба оқушының сабаққа уақытында келгенін және үй тапсырмасын мерзімінде тапсырғанын белгілейді. Мұны оқушы мен ата-аналар көреді, басқа оқушылар мен қызметкерлер көрмейді. Ауырғаны туралы өтініш серияны үзбейді.';
+
+  @override
+  String get s11Title => 'Сенің аптаң';
+
+  @override
+  String get s11DaysOnTime => 'күн уақытында';
+
+  @override
+  String get s11Homework => 'ҮТ тапсырылды';
+
+  @override
+  String s11Milestone(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days күн уақытында: жаңа бет');
+    return '$_temp0';
+  }
+
+  @override
+  String get s11WithMarks => 'Суретте бағаларды көрсету';
+
+  @override
+  String get s11MarksWarning =>
+      'Карточкада бағалар болады. Оны бөлісу арқылы бағаларды басқа адамдарға көрінетін етесіз.';
+
+  @override
+  String get s11Save => 'Сурет ретінде сақтау';
+
+  @override
+  String get p5Title => 'Қатысу';
+
+  @override
+  String get p5RowHint => 'Күнтізбе, қалып қоюлар және себептер';
+
+  @override
+  String p5Quarter(String name) {
+    return 'Қатысу · $name';
+  }
+
+  @override
+  String p5CountAbsent(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count қалып қою');
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountTardy(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count кешігу');
+    return '$_temp0';
+  }
+
+  @override
+  String p5CountExcused(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count өтініш бойынша');
+    return '$_temp0';
+  }
+
+  @override
+  String get p5NoMisses => 'Қалып қоюсыз';
+
+  @override
+  String get p5PrevMonth => 'Алдыңғы ай';
+
+  @override
+  String get p5NextMonth => 'Келесі ай';
+
+  @override
+  String get p5Present => 'Болды';
+
+  @override
+  String get p5Tardy => 'Кешікті';
+
+  @override
+  String get p5Absent => 'Қалып қойды';
+
+  @override
+  String get p5Excused => 'Өтініш бойынша';
+
+  @override
+  String get p5NoLessons => 'Сабақ жоқ';
+
+  @override
+  String get p5Absences => 'Айдағы қалып қоюлар';
+
+  @override
+  String get p5NoReason => 'себебі көрсетілмеген';
+
+  @override
+  String get p6Title => 'Апта қорытындысы';
+
+  @override
+  String get p6OpenSummary => 'Толығырақ';
+
+  @override
+  String get p6PrevWeek => 'Алдыңғы апта';
+
+  @override
+  String get p6NextWeek => 'Келесі апта';
+
+  @override
+  String p6WeekOf(String range) {
+    return 'Апта $range';
+  }
+
+  @override
+  String get p6EmptyTitle => 'Оқу күндері болған жоқ';
+
+  @override
+  String get p6EmptyBody => 'Бұл аптада қорытынды жоқ: демалыс немесе каникул.';
+
+  @override
+  String get p6VerdictEmpty => 'Бұл аптада сабақ болған жоқ.';
+
+  @override
+  String get p6VerdictGreat => 'Тамаша апта: барлық күн уақытында, тапсырмалар тапсырылды.';
+
+  @override
+  String get p6VerdictSteady => 'Апта тыныш өтті.';
+
+  @override
+  String get p6VerdictAbsences => 'Себепсіз қалып қою бар: оны түсіндіруге болады.';
+
+  @override
+  String get p6VerdictOverdue => 'Әлі тапсырылмаған тапсырмалар бар.';
+
+  @override
+  String p6VerdictDip(String course) {
+    return 'Апта тыныш өтті, «$course» пәнінен баға төмендеді.';
+  }
+
+  @override
+  String get p6VerdictDipPlain => 'Апта тыныш өтті, бір пәннен баға төмендеді.';
+
+  @override
+  String get p6Attendance => 'Қатысу';
+
+  @override
+  String get p6DaysOnTime => 'Уақытында келген күндер';
+
+  @override
+  String p6OfDays(int ontime, int days) {
+    return '$ontime / $days';
+  }
+
+  @override
+  String get p6Tardy => 'Кешігулер';
+
+  @override
+  String get p6Absent => 'Себепсіз қалып қоюлар';
+
+  @override
+  String get p6Excused => 'Өтініш бойынша';
+
+  @override
+  String get p6Grades => 'Пәндер бойынша бағалар';
+
+  @override
+  String p6GradesCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count баға');
+    return '$_temp0';
+  }
+
+  @override
+  String p6Avg(String value) {
+    return 'орташа $value';
+  }
+
+  @override
+  String p6Up(String delta) {
+    return '$delta жоғары';
+  }
+
+  @override
+  String p6Down(String delta) {
+    return '$delta төмен';
+  }
+
+  @override
+  String get p6Same => 'өзгеріссіз';
+
+  @override
+  String get p6Homework => 'Үй тапсырмалары';
+
+  @override
+  String get p6HwDone => 'Тапсырылды';
+
+  @override
+  String p6OfTotal(int done, int total) {
+    return '$done / $total';
+  }
+
+  @override
+  String get p6HwOverdue => 'Мерзімінде тапсырылмады';
+
+  @override
+  String get p6Feedback => 'Мұғалімдердің пікірлері';
+
+  @override
+  String get p6Praise => 'Мақтау';
+
+  @override
+  String get p6Remark => 'Ескертпе';
+
+  @override
+  String get p6Upcoming => 'Келесі аптада';
+
+  @override
+  String get p6TodayCard => 'Апта қорытындысы';
+
+  @override
+  String get p6TodayCardHint => 'Апта қалай өтті және не туралы сөйлесуге болады';
+
+  @override
+  String get p6DigestWhen => 'Апта қорытындысын қашан жіберу';
+
+  @override
+  String get p6DayFri => 'Жұма';
+
+  @override
+  String get p6DaySun => 'Жексенбі';
+
+  @override
+  String get p6DigestHour => 'Жіберу уақыты';
+
+  @override
+  String get ngDigest => 'Апта қорытындысы';
+
+  @override
+  String get ntDigest => 'Апта қорытындысы';
+
+  @override
+  String get ntConsentRequested => 'Баладан сұрау';
+
+  @override
+  String get p7Ask => 'Ата-анадан сұрау';
+
+  @override
+  String get p7Sent => 'Ата-анаңызға сұрау жіберілді.';
+
+  @override
+  String get p7TooSoon => 'Сіз қазір сұрадыңыз. Ертең қайталап көріңіз.';
+
+  @override
+  String get p7AlreadyGranted => 'Ата-анаңыз рұқсат берген. Экранды жаңартыңыз.';
+
+  @override
+  String get p8Title => 'Шоттар және төлем';
+
+  @override
+  String get p8ToPay => 'Төлеуге';
+
+  @override
+  String get p8History => 'Тарих';
+
+  @override
+  String get p8Empty => 'Әзірге шот жоқ';
+
+  @override
+  String get p8EmptyHint => 'Мұнда оқу ақысының шоттары көрінеді.';
+
+  @override
+  String p8InvoiceNo(String number) {
+    return '№ $number шот';
+  }
+
+  @override
+  String p8DueDate(String date) {
+    return '$date дейін';
+  }
+
+  @override
+  String p8PaidSoFar(String amount) {
+    return '$amount ₸ төленді';
+  }
+
+  @override
+  String p8PayableSemantic(String amount, String due) {
+    return 'Төлеуге $amount теңге, $due';
+  }
+
+  @override
+  String get p8StatusSent => 'Төлеуге';
+
+  @override
+  String get p8StatusPartial => 'Ішінара төленді';
+
+  @override
+  String get p8StatusPaid => 'Төленді';
+
+  @override
+  String get p8StatusOverdue => 'Мерзімі өтті';
+
+  @override
+  String get p8StatusCancelled => 'Бас тартылды';
+
+  @override
+  String get p8Pay => 'Төлеу';
+
+  @override
+  String get p8PayFailed => 'Төлемді ашу мүмкін болмады. Қайталап көріңіз.';
+
+  @override
+  String get p8PayUnavailable => 'Мектепте онлайн төлем қазір қолжетімсіз.';
+
+  @override
+  String get p8ConfirmTitle => 'Төлеу алдында';
+
+  @override
+  String p8Confirm(String name, String bin, String amount) {
+    return 'Сіз оқу ақысын тікелей мектепке төлейсіз: «$name», БСН $bin. Сомасы: $amount ₸. GradeApp ақшаны қабылдамайды және аудармайды. Фискалдық чекті мектеп немесе төлем сервисі қалыптастырады.';
+  }
+
+  @override
+  String p8ConfirmNoBin(String name, String amount) {
+    return 'Сіз оқу ақысын тікелей мектепке төлейсіз: «$name». Сомасы: $amount ₸. GradeApp ақшаны қабылдамайды және аудармайды. Фискалдық чекті мектеп немесе төлем сервисі қалыптастырады.';
+  }
+
+  @override
+  String get p8ConfirmGo => 'Төлеуге өту';
+
+  @override
+  String get p8Checking => 'Төлемді тексеріп жатырмыз';
+
+  @override
+  String get p8CheckingHint => 'Әдетте бір минуттан аз уақыт алады.';
+
+  @override
+  String get p8Arrived => 'Төлем қабылданды. Рақмет!';
+
+  @override
+  String get p8Delayed => 'Төлем әзірге көрінбейді.';
+
+  @override
+  String get p8DelayedHint =>
+      'Банк кейде төлемді ұзағырақ растайды. Ақша есептен шығарылса, қайта төлеудің қажеті жоқ: мәртебе өзі жаңарады.';
+
+  @override
+  String get p8CheckNow => 'Тексеру';
+
+  @override
+  String get p8OnlineOff => 'Онлайн төлем жоқ.';
+
+  @override
+  String get p8OnlineOffHint => 'Төменде көрсетілген деректемелер бойынша аудару арқылы төлеңіз.';
+
+  @override
+  String get p8Payments => 'Төлемдер';
+
+  @override
+  String get p8MethodCash => 'Қолма-қол';
+
+  @override
+  String get p8MethodTransfer => 'Аударым';
+
+  @override
+  String get p8HowToPay => 'Аударым арқылы қалай төлеу';
+
+  @override
+  String get p8ReqRecipient => 'Алушы';
+
+  @override
+  String get p8ReqBin => 'БСН';
+
+  @override
+  String get p8ReqBank => 'Банк';
+
+  @override
+  String get p8ReqBik => 'БСК';
+
+  @override
+  String get p8ReqKbe => 'КБе';
+
+  @override
+  String get p8ReqKnp => 'ТМК';
+
+  @override
+  String get p8ReqPurpose => 'Төлемнің мақсаты';
+
+  @override
+  String p8PurposeValue(String number) {
+    return 'Оқу ақысы, № $number шот';
+  }
+
+  @override
+  String get p8Copy => 'Көшіру';
+
+  @override
+  String get p8Copied => 'Көшірілді';
+
+  @override
+  String get p8Document => 'Құжат';
+
+  @override
+  String get p8PdfTitle => 'Төлем шоты';
+
+  @override
+  String get p8PdfCaption => 'Ақпараттық құжат, фискалдық чек емес';
+
+  @override
+  String get p8PdfFailed => 'Құжатты алу мүмкін болмады.';
+
+  @override
+  String get p9Title => 'Мұғалімдер';
+
+  @override
+  String get p9Homeroom => 'Сынып жетекшісі';
+
+  @override
+  String get p9Write => 'Жазу';
+
+  @override
+  String p9WriteTo(String name) {
+    return 'Жазу: $name';
+  }
+
+  @override
+  String p9AllTeachers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: 'Барлық мұғалімдер ($count)');
+    return '$_temp0';
+  }
+
+  @override
+  String get p9Empty => 'Мұғалімдер тізімі әзірге бос';
+
+  @override
+  String get p10Pinned => 'Хабарландыру';
+
+  @override
+  String p10PinnedMany(String title, int more) {
+    return '$title және тағы $more';
+  }
+
+  @override
+  String get p10Expand => 'Ашу';
+
+  @override
+  String get p10Collapse => 'Жинау';
+
+  @override
+  String get p10AllEvents => 'Барлық іс-шаралар';
+
+  @override
+  String get p10Events => 'Мектеп іс-шаралары';
+
+  @override
+  String get p10EventsEmpty => 'Жақын арада іс-шара жоқ';
+
+  @override
+  String get p10EventsEmptyHint => 'Мұнда алдағы апталардағы іс-шаралар көрінеді.';
 }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import '../common/school_providers.dart';
+import '../learner/streaks.dart';
+import '../learner/weekly_summary.dart';
+import 'billing_screen.dart';
+import 'teachers_screen.dart';
 import '../learner/learner_providers.dart';
 import '../shell/header.dart';
 import 'excuse_sheet.dart';
@@ -44,6 +50,7 @@ class FamilyScreen extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: g),
           sliver: SliverList.list(
             children: [
+              const PayableCard(),
               if (current != null)
                 GCard(
                   color: c.primarySoft,
@@ -67,6 +74,7 @@ class FamilyScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
+              if (current != null) _FamilyEntries(childId: current.id),
               GSectionTitle(title: l.requests),
               if (loading && requests.isEmpty)
                 const GSkeleton(hero: false, rows: 2)
@@ -78,6 +86,10 @@ class FamilyScreen extends ConsumerWidget {
                 GGroup(
                   children: [for (final r in requests.take(30)) _RequestRow(excuse: r, showName: children.length > 1)],
                 ),
+              if (current != null) ...[
+                TeachersSection(studentId: current.id),
+                StreaksParentSwitch(studentId: current.id),
+              ],
               if (children.isNotEmpty) ...[
                 GSectionTitle(title: l.profileChildren),
                 GGroup(
@@ -169,6 +181,38 @@ class _RequestRow extends ConsumerWidget {
                 if (context.mounted) GToast.show(context, l.errorGeneric, icon: GIcons.error);
               }
             },
+    );
+  }
+}
+
+/// Attendance, weekly summary, payments and events of the child in view.
+class _FamilyEntries extends ConsumerWidget {
+  const _FamilyEntries({required this.childId});
+  final String childId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    final c = context.c;
+    final digest = ref.watch(mobileFlagsProvider).weeklyDigestEnabled;
+    final billing = ref.watch(billingVisibleProvider);
+    Widget row(IconData icon, String title, String path) => GRow(
+      leading: GIcon(icon, size: 22, color: c.primaryText),
+      title: Text(title),
+      chevron: true,
+      onTap: () => context.push(path),
+    );
+    return Padding(
+      padding: const EdgeInsets.only(top: GSpace.stackGap),
+      child: GGroup(
+        inset: 52,
+        children: [
+          row(GIcons.week, l.p5Title, '/attendance?student=$childId'),
+          if (digest) row(GIcons.summary, l.p6Title, '/week-summary?student=$childId&week=${isoWeekId(DateTime.now())}'),
+          if (billing) row(GIcons.payments, l.p8Title, '/billing'),
+          row(GIcons.school, l.p10Events, '/events'),
+        ],
+      ),
     );
   }
 }

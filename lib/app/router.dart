@@ -5,7 +5,13 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/auth_controller.dart';
 import '../features/auth/login_screens.dart';
 import '../features/auth/user.dart';
+import '../features/common/events.dart';
 import '../features/learner/grades_screen.dart';
+import '../features/learner/streaks.dart';
+import '../features/parent/attendance_screen.dart';
+import '../features/parent/billing_screen.dart';
+import '../features/parent/teachers_screen.dart';
+import '../features/parent/weekly_summary_screen.dart';
 import '../features/learner/tasks_screen.dart';
 import '../features/learner/week_screen.dart';
 import '../features/notifications/notification_settings_screen.dart';
@@ -130,6 +136,21 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, s) =>
             LessonScreen(lessonId: s.pathParameters['id']!, allPresent: s.uri.queryParameters[allPresentParam] == '1'),
       ),
+      // Stage 3 (learner and parent screens).
+      GoRoute(path: '/streaks', builder: (_, _) => const StreakScreen()),
+      GoRoute(
+        path: '/week-summary',
+        builder: (_, s) =>
+            WeeklySummaryScreen(studentId: s.uri.queryParameters['student'], week: s.uri.queryParameters['week']),
+      ),
+      GoRoute(path: '/attendance', builder: (_, s) => AttendanceScreen(studentId: s.uri.queryParameters['student'])),
+      GoRoute(
+        path: '/billing',
+        builder: (_, _) => const BillingScreen(),
+        routes: [GoRoute(path: ':id', builder: (_, s) => InvoiceScreen(invoiceId: s.pathParameters['id']!))],
+      ),
+      GoRoute(path: '/teachers', builder: (_, s) => TeachersScreen(studentId: s.uri.queryParameters['student'])),
+      GoRoute(path: '/events', builder: (_, _) => const EventsScreen()),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => const NotificationSettingsScreen()),
       GoRoute(

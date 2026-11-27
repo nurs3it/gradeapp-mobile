@@ -39,6 +39,9 @@ abstract final class Fmt {
   /// «янв».
   static String monthShort(DateTime d, String loc) => DateFormat.MMM(loc).format(d).replaceAll('.', '');
 
+  /// «Ноябрь 2026».
+  static String monthYear(DateTime d, String loc) => _cap(DateFormat('LLLL y', loc).format(d));
+
   static String clock(DateTime d) => DateFormat.Hm().format(d);
 
   static String _cap(String s) => s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
