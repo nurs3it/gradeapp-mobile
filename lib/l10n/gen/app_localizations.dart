@@ -4035,6 +4035,12 @@ abstract class AppLocalizations {
   /// **'Сегодня не учебный день'**
   String get s10TodayOff;
 
+  /// No description provided for @s10TodayMissed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня не засчитано — день можно заморозить'**
+  String get s10TodayMissed;
+
   /// No description provided for @s10ExcusedTitle.
   ///
   /// In ru, this message translates to:

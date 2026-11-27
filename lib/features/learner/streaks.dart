@@ -16,7 +16,7 @@ enum StreakKind { checkin, homework }
 StreakKind? streakKindOf(String s) => StreakKind.values.asNameMap()[s];
 
 /// State of today for one streak (B2). Unknown values read as «off».
-enum StreakToday { done, pending, frozen, excused, off }
+enum StreakToday { done, pending, missed, frozen, excused, off }
 
 StreakToday streakTodayOf(String s) => StreakToday.values.asNameMap()[s] ?? StreakToday.off;
 
@@ -144,6 +144,7 @@ String todayLine(AppLocalizations l, StreakToday t, StreakKind k) => switch (t) 
   StreakToday.pending => l.s10TodayPending,
   StreakToday.frozen => l.s10TodayFrozen,
   StreakToday.excused => l.s10TodayExcused,
+  StreakToday.missed => l.s10TodayMissed,
   StreakToday.off => l.s10TodayOff,
 };
 

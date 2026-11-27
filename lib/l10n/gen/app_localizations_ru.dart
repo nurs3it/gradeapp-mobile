@@ -2412,6 +2412,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get s10TodayOff => 'Сегодня не учебный день';
 
   @override
+  String get s10TodayMissed => 'Сегодня не засчитано — день можно заморозить';
+
+  @override
   String get s10ExcusedTitle => 'Заявка принята.';
 
   @override

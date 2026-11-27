@@ -194,6 +194,7 @@ void main() {
       expect(streakTodayOf('done'), StreakToday.done);
       expect(streakTodayOf('excused'), StreakToday.excused);
       expect(streakTodayOf('frozen'), StreakToday.frozen);
+      expect(streakTodayOf('missed'), StreakToday.missed);
       expect(streakTodayOf('???'), StreakToday.off);
       expect(s.checkin.today, StreakToday.done);
       expect(s.homework.today, StreakToday.pending);

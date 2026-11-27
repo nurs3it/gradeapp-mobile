@@ -2356,6 +2356,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get s10TodayOff => 'Not a school day today';
 
   @override
+  String get s10TodayMissed => 'Today didn\'t count — you can use a freeze';
+
+  @override
   String get s10ExcusedTitle => 'Request approved.';
 
   @override
