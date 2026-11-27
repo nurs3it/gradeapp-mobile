@@ -10,6 +10,7 @@ import '../../ui/ui.dart';
 import '../auth/user.dart';
 import '../common/pulse.dart';
 import '../notifications/push.dart';
+import '../teacher/my_class_providers.dart' show hasHomeroomProvider;
 
 class _Signal extends ChangeNotifier {
   void fire() => notifyListeners();
@@ -74,6 +75,7 @@ class AppShell extends ConsumerWidget {
       badge: badge,
       semanticLabel: badge > 0 ? l.tabWithBadge(label, badge) : label,
     );
+    final homeroom = role == AppRole.teacher && ref.watch(hasHomeroomProvider);
     final items = switch (role) {
       AppRole.student => [
         item(GIcons.today, l.tabToday),
@@ -91,6 +93,7 @@ class AppShell extends ConsumerWidget {
         item(GIcons.today, l.tabToday),
         item(GIcons.week, l.tabWeek),
         item(GIcons.inbox, l.tabInbox, inbox + rejected),
+        if (homeroom) item(GIcons.teachers, l.t8Tab),
       ],
     };
     final keyboard = MediaQuery.viewInsetsOf(context).bottom > 0;

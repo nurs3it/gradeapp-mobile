@@ -19,6 +19,7 @@ import '../features/student/student_today_screen.dart';
 import '../features/teacher/inbox_screen.dart';
 import '../features/platform/lesson_link.dart';
 import '../features/teacher/lesson_screen.dart';
+import '../features/teacher/my_class_screen.dart';
 import '../features/teacher/teacher_today_screen.dart';
 import '../features/teacher/teacher_week_screen.dart';
 
@@ -124,6 +125,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         branch('/t/today', const TeacherTodayScreen()),
         branch('/t/week', const TeacherWeekScreen()),
         branch('/t/inbox', const InboxScreen()),
+        // Stage 3: the 4th tab, only shown to a homeroom teacher (T8).
+        branch('/t/class', const MyClassScreen()),
       ]),
       GoRoute(
         path: '/lesson/:id',
