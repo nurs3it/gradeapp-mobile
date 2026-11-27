@@ -145,7 +145,7 @@ String todayLine(AppLocalizations l, StreakToday t, StreakKind k) => switch (t) 
   StreakToday.frozen => l.s10TodayFrozen,
   StreakToday.excused => l.s10TodayExcused,
   StreakToday.missed => l.s10TodayMissed,
-  StreakToday.off => l.s10TodayOff,
+  StreakToday.off => k == StreakKind.checkin ? l.s10TodayOff : l.s10TodayOffHomework,
 };
 
 /// Card on the student's «Сегодня»: the first streak and a hint of the second.

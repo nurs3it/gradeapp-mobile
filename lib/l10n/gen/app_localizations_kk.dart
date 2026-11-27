@@ -2288,6 +2288,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get s10TodayOff => 'Бүгін оқу күні емес';
 
   @override
+  String get s10TodayOffHomework => 'Жақын оқу күніне тапсырма жоқ';
+
+  @override
   String get s10TodayMissed => 'Бүгін есептелмеді — күнді қатыруға болады';
 
   @override

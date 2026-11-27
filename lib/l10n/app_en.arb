@@ -753,6 +753,7 @@
   "s10TodayFrozen": "Day frozen: the streak is kept",
   "s10TodayExcused": "Request approved: streak is paused",
   "s10TodayOff": "Not a school day today",
+  "s10TodayOffHomework": "No homework due for the next school day",
   "s10TodayMissed": "Today didn't count — you can use a freeze",
   "s10ExcusedTitle": "Request approved.",
   "s10ExcusedBody": "Your streak does not break or grow: it simply waits for you.",

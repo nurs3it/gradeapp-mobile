@@ -64,33 +64,50 @@ class _State extends ConsumerState<AttendanceScreen> {
       appBar: GNavBar(backLabel: l.back),
       body: id == null
           ? const Center(child: GLoader())
-          : ListView(
-              padding: EdgeInsets.fromLTRB(g, 8, g, 32 + MediaQuery.paddingOf(context).bottom),
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 4, bottom: 14),
-                  child: Semantics(
-                    header: true,
-                    child: Text(
-                      child == null ? l.p5Title : '${l.p5Title} · ${child.shortName}',
-                      style: context.t.title1,
-                    ),
+          : CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              slivers: [
+                GRefreshControl(
+                  onRefresh: () async {
+                    final month = _monthArgs(id, _month);
+                    ref.invalidate(attendanceRecordsProvider(month));
+                    if (term != null) {
+                      ref.invalidate(attendanceStatsProvider((studentId: id, from: term.start, to: term.end)));
+                    }
+                    await ref.read(attendanceRecordsProvider(month).future).catchError((_) => const <AttRecord>[]);
+                  },
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.fromLTRB(g, 8, g, 32 + MediaQuery.paddingOf(context).bottom),
+                  sliver: SliverList.list(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4, bottom: 14),
+                        child: Semantics(
+                          header: true,
+                          child: Text(
+                            child == null ? l.p5Title : '${l.p5Title} · ${child.shortName}',
+                            style: context.t.title1,
+                          ),
+                        ),
+                      ),
+                      if (term != null) _Percent(studentId: id, term: term),
+                      const SizedBox(height: 14),
+                      _Calendar(
+                        studentId: id,
+                        month: _month,
+                        selected: _day,
+                        onMonth: (d) => setState(() {
+                          _month = d;
+                          _day = null;
+                        }),
+                        onDay: (d) => setState(() => _day = _day == d ? null : d),
+                      ),
+                      if (_day != null) _DayLessons(studentId: id, date: _day!),
+                      _Absences(studentId: id, month: _month),
+                    ],
                   ),
                 ),
-                if (term != null) _Percent(studentId: id, term: term),
-                const SizedBox(height: 14),
-                _Calendar(
-                  studentId: id,
-                  month: _month,
-                  selected: _day,
-                  onMonth: (d) => setState(() {
-                    _month = d;
-                    _day = null;
-                  }),
-                  onDay: (d) => setState(() => _day = _day == d ? null : d),
-                ),
-                if (_day != null) _DayLessons(studentId: id, date: _day!),
-                _Absences(studentId: id, month: _month),
               ],
             ),
     );
@@ -119,10 +136,7 @@ class _Percent extends ConsumerWidget {
                     children: [
                       Text(l.p5Quarter(term.name).toUpperCase(), style: t.eyebrow.copyWith(color: c.ink2)),
                       const SizedBox(height: 4),
-                      Text(
-                        stats.rate == null ? '—' : '${fmtNum(stats.rate!.round())} %',
-                        style: t.title1,
-                      ),
+                      Text(stats.rate == null ? '—' : '${fmtNum(stats.rate!.round())} %', style: t.title1),
                     ],
                   ),
                 ),
@@ -131,7 +145,8 @@ class _Percent extends ConsumerWidget {
                   children: [
                     if (stats.absent > 0) Text(l.p5CountAbsent(stats.absent), style: t.footnote.copyWith(color: c.bad)),
                     if (stats.tardy > 0) Text(l.p5CountTardy(stats.tardy), style: t.footnote.copyWith(color: c.warn)),
-                    if (stats.excused > 0) Text(l.p5CountExcused(stats.excused), style: t.footnote.copyWith(color: c.ink2)),
+                    if (stats.excused > 0)
+                      Text(l.p5CountExcused(stats.excused), style: t.footnote.copyWith(color: c.ink2)),
                     if (stats.absent + stats.tardy + stats.excused == 0)
                       Text(l.p5NoMisses, style: t.footnote.copyWith(color: c.ok)),
                   ],
@@ -255,7 +270,13 @@ String _dayLabel(AppLocalizations l, DayClass c) => switch (c) {
 };
 
 class _DayCell extends StatelessWidget {
-  const _DayCell({required this.date, required this.cls, required this.selected, required this.isToday, required this.onTap});
+  const _DayCell({
+    required this.date,
+    required this.cls,
+    required this.selected,
+    required this.isToday,
+    required this.onTap,
+  });
   final DateTime date;
   final DayClass cls;
   final bool selected;
@@ -291,7 +312,13 @@ class _DayCell extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${date.day}', style: context.t.callout.copyWith(color: cls == DayClass.none ? c.ink3 : fg, fontWeight: FontWeight.w700)),
+                Text(
+                  '${date.day}',
+                  style: context.t.callout.copyWith(
+                    color: cls == DayClass.none ? c.ink3 : fg,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 if (icon != null) GIcon(icon, size: 14, color: fg),
               ],
             ),
@@ -353,7 +380,9 @@ class _DayLessons extends ConsumerWidget {
       children: [
         GSectionTitle(title: Fmt.weekdayDayMonth(DateTime.parse(date), context.localeTag)),
         if (!day.hasValue)
-          day.hasError ? GStateRow(title: l.errorTitle, message: l.errorOffline, tone: GTone.bad) : const GSkeleton(hero: false, rows: 3)
+          day.hasError
+              ? GStateRow(title: l.errorTitle, message: l.errorOffline, tone: GTone.bad)
+              : const GSkeleton(hero: false, rows: 3)
         else if (day.value!.lessons.isEmpty)
           GCard(child: GEmpty(title: l.p5NoLessons))
         else
@@ -388,7 +417,11 @@ class _DayLessons extends ConsumerWidget {
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          for (final gr in grades.take(2)) Padding(padding: const EdgeInsets.only(left: 6), child: GradeChipOf(grade: gr)),
+                          for (final gr in grades.take(2))
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6),
+                              child: GradeChipOf(grade: gr),
+                            ),
                           if (icon != null && grades.isEmpty) GIcon(icon, size: 20, color: fg),
                         ],
                       ),
@@ -430,7 +463,12 @@ class _Absences extends ConsumerWidget {
                   [
                     Fmt.dayMonth(DateTime.parse(r.date), loc),
                     hm(r.start),
-                    if (r.reason.isNotEmpty) r.reason else if (r.status == Presence.excused) l.p5Excused else l.p5NoReason,
+                    if (r.reason.isNotEmpty)
+                      r.reason
+                    else if (r.status == Presence.excused)
+                      l.p5Excused
+                    else
+                      l.p5NoReason,
                   ].join(' · '),
                 ),
                 trailing: r.status == Presence.absent
