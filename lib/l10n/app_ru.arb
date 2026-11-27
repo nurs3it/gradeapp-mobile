@@ -1704,5 +1704,206 @@
   "setReminders": "Напоминания об отметке посещаемости",
   "setLive": "«Идёт урок» на экране блокировки",
   "ntCheckInMissing": "Не отметился в школе",
-  "wgNextShort": "Дальше"
+  "wgNextShort": "Дальше",
+  "t6Praise": "Похвалить",
+  "t6Remark": "Замечание",
+  "t6PraiseTitle": "Похвала: {name}",
+  "@t6PraiseTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "t6RemarkTitle": "Замечание: {name}",
+  "@t6RemarkTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "t6TextHint": "Пара слов, если нужно (необязательно)",
+  "t6TagActive": "Был активен",
+  "t6TagHelped": "Помогал другим",
+  "t6TagProgress": "Заметный прогресс",
+  "t6TagGreatAnswer": "Отличный ответ",
+  "t6TagLate": "Опоздал",
+  "t6TagNoHomework": "Нет домашнего задания",
+  "t6TagDistracted": "Отвлекался",
+  "t6TagNoMaterials": "Нет принадлежностей",
+  "t9Substitution": "Замена",
+  "t9ForTeacher": "за {name}",
+  "@t9ForTeacher": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "t9TaughtBy": "ведёт {name}",
+  "@t9TaughtBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "t12Title": "Выполнение ДЗ",
+  "t12Done": "Выполнили {done} из {total}",
+  "@t12Done": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "t12AllDone": "Все выполнили",
+  "t12NotDone": "Не выполнили: {count}",
+  "@t12NotDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t12Remind": "Напомнить",
+  "t12Reminded": "Напоминание получили {count}",
+  "@t12Reminded": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t12TooSoon": "Можно раз в час",
+  "t12RemindFailed": "Не удалось отправить напоминание",
+  "t12Loading": "Считаем, кто сделал…",
+  "t12Open": "Кто сделал",
+  "t8Tab": "Мой класс",
+  "t8Came": "Пришли {came} из {total}",
+  "@t8Came": {
+    "placeholders": {
+      "came": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "t8Unmarked": "Без отметки: {count}",
+  "@t8Unmarked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t8AllMarked": "Все отмечены",
+  "t8NextLesson": "Дальше: {subject} в {time}",
+  "@t8NextLesson": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "t8RollCall": "Утренняя отметка",
+  "t8MarkClass": "Отметить класс за день",
+  "t8AllCame": "Все пришли",
+  "t8MarkSent": "Отметка класса отправляется",
+  "t8SourceExcuse": "По заявке",
+  "t8SourcePending": "Есть заявка",
+  "t8Requests": "Заявки на отсутствие",
+  "t8Approve": "Одобрить",
+  "t8Reject": "Отклонить",
+  "t8RejectTitle": "Почему отклоняете?",
+  "t8RejectHint": "Родитель увидит это сообщение",
+  "t8RejectSend": "Отклонить заявку",
+  "t8Approved": "Заявка одобрена",
+  "t8Rejected": "Заявка отклонена",
+  "t8ReviewFailed": "Не удалось отправить решение",
+  "t8Photo": "Фото к заявке",
+  "t8From": "Подала: {name}",
+  "@t8From": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "t8Week": "Неделя класса",
+  "t8WeekRate": "Посещаемость {rate}%",
+  "@t8WeekRate": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "t8WeekAbsent": "Пропусков: {count}",
+  "@t8WeekAbsent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t8WeekTardy": "Опозданий: {count}",
+  "@t8WeekTardy": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t8AtRisk": "В зоне риска",
+  "t8AtRiskNone": "Никого в зоне риска",
+  "t8OpenWeb": "Открыть в вебе",
+  "t8Empty": "В классе нет учеников",
+  "t8NotHomeroom": "Раздел для классных руководителей",
+  "t8InboxSub": "Одобрить можно в разделе «Мой класс»",
+  "t8WhatDay": "Отметка класса за день: {count}",
+  "@t8WhatDay": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "t8ClassPick": "Класс {name}",
+  "@t8ClassPick": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "wgChildIn": "В школе с {time}",
+  "@wgChildIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "wgChildInNoTime": "В школе",
+  "wgChildNotYet": "Ещё нет отметки",
+  "wgChildNewGrades": "{count, plural, one{{count} новая оценка} few{{count} новые оценки} other{{count} новых оценок}}",
+  "@wgChildNewGrades": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wgChildNoNew": "Новых оценок нет",
+  "wgChildAbsent": "Не в школе"
 }

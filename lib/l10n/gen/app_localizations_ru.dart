@@ -2258,4 +2258,245 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get wgNextShort => 'Дальше';
+
+  @override
+  String get t6Praise => 'Похвалить';
+
+  @override
+  String get t6Remark => 'Замечание';
+
+  @override
+  String t6PraiseTitle(String name) {
+    return 'Похвала: $name';
+  }
+
+  @override
+  String t6RemarkTitle(String name) {
+    return 'Замечание: $name';
+  }
+
+  @override
+  String get t6TextHint => 'Пара слов, если нужно (необязательно)';
+
+  @override
+  String get t6TagActive => 'Был активен';
+
+  @override
+  String get t6TagHelped => 'Помогал другим';
+
+  @override
+  String get t6TagProgress => 'Заметный прогресс';
+
+  @override
+  String get t6TagGreatAnswer => 'Отличный ответ';
+
+  @override
+  String get t6TagLate => 'Опоздал';
+
+  @override
+  String get t6TagNoHomework => 'Нет домашнего задания';
+
+  @override
+  String get t6TagDistracted => 'Отвлекался';
+
+  @override
+  String get t6TagNoMaterials => 'Нет принадлежностей';
+
+  @override
+  String get t9Substitution => 'Замена';
+
+  @override
+  String t9ForTeacher(String name) {
+    return 'за $name';
+  }
+
+  @override
+  String t9TaughtBy(String name) {
+    return 'ведёт $name';
+  }
+
+  @override
+  String get t12Title => 'Выполнение ДЗ';
+
+  @override
+  String t12Done(int done, int total) {
+    return 'Выполнили $done из $total';
+  }
+
+  @override
+  String get t12AllDone => 'Все выполнили';
+
+  @override
+  String t12NotDone(int count) {
+    return 'Не выполнили: $count';
+  }
+
+  @override
+  String get t12Remind => 'Напомнить';
+
+  @override
+  String t12Reminded(int count) {
+    return 'Напоминание получили $count';
+  }
+
+  @override
+  String get t12TooSoon => 'Можно раз в час';
+
+  @override
+  String get t12RemindFailed => 'Не удалось отправить напоминание';
+
+  @override
+  String get t12Loading => 'Считаем, кто сделал…';
+
+  @override
+  String get t12Open => 'Кто сделал';
+
+  @override
+  String get t8Tab => 'Мой класс';
+
+  @override
+  String t8Came(int came, int total) {
+    return 'Пришли $came из $total';
+  }
+
+  @override
+  String t8Unmarked(int count) {
+    return 'Без отметки: $count';
+  }
+
+  @override
+  String get t8AllMarked => 'Все отмечены';
+
+  @override
+  String t8NextLesson(String subject, String time) {
+    return 'Дальше: $subject в $time';
+  }
+
+  @override
+  String get t8RollCall => 'Утренняя отметка';
+
+  @override
+  String get t8MarkClass => 'Отметить класс за день';
+
+  @override
+  String get t8AllCame => 'Все пришли';
+
+  @override
+  String get t8MarkSent => 'Отметка класса отправляется';
+
+  @override
+  String get t8SourceExcuse => 'По заявке';
+
+  @override
+  String get t8SourcePending => 'Есть заявка';
+
+  @override
+  String get t8Requests => 'Заявки на отсутствие';
+
+  @override
+  String get t8Approve => 'Одобрить';
+
+  @override
+  String get t8Reject => 'Отклонить';
+
+  @override
+  String get t8RejectTitle => 'Почему отклоняете?';
+
+  @override
+  String get t8RejectHint => 'Родитель увидит это сообщение';
+
+  @override
+  String get t8RejectSend => 'Отклонить заявку';
+
+  @override
+  String get t8Approved => 'Заявка одобрена';
+
+  @override
+  String get t8Rejected => 'Заявка отклонена';
+
+  @override
+  String get t8ReviewFailed => 'Не удалось отправить решение';
+
+  @override
+  String get t8Photo => 'Фото к заявке';
+
+  @override
+  String t8From(String name) {
+    return 'Подала: $name';
+  }
+
+  @override
+  String get t8Week => 'Неделя класса';
+
+  @override
+  String t8WeekRate(String rate) {
+    return 'Посещаемость $rate%';
+  }
+
+  @override
+  String t8WeekAbsent(int count) {
+    return 'Пропусков: $count';
+  }
+
+  @override
+  String t8WeekTardy(int count) {
+    return 'Опозданий: $count';
+  }
+
+  @override
+  String get t8AtRisk => 'В зоне риска';
+
+  @override
+  String get t8AtRiskNone => 'Никого в зоне риска';
+
+  @override
+  String get t8OpenWeb => 'Открыть в вебе';
+
+  @override
+  String get t8Empty => 'В классе нет учеников';
+
+  @override
+  String get t8NotHomeroom => 'Раздел для классных руководителей';
+
+  @override
+  String get t8InboxSub => 'Одобрить можно в разделе «Мой класс»';
+
+  @override
+  String t8WhatDay(int count) {
+    return 'Отметка класса за день: $count';
+  }
+
+  @override
+  String t8ClassPick(String name) {
+    return 'Класс $name';
+  }
+
+  @override
+  String wgChildIn(String time) {
+    return 'В школе с $time';
+  }
+
+  @override
+  String get wgChildInNoTime => 'В школе';
+
+  @override
+  String get wgChildNotYet => 'Ещё нет отметки';
+
+  @override
+  String wgChildNewGrades(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count новых оценок',
+      few: '$count новые оценки',
+      one: '$count новая оценка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wgChildNoNew => 'Новых оценок нет';
+
+  @override
+  String get wgChildAbsent => 'Не в школе';
 }
