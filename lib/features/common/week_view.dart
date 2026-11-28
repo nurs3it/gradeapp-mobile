@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +13,14 @@ import 'school_providers.dart';
 
 const _daysPerWeek = 6; // Mon–Sat
 const _origin = 600 * _daysPerWeek; // page index of the anchor Monday
+
+/// From this width (landscape, tablets) the week shows as day columns —
+/// «Неделя целиком» (S4 variant B) — instead of one day per page.
+const weekGridMinWidth = 700.0;
+
+/// Width of one day column: a sixth of the screen, never narrower than a
+/// readable lesson row (narrower screens scroll the columns sideways).
+double weekColumnWidth(double available) => math.max(250, available / _daysPerWeek);
 
 /// Week (S4, §3.3): strip of days with dots, then day pages in a PageView
 /// (horizontal swipe never fights the vertical list). Shared by learners and
@@ -39,8 +49,10 @@ class WeekView extends ConsumerStatefulWidget {
 
 class _WeekViewState extends ConsumerState<WeekView> {
   late final DateTime _anchor = mondayOf(DateTime.now());
-  late final PageController _pages = PageController(initialPage: _todayPage);
+  late PageController _pages = PageController(initialPage: _todayPage);
   late int _page = _todayPage;
+  final _columns = ScrollController();
+  bool _wide = false;
 
   int get _todayPage {
     final now = DateTime.now();
@@ -58,6 +70,12 @@ class _WeekViewState extends ConsumerState<WeekView> {
 
   void _go(int page) {
     GHaptics.selection();
+    if (_wide || !_pages.hasClients) {
+      // Columns: the strip picks the week; the picked day scrolls into view.
+      setState(() => _page = page);
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showColumn(page));
+      return;
+    }
     if (GMotion.reduce(context)) {
       _pages.jumpToPage(page);
     } else {
@@ -65,9 +83,18 @@ class _WeekViewState extends ConsumerState<WeekView> {
     }
   }
 
+  void _showColumn(int page) {
+    if (!_columns.hasClients) return;
+    final i = (page - _origin) % _daysPerWeek;
+    final w = weekColumnWidth(_columns.position.viewportDimension);
+    final target = (i * w).clamp(0.0, _columns.position.maxScrollExtent);
+    _columns.animateTo(target, duration: SpringCurve.smooth.duration, curve: SpringCurve.smooth);
+  }
+
   @override
   void dispose() {
     _pages.dispose();
+    _columns.dispose();
     super.dispose();
   }
 
@@ -88,6 +115,13 @@ class _WeekViewState extends ConsumerState<WeekView> {
     final range = Fmt.range(monday, monday.add(const Duration(days: _daysPerWeek - 1)), context.localeTag);
     final isToday = isoDate(date) == isoDate(now);
     final top = MediaQuery.paddingOf(context).top;
+    final wide = MediaQuery.sizeOf(context).width >= weekGridMinWidth;
+    if (_wide && !wide) {
+      // Back to pages (rotation): open on the day the columns were showing.
+      _pages.dispose();
+      _pages = PageController(initialPage: _page);
+    }
+    _wide = wide;
 
     return Scaffold(
       backgroundColor: c.canvas,
@@ -138,17 +172,44 @@ class _WeekViewState extends ConsumerState<WeekView> {
               onWeek: (step) => _go(_page + step * _daysPerWeek),
             ),
             Expanded(
-              child: PageView.builder(
-                controller: _pages,
-                onPageChanged: (p) => setState(() => _page = p),
-                itemBuilder: (context, page) => _DayPage(
-                  date: _dateOf(page),
-                  now: now,
-                  watchWeek: widget.watchWeek,
-                  rowBuilder: widget.rowBuilder,
-                  onRefresh: widget.onRefresh,
-                ),
-              ),
+              child: wide
+                  ? LayoutBuilder(
+                      builder: (context, box) {
+                        final w = weekColumnWidth(box.maxWidth);
+                        return ListView.builder(
+                          controller: _columns,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _daysPerWeek,
+                          itemBuilder: (context, i) {
+                            final d = monday.add(Duration(days: i));
+                            return Container(
+                              width: w,
+                              decoration: isoDate(d) == isoDate(now)
+                                  ? BoxDecoration(color: c.primarySoft.withValues(alpha: 0.35))
+                                  : null,
+                              child: _DayPage(
+                                date: d,
+                                now: now,
+                                watchWeek: widget.watchWeek,
+                                rowBuilder: widget.rowBuilder,
+                                onRefresh: widget.onRefresh,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : PageView.builder(
+                      controller: _pages,
+                      onPageChanged: (p) => setState(() => _page = p),
+                      itemBuilder: (context, page) => _DayPage(
+                        date: _dateOf(page),
+                        now: now,
+                        watchWeek: widget.watchWeek,
+                        rowBuilder: widget.rowBuilder,
+                        onRefresh: widget.onRefresh,
+                      ),
+                    ),
             ),
           ],
         ),
