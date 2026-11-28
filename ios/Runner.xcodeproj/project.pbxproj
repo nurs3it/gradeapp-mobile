@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7A1000CA1B2C3D4E5F6000C /* ControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */; };
+		D7A1000DA1B2C3D4E5F6000D /* ControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */; };
+		D7A1000AA1B2C3D4E5F6000A /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A10009A1B2C3D4E5F60009 /* Controls.swift */; };
 		D7A10002A1B2C3D4E5F60002 /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A10001A1B2C3D4E5F60001 /* AppShortcuts.swift */; };
 		D7A10004A1B2C3D4E5F60004 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D7A10003A1B2C3D4E5F60003 /* Localizable.xcstrings */; };
 		D7A10006A1B2C3D4E5F60006 /* AppShortcuts.strings in Resources */ = {isa = PBXBuildFile; fileRef = D7A10005A1B2C3D4E5F60005 /* AppShortcuts.strings */; };
@@ -81,6 +84,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlIntents.swift; sourceTree = "<group>"; };
+		D7A10009A1B2C3D4E5F60009 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		D7A10001A1B2C3D4E5F60001 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		D7A10003A1B2C3D4E5F60003 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		D7A10007A1B2C3D4E5F60007 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppShortcuts.strings; sourceTree = "<group>"; };
@@ -273,6 +278,8 @@
 				D406034C090B3B0CA69505E3 /* Common.swift */,
 				E8891EE92750E8CDF33FCF4E /* DayWidget.swift */,
 				C3A10001D0C5E1B200A0F001 /* ChildStatusWidget.swift */,
+				D7A10009A1B2C3D4E5F60009 /* Controls.swift */,
+				D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */,
 				7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */,
 				0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */,
 				CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */,
@@ -553,6 +560,8 @@
 				4A85DB5D028237B46C6D9372 /* Common.swift in Sources */,
 				60F0F3BCFF044B771C862183 /* DayWidget.swift in Sources */,
 				C3A10002D0C5E1B200A0F002 /* ChildStatusWidget.swift in Sources */,
+				D7A1000AA1B2C3D4E5F6000A /* Controls.swift in Sources */,
+				D7A1000CA1B2C3D4E5F6000C /* ControlIntents.swift in Sources */,
 				197912F6DF1E2EF5D9DF66D7 /* GradeAppWidgets.swift in Sources */,
 				38FB02E6F9D6E33FA6B60888 /* LessonLiveActivity.swift in Sources */,
 				87CBC5C351FD3DECC180915C /* NextLessonWidget.swift in Sources */,
@@ -568,6 +577,7 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				D7A10002A1B2C3D4E5F60002 /* AppShortcuts.swift in Sources */,
+				D7A1000DA1B2C3D4E5F6000D /* ControlIntents.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */,
 				C7B184FE0B6F555E251C18B1 /* LessonActivityAttributes.swift in Sources */,

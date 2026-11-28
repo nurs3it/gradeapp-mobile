@@ -11,6 +11,12 @@ import UserNotifications
     // Plugins register after launch with the implicit engine, so
     // firebase_messaging misses its chance to ask for the APNs token itself.
     application.registerForRemoteNotifications()
+    if #available(iOS 18.0, *) {
+      // W7 Controls: their intents run here and open a role-neutral link.
+      ControlLink.open = { target in
+        if let url = URL(string: "gradeapp://app/go/\(target)") { UIApplication.shared.open(url) }
+      }
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 

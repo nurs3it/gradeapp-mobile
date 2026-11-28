@@ -10,5 +10,9 @@ struct GradeAppWidgets: WidgetBundle {
     if #available(iOS 16.2, *) {
       LessonLiveActivity()
     }
+    if #available(iOS 18.0, *) {
+      TodayControl()
+      CheckInControl()
+    }
   }
 }
