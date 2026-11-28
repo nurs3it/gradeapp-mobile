@@ -29,6 +29,7 @@ class InboxScreen extends ConsumerWidget {
     final day = ref.watch(teacherDayProvider(isoDate(now))).value;
     final unmarked = day?.overdue.where((t) => t.needsAttendance).length ?? 0;
     final excuses = ref.watch(pulseProvider.select((p) => p.inbox));
+    final chats = ref.watch(pulseProvider.select((p) => p.chatUnread));
     final homeroom = ref.watch(hasHomeroomProvider);
     final list = ref.watch(notificationsProvider);
     final read = ref.watch(readIdsProvider);
@@ -36,6 +37,20 @@ class InboxScreen extends ConsumerWidget {
     final schedule = items.where((n) => n.type.startsWith('lesson.')).toList();
     final other = items.where((n) => !n.type.startsWith('lesson.')).toList();
     final unread = items.where((n) => !n.read && !read.contains(n.id)).toList();
+    final messages = GGroup(
+      inset: 68,
+      children: [
+        GRow(
+          minHeight: 64,
+          leading: const _Plate(icon: GIcons.chat, tone: GTone.info),
+          title: Text(l.chatTitle),
+          subtitle: Text(chats > 0 ? l.chatUnreadCount(chats) : l.chatInboxSub),
+          trailing: chats > 0 ? GCountBadge(count: chats) : null,
+          chevron: chats == 0,
+          onTap: () => context.push('/chat'),
+        ),
+      ],
+    );
     final action = <Widget>[
       if (rejected > 0)
         GRow(
@@ -122,6 +137,7 @@ class InboxScreen extends ConsumerWidget {
           padding: EdgeInsets.symmetric(horizontal: g),
           sliver: SliverList.list(
             children: [
+              messages,
               if (empty) GEmpty(title: l.inboxEmpty, message: l.inboxEmptyHint, icon: GIcons.inbox),
               if (action.isNotEmpty) ...[GSectionTitle(title: l.inboxAction), GGroup(inset: 68, children: action)],
               if (schedule.isNotEmpty) ...[GSectionTitle(title: l.inboxSchedule), notifGroup(schedule)],

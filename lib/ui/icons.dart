@@ -31,6 +31,7 @@ abstract final class GIcons {
   static const teachers = Symbols.groups_rounded;
   static const payments = Symbols.payments_rounded;
   static const chat = Symbols.chat_rounded;
+  static const send = Symbols.send_rounded;
   static const ok = Symbols.check_circle_rounded;
   static const error = Symbols.error_rounded;
   static const info = Symbols.info_rounded;

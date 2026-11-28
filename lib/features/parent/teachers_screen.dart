@@ -3,17 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/json.dart';
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
+import '../chat/chat_screens.dart';
 import '../common/presence.dart';
 import '../learner/learner_providers.dart';
-
-/// Web chat (P9, stage 3): «Написать» opens it in the browser.
-const chatWebUrl = 'https://grade-app.kz/chat';
 
 class ChildTeacher {
   const ChildTeacher({
@@ -56,14 +53,12 @@ final childTeachersProvider = StreamProvider.family<List<ChildTeacher>, String>(
   ),
 );
 
-Future<void> openChat() => launchUrl(Uri.parse(chatWebUrl), mode: LaunchMode.externalApplication);
-
-class _TeacherRow extends StatelessWidget {
+class _TeacherRow extends ConsumerWidget {
   const _TeacherRow({required this.t});
   final ChildTeacher t;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
     return GRow(
       minHeight: 68,
@@ -78,7 +73,8 @@ class _TeacherRow extends StatelessWidget {
         size: GButtonSize.s,
         variant: GButtonVariant.tinted,
         semanticLabel: l.p9WriteTo(t.name),
-        onPressed: () => unawaited(openChat()),
+        // Stage 4: the chat opens in the app.
+        onPressed: t.userId.isEmpty ? null : () => unawaited(openChatWith(context, ref, t.userId)),
       ),
     );
   }

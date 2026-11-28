@@ -10,8 +10,17 @@ import '../auth/auth_controller.dart';
 
 /// Badges from `GET /me/pulse/` (C4).
 class Pulse {
-  const Pulse({this.notificationsUnread = 0, this.inbox = 0, this.billingPayable = 0, this.pollSeconds = 60});
+  const Pulse({
+    this.notificationsUnread = 0,
+    this.inbox = 0,
+    this.billingPayable = 0,
+    this.chatUnread = 0,
+    this.pollSeconds = 60,
+  });
   final int notificationsUnread;
+
+  /// Conversations with something unread.
+  final int chatUnread;
   final int inbox;
   final int billingPayable;
   final int pollSeconds;
@@ -20,6 +29,7 @@ class Pulse {
     notificationsUnread: (j.number('notifications_unread') ?? 0).toInt(),
     inbox: ((j['inbox'] as Json?)?.number('total') ?? 0).toInt(),
     billingPayable: ((j['billing'] as Json?)?.number('payable') ?? 0).toInt(),
+    chatUnread: (j.number('chat_unread') ?? 0).toInt(),
     pollSeconds: (j.number('poll_seconds') ?? 60).toInt().clamp(30, 600),
   );
 }
@@ -71,7 +81,12 @@ class PulseController extends Notifier<Pulse> {
 
   /// After reading notifications: drop the badge at once.
   void seen() =>
-      state = Pulse(inbox: state.inbox, billingPayable: state.billingPayable, pollSeconds: state.pollSeconds);
+      state = Pulse(
+        inbox: state.inbox,
+        billingPayable: state.billingPayable,
+        chatUnread: state.chatUnread,
+        pollSeconds: state.pollSeconds,
+      );
 }
 
 final pulseProvider = NotifierProvider<PulseController, Pulse>(PulseController.new);

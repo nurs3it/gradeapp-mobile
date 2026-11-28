@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../features/auth/auth_controller.dart';
 import '../features/auth/login_screens.dart';
 import '../features/auth/user.dart';
+import '../features/chat/chat_screens.dart';
 import '../features/common/events.dart';
 import '../features/learner/grades_screen.dart';
 import '../features/learner/streaks.dart';
@@ -171,6 +172,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/teachers',
         builder: (_, s) => TeachersScreen(studentId: s.uri.queryParameters['student']),
+      ),
+      GoRoute(
+        path: '/chat',
+        builder: (_, _) => const ChatListScreen(),
+        routes: [GoRoute(path: ':id', builder: (_, s) => ChatScreen(id: s.pathParameters['id']!))],
       ),
       GoRoute(path: '/events', builder: (_, _) => const EventsScreen()),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),

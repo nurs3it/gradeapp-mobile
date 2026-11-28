@@ -167,6 +167,7 @@ String? notificationRoute(AppNotification n, AppRole role) {
     ('checkin' || 'attendance', AppRole.parent) => '/p/today',
     ('excuse' || 'invoice', AppRole.parent) => '/p/family',
     ('excuse', AppRole.teacher) => '/t/inbox',
+    ('conversation', _) when id.isNotEmpty => '/chat/$id',
     _ => null,
   };
 }
@@ -190,7 +191,7 @@ Future<void> openNotification(BuildContext context, WidgetRef ref, AppNotificati
   final role = ref.read(activeRoleProvider);
   final route = role == null ? null : notificationRoute(n, role);
   if (route == null || !context.mounted) return;
-  if (route.startsWith('/lesson/') || route.startsWith('/week-summary')) {
+  if (route.startsWith('/lesson/') || route.startsWith('/week-summary') || route.startsWith('/chat')) {
     unawaited(context.push(route));
   } else {
     context.go(route);

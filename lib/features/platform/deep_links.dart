@@ -39,6 +39,8 @@ String? routeForWebLink(Uri uri) {
       return '/checkin';
     case 'notifications':
       return '/notifications';
+    case 'chat':
+      return seg.length > 1 ? '/chat/${seg[1]}' : '/chat';
   }
   return null;
 }

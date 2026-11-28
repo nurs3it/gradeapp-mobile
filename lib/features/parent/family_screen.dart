@@ -6,6 +6,7 @@ import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
 import '../common/models.dart';
+import '../common/pulse.dart';
 import '../common/school_providers.dart';
 import '../learner/streaks.dart';
 import '../learner/weekly_summary.dart';
@@ -196,6 +197,7 @@ class _FamilyEntries extends ConsumerWidget {
     final c = context.c;
     final digest = ref.watch(mobileFlagsProvider).weeklyDigestEnabled;
     final billing = ref.watch(billingVisibleProvider);
+    final chats = ref.watch(pulseProvider.select((p) => p.chatUnread));
     Widget row(IconData icon, String title, String path) => GRow(
       leading: GIcon(icon, size: 22, color: c.primaryText),
       title: Text(title),
@@ -207,6 +209,13 @@ class _FamilyEntries extends ConsumerWidget {
       child: GGroup(
         inset: 52,
         children: [
+          GRow(
+            leading: GIcon(GIcons.chat, size: 22, color: c.primaryText),
+            title: Text(l.chatTitle),
+            trailing: chats > 0 ? GCountBadge(count: chats) : null,
+            chevron: chats == 0,
+            onTap: () => context.push('/chat'),
+          ),
           row(GIcons.week, l.p5Title, '/attendance?student=$childId'),
           if (digest) row(GIcons.summary, l.p6Title, '/week-summary?student=$childId&week=${isoWeekId(DateTime.now())}'),
           if (billing) row(GIcons.payments, l.p8Title, '/billing'),
