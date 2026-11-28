@@ -3223,4 +3223,10 @@ class AppLocalizationsKk extends AppLocalizations {
   String s14ShareText(String number, String url) {
     return 'Оқу туралы анықтама № $number. Түпнұсқалығын тексеру: $url';
   }
+
+  @override
+  String get w6Setting => 'Оқу күні құлыптау экранында';
+
+  @override
+  String get w6SettingHint => 'Ағымдағы сабақ және қоңырауға дейінгі уақыт. Бағасыз.';
 }

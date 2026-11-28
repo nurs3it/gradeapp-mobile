@@ -5,11 +5,6 @@ import WidgetKit
 /// W7 Controls (Control Center, Lock Screen, Action button): one tap opens the
 /// app on a role-neutral link; the Flutter router picks the screen for the
 /// signed-in role (lib/app/router.dart, shortcutRoute).
-@available(iOS 18.0, *)
-private func trs(_ ru: String, _ kk: String, _ en: String) -> String {
-  let lang = Locale.preferredLanguages.first?.prefix(2) ?? "ru"
-  return lang == "kk" ? kk : lang == "en" ? en : ru
-}
 
 @available(iOS 18.0, *)
 struct TodayControl: ControlWidget {

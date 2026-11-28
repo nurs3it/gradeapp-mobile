@@ -12,6 +12,8 @@ import '../../core/env.dart';
 import '../../core/providers.dart';
 import '../../l10n/l10n.dart';
 import '../../ui/ui.dart';
+import '../common/school_providers.dart';
+import '../platform/day_live.dart';
 import '../auth/auth_controller.dart';
 import '../auth/user.dart';
 import '../common/models.dart';
@@ -149,6 +151,8 @@ class _ProfileSheet extends ConsumerWidget {
                 onTap: () => _pickTheme(context, ref),
               ),
               const _AppLockRow(),
+              if (role == AppRole.student && DayLive.supported && ref.watch(mobileFlagsProvider).liveActivityEnabled)
+                const _DayLiveRow(),
               GRow(
                 minHeight: GSpace.rowCompact,
                 leading: GIcon(GIcons.openInNew, size: 20, color: c.ink2),
@@ -520,6 +524,46 @@ class _AppLockRow extends ConsumerWidget {
       subtitle: Text(l.lockSettingHint),
       trailing: Switch.adaptive(value: on, activeTrackColor: GColors.brand, onChanged: (v) => unawaited(toggle(v))),
       onTap: () => unawaited(toggle(!on)),
+    );
+  }
+}
+
+/// W6: opt-in «Мой учебный день» on the lock screen (iOS).
+class _DayLiveRow extends ConsumerStatefulWidget {
+  const _DayLiveRow();
+
+  @override
+  ConsumerState<_DayLiveRow> createState() => _DayLiveRowState();
+}
+
+class _DayLiveRowState extends ConsumerState<_DayLiveRow> {
+  bool? _on;
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(DayLive.enabled(ref.read(prefsProvider)).then((v) => mounted ? setState(() => _on = v) : null));
+  }
+
+  Future<void> _toggle(bool want) async {
+    GHaptics.selection();
+    setState(() => _on = want);
+    await DayLive.setEnabled(want, prefs: ref.read(prefsProvider));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final c = context.c;
+    final on = _on ?? false;
+    return GRow(
+      minHeight: GSpace.rowCompact,
+      leading: GIcon(GIcons.clock, size: 20, color: c.ink2),
+      title: Text(l.w6Setting),
+      subtitle: Text(l.w6SettingHint),
+      subtitleMaxLines: 2,
+      trailing: Switch.adaptive(value: on, activeTrackColor: GColors.brand, onChanged: (v) => unawaited(_toggle(v))),
+      onTap: () => unawaited(_toggle(!on)),
     );
   }
 }

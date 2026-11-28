@@ -3311,4 +3311,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String s14ShareText(String number, String url) {
     return 'Study certificate No. $number. Check it here: $url';
   }
+
+  @override
+  String get w6Setting => 'School day on the lock screen';
+
+  @override
+  String get w6SettingHint => 'The current lesson and time to the bell. No grades.';
 }

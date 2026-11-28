@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7A1000FA1B2C3D4E5F6000F /* DayActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000EA1B2C3D4E5F6000E /* DayActivityAttributes.swift */; };
+		D7A10010A1B2C3D4E5F60010 /* DayActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000EA1B2C3D4E5F6000E /* DayActivityAttributes.swift */; };
+		D7A10012A1B2C3D4E5F60012 /* DayLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A10011A1B2C3D4E5F60011 /* DayLiveActivity.swift */; };
 		D7A1000CA1B2C3D4E5F6000C /* ControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */; };
 		D7A1000DA1B2C3D4E5F6000D /* ControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */; };
 		D7A1000AA1B2C3D4E5F6000A /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A10009A1B2C3D4E5F60009 /* Controls.swift */; };
@@ -84,6 +87,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D7A1000EA1B2C3D4E5F6000E /* DayActivityAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DayActivityAttributes.swift; sourceTree = "<group>"; };
+		D7A10011A1B2C3D4E5F60011 /* DayLiveActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DayLiveActivity.swift; sourceTree = "<group>"; };
 		D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlIntents.swift; sourceTree = "<group>"; };
 		D7A10009A1B2C3D4E5F60009 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		D7A10001A1B2C3D4E5F60001 /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
@@ -183,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B3780821D44FECDDD0DB80A7 /* LessonActivityAttributes.swift */,
+				D7A1000EA1B2C3D4E5F6000E /* DayActivityAttributes.swift */,
 			);
 			name = Shared;
 			path = Shared;
@@ -282,6 +288,7 @@
 				D7A1000BA1B2C3D4E5F6000B /* ControlIntents.swift */,
 				7AE8FA3EE5A659FE8EC60014 /* GradeAppWidgets.swift */,
 				0B85AE8E10BC433084D9B25F /* LessonLiveActivity.swift */,
+				D7A10011A1B2C3D4E5F60011 /* DayLiveActivity.swift */,
 				CB4DA2FF234852AC8BD10C5B /* NextLessonWidget.swift */,
 				58671A9936990612DC221318 /* Snapshot.swift */,
 				D350473D7C27191A3559F716 /* Tokens.swift */,
@@ -564,10 +571,12 @@
 				D7A1000CA1B2C3D4E5F6000C /* ControlIntents.swift in Sources */,
 				197912F6DF1E2EF5D9DF66D7 /* GradeAppWidgets.swift in Sources */,
 				38FB02E6F9D6E33FA6B60888 /* LessonLiveActivity.swift in Sources */,
+				D7A10012A1B2C3D4E5F60012 /* DayLiveActivity.swift in Sources */,
 				87CBC5C351FD3DECC180915C /* NextLessonWidget.swift in Sources */,
 				91D7D7704515B19EEA335973 /* Snapshot.swift in Sources */,
 				1F96D0A2C9F65FD734D4AC51 /* Tokens.swift in Sources */,
 				BF49FDC3AEF75EA58226BF1A /* LessonActivityAttributes.swift in Sources */,
+				D7A1000FA1B2C3D4E5F6000F /* DayActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +590,7 @@
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				7884E8682EC3CC0700C636F2 /* SceneDelegate.swift in Sources */,
 				C7B184FE0B6F555E251C18B1 /* LessonActivityAttributes.swift in Sources */,
+				D7A10010A1B2C3D4E5F60010 /* DayActivityAttributes.swift in Sources */,
 				2CFD34A5F9C46D141F538F37 /* LiveActivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

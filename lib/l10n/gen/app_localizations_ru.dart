@@ -3399,4 +3399,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String s14ShareText(String number, String url) {
     return 'Справка об обучении № $number. Проверить подлинность: $url';
   }
+
+  @override
+  String get w6Setting => 'Учебный день на экране блокировки';
+
+  @override
+  String get w6SettingHint => 'Текущий урок и время до звонка. Без оценок.';
 }

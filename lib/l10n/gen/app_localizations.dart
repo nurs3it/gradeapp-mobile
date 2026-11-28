@@ -5654,6 +5654,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Справка об обучении № {number}. Проверить подлинность: {url}'**
   String s14ShareText(String number, String url);
+
+  /// No description provided for @w6Setting.
+  ///
+  /// In ru, this message translates to:
+  /// **'Учебный день на экране блокировки'**
+  String get w6Setting;
+
+  /// No description provided for @w6SettingHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текущий урок и время до звонка. Без оценок.'**
+  String get w6SettingHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

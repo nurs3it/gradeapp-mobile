@@ -9,6 +9,7 @@ struct GradeAppWidgets: WidgetBundle {
     ChildStatusWidget()
     if #available(iOS 16.2, *) {
       LessonLiveActivity()
+      DayLiveActivity()
     }
     if #available(iOS 18.0, *) {
       TodayControl()

@@ -8,8 +8,16 @@ import 'models.dart';
 
 /// School flags of the mobile app (B9): a disabled flag hides the feature.
 class MobileFlags {
-  const MobileFlags({this.streaksEnabled = false, this.weeklyDigestEnabled = false, this.checkinMissingAlert = false});
+  const MobileFlags({
+    this.streaksEnabled = false,
+    this.weeklyDigestEnabled = false,
+    this.checkinMissingAlert = false,
+    this.liveActivityEnabled = false,
+  });
   final bool streaksEnabled;
+
+  /// W6 «Мой учебный день» (backend B6).
+  final bool liveActivityEnabled;
   final bool weeklyDigestEnabled;
   final bool checkinMissingAlert;
 
@@ -17,6 +25,7 @@ class MobileFlags {
     streaksEnabled: j.flag('streaks_enabled'),
     weeklyDigestEnabled: j.flag('weekly_digest_enabled'),
     checkinMissingAlert: j.flag('checkin_missing_alert'),
+    liveActivityEnabled: j.flag('live_activity_enabled'),
   );
 }
 

@@ -1022,5 +1022,7 @@
   "s14OpenPdf": "PDF",
   "s14Share": "Check link",
   "s14IssuedNo": "Certificate No. {number} is ready",
-  "s14ShareText": "Study certificate No. {number}. Check it here: {url}"
+  "s14ShareText": "Study certificate No. {number}. Check it here: {url}",
+  "w6Setting": "School day on the lock screen",
+  "w6SettingHint": "The current lesson and time to the bell. No grades."
 }

@@ -9,7 +9,10 @@ import '../common/events.dart';
 import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/now_next.dart';
+import '../auth/auth_controller.dart';
+import '../common/school_providers.dart';
 import '../learner/learner_hero.dart';
+import '../platform/day_live.dart';
 import '../learner/learner_providers.dart';
 import '../learner/school_life.dart';
 import '../learner/seen.dart';
@@ -31,6 +34,16 @@ class StudentTodayScreen extends ConsumerWidget {
     final id = ref.watch(myStudentIdProvider);
     final today = isoDate(now);
     final day = id == null ? null : ref.watch(learnerDayProvider((studentId: id, date: today)));
+
+    // W6: keep the «Мой учебный день» Live Activity in step while open.
+    final lessons = day?.value?.lessons;
+    if (id != null && lessons != null && ref.watch(mobileFlagsProvider).liveActivityEnabled && DayLive.supported) {
+      final name = ref.read(authProvider).value?.firstName ?? '';
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await DayLive.bind(dio: ref.read(dioProvider), studentId: id, prefs: ref.read(prefsProvider));
+        await DayLive.sync(lessons: lessons, firstName: name, now: DateTime.now());
+      });
+    }
 
     Future<void> refresh() async {
       if (id == null) return;
