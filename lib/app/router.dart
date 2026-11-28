@@ -93,7 +93,14 @@ final routerProvider = Provider<GoRouter>((ref) {
     if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
     if (link != null && link != loc) return link;
     final shortcut = shortcutRoute(loc, role);
-    if (shortcut != null) return shortcut;
+    if (shortcut != null) {
+      // Full-screen targets go on top of the home tab, not in its place.
+      if (!shortcut.startsWith(_prefixOf(role))) {
+        ref.read(deferredPushProvider.notifier).set(shortcut);
+        return homeOf(role);
+      }
+      return shortcut;
+    }
     if (childId != null && role == AppRole.parent) {
       ref.read(selectedChildProvider.notifier).select(childId);
       ref.read(familyModeProvider.notifier).set(false);

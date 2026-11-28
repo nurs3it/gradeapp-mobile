@@ -10,6 +10,7 @@ import '../../ui/ui.dart';
 import '../auth/user.dart';
 import '../common/pulse.dart';
 import '../notifications/push.dart';
+import '../platform/deep_links.dart';
 import '../teacher/my_class_providers.dart' show hasHomeroomProvider;
 
 class _Signal extends ChangeNotifier {
@@ -66,6 +67,13 @@ class AppShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     _offerPush(context, ref);
+    // A shortcut's full-screen target (chat, check-in) opens over the tab.
+    if (ref.watch(deferredPushProvider) != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final r = ref.read(deferredPushProvider.notifier).take();
+        if (r != null && context.mounted) unawaited(GoRouter.of(context).push(r));
+      });
+    }
     final l = context.l10n;
     final rejected = ref.watch(outboxStateProvider.select((s) => s.value?.rejected.length ?? 0));
     final inbox = ref.watch(pulseProvider.select((p) => p.inbox + p.notificationsUnread));

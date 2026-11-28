@@ -295,6 +295,8 @@ class ChatThread extends Notifier<ChatThreadState> {
 
   /// What arrived since the last confirmed message (everything, when none).
   Future<void> poll() async {
+    // The first load failed: retry it whole, so the title and «can post» come too.
+    if (state.conversation == null) return _load();
     final confirmed = state.messages.where((m) => !m.pending && !m.failed);
     try {
       final res = await _dio.get<Object?>(

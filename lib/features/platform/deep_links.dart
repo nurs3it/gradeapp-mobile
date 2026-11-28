@@ -62,3 +62,21 @@ class PendingLink extends Notifier<String?> {
 }
 
 final pendingLinkProvider = NotifierProvider<PendingLink, String?>(PendingLink.new);
+
+/// A full-screen route a shortcut asked for (chat, check-in). The router
+/// first opens the role's home, then the shell pushes this on top, so the
+/// screen has a page to go back to (a redirect would leave it alone).
+class DeferredPush extends Notifier<String?> {
+  @override
+  String? build() => null;
+
+  void set(String route) => state = route;
+
+  String? take() {
+    final r = state;
+    state = null;
+    return r;
+  }
+}
+
+final deferredPushProvider = NotifierProvider<DeferredPush, String?>(DeferredPush.new);
