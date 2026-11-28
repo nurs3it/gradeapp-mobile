@@ -12,6 +12,7 @@ import '../../ui/ui.dart';
 import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
+import '../common/week_view.dart' show weekGridMinWidth;
 import '../platform/lesson_link.dart';
 import '../platform/lesson_live.dart';
 import '../platform/reminders.dart';
@@ -469,11 +470,15 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
         ? (l.dockAllPresent(students.length), () => _rollCall(students, cells))
         : (l.dockDone(present, students.length), () => _rollCall(students, cells));
 
+    // Tablets and landscape: the roll call in two columns, faces in seven.
+    final wide = MediaQuery.sizeOf(context).width >= weekGridMinWidth;
     final rows = <Widget>[];
+    final headers = <int>{};
     String? lastClass;
     for (final s in visible) {
       if (joint && s.className != lastClass) {
         lastClass = s.className;
+        headers.add(rows.length);
         final count = ordered.where((x) => x.className == lastClass).length;
         rows.add(
           Container(
@@ -718,7 +723,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
               SliverPadding(
                 padding: EdgeInsets.fromLTRB(g, 0, g, bottomPad),
                 sliver: SliverGrid.count(
-                  crossAxisCount: 4,
+                  crossAxisCount: wide ? 7 : 4,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   childAspectRatio: 0.72,
@@ -736,7 +741,7 @@ class _LessonBodyState extends ConsumerState<_LessonBody> {
             else
               SliverPadding(
                 padding: EdgeInsets.fromLTRB(g, 0, g, bottomPad),
-                sliver: SliverToBoxAdapter(child: GGroup(inset: 68, children: rows)),
+                sliver: SliverToBoxAdapter(child: wide ? _twoColumns(rows, headers) : GGroup(inset: 68, children: rows)),
               ),
           ],
         ),
@@ -1432,4 +1437,21 @@ class _Face extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Two side-by-side groups; a class header never ends a column.
+Widget _twoColumns(List<Widget> rows, Set<int> headers) {
+  if (rows.length < 2) return GGroup(inset: 68, children: rows);
+  var split = (rows.length + 1) ~/ 2;
+  while (split > 1 && headers.contains(split - 1)) {
+    split--;
+  }
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(child: GGroup(inset: 68, children: rows.sublist(0, split))),
+      const SizedBox(width: 12),
+      Expanded(child: GGroup(inset: 68, children: rows.sublist(split))),
+    ],
+  );
 }
