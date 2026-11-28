@@ -48,6 +48,15 @@ struct LessonProvider: TimelineProvider {
     let f = DateFormatter()
     f.dateFormat = "yyyy-MM-dd"
     let today = f.string(from: Date())
+    // A believable preview: the next lesson in 25 minutes (late evening keeps
+    // the fixed times so the lessons stay on today's date).
+    let hm = DateFormatter()
+    hm.dateFormat = "HH:mm"
+    let start = Date().addingTimeInterval(25 * 60)
+    let fits = Calendar.current.isDateInToday(start.addingTimeInterval(105 * 60))
+    let t = fits
+      ? [start, start.addingTimeInterval(45 * 60), start.addingTimeInterval(55 * 60), start.addingTimeInterval(100 * 60)].map(hm.string)
+      : ["23:00", "23:45", "23:50", "23:59"]
     let json = """
       {"v":1,"role":"student","who":"","lang":"ru","generatedAt":"\(ISO8601DateFormatter().string(from: Date()))",
        "generatedLabel":"08:00","labels":{"next":"Следующий урок","nextShort":"Дальше","now":"Сейчас","updated":"Обновлено 08:00",
@@ -55,8 +64,8 @@ struct LessonProvider: TimelineProvider {
        "stale":"Откройте приложение, чтобы обновить","noMore":"Сегодня уроков больше нет","tomorrow":"Завтра",
        "noHomework":"На завтра ничего не задано","signedOut":"Войдите в GradeApp","day":"День"},
        "days":[{"date":"\(today)","lessons":[
-        {"id":"1","subject":"Алгебра","start":"23:00","end":"23:45","room":"312","cls":"","ci":0},
-        {"id":"2","subject":"Физика","start":"23:50","end":"23:59","room":"204","cls":"","ci":5}]}],
+        {"id":"1","subject":"Алгебра","start":"\(t[0])","end":"\(t[1])","room":"312","cls":"","ci":0},
+        {"id":"2","subject":"Физика","start":"\(t[2])","end":"\(t[3])","room":"204","cls":"","ci":5}]}],
        "homework":{"date":"","minutes":45,"items":[]}}
       """
     return try? JSONDecoder().decode(Snapshot.self, from: Data(json.utf8))
