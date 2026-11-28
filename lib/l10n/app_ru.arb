@@ -2468,5 +2468,13 @@
         "type": "int"
       }
     }
+  },
+  "checkInMarkedAt": "Отметка в {time}",
+  "@checkInMarkedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
   }
 }

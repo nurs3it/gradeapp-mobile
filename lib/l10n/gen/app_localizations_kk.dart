@@ -3147,4 +3147,9 @@ class AppLocalizationsKk extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count ұпай');
     return '$_temp0';
   }
+
+  @override
+  String checkInMarkedAt(String time) {
+    return '$time-те белгіленді';
+  }
 }

@@ -5528,6 +5528,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'{count, plural, one{{count} балл} few{{count} балла} other{{count} баллов}}'**
   String slPointsTotal(int count);
+
+  /// No description provided for @checkInMarkedAt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отметка в {time}'**
+  String checkInMarkedAt(String time);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

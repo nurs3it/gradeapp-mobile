@@ -1001,5 +1001,6 @@
   "slBirthdayToday": "Бүгін туған күн: {names}",
   "slBirthdayTomorrow": "Ертең туған күн: {names}",
   "slRank": "Сыныпта {rank}-орын",
-  "slPointsTotal": "{count, plural, other{{count} ұпай}}"
+  "slPointsTotal": "{count, plural, other{{count} ұпай}}",
+  "checkInMarkedAt": "{time}-те белгіленді"
 }

@@ -144,7 +144,12 @@ class _Body extends ConsumerWidget {
         children: [
           const PinnedEventsLine(),
           if (cardState != CheckInCardState.hidden) ...[
-            CheckInCard(status: day.checkIn!, state: cardState),
+            CheckInCard(
+              status: day.checkIn!,
+              state: cardState,
+              dayOver: day.lessons.any((x) => !x.isCancelled) &&
+                  day.lessons.where((x) => !x.isCancelled).every((x) => !now.isBefore(x.endsAt())),
+            ),
             const SizedBox(height: 14),
           ],
           RepaintBoundary(

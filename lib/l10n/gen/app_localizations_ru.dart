@@ -3323,4 +3323,9 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String checkInMarkedAt(String time) {
+    return 'Отметка в $time';
+  }
 }

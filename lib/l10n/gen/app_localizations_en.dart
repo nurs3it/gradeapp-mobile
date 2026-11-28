@@ -3235,4 +3235,9 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count points', one: '$count point');
     return '$_temp0';
   }
+
+  @override
+  String checkInMarkedAt(String time) {
+    return 'Checked in at $time';
+  }
 }

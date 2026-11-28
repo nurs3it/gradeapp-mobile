@@ -16,9 +16,12 @@ import 'check_in_state.dart';
 /// «Я в школе» on the student's «Сегодня» (§3.15). Loud (brand) only while
 /// the window is open and the student has not checked in.
 class CheckInCard extends ConsumerWidget {
-  const CheckInCard({super.key, required this.status, required this.state});
+  const CheckInCard({super.key, required this.status, required this.state, this.dayOver = false});
   final CheckInStatus status;
   final CheckInCardState state;
+
+  /// Every lesson has ended: «В школе с …» is no longer true.
+  final bool dayOver;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,8 +38,8 @@ class CheckInCard extends ConsumerWidget {
         return _Pill(
           icon: late ? GIcons.clock : GIcons.check,
           tone: late ? GTone.warn : GTone.ok,
-          title: late ? l.checkInLateAt(time) : l.checkInDoneAt(time),
-          subtitle: late ? null : l.checkInOnTime,
+          title: late ? l.checkInLateAt(time) : (dayOver ? l.checkInMarkedAt(time) : l.checkInDoneAt(time)),
+          subtitle: dayOver ? l.wgChildDayOver : (late ? null : l.checkInOnTime),
         );
       case CheckInCardState.opensLater:
         return _Quiet(icon: GIcons.lock, title: l.checkInOpensAt(status.windowStart));
