@@ -2381,15 +2381,7 @@
     }
   },
   "wgChildInNoTime": "В школе",
-  "wgChildDayOver": "Уроки закончились · отметка в {time}",
-  "@wgChildDayOver": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "wgChildDayOverNoTime": "Уроки закончились",
+  "wgChildDayOver": "Уроки закончились",
   "wgChildNotYet": "Ещё нет отметки",
   "wgChildNewGrades": "{count, plural, one{{count} новая оценка} few{{count} новые оценки} other{{count} новых оценок}}",
   "@wgChildNewGrades": {
@@ -2400,5 +2392,35 @@
     }
   },
   "wgChildNoNew": "Новых оценок нет",
-  "wgChildAbsent": "Не в школе"
+  "wgChildAbsent": "Не в школе",
+  "chatTitle": "Сообщения",
+  "chatEmpty": "Переписок пока нет",
+  "chatEmptyHint": "Напишите учителю или родителю — ответ придёт сюда.",
+  "chatThreadEmpty": "Напишите первое сообщение",
+  "chatNew": "Новое сообщение",
+  "chatSearch": "Имя или класс",
+  "chatNoOne": "Никого не нашли",
+  "chatInputHint": "Сообщение",
+  "chatSend": "Отправить",
+  "chatSending": "Отправляется…",
+  "chatSendFailed": "Не отправлено — нажмите, чтобы повторить",
+  "chatEdited": "изменено",
+  "chatYou": "Вы",
+  "chatAttachment": "Вложение",
+  "chatSystem": "Изменения в беседе",
+  "chatReadOnly": "В этом канале пишет только автор",
+  "chatMute": "Без звука",
+  "chatUnmute": "Включить звук",
+  "chatMuted": "Уведомления о беседе выключены",
+  "chatUnmuted": "Уведомления о беседе включены",
+  "chatOpenFailed": "Не удалось открыть переписку",
+  "chatInboxSub": "Переписка с родителями и коллегами",
+  "chatUnreadCount": "{count, plural, one{{count} непрочитанная беседа} few{{count} непрочитанные беседы} other{{count} непрочитанных бесед}}",
+  "@chatUnreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

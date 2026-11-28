@@ -3093,12 +3093,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get wgChildInNoTime => 'At school';
 
   @override
-  String wgChildDayOver(String time) {
-    return 'School\'s over · checked in at $time';
-  }
-
-  @override
-  String get wgChildDayOverNoTime => 'School\'s over';
+  String get wgChildDayOver => 'School\'s over';
 
   @override
   String get wgChildNotYet => 'Not checked in yet';
@@ -3119,4 +3114,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wgChildAbsent => 'Not at school';
+
+  @override
+  String get chatTitle => 'Messages';
+
+  @override
+  String get chatEmpty => 'No conversations yet';
+
+  @override
+  String get chatEmptyHint => 'Write to a teacher or a parent — replies come here.';
+
+  @override
+  String get chatThreadEmpty => 'Write the first message';
+
+  @override
+  String get chatNew => 'New message';
+
+  @override
+  String get chatSearch => 'Name or class';
+
+  @override
+  String get chatNoOne => 'No one found';
+
+  @override
+  String get chatInputHint => 'Message';
+
+  @override
+  String get chatSend => 'Send';
+
+  @override
+  String get chatSending => 'Sending…';
+
+  @override
+  String get chatSendFailed => 'Not sent — tap to retry';
+
+  @override
+  String get chatEdited => 'edited';
+
+  @override
+  String get chatYou => 'You';
+
+  @override
+  String get chatAttachment => 'Attachment';
+
+  @override
+  String get chatSystem => 'Conversation updated';
+
+  @override
+  String get chatReadOnly => 'Only the author writes in this channel';
+
+  @override
+  String get chatMute => 'Mute';
+
+  @override
+  String get chatUnmute => 'Unmute';
+
+  @override
+  String get chatMuted => 'Notifications for this chat are off';
+
+  @override
+  String get chatUnmuted => 'Notifications for this chat are on';
+
+  @override
+  String get chatOpenFailed => 'Couldn\'t open the conversation';
+
+  @override
+  String get chatInboxSub => 'Chats with parents and colleagues';
+
+  @override
+  String chatUnreadCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count unread chats',
+      one: '$count unread chat',
+    );
+    return '$_temp0';
+  }
 }

@@ -62,7 +62,7 @@ void main() {
         l: ru,
       );
       expect(s.kind, ChildKind.inSchool);
-      expect(s.text, 'Уроки закончились · отметка в 07:52');
+      expect(s.text, 'Уроки закончились');
       expect(s.until, isNull);
     });
 
@@ -78,7 +78,7 @@ void main() {
       );
       expect(s.text, 'В школе с 07:52');
       expect(s.until, DateTime(2026, 11, 27, 13, 30));
-      expect(s.afterText, 'Уроки закончились · отметка в 07:52');
+      expect(s.afterText, 'Уроки закончились');
       final back = ChildStatus.fromJson(jsonDecode(jsonEncode(s.toJson())) as Map<String, dynamic>);
       expect(back.until, s.until);
       expect(back.afterText, s.afterText);

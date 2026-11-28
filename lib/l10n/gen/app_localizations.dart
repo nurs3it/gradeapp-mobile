@@ -5298,14 +5298,8 @@ abstract class AppLocalizations {
   /// No description provided for @wgChildDayOver.
   ///
   /// In ru, this message translates to:
-  /// **'Уроки закончились · отметка в {time}'**
-  String wgChildDayOver(String time);
-
-  /// No description provided for @wgChildDayOverNoTime.
-  ///
-  /// In ru, this message translates to:
   /// **'Уроки закончились'**
-  String get wgChildDayOverNoTime;
+  String get wgChildDayOver;
 
   /// No description provided for @wgChildNotYet.
   ///
@@ -5330,6 +5324,144 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не в школе'**
   String get wgChildAbsent;
+
+  /// No description provided for @chatTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сообщения'**
+  String get chatTitle;
+
+  /// No description provided for @chatEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Переписок пока нет'**
+  String get chatEmpty;
+
+  /// No description provided for @chatEmptyHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напишите учителю или родителю — ответ придёт сюда.'**
+  String get chatEmptyHint;
+
+  /// No description provided for @chatThreadEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напишите первое сообщение'**
+  String get chatThreadEmpty;
+
+  /// No description provided for @chatNew.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новое сообщение'**
+  String get chatNew;
+
+  /// No description provided for @chatSearch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Имя или класс'**
+  String get chatSearch;
+
+  /// No description provided for @chatNoOne.
+  ///
+  /// In ru, this message translates to:
+  /// **'Никого не нашли'**
+  String get chatNoOne;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сообщение'**
+  String get chatInputHint;
+
+  /// No description provided for @chatSend.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отправить'**
+  String get chatSend;
+
+  /// No description provided for @chatSending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отправляется…'**
+  String get chatSending;
+
+  /// No description provided for @chatSendFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не отправлено — нажмите, чтобы повторить'**
+  String get chatSendFailed;
+
+  /// No description provided for @chatEdited.
+  ///
+  /// In ru, this message translates to:
+  /// **'изменено'**
+  String get chatEdited;
+
+  /// No description provided for @chatYou.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы'**
+  String get chatYou;
+
+  /// No description provided for @chatAttachment.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вложение'**
+  String get chatAttachment;
+
+  /// No description provided for @chatSystem.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменения в беседе'**
+  String get chatSystem;
+
+  /// No description provided for @chatReadOnly.
+  ///
+  /// In ru, this message translates to:
+  /// **'В этом канале пишет только автор'**
+  String get chatReadOnly;
+
+  /// No description provided for @chatMute.
+  ///
+  /// In ru, this message translates to:
+  /// **'Без звука'**
+  String get chatMute;
+
+  /// No description provided for @chatUnmute.
+  ///
+  /// In ru, this message translates to:
+  /// **'Включить звук'**
+  String get chatUnmute;
+
+  /// No description provided for @chatMuted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления о беседе выключены'**
+  String get chatMuted;
+
+  /// No description provided for @chatUnmuted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления о беседе включены'**
+  String get chatUnmuted;
+
+  /// No description provided for @chatOpenFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось открыть переписку'**
+  String get chatOpenFailed;
+
+  /// No description provided for @chatInboxSub.
+  ///
+  /// In ru, this message translates to:
+  /// **'Переписка с родителями и коллегами'**
+  String get chatInboxSub;
+
+  /// No description provided for @chatUnreadCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} непрочитанная беседа} few{{count} непрочитанные беседы} other{{count} непрочитанных бесед}}'**
+  String chatUnreadCount(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

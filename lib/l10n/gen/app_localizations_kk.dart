@@ -3016,12 +3016,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get wgChildInNoTime => 'Мектепте';
 
   @override
-  String wgChildDayOver(String time) {
-    return 'Сабақтар бітті · белгі $time';
-  }
-
-  @override
-  String get wgChildDayOverNoTime => 'Сабақтар бітті';
+  String get wgChildDayOver => 'Сабақтар бітті';
 
   @override
   String get wgChildNotYet => 'Әзірге белгі жоқ';
@@ -3036,4 +3031,76 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get wgChildAbsent => 'Мектепте жоқ';
+
+  @override
+  String get chatTitle => 'Хабарламалар';
+
+  @override
+  String get chatEmpty => 'Хат алмасу әлі жоқ';
+
+  @override
+  String get chatEmptyHint => 'Мұғалімге не ата-анаға жазыңыз — жауап осында келеді.';
+
+  @override
+  String get chatThreadEmpty => 'Алғашқы хабарламаны жазыңыз';
+
+  @override
+  String get chatNew => 'Жаңа хабарлама';
+
+  @override
+  String get chatSearch => 'Аты немесе сынып';
+
+  @override
+  String get chatNoOne => 'Ешкім табылмады';
+
+  @override
+  String get chatInputHint => 'Хабарлама';
+
+  @override
+  String get chatSend => 'Жіберу';
+
+  @override
+  String get chatSending => 'Жіберілуде…';
+
+  @override
+  String get chatSendFailed => 'Жіберілмеді — қайталау үшін басыңыз';
+
+  @override
+  String get chatEdited => 'өзгертілді';
+
+  @override
+  String get chatYou => 'Сіз';
+
+  @override
+  String get chatAttachment => 'Тіркеме';
+
+  @override
+  String get chatSystem => 'Әңгімедегі өзгеріс';
+
+  @override
+  String get chatReadOnly => 'Бұл арнада тек автор жазады';
+
+  @override
+  String get chatMute => 'Дыбыссыз';
+
+  @override
+  String get chatUnmute => 'Дыбысты қосу';
+
+  @override
+  String get chatMuted => 'Әңгіме хабарландырулары өшірілді';
+
+  @override
+  String get chatUnmuted => 'Әңгіме хабарландырулары қосылды';
+
+  @override
+  String get chatOpenFailed => 'Хат алмасуды ашу мүмкін болмады';
+
+  @override
+  String get chatInboxSub => 'Ата-аналармен және әріптестермен хат алмасу';
+
+  @override
+  String chatUnreadCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count оқылмаған әңгіме');
+    return '$_temp0';
+  }
 }

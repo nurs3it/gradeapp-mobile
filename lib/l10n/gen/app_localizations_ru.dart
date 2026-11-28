@@ -3173,12 +3173,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get wgChildInNoTime => 'В школе';
 
   @override
-  String wgChildDayOver(String time) {
-    return 'Уроки закончились · отметка в $time';
-  }
-
-  @override
-  String get wgChildDayOverNoTime => 'Уроки закончились';
+  String get wgChildDayOver => 'Уроки закончились';
 
   @override
   String get wgChildNotYet => 'Ещё нет отметки';
@@ -3200,4 +3195,82 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get wgChildAbsent => 'Не в школе';
+
+  @override
+  String get chatTitle => 'Сообщения';
+
+  @override
+  String get chatEmpty => 'Переписок пока нет';
+
+  @override
+  String get chatEmptyHint => 'Напишите учителю или родителю — ответ придёт сюда.';
+
+  @override
+  String get chatThreadEmpty => 'Напишите первое сообщение';
+
+  @override
+  String get chatNew => 'Новое сообщение';
+
+  @override
+  String get chatSearch => 'Имя или класс';
+
+  @override
+  String get chatNoOne => 'Никого не нашли';
+
+  @override
+  String get chatInputHint => 'Сообщение';
+
+  @override
+  String get chatSend => 'Отправить';
+
+  @override
+  String get chatSending => 'Отправляется…';
+
+  @override
+  String get chatSendFailed => 'Не отправлено — нажмите, чтобы повторить';
+
+  @override
+  String get chatEdited => 'изменено';
+
+  @override
+  String get chatYou => 'Вы';
+
+  @override
+  String get chatAttachment => 'Вложение';
+
+  @override
+  String get chatSystem => 'Изменения в беседе';
+
+  @override
+  String get chatReadOnly => 'В этом канале пишет только автор';
+
+  @override
+  String get chatMute => 'Без звука';
+
+  @override
+  String get chatUnmute => 'Включить звук';
+
+  @override
+  String get chatMuted => 'Уведомления о беседе выключены';
+
+  @override
+  String get chatUnmuted => 'Уведомления о беседе включены';
+
+  @override
+  String get chatOpenFailed => 'Не удалось открыть переписку';
+
+  @override
+  String get chatInboxSub => 'Переписка с родителями и коллегами';
+
+  @override
+  String chatUnreadCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count непрочитанных бесед',
+      few: '$count непрочитанные беседы',
+      one: '$count непрочитанная беседа',
+    );
+    return '$_temp0';
+  }
 }

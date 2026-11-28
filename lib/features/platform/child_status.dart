@@ -65,7 +65,7 @@ class ChildStatus {
   /// the widget shows [afterText] from then on without waiting for the app.
   final DateTime? until;
 
-  /// «Уроки закончились · отметка в 08:05».
+  /// «Уроки закончились».
   final String afterText;
 
   Json toJson() => {
@@ -137,7 +137,8 @@ ChildStatus childStatusOf({
   final lastEnd = day.lessons.where((x) => !x.isCancelled).map((x) => x.endsAt()).reduce((a, b) => a.isAfter(b) ? a : b);
   ChildStatus inSchool(String time) {
     final during = time.isEmpty ? l.wgChildInNoTime : l.wgChildIn(time);
-    final after = time.isEmpty ? l.wgChildDayOverNoTime : l.wgChildDayOver(time);
+    // Short on purpose: the small widget has three lines for the status.
+    final after = l.wgChildDayOver;
     if (!now.isBefore(lastEnd)) return make(ChildKind.inSchool, after, since: time, grades: grades);
     return make(ChildKind.inSchool, during, since: time, grades: grades, until: lastEnd, afterText: after);
   }
