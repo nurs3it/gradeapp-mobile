@@ -992,5 +992,14 @@
   "chatInboxSub": "Ата-аналармен және әріптестермен хат алмасу",
   "chatUnreadCount": "{count, plural, other{{count} оқылмаған әңгіме}}",
   "factCameAt": "{time}-те келді.",
-  "factDayOver": "Сабақтар бітті."
+  "factDayOver": "Сабақтар бітті.",
+  "slMenuTitle": "Бүгін асханада",
+  "slMenuFile": "Мәзірді ашу",
+  "slBirthdayMine": "Туған күніңмен! 🎉",
+  "slPoints": "Ұпайлар",
+  "slPointsHistory": "Ұпай тарихы",
+  "slBirthdayToday": "Бүгін туған күн: {names}",
+  "slBirthdayTomorrow": "Ертең туған күн: {names}",
+  "slRank": "Сыныпта {rank}-орын",
+  "slPointsTotal": "{count, plural, other{{count} ұпай}}"
 }

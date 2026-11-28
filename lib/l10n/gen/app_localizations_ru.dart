@@ -3281,4 +3281,46 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get factDayOver => 'Уроки закончились.';
+
+  @override
+  String get slMenuTitle => 'Столовая сегодня';
+
+  @override
+  String get slMenuFile => 'Открыть меню';
+
+  @override
+  String get slBirthdayMine => 'С днём рождения! 🎉';
+
+  @override
+  String get slPoints => 'Баллы';
+
+  @override
+  String get slPointsHistory => 'История баллов';
+
+  @override
+  String slBirthdayToday(String names) {
+    return 'Сегодня день рождения: $names';
+  }
+
+  @override
+  String slBirthdayTomorrow(String names) {
+    return 'Завтра день рождения: $names';
+  }
+
+  @override
+  String slRank(int rank) {
+    return '$rank-е место в классе';
+  }
+
+  @override
+  String slPointsTotal(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count баллов',
+      few: '$count балла',
+      one: '$count балл',
+    );
+    return '$_temp0';
+  }
 }

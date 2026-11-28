@@ -3199,4 +3199,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get factDayOver => 'School\'s over.';
+
+  @override
+  String get slMenuTitle => 'Cafeteria today';
+
+  @override
+  String get slMenuFile => 'Open the menu';
+
+  @override
+  String get slBirthdayMine => 'Happy birthday! 🎉';
+
+  @override
+  String get slPoints => 'Points';
+
+  @override
+  String get slPointsHistory => 'Points history';
+
+  @override
+  String slBirthdayToday(String names) {
+    return 'Birthday today: $names';
+  }
+
+  @override
+  String slBirthdayTomorrow(String names) {
+    return 'Birthday tomorrow: $names';
+  }
+
+  @override
+  String slRank(int rank) {
+    return 'No. $rank in class';
+  }
+
+  @override
+  String slPointsTotal(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count points', one: '$count point');
+    return '$_temp0';
+  }
 }

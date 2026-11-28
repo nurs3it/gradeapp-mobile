@@ -10,6 +10,7 @@ import '../common/lesson_widgets.dart';
 import '../common/models.dart';
 import '../common/school_providers.dart';
 import '../learner/learner_providers.dart';
+import '../learner/school_life.dart';
 import '../shell/header.dart';
 import 'excuse_sheet.dart';
 import 'parent_entries.dart';
@@ -198,6 +199,7 @@ class _ChildDay extends ConsumerWidget {
             ),
           ],
           ParentTodayEntries(studentId: child.id, now: now),
+          MenuCard(date: isoDate(now)),
           _FeedSection(day: d, now: now, onTapLesson: openLesson),
           if (tomorrowHw.isNotEmpty) ...[
             GSectionTitle(title: l.heroForTomorrow),

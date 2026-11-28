@@ -2431,5 +2431,42 @@
         "type": "String"
       }
     }
+  },
+  "slMenuTitle": "Столовая сегодня",
+  "slMenuFile": "Открыть меню",
+  "slBirthdayMine": "С днём рождения! 🎉",
+  "slPoints": "Баллы",
+  "slPointsHistory": "История баллов",
+  "slBirthdayToday": "Сегодня день рождения: {names}",
+  "@slBirthdayToday": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "slBirthdayTomorrow": "Завтра день рождения: {names}",
+  "@slBirthdayTomorrow": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "slRank": "{rank}-е место в классе",
+  "@slRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "slPointsTotal": "{count, plural, one{{count} балл} few{{count} балла} other{{count} баллов}}",
+  "@slPointsTotal": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

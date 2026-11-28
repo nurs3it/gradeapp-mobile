@@ -5474,6 +5474,60 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Уроки закончились.'**
   String get factDayOver;
+
+  /// No description provided for @slMenuTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Столовая сегодня'**
+  String get slMenuTitle;
+
+  /// No description provided for @slMenuFile.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыть меню'**
+  String get slMenuFile;
+
+  /// No description provided for @slBirthdayMine.
+  ///
+  /// In ru, this message translates to:
+  /// **'С днём рождения! 🎉'**
+  String get slBirthdayMine;
+
+  /// No description provided for @slPoints.
+  ///
+  /// In ru, this message translates to:
+  /// **'Баллы'**
+  String get slPoints;
+
+  /// No description provided for @slPointsHistory.
+  ///
+  /// In ru, this message translates to:
+  /// **'История баллов'**
+  String get slPointsHistory;
+
+  /// No description provided for @slBirthdayToday.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня день рождения: {names}'**
+  String slBirthdayToday(String names);
+
+  /// No description provided for @slBirthdayTomorrow.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завтра день рождения: {names}'**
+  String slBirthdayTomorrow(String names);
+
+  /// No description provided for @slRank.
+  ///
+  /// In ru, this message translates to:
+  /// **'{rank}-е место в классе'**
+  String slRank(int rank);
+
+  /// No description provided for @slPointsTotal.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} балл} few{{count} балла} other{{count} баллов}}'**
+  String slPointsTotal(int count);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

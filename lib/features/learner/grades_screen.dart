@@ -17,6 +17,7 @@ import 'learner_providers.dart';
 import 'report_card.dart';
 import 'seen.dart';
 import 'feedback.dart';
+import 'school_life.dart';
 import 'forecast.dart';
 
 /// Quarter picked in «Оценки» (null = the current one).
@@ -165,6 +166,7 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
   }
 
   List<Widget> _content(BuildContext context, List<SubjectSummary> list, Grading grading, DateTime? seen, Term? term) {
+    final parent = ref.read(activeRoleProvider) == AppRole.parent;
     final learner = ref.watch(learnerIdProvider);
     final l = context.l10n;
     final c = context.c;
@@ -252,6 +254,12 @@ class _GradesScreenState extends ConsumerState<GradesScreen> {
           sliver: SliverToBoxAdapter(
             child: ReportCardRow(studentId: learner, term: term),
           ),
+        ),
+      if (learner != null)
+        SliverPadding(
+          padding: EdgeInsets.symmetric(horizontal: g),
+          // S12: the place in class is the student's own business.
+          sliver: SliverToBoxAdapter(child: PointsCard(studentId: learner, showRank: !parent)),
         ),
     ];
   }

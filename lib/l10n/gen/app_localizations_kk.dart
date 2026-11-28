@@ -3111,4 +3111,40 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get factDayOver => 'Сабақтар бітті.';
+
+  @override
+  String get slMenuTitle => 'Бүгін асханада';
+
+  @override
+  String get slMenuFile => 'Мәзірді ашу';
+
+  @override
+  String get slBirthdayMine => 'Туған күніңмен! 🎉';
+
+  @override
+  String get slPoints => 'Ұпайлар';
+
+  @override
+  String get slPointsHistory => 'Ұпай тарихы';
+
+  @override
+  String slBirthdayToday(String names) {
+    return 'Бүгін туған күн: $names';
+  }
+
+  @override
+  String slBirthdayTomorrow(String names) {
+    return 'Ертең туған күн: $names';
+  }
+
+  @override
+  String slRank(int rank) {
+    return 'Сыныпта $rank-орын';
+  }
+
+  @override
+  String slPointsTotal(int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count ұпай');
+    return '$_temp0';
+  }
 }

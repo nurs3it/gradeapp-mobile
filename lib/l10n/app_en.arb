@@ -992,5 +992,14 @@
   "chatInboxSub": "Chats with parents and colleagues",
   "chatUnreadCount": "{count, plural, one{{count} unread chat} other{{count} unread chats}}",
   "factCameAt": "Arrived at {time}.",
-  "factDayOver": "School's over."
+  "factDayOver": "School's over.",
+  "slMenuTitle": "Cafeteria today",
+  "slMenuFile": "Open the menu",
+  "slBirthdayMine": "Happy birthday! 🎉",
+  "slPoints": "Points",
+  "slPointsHistory": "Points history",
+  "slBirthdayToday": "Birthday today: {names}",
+  "slBirthdayTomorrow": "Birthday tomorrow: {names}",
+  "slRank": "No. {rank} in class",
+  "slPointsTotal": "{count, plural, one{{count} point} other{{count} points}}"
 }

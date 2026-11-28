@@ -11,6 +11,7 @@ import '../common/models.dart';
 import '../common/now_next.dart';
 import '../learner/learner_hero.dart';
 import '../learner/learner_providers.dart';
+import '../learner/school_life.dart';
 import '../learner/seen.dart';
 import '../learner/streaks.dart';
 import '../learner/week_card.dart';
@@ -161,6 +162,8 @@ class _Body extends ConsumerWidget {
           if (tiles.isNotEmpty) ...[const SizedBox(height: 24), GTileRow(tiles: tiles)],
           const StreakCard(),
           WeekCard(studentId: studentId, lessons: day.lessons, now: now),
+          BirthdayLine(myStudentId: studentId),
+          MenuCard(date: day.date),
           if (day.lessons.isNotEmpty) ...[
             GSectionTitle(title: l.dayPlan, action: l.tabWeek, onAction: () => goTab(1)),
             GGroup(
