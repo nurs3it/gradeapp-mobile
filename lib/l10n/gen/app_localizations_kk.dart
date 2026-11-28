@@ -3103,4 +3103,12 @@ class AppLocalizationsKk extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count оқылмаған әңгіме');
     return '$_temp0';
   }
+
+  @override
+  String factCameAt(String time) {
+    return '$time-те келді.';
+  }
+
+  @override
+  String get factDayOver => 'Сабақтар бітті.';
 }

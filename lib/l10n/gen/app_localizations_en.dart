@@ -3191,4 +3191,12 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String factCameAt(String time) {
+    return 'Arrived at $time.';
+  }
+
+  @override
+  String get factDayOver => 'School\'s over.';
 }

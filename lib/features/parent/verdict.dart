@@ -43,6 +43,9 @@ class DayVerdict {
   final bool late;
   final int lessonsDone;
   final int lessonsTotal;
+
+  /// Every lesson of the day has ended: «В школе» is no longer true.
+  bool get dayOver => lessonsTotal > 0 && lessonsDone == lessonsTotal;
   final Lesson? firstLesson;
 
   /// Lessons marked absent without a reason or request.

@@ -2422,5 +2422,14 @@
         "type": "int"
       }
     }
+  },
+  "factCameAt": "Пришёл(ла) в {time}.",
+  "factDayOver": "Уроки закончились.",
+  "@factCameAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
   }
 }

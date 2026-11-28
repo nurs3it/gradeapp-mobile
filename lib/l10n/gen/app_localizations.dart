@@ -5462,6 +5462,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'{count, plural, one{{count} непрочитанная беседа} few{{count} непрочитанные беседы} other{{count} непрочитанных бесед}}'**
   String chatUnreadCount(int count);
+
+  /// No description provided for @factCameAt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пришёл(ла) в {time}.'**
+  String factCameAt(String time);
+
+  /// No description provided for @factDayOver.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уроки закончились.'**
+  String get factDayOver;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

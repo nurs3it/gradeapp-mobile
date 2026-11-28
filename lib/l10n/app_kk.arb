@@ -990,5 +990,7 @@
   "chatUnmuted": "Әңгіме хабарландырулары қосылды",
   "chatOpenFailed": "Хат алмасуды ашу мүмкін болмады",
   "chatInboxSub": "Ата-аналармен және әріптестермен хат алмасу",
-  "chatUnreadCount": "{count, plural, other{{count} оқылмаған әңгіме}}"
+  "chatUnreadCount": "{count, plural, other{{count} оқылмаған әңгіме}}",
+  "factCameAt": "{time}-те келді.",
+  "factDayOver": "Сабақтар бітті."
 }

@@ -63,6 +63,13 @@ void main() {
     expect(v.arrivedAt, isNotNull);
   });
 
+  test('after the last lesson the day is over, not «в школе»', () {
+    expect(verdictOf(day(ci: checkIn(checkedIn: true)), noon, grading: grading).dayOver, isFalse);
+    final v = verdictOf(day(ci: checkIn(checkedIn: true)), DateTime(2026, 11, 16, 14), grading: grading);
+    expect(v.dayOver, isTrue);
+    expect(v.level, VerdictLevel.ok);
+  });
+
   test('no check-in after lessons started, no request → alarm', () {
     expect(verdictOf(day(ci: checkIn()), noon, grading: grading).level, VerdictLevel.alarm);
   });

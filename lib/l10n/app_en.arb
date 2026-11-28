@@ -990,5 +990,7 @@
   "chatUnmuted": "Notifications for this chat are on",
   "chatOpenFailed": "Couldn't open the conversation",
   "chatInboxSub": "Chats with parents and colleagues",
-  "chatUnreadCount": "{count, plural, one{{count} unread chat} other{{count} unread chats}}"
+  "chatUnreadCount": "{count, plural, one{{count} unread chat} other{{count} unread chats}}",
+  "factCameAt": "Arrived at {time}.",
+  "factDayOver": "School's over."
 }

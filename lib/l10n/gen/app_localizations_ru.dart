@@ -3273,4 +3273,12 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String factCameAt(String time) {
+    return 'Пришёл(ла) в $time.';
+  }
+
+  @override
+  String get factDayOver => 'Уроки закончились.';
 }

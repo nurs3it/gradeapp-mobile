@@ -299,13 +299,15 @@ class VerdictSheet extends StatelessWidget {
       default:
         if (v.arrivedAt != null) {
           final time = Fmt.clock(v.arrivedAt!);
-          add(v.late ? l.factLate(time) : l.factArrived(time), strong: [time]);
+          add(v.late ? l.factLate(time) : (v.dayOver ? l.factCameAt(time) : l.factArrived(time)), strong: [time]);
         } else if (v.excusedToday) {
           add(l.factExcused);
         } else if (v.firstLesson != null && v.lessonsDone == 0) {
           add(l.factBeforeLessons(hm(v.firstLesson!.start)), strong: [hm(v.firstLesson!.start)]);
         }
-        if (v.lessonsDone > 0) {
+        if (v.dayOver) {
+          add(l.factDayOver);
+        } else if (v.lessonsDone > 0) {
           add(l.factLessons(v.lessonsDone, v.lessonsTotal), strong: ['${v.lessonsDone}', '${v.lessonsTotal}']);
         }
         for (final a in v.absent) {
@@ -602,8 +604,8 @@ class _ChildCard extends ConsumerWidget {
         : alarm
         ? l.factAlarm(hm(v.firstLesson!.start))
         : [
-            if (v.arrivedAt != null) l.factArrived(Fmt.clock(v.arrivedAt!)),
-            if (v.lessonsTotal > 0 && v.lessonsDone > 0) l.factLessons(v.lessonsDone, v.lessonsTotal),
+            if (v.arrivedAt != null) v.dayOver ? l.factCameAt(Fmt.clock(v.arrivedAt!)) : l.factArrived(Fmt.clock(v.arrivedAt!)),
+            if (v.dayOver) l.factDayOver else if (v.lessonsDone > 0) l.factLessons(v.lessonsDone, v.lessonsTotal),
             for (final a in v.absent) '${l.factAbsent(a.subject)}.',
           ].join(' ');
     void focus() {
