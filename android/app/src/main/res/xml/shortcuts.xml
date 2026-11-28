@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- W7: launcher shortcuts. One link per action; the router resolves it
+     by role (lib/app/router.dart, shortcutRoute). -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="today"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_today">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="gradeapp://app/go/today"
+            android:targetPackage="kz.gradeapp.gradeapp"
+            android:targetClass="kz.gradeapp.gradeapp.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="week"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_week">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="gradeapp://app/go/week"
+            android:targetPackage="kz.gradeapp.gradeapp"
+            android:targetClass="kz.gradeapp.gradeapp.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="grades"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_grades">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="gradeapp://app/go/grades"
+            android:targetPackage="kz.gradeapp.gradeapp"
+            android:targetClass="kz.gradeapp.gradeapp.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="chat"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_chat">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="gradeapp://app/go/chat"
+            android:targetPackage="kz.gradeapp.gradeapp"
+            android:targetClass="kz.gradeapp.gradeapp.MainActivity" />
+    </shortcut>
+</shortcuts>

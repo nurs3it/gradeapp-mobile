@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shortcut_today">Today</string>
+    <string name="shortcut_week">Schedule</string>
+    <string name="shortcut_grades">Grades</string>
+    <string name="shortcut_chat">Messages</string>
+</resources>

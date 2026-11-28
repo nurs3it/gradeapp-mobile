@@ -1,0 +1,10 @@
+"What's today in ${applicationName}" = "${applicationName} бүгін не бар";
+"Open today in ${applicationName}" = "${applicationName} бүгінгі күнді аш";
+"Show my schedule in ${applicationName}" = "${applicationName} кестені көрсет";
+"${applicationName} schedule" = "${applicationName} кестесі";
+"Show grades in ${applicationName}" = "${applicationName} бағаларды көрсет";
+"${applicationName} grades" = "${applicationName} бағалары";
+"Check in with ${applicationName}" = "${applicationName} арқылы белгілену";
+"I'm at school in ${applicationName}" = "${applicationName} мен мектептемін";
+"Open messages in ${applicationName}" = "${applicationName} хабарламаларды аш";
+"${applicationName} messages" = "${applicationName} хабарламалары";

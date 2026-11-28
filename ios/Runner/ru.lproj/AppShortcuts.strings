@@ -1,0 +1,10 @@
+"What's today in ${applicationName}" = "Что сегодня в ${applicationName}";
+"Open today in ${applicationName}" = "Открой сегодня в ${applicationName}";
+"Show my schedule in ${applicationName}" = "Покажи расписание в ${applicationName}";
+"${applicationName} schedule" = "Расписание ${applicationName}";
+"Show grades in ${applicationName}" = "Покажи оценки в ${applicationName}";
+"${applicationName} grades" = "Оценки ${applicationName}";
+"Check in with ${applicationName}" = "Отметиться в ${applicationName}";
+"I'm at school in ${applicationName}" = "Я в школе ${applicationName}";
+"Open messages in ${applicationName}" = "Открой сообщения в ${applicationName}";
+"${applicationName} messages" = "Сообщения ${applicationName}";

@@ -38,6 +38,20 @@ String homeOf(AppRole role) => switch (role) {
   AppRole.teacher => '/t/today',
 };
 
+/// App shortcuts (W7: Siri, Spotlight, Android launcher) open
+/// `gradeapp://app/go/<target>`: one link for every role, resolved here.
+String? shortcutRoute(String loc, AppRole role) {
+  if (!loc.startsWith('/go/')) return null;
+  final p = _prefixOf(role);
+  return switch (loc.substring(4)) {
+    'week' => '${p}week',
+    'grades' when role != AppRole.teacher => '${p}grades',
+    'checkin' when role == AppRole.student => '/checkin',
+    'chat' when role != AppRole.student => '/chat',
+    _ => homeOf(role),
+  };
+}
+
 String _prefixOf(AppRole role) => switch (role) {
   AppRole.student => '/s/',
   AppRole.parent => '/p/',
@@ -62,7 +76,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     final pending = ref.read(pendingLinkProvider.notifier);
     // A lesson link from the lock screen (with its roll-call request) also
     // waits for sign-in; it is not a web link, so it is only held, not routed.
-    final lesson = loc.startsWith('/lesson/') ? s.uri.toString() : null;
+    final lesson = loc.startsWith('/lesson/') || loc.startsWith('/go/') ? s.uri.toString() : null;
     // The parent status widget (W3) opens «Сегодня» of one child.
     final childId = loc == '/p/today' ? s.uri.queryParameters['child'] : null;
     if (auth.isLoading && !auth.hasValue) {
@@ -78,6 +92,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     }
     if (inLogin || loc == '/splash') return pending.take() ?? homeOf(role);
     if (link != null && link != loc) return link;
+    final shortcut = shortcutRoute(loc, role);
+    if (shortcut != null) return shortcut;
     if (childId != null && role == AppRole.parent) {
       ref.read(selectedChildProvider.notifier).select(childId);
       ref.read(familyModeProvider.notifier).set(false);
