@@ -6,6 +6,7 @@ import '../features/auth/auth_controller.dart';
 import '../features/auth/login_screens.dart';
 import '../features/auth/user.dart';
 import '../features/chat/chat_screens.dart';
+import '../features/learner/study_proof.dart';
 import '../features/common/events.dart';
 import '../features/learner/grades_screen.dart';
 import '../features/learner/streaks.dart';
@@ -201,6 +202,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, _) => const ChatListScreen(),
         routes: [GoRoute(path: ':id', builder: (_, s) => ChatScreen(id: s.pathParameters['id']!))],
       ),
+      GoRoute(path: '/study-proof', builder: (_, s) => StudyProofScreen(studentId: s.uri.queryParameters['student'])),
       GoRoute(path: '/events', builder: (_, _) => const EventsScreen()),
       GoRoute(path: '/notifications', builder: (_, _) => const NotificationsScreen()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => const NotificationSettingsScreen()),

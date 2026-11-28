@@ -5552,6 +5552,108 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'{h} ч {m} мин'**
   String durHm(int h, int m);
+
+  /// No description provided for @s14Title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Справка об обучении'**
+  String get s14Title;
+
+  /// No description provided for @s14Hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Справку выдаёт канцелярия школы. Закажите её здесь — когда будет готова, придёт уведомление, а PDF можно будет скачать и отправить.'**
+  String get s14Hint;
+
+  /// No description provided for @s14Request.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заказать справку'**
+  String get s14Request;
+
+  /// No description provided for @s14Empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявок пока нет'**
+  String get s14Empty;
+
+  /// No description provided for @s14Purpose.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда нужна справка'**
+  String get s14Purpose;
+
+  /// No description provided for @s14PurposeHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Например, в поликлинику'**
+  String get s14PurposeHint;
+
+  /// No description provided for @s14Language.
+  ///
+  /// In ru, this message translates to:
+  /// **'Язык справки'**
+  String get s14Language;
+
+  /// No description provided for @s14Send.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отправить заявку'**
+  String get s14Send;
+
+  /// No description provided for @s14Sent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заявка отправлена в канцелярию'**
+  String get s14Sent;
+
+  /// No description provided for @s14AlreadyPending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одна заявка уже ждёт ответа'**
+  String get s14AlreadyPending;
+
+  /// No description provided for @s14Pending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ждёт канцелярию'**
+  String get s14Pending;
+
+  /// No description provided for @s14Issued.
+  ///
+  /// In ru, this message translates to:
+  /// **'Справка готова'**
+  String get s14Issued;
+
+  /// No description provided for @s14Declined.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отклонена'**
+  String get s14Declined;
+
+  /// No description provided for @s14OpenPdf.
+  ///
+  /// In ru, this message translates to:
+  /// **'PDF'**
+  String get s14OpenPdf;
+
+  /// No description provided for @s14Share.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ссылка на проверку'**
+  String get s14Share;
+
+  /// No description provided for @s14IssuedNo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Справка № {number} готова'**
+  String s14IssuedNo(String number);
+
+  /// No description provided for @s14ShareText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Справка об обучении № {number}. Проверить подлинность: {url}'**
+  String s14ShareText(String number, String url);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

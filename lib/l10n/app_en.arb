@@ -1005,5 +1005,22 @@
   "checkInMarkedAt": "Checked in at {time}",
   "windowLine": "free {time}",
   "durH": "{h} h",
-  "durHm": "{h} h {m} min"
+  "durHm": "{h} h {m} min",
+  "s14Title": "Study certificate",
+  "s14Hint": "The school office issues it. Request it here — you'll get a notification when it's ready, and you can download and send the PDF.",
+  "s14Request": "Request a certificate",
+  "s14Empty": "No requests yet",
+  "s14Purpose": "Where it's needed",
+  "s14PurposeHint": "For example, a clinic",
+  "s14Language": "Certificate language",
+  "s14Send": "Send the request",
+  "s14Sent": "Request sent to the office",
+  "s14AlreadyPending": "A request is already waiting",
+  "s14Pending": "Waiting for the office",
+  "s14Issued": "Certificate ready",
+  "s14Declined": "Declined",
+  "s14OpenPdf": "PDF",
+  "s14Share": "Check link",
+  "s14IssuedNo": "Certificate No. {number} is ready",
+  "s14ShareText": "Study certificate No. {number}. Check it here: {url}"
 }

@@ -220,6 +220,7 @@ class _FamilyEntries extends ConsumerWidget {
           if (digest) row(GIcons.summary, l.p6Title, '/week-summary?student=$childId&week=${isoWeekId(DateTime.now())}'),
           if (billing) row(GIcons.payments, l.p8Title, '/billing'),
           row(GIcons.school, l.p10Events, '/events'),
+          row(GIcons.file, l.s14Title, '/study-proof?student=$childId'),
         ],
       ),
     );

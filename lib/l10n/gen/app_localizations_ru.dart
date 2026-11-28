@@ -3343,4 +3343,60 @@ class AppLocalizationsRu extends AppLocalizations {
   String durHm(int h, int m) {
     return '$h ч $m мин';
   }
+
+  @override
+  String get s14Title => 'Справка об обучении';
+
+  @override
+  String get s14Hint =>
+      'Справку выдаёт канцелярия школы. Закажите её здесь — когда будет готова, придёт уведомление, а PDF можно будет скачать и отправить.';
+
+  @override
+  String get s14Request => 'Заказать справку';
+
+  @override
+  String get s14Empty => 'Заявок пока нет';
+
+  @override
+  String get s14Purpose => 'Куда нужна справка';
+
+  @override
+  String get s14PurposeHint => 'Например, в поликлинику';
+
+  @override
+  String get s14Language => 'Язык справки';
+
+  @override
+  String get s14Send => 'Отправить заявку';
+
+  @override
+  String get s14Sent => 'Заявка отправлена в канцелярию';
+
+  @override
+  String get s14AlreadyPending => 'Одна заявка уже ждёт ответа';
+
+  @override
+  String get s14Pending => 'Ждёт канцелярию';
+
+  @override
+  String get s14Issued => 'Справка готова';
+
+  @override
+  String get s14Declined => 'Отклонена';
+
+  @override
+  String get s14OpenPdf => 'PDF';
+
+  @override
+  String get s14Share => 'Ссылка на проверку';
+
+  @override
+  String s14IssuedNo(String number) {
+    return 'Справка № $number готова';
+  }
+
+  @override
+  String s14ShareText(String number, String url) {
+    return 'Справка об обучении № $number. Проверить подлинность: $url';
+  }
 }

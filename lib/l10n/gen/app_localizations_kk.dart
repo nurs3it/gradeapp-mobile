@@ -3167,4 +3167,60 @@ class AppLocalizationsKk extends AppLocalizations {
   String durHm(int h, int m) {
     return '$h сағ $m мин';
   }
+
+  @override
+  String get s14Title => 'Оқу туралы анықтама';
+
+  @override
+  String get s14Hint =>
+      'Анықтаманы мектеп кеңсесі береді. Осында тапсырыс беріңіз — дайын болғанда хабарлама келеді, PDF-ті жүктеп, жіберуге болады.';
+
+  @override
+  String get s14Request => 'Анықтамаға тапсырыс беру';
+
+  @override
+  String get s14Empty => 'Әзірге өтінім жоқ';
+
+  @override
+  String get s14Purpose => 'Анықтама қайда керек';
+
+  @override
+  String get s14PurposeHint => 'Мысалы, емханаға';
+
+  @override
+  String get s14Language => 'Анықтама тілі';
+
+  @override
+  String get s14Send => 'Өтінімді жіберу';
+
+  @override
+  String get s14Sent => 'Өтінім кеңсеге жіберілді';
+
+  @override
+  String get s14AlreadyPending => 'Бір өтінім жауап күтуде';
+
+  @override
+  String get s14Pending => 'Кеңсені күтуде';
+
+  @override
+  String get s14Issued => 'Анықтама дайын';
+
+  @override
+  String get s14Declined => 'Қабылданбады';
+
+  @override
+  String get s14OpenPdf => 'PDF';
+
+  @override
+  String get s14Share => 'Тексеру сілтемесі';
+
+  @override
+  String s14IssuedNo(String number) {
+    return '№ $number анықтама дайын';
+  }
+
+  @override
+  String s14ShareText(String number, String url) {
+    return 'Оқу туралы анықтама № $number. Түпнұсқалығын тексеру: $url';
+  }
 }

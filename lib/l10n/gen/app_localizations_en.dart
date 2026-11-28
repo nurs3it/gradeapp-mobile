@@ -3255,4 +3255,60 @@ class AppLocalizationsEn extends AppLocalizations {
   String durHm(int h, int m) {
     return '$h h $m min';
   }
+
+  @override
+  String get s14Title => 'Study certificate';
+
+  @override
+  String get s14Hint =>
+      'The school office issues it. Request it here — you\'ll get a notification when it\'s ready, and you can download and send the PDF.';
+
+  @override
+  String get s14Request => 'Request a certificate';
+
+  @override
+  String get s14Empty => 'No requests yet';
+
+  @override
+  String get s14Purpose => 'Where it\'s needed';
+
+  @override
+  String get s14PurposeHint => 'For example, a clinic';
+
+  @override
+  String get s14Language => 'Certificate language';
+
+  @override
+  String get s14Send => 'Send the request';
+
+  @override
+  String get s14Sent => 'Request sent to the office';
+
+  @override
+  String get s14AlreadyPending => 'A request is already waiting';
+
+  @override
+  String get s14Pending => 'Waiting for the office';
+
+  @override
+  String get s14Issued => 'Certificate ready';
+
+  @override
+  String get s14Declined => 'Declined';
+
+  @override
+  String get s14OpenPdf => 'PDF';
+
+  @override
+  String get s14Share => 'Check link';
+
+  @override
+  String s14IssuedNo(String number) {
+    return 'Certificate No. $number is ready';
+  }
+
+  @override
+  String s14ShareText(String number, String url) {
+    return 'Study certificate No. $number. Check it here: $url';
+  }
 }

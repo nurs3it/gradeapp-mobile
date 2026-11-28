@@ -109,6 +109,18 @@ class _ProfileSheet extends ConsumerWidget {
           GGroup(
             inset: 48,
             children: [
+              if (role == AppRole.student)
+                GRow(
+                  minHeight: GSpace.rowCompact,
+                  leading: GIcon(GIcons.file, size: 20, color: c.ink2),
+                  title: Text(l.s14Title),
+                  chevron: true,
+                  onTap: () {
+                    final router = GoRouter.of(context);
+                    Navigator.of(context).pop();
+                    unawaited(router.push('/study-proof'));
+                  },
+                ),
               GRow(
                 minHeight: GSpace.rowCompact,
                 leading: GIcon(GIcons.bell, size: 20, color: c.ink2),
