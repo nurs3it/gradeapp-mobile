@@ -45,6 +45,11 @@ struct ChildProvider: TimelineProvider {
     if let g = snap?.generated, g.addingTimeInterval(24 * 3600) > now {
       entries.append(ChildEntry(date: g.addingTimeInterval(24 * 3600), snap: snap))
     }
+    // …and when the last lesson ends («В школе» → «Уроки закончились»).
+    if let u = snap?.firstChild?.untilDate, u > now {
+      entries.append(ChildEntry(date: u, snap: snap))
+      entries.sort { $0.date < $1.date }
+    }
     // Reloaded when the app writes new data (silent push, app open).
     completion(Timeline(entries: entries, policy: .after(now.addingTimeInterval(3600))))
   }
@@ -127,7 +132,7 @@ struct ChildStatusView: View {
           .font(G.font(12, .bold)).foregroundStyle(G.ink2).lineLimit(1)
         HStack(alignment: .top, spacing: 6) {
           Image(systemName: symbol(c.kind)).font(.system(size: 18)).foregroundStyle(tint(c.kind)).widgetAccentable()
-          Text(c.text).font(G.font(18, .heavy)).foregroundStyle(tint(c.kind))
+          Text(c.text(at: entry.date)).font(G.font(18, .heavy)).foregroundStyle(tint(c.kind))
             .lineLimit(3).minimumScaleFactor(0.7)
         }
         Spacer(minLength: 0)
@@ -138,7 +143,7 @@ struct ChildStatusView: View {
       .widgetBackground(G.surface)
       .widgetURL(entry.snap!.childURL(c))
       .accessibilityElement(children: .ignore)
-      .accessibilityLabel("\(c.name), \(c.text), \(c.gradesText)")
+      .accessibilityLabel("\(c.name), \(c.text(at: entry.date)), \(c.gradesText)")
     case .stale(let c):
       VStack(alignment: .leading, spacing: 4) {
         Text(c.name).font(G.font(12, .bold)).foregroundStyle(G.ink2).lineLimit(1)
@@ -168,7 +173,7 @@ struct ChildStatusView: View {
     case .child(let c):
       VStack(alignment: .leading, spacing: 1) {
         Text(c.name).font(.system(size: 15, weight: .heavy)).lineLimit(1).widgetAccentable()
-        Text(c.text).font(.system(size: 13, weight: .semibold)).lineLimit(2)
+        Text(c.text(at: entry.date)).font(.system(size: 13, weight: .semibold)).lineLimit(2)
         Text(entry.snap?.label("updated") ?? "").font(.system(size: 11)).foregroundStyle(.secondary).lineLimit(1)
       }
       .frame(maxWidth: .infinity, alignment: .leading)
@@ -181,7 +186,7 @@ struct ChildStatusView: View {
 
   @ViewBuilder var inline: some View {
     switch state {
-    case .child(let c): Text("\(c.name): \(c.text)")
+    case .child(let c): Text("\(c.name): \(c.text(at: entry.date))")
     case .stale: Text(entry.snap?.label("stale") ?? "")
     case .signedOut: Text(entry.snap?.label("signedOut") ?? "GradeApp")
     default: Text(message ?? "")

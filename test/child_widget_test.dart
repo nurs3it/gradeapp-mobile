@@ -8,8 +8,8 @@ import 'package:gradeapp/features/platform/deep_links.dart';
 import 'package:gradeapp/features/platform/widget_snapshot.dart';
 import 'package:gradeapp/l10n/gen/app_localizations.dart';
 
-Lesson lesson(String id, {LessonStatus status = LessonStatus.scheduled}) =>
-    Lesson(id: id, courseId: 'c', subject: 'Алгебра', date: '2026-11-27', start: '09:00', end: '09:45', status: status);
+Lesson lesson(String id, {LessonStatus status = LessonStatus.scheduled, String end = '11:45'}) =>
+    Lesson(id: id, courseId: 'c', subject: 'Алгебра', date: '2026-11-27', start: '11:00', end: end, status: status);
 
 Grade grade(String id, DateTime created) => Grade(
   id: id,
@@ -54,6 +54,36 @@ void main() {
   );
 
   group('child status (W3)', () {
+    test('after the last lesson: «Уроки закончились», no switch time left', () {
+      final s = childStatusOf(
+        child: child,
+        day: day(lessons: [lesson('l1', end: '09:45')], ci: checkIn(done: true, at: DateTime(2026, 11, 27, 7, 52))),
+        now: now,
+        l: ru,
+      );
+      expect(s.kind, ChildKind.inSchool);
+      expect(s.text, 'Уроки закончились · отметка в 07:52');
+      expect(s.until, isNull);
+    });
+
+    test('during lessons: the widget gets the switch time and the later text', () {
+      final s = childStatusOf(
+        child: child,
+        day: day(
+          lessons: [lesson('l1'), lesson('l2', end: '13:30'), lesson('l3', end: '15:00', status: LessonStatus.cancelled)],
+          ci: checkIn(done: true, at: DateTime(2026, 11, 27, 7, 52)),
+        ),
+        now: now,
+        l: ru,
+      );
+      expect(s.text, 'В школе с 07:52');
+      expect(s.until, DateTime(2026, 11, 27, 13, 30));
+      expect(s.afterText, 'Уроки закончились · отметка в 07:52');
+      final back = ChildStatus.fromJson(jsonDecode(jsonEncode(s.toJson())) as Map<String, dynamic>);
+      expect(back.until, s.until);
+      expect(back.afterText, s.afterText);
+    });
+
     test('checked in: «В школе с 07:52»', () {
       final s = childStatusOf(
         child: child,

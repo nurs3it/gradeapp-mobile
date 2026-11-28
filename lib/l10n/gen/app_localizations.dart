@@ -5295,6 +5295,18 @@ abstract class AppLocalizations {
   /// **'В школе'**
   String get wgChildInNoTime;
 
+  /// No description provided for @wgChildDayOver.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уроки закончились · отметка в {time}'**
+  String wgChildDayOver(String time);
+
+  /// No description provided for @wgChildDayOverNoTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уроки закончились'**
+  String get wgChildDayOverNoTime;
+
   /// No description provided for @wgChildNotYet.
   ///
   /// In ru, this message translates to:

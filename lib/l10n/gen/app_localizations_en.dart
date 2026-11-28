@@ -3093,6 +3093,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get wgChildInNoTime => 'At school';
 
   @override
+  String wgChildDayOver(String time) {
+    return 'School\'s over · checked in at $time';
+  }
+
+  @override
+  String get wgChildDayOverNoTime => 'School\'s over';
+
+  @override
   String get wgChildNotYet => 'Not checked in yet';
 
   @override

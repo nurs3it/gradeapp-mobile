@@ -42,6 +42,8 @@ class ChildStatus {
     this.since = '',
     this.newGrades = 0,
     this.gradesText = '',
+    this.until,
+    this.afterText = '',
   });
 
   final String id;
@@ -59,6 +61,13 @@ class ChildStatus {
   /// «2 новые оценки».
   final String gradesText;
 
+  /// End of the last lesson today, while the child is still [ChildKind.inSchool]:
+  /// the widget shows [afterText] from then on without waiting for the app.
+  final DateTime? until;
+
+  /// «Уроки закончились · отметка в 08:05».
+  final String afterText;
+
   Json toJson() => {
     'id': id,
     'name': name,
@@ -68,6 +77,8 @@ class ChildStatus {
     'since': since,
     'newGrades': newGrades,
     'gradesText': gradesText,
+    if (until != null) 'until': until!.toUtc().toIso8601String(),
+    if (until != null) 'afterText': afterText,
   };
 
   factory ChildStatus.fromJson(Json j) => ChildStatus(
@@ -79,6 +90,8 @@ class ChildStatus {
     since: j.str('since'),
     newGrades: (j.number('newGrades') ?? 0).toInt(),
     gradesText: j.str('gradesText'),
+    until: DateTime.tryParse(j.str('until'))?.toLocal(),
+    afterText: j.str('afterText'),
   );
 }
 
@@ -98,7 +111,14 @@ ChildStatus childStatusOf({
   required AppLocalizations l,
   DateTime? gradesSeenAt,
 }) {
-  ChildStatus make(ChildKind kind, String text, {String since = '', int grades = 0}) => ChildStatus(
+  ChildStatus make(
+    ChildKind kind,
+    String text, {
+    String since = '',
+    int grades = 0,
+    DateTime? until,
+    String afterText = '',
+  }) => ChildStatus(
     id: child.id,
     name: child.shortName,
     cls: child.className ?? '',
@@ -107,19 +127,25 @@ ChildStatus childStatusOf({
     since: since,
     newGrades: grades,
     gradesText: kind == ChildKind.unknown ? '' : (grades > 0 ? l.wgChildNewGrades(grades) : l.wgChildNoNew),
+    until: until,
+    afterText: afterText,
   );
   if (day == null) return make(ChildKind.unknown, '');
   final grades = newGradesCount(day.recentGrades, now, gradesSeenAt);
   if (!day.lessons.any((x) => !x.isCancelled)) return make(ChildKind.noLessons, l.wgNoLessons, grades: grades);
+  // «В школе» stops being true after the last lesson (there is no check-out).
+  final lastEnd = day.lessons.where((x) => !x.isCancelled).map((x) => x.endsAt()).reduce((a, b) => a.isAfter(b) ? a : b);
+  ChildStatus inSchool(String time) {
+    final during = time.isEmpty ? l.wgChildInNoTime : l.wgChildIn(time);
+    final after = time.isEmpty ? l.wgChildDayOverNoTime : l.wgChildDayOver(time);
+    if (!now.isBefore(lastEnd)) return make(ChildKind.inSchool, after, since: time, grades: grades);
+    return make(ChildKind.inSchool, during, since: time, grades: grades, until: lastEnd, afterText: after);
+  }
+
   final checkedAt = day.checkIn?.checkedIn == true ? day.checkIn!.checkedAt : null;
-  if (day.checkIn?.checkedIn == true) {
-    final time = checkedAt == null ? '' : _clock(checkedAt);
-    return make(ChildKind.inSchool, time.isEmpty ? l.wgChildInNoTime : l.wgChildIn(time), since: time, grades: grades);
-  }
+  if (day.checkIn?.checkedIn == true) return inSchool(checkedAt == null ? '' : _clock(checkedAt));
   final marks = day.attendance.values.toList();
-  if (marks.any((m) => m.status == Presence.present || m.status == Presence.tardy)) {
-    return make(ChildKind.inSchool, l.wgChildInNoTime, grades: grades);
-  }
+  if (marks.any((m) => m.status == Presence.present || m.status == Presence.tardy)) return inSchool('');
   if (marks.isNotEmpty) return make(ChildKind.absent, l.wgChildAbsent, grades: grades);
   return make(ChildKind.notYet, l.wgChildNotYet, grades: grades);
 }

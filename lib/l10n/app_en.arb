@@ -963,6 +963,8 @@
   "t8ClassPick": "Class {name}",
   "wgChildIn": "At school since {time}",
   "wgChildInNoTime": "At school",
+  "wgChildDayOver": "School's over · checked in at {time}",
+  "wgChildDayOverNoTime": "School's over",
   "wgChildNotYet": "Not checked in yet",
   "wgChildNewGrades": "{count, plural, one{{count} new grade} other{{count} new grades}}",
   "wgChildNoNew": "No new grades",

@@ -17,9 +17,12 @@ class ChildStatusWidget : AppWidgetProvider() {
         val data = WidgetData.load(context)
         val now = System.currentTimeMillis()
         for (id in ids) manager.updateAppWidget(id, render(context, data, id, now))
-        // Only the «older than a day» boundary changes the picture by itself.
-        val stale = data?.generatedAt?.takeIf { it != 0L }?.plus(24 * 3600 * 1000L)?.takeIf { it > now }
-        WidgetCommon.scheduleNext(context, ChildStatusWidget::class.java, stale)
+        // The picture changes by itself when the data turns a day old and when
+        // a shown child's last lesson ends («В школе» → «Уроки закончились»).
+        val stale = data?.generatedAt?.takeIf { it != 0L }?.plus(24 * 3600 * 1000L)
+        val ends = ids.toList().mapNotNull { data?.child(ChildPrefs.get(context, it))?.until?.takeIf { u -> u != 0L } }
+        val next = (ends + listOfNotNull(stale)).filter { it > now }.minOrNull()
+        WidgetCommon.scheduleNext(context, ChildStatusWidget::class.java, next)
     }
 
     override fun onDeleted(context: Context, ids: IntArray) {
@@ -72,13 +75,13 @@ class ChildStatusWidget : AppWidgetProvider() {
                     "notyet" -> WidgetCommon.color(c, R.color.g_warn)
                     else -> ink
                 }
-                text(R.id.status, child.text, color)
+                text(R.id.status, child.textAt(now), color)
                 text(R.id.grades, child.gradesText, ink2)
             }
             text(R.id.updated, data.label("updated"), ink3)
             v.setContentDescription(
                 R.id.widget_root,
-                listOf(eyebrow, if (stale) data.label("stale") else child.text, if (stale) "" else child.gradesText)
+                listOf(eyebrow, if (stale) data.label("stale") else child.textAt(now), if (stale) "" else child.gradesText)
                     .filter { it.isNotEmpty() }.joinToString(", "),
             )
             return v

@@ -34,7 +34,12 @@ class ChildEntry(
     val text: String,
     val newGrades: Int,
     val gradesText: String,
-)
+    /** End of today's last lesson (0 — none); from then on [afterText] replaces [text]. */
+    val until: Long = 0L,
+    val afterText: String = "",
+) {
+    fun textAt(now: Long): String = if (until != 0L && now >= until && afterText.isNotEmpty()) afterText else text
+}
 
 class WidgetData(private val json: JSONObject) {
     val role: String = json.optString("role")
@@ -80,6 +85,7 @@ class WidgetData(private val json: JSONObject) {
                 ChildEntry(
                     c.optString("id"), c.optString("name"), c.optString("cls"), c.optString("kind"),
                     c.optString("text"), c.optInt("newGrades"), c.optString("gradesText"),
+                    parseIso(c.optString("until")), c.optString("afterText"),
                 ),
             )
         }

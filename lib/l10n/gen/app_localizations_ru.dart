@@ -3173,6 +3173,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get wgChildInNoTime => 'В школе';
 
   @override
+  String wgChildDayOver(String time) {
+    return 'Уроки закончились · отметка в $time';
+  }
+
+  @override
+  String get wgChildDayOverNoTime => 'Уроки закончились';
+
+  @override
   String get wgChildNotYet => 'Ещё нет отметки';
 
   @override

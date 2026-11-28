@@ -3016,6 +3016,14 @@ class AppLocalizationsKk extends AppLocalizations {
   String get wgChildInNoTime => 'Мектепте';
 
   @override
+  String wgChildDayOver(String time) {
+    return 'Сабақтар бітті · белгі $time';
+  }
+
+  @override
+  String get wgChildDayOverNoTime => 'Сабақтар бітті';
+
+  @override
   String get wgChildNotYet => 'Әзірге белгі жоқ';
 
   @override

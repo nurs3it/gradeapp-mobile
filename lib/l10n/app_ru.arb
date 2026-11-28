@@ -2381,6 +2381,15 @@
     }
   },
   "wgChildInNoTime": "В школе",
+  "wgChildDayOver": "Уроки закончились · отметка в {time}",
+  "@wgChildDayOver": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "wgChildDayOverNoTime": "Уроки закончились",
   "wgChildNotYet": "Ещё нет отметки",
   "wgChildNewGrades": "{count, plural, one{{count} новая оценка} few{{count} новые оценки} other{{count} новых оценок}}",
   "@wgChildNewGrades": {

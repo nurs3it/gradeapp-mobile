@@ -963,6 +963,8 @@
   "t8ClassPick": "{name} сыныбы",
   "wgChildIn": "{time}-ден бері мектепте",
   "wgChildInNoTime": "Мектепте",
+  "wgChildDayOver": "Сабақтар бітті · белгі {time}",
+  "wgChildDayOverNoTime": "Сабақтар бітті",
   "wgChildNotYet": "Әзірге белгі жоқ",
   "wgChildNewGrades": "{count} жаңа баға",
   "wgChildNoNew": "Жаңа баға жоқ",

@@ -37,6 +37,16 @@ struct Snapshot: Decodable {
     let text: String
     let newGrades: Int
     let gradesText: String
+    /// End of today's last lesson; from then on [afterText] replaces [text].
+    let until: String?
+    let afterText: String?
+
+    var untilDate: Date? { until.flatMap { Snapshot.iso.date(from: $0) ?? Snapshot.isoFraction.date(from: $0) } }
+
+    func text(at date: Date) -> String {
+      if let u = untilDate, date >= u, let a = afterText, !a.isEmpty { return a }
+      return text
+    }
   }
 
   let v: Int
@@ -64,13 +74,13 @@ struct Snapshot: Decodable {
   var isTeacher: Bool { role == "teacher" }
   var signedOut: Bool { role == "none" }
 
-  private static let iso: ISO8601DateFormatter = {
+  fileprivate static let iso: ISO8601DateFormatter = {
     let f = ISO8601DateFormatter()
     f.formatOptions = [.withInternetDateTime]
     return f
   }()
 
-  private static let isoFraction: ISO8601DateFormatter = {
+  fileprivate static let isoFraction: ISO8601DateFormatter = {
     let f = ISO8601DateFormatter()
     f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
     return f
