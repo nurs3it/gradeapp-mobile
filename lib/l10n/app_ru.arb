@@ -2476,5 +2476,32 @@
         "type": "String"
       }
     }
+  },
+  "windowLine": "окно {time}",
+  "@windowLine": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "durH": "{h} ч",
+  "@durH": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      }
+    }
+  },
+  "durHm": "{h} ч {m} мин",
+  "@durHm": {
+    "placeholders": {
+      "h": {
+        "type": "int"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
   }
 }

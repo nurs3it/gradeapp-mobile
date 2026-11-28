@@ -5534,6 +5534,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Отметка в {time}'**
   String checkInMarkedAt(String time);
+
+  /// No description provided for @windowLine.
+  ///
+  /// In ru, this message translates to:
+  /// **'окно {time}'**
+  String windowLine(String time);
+
+  /// No description provided for @durH.
+  ///
+  /// In ru, this message translates to:
+  /// **'{h} ч'**
+  String durH(int h);
+
+  /// No description provided for @durHm.
+  ///
+  /// In ru, this message translates to:
+  /// **'{h} ч {m} мин'**
+  String durHm(int h, int m);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

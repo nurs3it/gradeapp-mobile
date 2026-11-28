@@ -3328,4 +3328,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String checkInMarkedAt(String time) {
     return 'Отметка в $time';
   }
+
+  @override
+  String windowLine(String time) {
+    return 'окно $time';
+  }
+
+  @override
+  String durH(int h) {
+    return '$h ч';
+  }
+
+  @override
+  String durHm(int h, int m) {
+    return '$h ч $m мин';
+  }
 }

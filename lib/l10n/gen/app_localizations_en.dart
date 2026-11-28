@@ -3240,4 +3240,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String checkInMarkedAt(String time) {
     return 'Checked in at $time';
   }
+
+  @override
+  String windowLine(String time) {
+    return 'free $time';
+  }
+
+  @override
+  String durH(int h) {
+    return '$h h';
+  }
+
+  @override
+  String durHm(int h, int m) {
+    return '$h h $m min';
+  }
 }

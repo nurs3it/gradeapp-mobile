@@ -131,10 +131,19 @@ class BreakDivider extends StatelessWidget {
       padding: const EdgeInsets.only(left: 76),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(context.l10n.breakLine(minutes), style: context.t.footnote.copyWith(color: context.c.ink3)),
+        child: Text(breakLabel(context.l10n, minutes), style: context.t.footnote.copyWith(color: context.c.ink3)),
       ),
     ),
   );
+}
+
+/// «перемена 20 мин»; more than an hour is a free window, not a break:
+/// «окно 5 ч 45 мин».
+String breakLabel(AppLocalizations l, int minutes) {
+  if (minutes <= 60) return l.breakLine(minutes);
+  final h = minutes ~/ 60;
+  final m = minutes % 60;
+  return l.windowLine(m == 0 ? l.durH(h) : l.durHm(h, m));
 }
 
 /// Day lessons interleaved with long breaks.

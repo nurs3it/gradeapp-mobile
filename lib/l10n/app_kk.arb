@@ -1002,5 +1002,8 @@
   "slBirthdayTomorrow": "Ертең туған күн: {names}",
   "slRank": "Сыныпта {rank}-орын",
   "slPointsTotal": "{count, plural, other{{count} ұпай}}",
-  "checkInMarkedAt": "{time}-те белгіленді"
+  "checkInMarkedAt": "{time}-те белгіленді",
+  "windowLine": "бос уақыт {time}",
+  "durH": "{h} сағ",
+  "durHm": "{h} сағ {m} мин"
 }

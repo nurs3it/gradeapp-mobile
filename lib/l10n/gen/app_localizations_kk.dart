@@ -3152,4 +3152,19 @@ class AppLocalizationsKk extends AppLocalizations {
   String checkInMarkedAt(String time) {
     return '$time-те белгіленді';
   }
+
+  @override
+  String windowLine(String time) {
+    return 'бос уақыт $time';
+  }
+
+  @override
+  String durH(int h) {
+    return '$h сағ';
+  }
+
+  @override
+  String durHm(int h, int m) {
+    return '$h сағ $m мин';
+  }
 }

@@ -1002,5 +1002,8 @@
   "slBirthdayTomorrow": "Birthday tomorrow: {names}",
   "slRank": "No. {rank} in class",
   "slPointsTotal": "{count, plural, one{{count} point} other{{count} points}}",
-  "checkInMarkedAt": "Checked in at {time}"
+  "checkInMarkedAt": "Checked in at {time}",
+  "windowLine": "free {time}",
+  "durH": "{h} h",
+  "durHm": "{h} h {m} min"
 }
