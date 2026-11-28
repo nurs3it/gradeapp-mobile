@@ -154,6 +154,11 @@ String? notificationRoute(AppNotification n, AppRole role) {
     return q.isEmpty ? '/week-summary' : '/week-summary?$q';
   }
   if (n.type == 'consent.requested') return role == AppRole.parent ? '/p/today' : null;
+  // S14: a decided study certificate request opens the certificate screen.
+  if (n.type.startsWith('study_proof.') && role != AppRole.teacher) {
+    final student = n.payload.strOrNull('student_id');
+    return student == null ? '/study-proof' : '/study-proof?student=$student';
+  }
   final kind = n.target?.kind ?? n.type.split('.').first;
   final id = n.target?.id ?? '';
   return switch ((kind, role)) {
@@ -191,7 +196,10 @@ Future<void> openNotification(BuildContext context, WidgetRef ref, AppNotificati
   final role = ref.read(activeRoleProvider);
   final route = role == null ? null : notificationRoute(n, role);
   if (route == null || !context.mounted) return;
-  if (route.startsWith('/lesson/') || route.startsWith('/week-summary') || route.startsWith('/chat')) {
+  if (route.startsWith('/lesson/') ||
+      route.startsWith('/week-summary') ||
+      route.startsWith('/chat') ||
+      route.startsWith('/study-proof')) {
     unawaited(context.push(route));
   } else {
     context.go(route);
